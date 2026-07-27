@@ -1,0 +1,7 @@
+/.luarc.json
+
+/.quarto/
+**/*.quarto_ipynb
+
+sandbox
+_book

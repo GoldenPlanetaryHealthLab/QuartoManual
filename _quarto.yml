@@ -1,10 +1,10 @@
 project:
-  type: book
+  type: quarto-manual
 
 book:
   title: Quarto Manual
   chapters:
-    - README.md
+    - index.qmd
 
 format:
   html:
