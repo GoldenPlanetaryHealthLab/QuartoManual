@@ -1,0 +1,22 @@
+# Before You Start
+
+```{python}
+from lib.project import Project
+project = Project.discover()
+project
+```
+
+## What you’ll need
+
+- A project workspace directory.
+- Template configuration values in `manual.yml`.
+- Access to files, scripts, or tools referenced by this step.
+
+## Assemble
+
+- Follow this page's checklist to create or verify the required scaffold artifacts.
+- Record any unresolved prerequisites before proceeding.
+
+## Inspect
+
+- Run and review `tests/test_00_before_you_start.py`.

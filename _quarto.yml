@@ -1,0 +1,11 @@
+project:
+  type: book
+
+book:
+  title: Quarto Manual
+  chapters:
+    - README.md
+
+format:
+  html:
+    theme: cosmo

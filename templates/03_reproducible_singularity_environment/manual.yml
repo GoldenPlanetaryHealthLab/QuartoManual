@@ -1,0 +1,7 @@
+project_name: ""
+project_dir: ""
+r_version: ""
+python_version: ""
+spack_specs: []
+slurm_partition: ""
+container_runtime: ""
