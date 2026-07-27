@@ -16,8 +16,6 @@ author: TinasheMTapera
 date: last-modified
 ---
 
-{{ << include README.md >> }}
-
 ## Introduction
 
 A Quarto Manual is a structured, multi-document Quarto template. It contains ordered, 

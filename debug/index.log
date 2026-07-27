@@ -1,0 +1,845 @@
+Quarto version: 1.9.38
+
+Loaded deno-dom-native
+
+Creating SassCache at /Users/tit420/projects/QuartoManual/.quarto/quarto-session-temp7d2a964ba61ee6e6/sass
+
+Returning SassCache at /Users/tit420/projects/QuartoManual/.quarto/quarto-session-temp7d2a964ba61ee6e6/sass
+
+SassCache.getOrSet(...)
+
+SassCache.getFromHash(hash=75f3f2c3592e29f2125c6cb7a08cfea3, inputHash=498ac5a44be998043e4d593b519e5625, force=undefined)
+
+  cache miss
+
+  cache miss, setting
+
+SassCache.setFromHash(75f3f2c3592e29f2125c6cb7a08cfea3, 498ac5a44be998043e4d593b519e5625), ...
+
+[execProcess] /Applications/quarto/bin/tools/aarch64/dart-sass/sass /Users/tit420/projects/QuartoManual/.quarto/quarto-session-temp7d2a964ba61ee6e6/2e5da0e00c1b8302.scss /Users/tit420/projects/QuartoManual/.quarto/quarto-session-temp7d2a964ba61ee6e6/sass/75f3f2c3592e29f2125c6cb7a08cfea3.css --style compressed --quiet --load-path=/Applications/quarto/share/formats/html/bootstrap/dist/scss --load-path=/Applications/quarto/share/formats/html/bslib/bslib-scss
+
+[execProcess] Success: true, code: 0
+
+Creating SassCache at /Users/tit420/Library/Caches/quarto/sass
+
+Returning SassCache at /Users/tit420/Library/Caches/quarto/sass
+
+SassCache.getOrSet(...)
+
+SassCache.getFromHash(hash=f23921c56f73e400b49028c9186a1aa0, inputHash=93bcc2bac898f6cf1a7ee8bec68008e4, force=undefined)
+
+  cache hit
+
+  cache hit
+
+[NotebookContext]: Writing all notebooks to /Users/tit420/projects/QuartoManual/.quarto/quarto-session-temp7d2a964ba61ee6e6/4219e74a5fe2814f.json
+
+-- Searching for R binary --
+
+Looking for 'Rscript' in QUARTO_R: undefined
+
+Looking for 'Rscript' in R_HOME: undefined
+
+Looking for 'Rscript' in PATH.
+
+[execProcess] which Rscript
+
+[execProcess] Success: true, code: 0
+
+Found in PATH at /usr/local/bin/Rscript
+
+pandoc --verbose --trace
+
+  to: html
+  output-file: index.html
+  standalone: true
+  toc: true
+  number-sections: true
+  title-prefix: Quarto Manual
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  variables: {}
+  
+
+metadata
+
+  crossref:
+    chapters: true
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  engines:
+    - path: /Applications/quarto/share/extension-subtrees/julia-engine/_extensions/julia-engine/julia-engine.js
+  theme: cosmo
+  title: Quarto Manual
+  subtitle: A minimal page showing every manual block supported by the current filters
+  manual:
+    project_name: demo-era5-project
+    project_package: demo_era5_project
+    manual_type: era5_pipeline
+    project_dir: generated/demo-era5-project
+    package_root: generated/demo-era5-project/src/demo_era5_project
+    manual_root: .
+  author: TinasheMTapera
+  date: last-modified
+  
+
+[execProcess] /Applications/quarto/bin/tools/aarch64/pandoc +RTS -K512m -RTS --defaults /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/quarto-defaults1970ee28bb3afd3b.yml /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/quarto-input283f1e5b500b73ee.md --metadata-file /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/quarto-metadata878c465eac2e70ed.yml --verbose --trace --data-dir /Applications/quarto/share/pandoc/datadir
+
+[INFO] 
+Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1
+121d1d9e7/c8e604c07338c24/template.patched from /var/folders/by/68tvcby16v9
+76kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d
+9e7/c8e604c07338c24/template.patched
+
+[INFO
+] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c
+8e604c07338c24/metadata.html from /var/folders/by/68tvc
+by16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5
+be62ec/636d7e1121d1d9e7/c8e604c07338c24/metadata.html
+
+[I
+NFO] Loaded /var/folder
+s/by/68tvcby16v976kdfwvx
+bzw5w0000gp/T/quarto-
+sessione10c941d5be62e
+c/636d7e1121d1d9e7/c
+8e604c07338c24/styl
+es.html from /var/f
+olders/by/68tvcby16
+v976kdfwvxbzw5w000
+0gp/T/quarto-sessio
+ne10c941d5be62ec/636
+d7e1121d1d9e7/c8
+e604c07338c24/style
+s.html
+
+[INFO] 
+Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/qu
+arto-sessione10c941d5be62ec/636d7e1121d1d9
+e7/c8e604c07338c24/title-b
+lock.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp
+/T/quarto-sessione10c941d5be62ec
+/636d7e1121d1d9e7/c8e604
+c07338c24/title-block.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-metadata.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-metadata.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-block.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-block.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-metadata.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-metadata.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+
+[INF
+O] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-s
+essione10c941d5be62ec/636d
+7e1121d1d9e7/c8e604c07338c24/title-block.
+html from /var/folders
+/by
+/68tvcby16v976kdf
+wvxbzw5w0000gp/T/
+quarto-sessione10c
+941d5be62ec/636d
+7e1121d1d9e7/c8e
+604c07338c24/title-blo
+ck.html
+
+[I
+NFO] Load
+ed /var/folders/by
+/68tvcby16v976kdf
+wvxbzw5w0000gp/
+T/quarto-sessione10
+c941d5be62ec/636
+d7e1121d1d9e7/c8e604c0733
+8c24/title-metad
+ata.html from /va
+r/folders/by/68tv
+cby16v976kdfwvxbz
+w5w0000gp/T/quar
+to-sessione10c941
+d5be62ec/636d7e11
+21d1d9e7/c8e604c07338c24/ti
+tle-metadata.html
+
+[IN
+FO] Loaded
+ /var/folders/by/
+68tvcby16v976kdfwvxbzw5w
+0000gp/T/quarto-session
+e10c941d5be62ec/63
+6d7e1121d1d9e7/c
+8
+e604c07
+338c24/
+_titl
+e-meta-author.ht
+ml from /var/fold
+ers/by/68tvcby16
+v976kdfwvxbzw5w00
+00gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9
+e7/c8e604c07338c24/_title-meta-author.html
+
+[INFO] Lo
+aded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/
+68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d
+9e7/c8e604c07338c24/_title-meta-author.html
+
+[INFO] Loade
+d /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-block.html f
+rom /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9
+e7/c8e604c07338c24/title-block.html
+
+[INFO] 
+Loaded /var/folders/b
+y/68tvcby16v976kdf
+wvxbzw5w0000gp/T/
+quarto-s
+essione10c941d5
+be
+62ec/636d7e1121d1d
+9e7/c8e604c073
+38c24/title-metada
+ta.html from /va
+r/folders/by/6
+8tvcby16v976k
+dfwvxbzw5w0000
+gp/T/quarto-se
+ssione10c941d5
+be62ec/636d7e
+1121d1d9e7/c8e
+604c07338c24/tit
+le-metadat
+a.html
+
+[INFO]
+ Loaded /var
+/folders/by
+/68tvcby16v97
+6kdfwvxbzw5w0000g
+p
+/T/quarto-se
+ssione10c941d5be6
+2ec/636d7e112
+1d1d9e7/c8e604
+c07338c24/
+_title-meta-au
+thor.html from /
+var/folders/by/68tvc
+by16v976kdfwvxbzw5w0000gp/T/quarto-s
+essione10c941
+d
+5be
+62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+
+[INFO] 
+Loaded /var/folders/by/68tvcby16v976kdfwvxb
+zw5w0000gp/T/quarto-sess
+ione10c941d5be62
+ec/636d7e1121d1d9
+e7/c8e604c07338c24
+/_title-meta
+-author.html fro
+m /var/fold
+ers/by/68tvcby16v
+976kdfwvxbzw5w0000g
+p/T/quarto-sessio
+ne10c941d5be62e
+c/636d7e1121d1d9e7/c8e604c07338
+c24/_title-meta-author.html
+
+[INFO]
+ Loaded /var/fo
+lders/by/68tvc
+by16v976kdfwvxbzw5w000
+0gp/T/quarto-sess
+ione10c941d5be6
+2ec/636d7e1121d1
+d9e7/c8e604c0733
+8c24/ti
+tle-block.html
+ from /var/folders/b
+y/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c2
+4/title-block.html
+
+[INFO]
+ Loaded /var/fol
+ders/by/68tvcby16
+v976kdfwvxbz
+w5w0000gp/T/qua
+rto-sessione10
+c941d5be62ec/63
+6d7e1121d1d9e7/
+c8e604c0733
+8c24/title-metadata.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-metadata.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-block.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-block.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-metadata.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-metadata.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5b
+e62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c
+941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+
+[INFO
+] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessi
+one10c941d5be62ec/636d7e11
+21d1d9e7/c8e604c07338
+c24/title-block.html
+ from /var/folders
+/by/68tvcby16v976k
+dfwvxbzw5w0000gp/
+T/quarto-sessione
+10c941d5be62ec/63
+6d7e1121d1d9e7/c8
+e604c07338c24/titl
+e-block.html
+
+[IN
+FO] Loade
+d /var/folders/by
+/68tvcby16v976kdf
+wvxbzw5w0000gp/
+T
+/qu
+arto-se
+s
+si
+o
+ne
+10c
+9
+41
+d5be6
+2e
+c/636
+d7e1121d
+1d9e7/c8e6
+04c07338
+c24/title
+-metadata
+.html fr
+om /var/
+folders/
+by/68tvcb
+y16v976kd
+fwvxbzw5
+w0000gp/
+T/quarto-
+sessione10c941d5b
+e62ec/636d7e1121d1d9e7/c8
+e604c073
+38c24/title-me
+tadata.html
+
+
+[I
+NFO] Loaded /var/fo
+lders/by/68tvcby1
+6v976kdfwvxbzw5w0
+000gp/T/quarto-s
+essione10c941d5be62e
+c/636d7e1121d1d9e7/c8e60
+4c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000
+gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24
+/_title-meta-author.html
+
+[INFO
+] Loaded /var/folders/by/68tvcby16v976kdf
+wvxbzw5w0000gp/T/quarto-
+sessione10c941d5be62e
+c/636d7e1121d1d9e7
+/c8e604c07338c24/
+_title-meta-author.html from
+ /var/folders/by/
+68tvcby16v976kdfwvxbzw5
+w0000gp/T/quart
+o-sessione10c94
+1d5be62ec/636d7e1
+121d1d9e7/c8e
+604c07338c24/_
+t
+itle-meta-author.ht
+ml
+
+[IN
+FO] Loaded /va
+r/folders/by/68tvcby16
+v976kdfwvxbzw5w00
+00gp/T/quarto-sessione
+10c941d5
+be62ec/636d7e1121d1d9e7/c8e6
+04c07338c24/title-bloc
+k.html from /var/folder
+s/by/68tvcby16v976kdfwvxbzw5w0
+000gp/T/quarto-ses
+sione10c941d5be6
+2ec/636d7e1121d
+1d9e7/c8e604c07338c24/
+title-block.
+html
+
+[INFO]
+ Loaded /var/f
+older
+s/by/68tvcb
+y16v976
+kdfw
+vxbz
+w5w0000gp
+/T/quarto-s
+e
+ssione
+10c941d
+5
+be62e
+c/636d7
+e1121
+d1d9e7
+/c8e604
+c07338c2
+4/title
+-metadat
+a.html f
+rom /va
+r/
+folders/by/68tvcby16v
+976kdfwvxbzw5w00
+00gp/T/quarto-
+sessione10c941d
+5be62ec/636d7e1
+121d1d9e7/
+c8e604c07338c24/title
+-metadata.html
+
+
+[INFO]
+ Loaded 
+/var/folders/by
+/68tvcby16v976k
+dfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-block.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-block.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-metadata.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/title-metadata.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+[INFO] Loaded /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html from /var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/quarto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/_title-meta-author.html
+
+[INFO]
+ Loaded /var/folders/by/68tvcby16v976kdfw
+vxbzw5w0000gp/T/quarto-sessione10c941d5be62
+ec/636d7e1121d1d9e7/c8e604c07338c24/toc.html from /
+var/folders/by/68tvcby16v976kdfwvxbzw5w0000gp/T/qua
+rto-sessione10c941d5be62ec/636d7e1121d1d9e7/c8e604c07338c24/toc.html
+
+[trace] Parsed [Plain [Str "TinasheMTapera"]] at line 1
+
+[trace] Parsed [Plain [Str "TinasheMTapera"]] at line 1
+
+[trace] Parsed [Plain [Str "index.qmd"]] at line 1
+
+[trace] Parsed [Plain [Str "0"]] at line 1
+
+[trace] Parsed [Plain [Str "index.qmd"]] at line 1
+
+[trace] Parsed [Plain [Str "1"]] at line 1
+
+[trace] Parsed [Plain [Str "chapter"]] at line 1
+
+[trace] Parsed [Plain [Str "Quarto",Space,Str "Manual"]] at line 1
+
+[trace] Parsed [Plain [Str "July",Space,Str "27,",Space,Str "2026"]] at line 1
+
+[trace] Parsed [Plain [Str "long"]] at line 1
+
+[trace] Parsed [Plain [Str "/Applications/quarto/share/extension-subtrees/j at line 1
+
+[trace] Parsed [Plain [Str "en"]] at line 1
+
+[trace] Parsed [Plain [Str "."]] at line 1
+
+[trace] Parsed [Plain [Str "era5_pipeline"]] at line 1
+
+[trace] Parsed [Plain [Str "generated/demo-era5-project/src/demo_era5_proje at line 1
+
+[trace] Parsed [Plain [Str "generated/demo-era5-project"]] at line 1
+
+[trace] Parsed [Plain [Str "demo-era5-project"]] at line 1
+
+[trace] Parsed [Plain [Str "demo_era5_project"]] at line 1
+
+[trace] Parsed [Plain [Str "true"]] at line 1
+
+[trace] Parsed [Plain [Str "1.9.38"]] at line 1
+
+[trace] Parsed [Plain [Str "A",Space,Str "minimal",Space,Str "page",Space,S at line 1
+
+[trace] Parsed [Plain [Str "cosmo"]] at line 1
+
+[trace] Parsed [Plain [Str "Quarto",Space,Str "Manual"]] at line 1
+
+[trace] Parsed [Plain [Str "Table",Space,Str "of",Space,Str "contents"]] at line 1
+
+[trace] Parsed [] at line 3
+
+[trace] Parsed [Header 2 ("introduction",[],[]) [Str "Introduction"]] at line 5
+
+[trace] Parsed [Para [Str "A",Space,Str "Quarto",Space,Str "Manual",Space,S at line 9
+
+[trace] Parsed [Para [Str "Organizations,",Space,Str "research",Space,Str " at line 13
+
+[trace] Parsed [Plain [Str "Flight",Space,Str "check",Space,Str "manuals",S at line 2
+
+[trace] Parsed [Plain [Str "HR",Space,Str "training",Space,Str "websites",S at line 2
+
+[trace] Parsed [Plain [Str "Cleaning",Space,Str "and",Space,Str "maintenanc at line 2
+
+[trace] Parsed [Para [Str "Standard",Space,Str "operating",Space,Str "proce at line 3
+
+[trace] Parsed [BulletList [[Plain [Str "Flight",Space,Str "check",Space,St at line 18
+
+[trace] Parsed [Para [Str "Manuals",Space,Str "are",Space,Str "used",Space, at line 22
+
+[trace] Parsed [Para [Str "Working",Space,Str "with",Space,Str "software",S at line 24
+
+[trace] Parsed [] at line 26
+
+[trace] Parsed [Para [Str "Quarto",Space,Str "Manuals",Space,Str "are",Spac at line 30
+
+[trace] Parsed [Div ("",["callout-important"],[]) [Para [Str "Quarto",Space at line 32
+
+[trace] Parsed [Header 2 ("basic-use",[],[]) [Str "Basic",Space,Str "use"]] at line 34
+
+[trace] Parsed [Para [Str "To",Space,Str "use",Space,Str "an",Space,Str "ex at line 36
+
+[trace] Parsed [CodeBlock ("",["bash"],[]) "quarto use template GoldenPlane at line 40
+
+[trace] Parsed [Para [Str "Here,",Space,Code ("",[],[]) "GoldenPlanetaryHea at line 42
+
+[trace] Parsed [Para [Str "Quarto",Space,Str "will",Space,Str "create",Spac at line 44
+
+[trace] Parsed [Para [Str "A",Space,Str "typical",Space,Str "manual",Space, at line 46
+
+[trace] Parsed [Plain [Str "discover",Space,Str "the",Space,Str "current",S at line 2
+
+[trace] Parsed [Plain [Str "explain",Space,Str "the",Space,Str "setup",Spac at line 2
+
+[trace] Parsed [Plain [Str "ask",Space,Str "the",Space,Str "user",Space,Str at line 2
+
+[trace] Parsed [Plain [Str "generate",Space,Str "or",Space,Str "modify",Spa at line 2
+
+[trace] Parsed [Plain [Str "run",Space,Str "a",Space,Str "test",Space,Str " at line 2
+
+[trace] Parsed [Para [Str "update",Space,Str "the",Space,Str "final",Space, at line 3
+
+[trace] Parsed [OrderedList (1,Decimal,Period) [[Plain [Str "discover",Spac at line 53
+
+[trace] Parsed [Header 2 ("creating-a-new-manual",[],[]) [Str "Creating",Sp at line 55
+
+[trace] Parsed [Para [Str "To",Space,Str "create",Space,Str "a",Space,Str " at line 57
+
+[trace] Parsed [CodeBlock ("",["yaml"],[]) "project:\n  type: quarto-manual at line 62
+
+[trace] Parsed [Para [Str "Then",Space,Str "create",Space,Str "one",Space,C at line 64
+
+[trace] Parsed [Para [Str "Each",Space,Str "page",Space,Str "should",Space, at line 66
+
+[trace] Parsed [Plain [Str "a",Space,Str "short",Space,Str "explanation",Sp at line 2
+
+[trace] Parsed [Plain [Str "a",Space,Str "code",Space,Str "chunk",Space,Str at line 2
+
+[trace] Parsed [Plain [Str "any",Space,Str "user-editable",Space,Str "varia at line 2
+
+[trace] Parsed [Plain [Str "code",Space,Str "or",Space,Str "export",Space,S at line 2
+
+[trace] Parsed [Para [Str "an",Space,Str "inspection",Space,Str "or",Space, at line 3
+
+[trace] Parsed [BulletList [[Plain [Str "a",Space,Str "short",Space,Str "ex at line 72
+
+[trace] Parsed [Para [Str "For",Space,Str "example:"]] at line 74
+
+[trace] Parsed [CodeBlock ("",["markdown"],[]) "# 02 Request Specification\ at line 94
+
+[trace] Parsed [Header 2 ("export-blocks",[],[]) [Str "Export",Space,Str "b at line 96
+
+[trace] Parsed [Para [Str "Manual",Space,Str "pages",Space,Str "can",Space, at line 98
+
+[trace] Parsed [Para [Str "For",Space,Str "example:"]] at line 100
+
+[trace] Parsed [CodeBlock ("",["markdown"],[]) "::: {.manual-project-source at line 109
+
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "says:"]] at line 111
+
+[trace] Parsed [Para [Str "When",Space,Str "the",Space,Str "manual",Space,S at line 3
+
+[trace] Parsed [BlockQuote [Para [Str "When",Space,Str "the",Space,Str "man at line 113
+
+[trace] Parsed [Para [Str "Common",Space,Str "block",Space,Str "types",Spac at line 115
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-lib-source",Space,Str "for" at line 2
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-project-source",Space,Str " at line 2
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-project-test",Space,Str "fo at line 2
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-project-script",Space,Str " at line 2
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-project-config",Space,Str " at line 2
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-run",Space,Str "for",Space, at line 2
+
+[trace] Parsed [Para [Code ("",[],[]) ".manual-explain",Space,Str "for",Spa at line 3
+
+[trace] Parsed [BulletList [[Plain [Code ("",[],[]) ".manual-lib-source",Sp at line 123
+
+[trace] Parsed [Header 2 ("what-a-manual-produces",[],[]) [Str "What",Space at line 125
+
+[trace] Parsed [Para [Str "A",Space,Str "manual",Space,Str "produces",Space at line 127
+
+[trace] Parsed [Para [Str "Depending",Space,Str "on",Space,Str "the",Space, at line 129
+
+[trace] Parsed [Plain [Str "configuration",Space,Str "files;"]] at line 2
+
+[trace] Parsed [Plain [Str "source",Space,Str "modules;"]] at line 2
+
+[trace] Parsed [Plain [Str "helper",Space,Str "scripts;"]] at line 2
+
+[trace] Parsed [Plain [Str "Slurm",Space,Str "scripts;"]] at line 2
+
+[trace] Parsed [Plain [Str "package",Space,Str "files;"]] at line 2
+
+[trace] Parsed [Plain [Str "container",Space,Str "recipes;"]] at line 2
+
+[trace] Parsed [Plain [Str "tests;"]] at line 2
+
+[trace] Parsed [Plain [Str "logs;"]] at line 2
+
+[trace] Parsed [Para [Str "a",Space,Str "completed",Space,Str "readiness",S at line 3
+
+[trace] Parsed [BulletList [[Plain [Str "configuration",Space,Str "files;"] at line 139
+
+[trace] Parsed [Para [Str "Much",Space,Str "like",Space,Str "a",Space,Str " at line 141
+
+[trace] Parsed [Para [Str "Is",Space,Str "this",Space,Str "project",Space,S at line 3
+
+[trace] Parsed [BlockQuote [Para [Str "Is",Space,Str "this",Space,Str "proj at line 143
+
+[trace] Parsed [Para [Str "The",Space,Str "user",Space,Str "still",Space,St at line 145
+
+[trace] Parsed [Header 2 ("internals",[],[]) [Str "Internals"]] at line 147
+
+[trace] Parsed [Para [Str "A",Space,Str "Quarto",Space,Str "Manual",Space,S at line 153
+
+[trace] Parsed [Header 1 ("quarto-manual-template-demonstration",[],[]) [St at line 155
+
+[trace] Parsed [Para [Str "This",Space,Str "page",Space,Str "demonstrates", at line 157
+
+[trace] Parsed [Para [Str "It",Space,Str "is",Space,Str "intended",Space,St at line 159
+
+[trace] Parsed [Plain [Str "as",Space,Str "a",Space,Str "rendered",Space,St at line 2
+
+[trace] Parsed [Para [Str "as",Space,Str "an",Space,Str "executable/exporta at line 3
+
+[trace] Parsed [OrderedList (1,Decimal,Period) [[Plain [Str "as",Space,Str  at line 162
+
+[trace] Parsed [Para [Str "The",Space,Str "export",Space,Str "filter",Space at line 164
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-lib-source"]] at line 2
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-project-source"]] at line 2
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-project-test"]] at line 2
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-project-script"]] at line 2
+
+[trace] Parsed [Para [Code ("",[],[]) ".manual-project-config"]] at line 3
+
+[trace] Parsed [BulletList [[Plain [Code ("",[],[]) ".manual-lib-source"]], at line 170
+
+[trace] Parsed [Para [Str "The",Space,Str "rendering",Space,Str "filter",Sp at line 172
+
+[trace] Parsed [Plain [Code ("",[],[]) ".manual-run"]] at line 2
+
+[trace] Parsed [Para [Code ("",[],[]) ".manual-explain"]] at line 3
+
+[trace] Parsed [BulletList [[Plain [Code ("",[],[]) ".manual-run"]],[Plain  at line 175
+
+[trace] Parsed [Para [Str "The",Space,Code ("",[],[]) ".qmd",Space,Str "pag at line 177
+
+[trace] Parsed [Header 2 ("how-to-run-this-demonstration",[],[]) [Str "How" at line 179
+
+[trace] Parsed [Para [Str "Render",Space,Str "normally",Space,Str "to",Spac at line 181
+
+[trace] Parsed [CodeBlock ("",["bash"],[]) "quarto render template.qmd"] at line 185
+
+[trace] Parsed [Para [Str "Run",Space,Str "with",Space,Str "export",Space,S at line 187
+
+[trace] Parsed [CodeBlock ("",["bash"],[]) "RSE_MANUAL_EXPORT=1 quarto rend at line 191
+
+[trace] Parsed [Para [Str "Run",Space,Str "in",Space,Str "check",Space,Str  at line 193
+
+[trace] Parsed [CodeBlock ("",["bash"],[]) "RSE_MANUAL_EXPORT=1 RSE_MANUAL_ at line 197
+[trace] Parsed [Para [Str "Override",Space,Str "metadata",Space,Str "variab at line 199
+[trace] Parsed [CodeBlock ("",["bash"],[]) "RSE_MANUAL_EXPORT=1 \\\nRSE_MAN at line 208
+[trace] Parsed [Header 2 ("why-this-step-exists",[],[]) [Str "Why",Space,St at line 210
+[trace] Parsed [Para [Str "A",Space,Str "Quarto",Space,Str "Manual",Space,S at line 213
+[trace] Parsed [Para [Str "Each",Space,Str "page",Space,Str "should",Space, at line 215
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "uses",Space,C at line 217
+[trace] Parsed [Para [Str "It",Space,Str "is",Space,Str "not",Space,Str "ex at line 219
+[trace] Parsed [Para [Str "Why",Space,Str "This",Space,Str "Step",Space,Str at line 3
+[trace] Parsed [BlockQuote [Para [Str "Why",Space,Str "This",Space,Str "Ste at line 220
+[trace] Parsed [Div ("",["manual-explain"],[]) [Para [Str "A",Space,Str "Qu at line 222
+[trace] Parsed [Header 2 ("start-from-current-project-state",[],[]) [Str "S at line 224
+[trace] Parsed [CodeBlock ("",["python"],[]) "from pathlib import Path\n\np at line 238
+[trace] Parsed [Div ("",["manual-run"],[("title","Discover Project State")] at line 240
+[trace] Parsed [Para [Str "The",Space,Code ("",[],[]) ".manual-run",Space,S at line 242
+[trace] Parsed [Header 2 ("manual-library-export",[],[]) [Str "1.",Space,St at line 244
+[trace] Parsed [CodeBlock ("",["python"],[]) "from __future__ import annota at line 286
+[trace] Parsed [Div ("",["manual-lib-source"],[("file","{{ manual_root }}/s at line 288
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "demonstrates" at line 290
+[trace] Parsed [Para [Str "When",Space,Str "exported,",Space,Str "it",Space at line 292
+[trace] Parsed [CodeBlock ("",["text"],[]) "{{ manual_root }}/src/quarto_ma at line 296
+[trace] Parsed [Para [Str "Because",Space,Str "the",Space,Str "code",Space, at line 298
+[trace] Parsed [Header 2 ("project-source-export",[],[]) [Str "2.",Space,St at line 300
+[trace] Parsed [CodeBlock ("",["python"],[]) "from __future__ import annota at line 336
+[trace] Parsed [Div ("",["manual-project-source"],[("file","{{ package_root at line 338
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "demonstrates" at line 340
+[trace] Parsed [Para [Str "It",Space,Str "also",Space,Str "demonstrates",Sp at line 342
+[trace] Parsed [Para [Str "When",Space,Str "exported,",Space,Str "it",Space at line 344
+[trace] Parsed [CodeBlock ("",["text"],[]) "{{ package_root }}/contract.py" at line 348
+[trace] Parsed [Header 2 ("project-config-export",[],[]) [Str "3.",Space,St at line 350
+[trace] Parsed [CodeBlock ("",["yaml"],[]) "manual:\n  project_name: \"{{ p at line 374
+[trace] Parsed [Div ("",["manual-project-config"],[("file","{{ project_dir  at line 376
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "demonstrates" at line 378
+[trace] Parsed [Para [Str "Because",Space,Str "the",Space,Str "language",Sp at line 380
+[trace] Parsed [Para [Str "When",Space,Str "exported,",Space,Str "it",Space at line 382
+[trace] Parsed [CodeBlock ("",["text"],[]) "{{ project_dir }}/config/manual at line 386
+[trace] Parsed [Header 2 ("project-script-export",[],[]) [Str "4.",Space,St at line 388
+[trace] Parsed [CodeBlock ("",["bash"],[]) "#!/usr/bin/env bash\nset -euo p at line 404
+[trace] Parsed [Div ("",["manual-project-script"],[("file","{{ project_dir  at line 406
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "demonstrates" at line 408
+[trace] Parsed [Para [Str "The",Space,Code ("",[],[]) "mode=\"0755\"",Space at line 410
+[trace] Parsed [Para [Str "When",Space,Str "exported,",Space,Str "it",Space at line 412
+[trace] Parsed [CodeBlock ("",["text"],[]) "{{ project_dir }}/scripts/check at line 416
+[trace] Parsed [Header 2 ("project-test-export",[],[]) [Str "5.",Space,Str  at line 418
+[trace] Parsed [CodeBlock ("",["python"],[]) "from pathlib import Path\n\nf at line 440
+[trace] Parsed [Div ("",["manual-project-test"],[("file","{{ project_dir }} at line 442
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "demonstrates" at line 444
+[trace] Parsed [Para [Str "When",Space,Str "exported,",Space,Str "it",Space at line 446
+[trace] Parsed [CodeBlock ("",["text"],[]) "{{ project_dir }}/tests/test_pr at line 450
+[trace] Parsed [Para [Str "This",Space,Str "is",Space,Str "the",Space,Str " at line 452
+[trace] Parsed [Header 2 ("markdown-export",[],[]) [Str "6.",Space,Str "Mar at line 454
+[trace] Parsed [CodeBlock ("",["markdown"],[]) "# Completed Checklist\n\nTh at line 468
+[trace] Parsed [Div ("",["manual-project-config"],[("file","{{ project_dir  at line 470
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "demonstrates" at line 472
+[trace] Parsed [Para [Str "Because",Space,Str "the",Space,Str "language",Sp at line 474
+[trace] Parsed [CodeBlock ("",["html"],[]) "<!-- Generated by rse-manual. - at line 478
+[trace] Parsed [Para [Str "When",Space,Str "exported,",Space,Str "it",Space at line 480
+[trace] Parsed [CodeBlock ("",["text"],[]) "{{ project_dir }}/checklist.md" at line 484
+[trace] Parsed [Header 2 ("sql-export",[],[]) [Str "7.",Space,Str "SQL",Spa at line 486
+[trace] Parsed [CodeBlock ("",["sql"],[]) "select\n  '{{ project_name }}' a at line 493
+[trace] Parsed [Div ("",["manual-project-config"],[("file","{{ project_dir  at line 495
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "demonstrates" at line 497
+[trace] Parsed [Para [Str "When",Space,Str "exported,",Space,Str "it",Space at line 499
+[trace] Parsed [CodeBlock ("",["text"],[]) "{{ project_dir }}/sql/inspect_p at line 503
+[trace] Parsed [Header 2 ("custom-callout-title",[],[]) [Str "8.",Space,Str at line 505
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "uses",Space,C at line 508
+[trace] Parsed [Para [Str "The",Space,Str "rendering",Space,Str "filter",Sp at line 509
+[trace] Parsed [Div ("",["manual-explain"],[("title","Custom Title Example" at line 511
+[trace] Parsed [Header 2 ("intentional-non-export-run-block",[],[]) [Str "9 at line 513
+[trace] Parsed [CodeBlock ("",["python"],[]) "from pathlib import Path\n\ne at line 527
+[trace] Parsed [Div ("",["manual-run"],[]) [CodeBlock ("",["python"],[]) "f at line 529
+[trace] Parsed [Para [Str "This",Space,Str "block",Space,Str "demonstrates" at line 531
+[trace] Parsed [Para [Str "It",Space,Str "is",Space,Str "useful",Space,Str  at line 533
+[trace] Parsed [Header 2 ("page-completion-inspection",[],[]) [Str "10.",Sp at line 535
+[trace] Parsed [Para [Str "This",Space,Str "page",Space,Str "is",Space,Str  at line 538
+[trace] Parsed [Para [Str "The",Space,Str "manual",Space,Str "should",Space at line 539
+[trace] Parsed [Div ("",["manual-explain"],[("title","Completion Rule")]) [ at line 541
+[trace] Parsed [Para [Str "A",Space,Str "real",Space,Str "page",Space,Str " at line 543
+[trace] Parsed [CodeBlock ("",["bash"],[]) "pytest {{ project_dir }}/tests/ at line 547
+[trace] Parsed [Para [Str "For",Space,Str "this",Space,Str "template",Space at line 549
+[trace] Parsed [Plain [Str "the",Space,Str "project",Space,Str "contract",S at line 2
+[trace] Parsed [Plain [Str "the",Space,Str "config",Space,Str "block",Space at line 2
+[trace] Parsed [Plain [Str "the",Space,Str "script",Space,Str "block",Space at line 2
+[trace] Parsed [Plain [Str "the",Space,Str "test",Space,Str "block",Space,S at line 2
+[trace] Parsed [Plain [Str "the",Space,Str "rendered",Space,Str "page",Spac at line 2
+[trace] Parsed [Para [Str "exporting",Space,Str "writes",Space,Str "files", at line 3
+[trace] Parsed [BulletList [[Plain [Str "the",Space,Str "project",Space,Str at line 556
+[trace] Parsed [Header 2 ("notes-for-manual-authors",[],[]) [Str "11.",Spac at line 558
+[trace] Parsed [Para [Str "Each",Space,Str "export",Space,Str "block",Space at line 560
+[trace] Parsed [Plain [Str "Include",Space,Str "exactly",Space,Str "one",Sp at line 2
+[trace] Parsed [Plain [Str "Include",Space,Str "a",Space,Code ("",[],[]) "f at line 2
+[trace] Parsed [Plain [Str "Contain",Space,Str "exactly",Space,Str "one",Sp at line 2
+
+[trace] Parsed [Plain [Str "Use",Space,Str "template",Space,Str "variables" at line 2
+[trace] Parsed [Plain [Str "Keep",Space,Str "explanatory",Space,Str "prose" at line 2
+[trace] Parsed [Plain [Str "Use",Space,Code ("",[],[]) ".manual-run",Space, at line 2
+[trace] Parsed [Para [Str "Use",Space,Code ("",[],[]) ".manual-explain",Spa at line 3
+[trace] Parsed [OrderedList (1,Decimal,Period) [[Plain [Str "Include",Space at line 568
+[trace] Parsed [Para [Str "This",Space,Str "page",Space,Str "intentionally" at line 572
+
+[trace] Parsed [Para [Span ("",["hidden","quarto-markdown-envelope-contents at line 577
+
+[trace] Parsed [Div ("quarto-navigation-envelope",["hidden"],[]) [Para [Spa at line 581
+
+[trace] Parsed [Para [Span ("",["hidden","quarto-markdown-envelope-contents at line 588
+
+[trace] Parsed [Div ("quarto-meta-markdown",["hidden"],[]) [Para [Span ("", at line 592
+
+[INFO] 
+Running filter /Applications/quarto/share/filters/main.lua
+
+[trace] Parsed [] at line 4
+
+[quarto-manual] rendering manual-explain as callout-note
+
+[quarto-manual] rendering manual-run as callout-tip
+[quarto-manual] rendering manual-explain as callout-note
+
+[quarto-manual] rendering manual-run as callout-tip
+
+[quarto-manual] rendering manual-explain as callout-note
+
+[rse-manual] wrote {{ manual_root }}/src/quarto_manual/checks.py
+
+[rse-manual] wrote {{ package_root }}/contract.py
+
+[rse-manual] wrote {{ project_dir }}/config/manual.yml
+
+[rse-manual] wrote {{ project_dir }}/scripts/check_project.sh
+
+[rse-manual] wrote {{ project_dir }}/tests/test_project_contract.py
+
+[rse-manual] wrote {{ project_dir }}/checklist.md
+
+[rse-manual] wrote {{ project_dir }}/sql/inspect_project.sql
+
+[INFO] 
+Completed filter /Applications/quarto/share/filters/main.lua in 113 ms
+
+[execProcess] Success: true, code: 0
+
+[listing] Completing staged feeds in /Users/tit420/projects/QuartoManual
+
+[listing] Completing listing items in /Users/tit420/projects/QuartoManual
+
+[listing] Completing listing items for 1 files
+
+[listing] Creating content reader
+
+[listing] Completing listing items /Users/tit420/projects/QuartoManual/index.qmd
+
+[listing] Writing global listing index for /Users/tit420/projects/QuartoManual
+
+[NotebookContext]: Starting Cleanup
+
+Output created: _book/index.html
+
+
+SassCache cleanup executing for /Users/tit420/projects/QuartoManual/.quarto/quarto-session-temp7d2a964ba61ee6e6/sass
+
+SassCache cleanup executing for /Users/tit420/Library/Caches/quarto/sass
+

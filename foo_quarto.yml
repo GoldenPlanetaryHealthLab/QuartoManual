@@ -1,0 +1,11 @@
+project:
+  type: quarto-manual
+
+book:
+  title: Quarto Manual
+  chapters:
+    - index.qmd
+
+format:
+  html:
+    theme: cosmo

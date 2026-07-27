@@ -162,8 +162,8 @@ function Div(el)
     return el
   end
 
-  local inflating = os.getenv("RSE_MANUAL_EXPORT") == "1"
-  if not inflating then
+  local exporting = os.getenv("RSE_MANUAL_EXPORT") == "1"
+  if not exporting then
     return el
   end
 

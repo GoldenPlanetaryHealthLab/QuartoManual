@@ -1,5 +1,5 @@
 project:
-  type: quarto-manual
+  type: book
 
 book:
   title: Quarto Manual
@@ -8,4 +8,8 @@ book:
 
 format:
   html:
+    toc: true
     theme: cosmo
+    filters:
+      - _extensions/quarto-manual/manual.lua
+      - _extensions/quarto-manual/manual-export.lua
