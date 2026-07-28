@@ -39,23 +39,41 @@ Then write the page using the required manual blocks.
 
 The prerequisite block explains what the user must already have before this
 step is actionable. This is the place to inspect the current project state,
-load helper code, or confirm that earlier manual steps are complete.
+load shared helper code, or confirm that earlier manual steps are complete.
 
-There must be exactly one prerequisite block on the page.
+There must be exactly one prerequisite block on the page. In this manual,
+the prerequisite block should include the shared checklist definition so that
+each page starts from the same declared manual state.[^1]
 
-```markdown
+[^1]: Notebook authoring can make cross-page state hard to reason about.
+By keeping the checklist definition in one included file, each page can
+recreate the same shared base objects in its own execution context. This
+gives authors one source of truth while avoiding hidden dependence on
+state from another page.
+
 ::: {.manual-prereq}
+
+## Prerequisite Block Example
+
+<!-- For computations during rendering, the following will run the class definition -->
+
+{{< include impl_python.qmd >}}
+
+
 This page assumes the project directory exists and that the user has already
 chosen an environment name.
 
 ```{python}
 from pathlib import Path
 
-project_root = Path(".")
-environment_dir = project_root / ".venv"
+assert project, "Expected project to be defined. Did you include the checklist.qmd file and run the first page?"
+assert project.project_root.is_dir(), "Expected project root to be a directory"
+
+environment_dir = project.project_root / ".venv"
 ```
+
 :::
-```
+
 
 ### 2. Procedure Blocks
 

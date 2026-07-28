@@ -1,0 +1,22 @@
+project:
+  type: book
+  output-dir: ../docs
+  render: 
+    - "*.qmd"
+
+book:
+  title: Quarto Manual
+  chapters:
+    - index.qmd
+    - checklist.qmd
+    - impl_python.qmd
+    - impl_r.qmd
+    - page.qmd
+
+format:
+  html:
+    toc: true
+    theme: cosmo
+    filters:
+      - _extensions/quarto-manual/manual.lua
+

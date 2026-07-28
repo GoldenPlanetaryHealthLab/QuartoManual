@@ -1,0 +1,166 @@
+---
+title: "Manual Python Implementation"
+format: html
+---
+
+## Implementation
+
+Python is great for object oriented workflows.
+One useful Python implementation for a manual is as a 
+`Checklist` object. By using a `dataclass`, we can create a
+flexible checklist object that summarize a manual and its pages. 
+In that design, the checklist is not the manual itself.
+It is a structured representation of the manual's ordered steps. Each page has
+a number, title, and semantic content for prerequisite, procedure, and check
+blocks.
+
+## Page
+
+First, we'll define a page in the checklist.
+
+```{python}
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Callable, Iterable, Sequence
+
+import warnings
+
+
+CheckFn = Callable[["Checklist", "Page"], None]
+
+
+@dataclass(frozen=True)
+class Page:
+    """One checklist step in a Quarto Manual."""
+
+    title: str
+    number: int
+    prerequisite: str
+    procedures: tuple[str, ...]
+    check: str
+
+    def __post_init__(self) -> None:
+        if not self.title.strip():
+            raise ValueError("Page.title must not be empty.")
+
+        if self.number < 1:
+            raise ValueError("Page.number must be >= 1.")
+
+        if not self.prerequisite.strip():
+            raise ValueError("Page.prerequisite must not be empty.")
+
+        if not self.check.strip():
+            raise ValueError("Page.check must not be empty.")
+
+        if len(self.procedures) < 1:
+            raise ValueError("Page.procedures must contain at least one procedure block.")
+
+        if any(not step.strip() for step in self.procedures):
+            raise ValueError("Page.procedures may not contain empty procedure blocks.")
+
+    @property
+    def procedure_count(self) -> int:
+        return len(self.procedures)
+
+    def summary(self) -> dict:
+        return {
+            "title": self.title,
+            "number": self.number,
+            "prerequisite": self.prerequisite,
+            "procedure_count": self.procedure_count,
+            "check": self.check,
+        }
+
+```
+
+
+
+The `Checklist` class is a container for the pages in the manual. It can be used to
+summarize the manual, report missing sections, and help the user see how much of the
+procedure has been covered.
+
+It has a simple initialization API requiring the title of the project,
+the root directory of the project, and a sequence of `Page` objects. The
+`Checklist` class validates that the pages are numbered in order and that there
+are no duplicate page numbers.
+
+```{python}
+from pathlib import Path
+
+@dataclass(frozen=True)
+class Checklist:
+    """Declarative description of a Quarto Manual."""
+
+    project_title: str
+    project_root: Path
+    pages: tuple[Page, ...] = field(default_factory=tuple)
+
+    def __post_init__(self) -> None:
+        if not self.project_title.strip():
+            raise ValueError("Checklist.project_title must not be empty.")
+
+        if not Path(self.project_root).is_dir():
+            raise ValueError("Checklist.project_root must be an existing directory.")
+
+        if len(self.pages) < 1:
+            warnings.warn(
+                "Checklist.pages is empty; this is useful during testing, but an end-user manual should contain at least one page.",
+                stacklevel=2,
+            )
+
+        numbers = [page.number for page in self.pages]
+        if len(numbers) != len(set(numbers)):
+            raise ValueError("Checklist page numbers must be unique.")
+
+        if numbers != sorted(numbers):
+            raise ValueError("Checklist pages must be ordered by page number.")
+
+    @property
+    def page_count(self) -> int:
+        return len(self.pages)
+
+    @property
+    def check_count(self) -> int:
+        return len(self.pages)
+
+    @property
+    def procedure_count(self) -> int:
+        return sum(page.procedure_count for page in self.pages)
+
+    def get_page(self, number: int) -> Page:
+        for page in self.pages:
+            if page.number == number:
+                return page
+        raise KeyError(f"No page found for number {number}.")
+
+    def summary(self) -> dict:
+        return {
+            "project_title": self.project_title,
+            "project_root": str(self.project_root),
+            "page_count": self.page_count,
+            "procedure_count": self.procedure_count,
+            "check_count": self.check_count,
+            "pages": [page.summary() for page in self.pages],
+        }
+
+    def __repr__(self) -> str:
+        return (
+            f"Checklist("
+            f"project_title={self.project_title!r}, "
+            f"pages={self.page_count}, "
+            f"project_root={str(self.project_root)!r})"
+        )
+
+```
+
+This allows us to create a very simple checklist for a manual:
+
+```{python}
+from pathlib import Path
+project = Checklist(project_title="simple_example", project_root=Path("../examples"))
+```
+
+To see how `Pages` are added to the manual, see the next section.
+

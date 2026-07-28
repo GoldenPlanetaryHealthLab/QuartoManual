@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TinasheMTapera">
+<meta name="dcterms.date" content="2026-07-28">
+
+<title>Quarto Manual</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./checklist.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manual Template Demonstration</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Quarto Manual</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manual Template Demonstration</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quarto Manuals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./impl_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manual Python Implementation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./impl_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual R Implementation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./page.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manual Python Implementation</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">0.1</span> Introduction</a></li>
+  <li><a href="#basic-use" id="toc-basic-use" class="nav-link" data-scroll-target="#basic-use"><span class="header-section-number">0.2</span> Basic use</a></li>
+  <li><a href="#creating-a-new-manual" id="toc-creating-a-new-manual" class="nav-link" data-scroll-target="#creating-a-new-manual"><span class="header-section-number">0.3</span> Creating a new manual</a></li>
+  <li><a href="#export-blocks" id="toc-export-blocks" class="nav-link" data-scroll-target="#export-blocks"><span class="header-section-number">0.4</span> Export blocks</a></li>
+  <li><a href="#what-a-manual-produces" id="toc-what-a-manual-produces" class="nav-link" data-scroll-target="#what-a-manual-produces"><span class="header-section-number">0.5</span> What a manual produces</a></li>
+  <li><a href="#internals" id="toc-internals" class="nav-link" data-scroll-target="#internals"><span class="header-section-number">0.6</span> Internals</a></li>
+  <li><a href="#quarto-manual-template-demonstration" id="toc-quarto-manual-template-demonstration" class="nav-link" data-scroll-target="#quarto-manual-template-demonstration"><span class="header-section-number">1</span> Quarto Manual Template Demonstration</a>
+  <ul class="collapse">
+  <li><a href="#how-to-run-this-demonstration" id="toc-how-to-run-this-demonstration" class="nav-link" data-scroll-target="#how-to-run-this-demonstration"><span class="header-section-number">1.1</span> How to run this demonstration</a></li>
+  <li><a href="#why-this-step-exists" id="toc-why-this-step-exists" class="nav-link" data-scroll-target="#why-this-step-exists"><span class="header-section-number">1.2</span> Why this step exists</a></li>
+  <li><a href="#start-from-current-project-state" id="toc-start-from-current-project-state" class="nav-link" data-scroll-target="#start-from-current-project-state"><span class="header-section-number">1.3</span> Start from current project state</a></li>
+  <li><a href="#manual-library-export" id="toc-manual-library-export" class="nav-link" data-scroll-target="#manual-library-export"><span class="header-section-number">1.4</span> 1. Manual library export</a></li>
+  <li><a href="#project-source-export" id="toc-project-source-export" class="nav-link" data-scroll-target="#project-source-export"><span class="header-section-number">1.5</span> 2. Project source export</a></li>
+  <li><a href="#project-config-export" id="toc-project-config-export" class="nav-link" data-scroll-target="#project-config-export"><span class="header-section-number">1.6</span> 3. Project config export</a></li>
+  <li><a href="#project-script-export" id="toc-project-script-export" class="nav-link" data-scroll-target="#project-script-export"><span class="header-section-number">1.7</span> 4. Project script export</a></li>
+  <li><a href="#project-test-export" id="toc-project-test-export" class="nav-link" data-scroll-target="#project-test-export"><span class="header-section-number">1.8</span> 5. Project test export</a></li>
+  <li><a href="#markdown-export" id="toc-markdown-export" class="nav-link" data-scroll-target="#markdown-export"><span class="header-section-number">1.9</span> 6. Markdown export</a></li>
+  <li><a href="#sql-export" id="toc-sql-export" class="nav-link" data-scroll-target="#sql-export"><span class="header-section-number">1.10</span> 7. SQL export</a></li>
+  <li><a href="#custom-callout-title" id="toc-custom-callout-title" class="nav-link" data-scroll-target="#custom-callout-title"><span class="header-section-number">1.11</span> 8. Custom callout title</a></li>
+  <li><a href="#intentional-non-export-run-block" id="toc-intentional-non-export-run-block" class="nav-link" data-scroll-target="#intentional-non-export-run-block"><span class="header-section-number">1.12</span> 9. Intentional non-export run block</a></li>
+  <li><a href="#page-completion-inspection" id="toc-page-completion-inspection" class="nav-link" data-scroll-target="#page-completion-inspection"><span class="header-section-number">1.13</span> 10. Page completion inspection</a></li>
+  <li><a href="#notes-for-manual-authors" id="toc-notes-for-manual-authors" class="nav-link" data-scroll-target="#notes-for-manual-authors"><span class="header-section-number">1.14</span> 11. Notes for manual authors</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Quarto Manual</h1>
+<p class="subtitle lead">A minimal page showing every manual block supported by the current filters</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TinasheMTapera </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 28, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>{{ &lt;&lt; include README.md &gt;&gt; }}</p>
+<section id="introduction" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">0.1</span> Introduction</h2>
+<p>A Quarto Manual is a structured, multi-document Quarto template. It contains ordered, executable <code>.qmd</code> pages, workflow-specific helper libraries, page-level tests, and a final readiness checklist. Organizations, research groups, and individuals can create their own Quarto Manuals to document and share procedural, complex workflows.</p>
+<p>Manuals are common in many workplaces and every day life:</p>
+<ul>
+<li>Flight check manuals for pilots and cabin passengers</li>
+<li>HR training websites with modules and quizzes</li>
+<li>Cleaning and maintenance procedures for hotels and restaurants</li>
+<li>Standard operating procedures for experiments</li>
+<li>Product assembly instructions for furniture, electronics, and appliances</li>
+</ul>
+<p>When instructions are more complex than simply reading can allow, manuals are employed to ensure that critical procedures are followed correctly and consistently, and — perhaps most importantly — rely on active participation from the user and frequent spot checks to ensure that the workflow is going smoothly.</p>
+<p>Working with software need not be any different.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Quarto Manuals are interactive, executable software manuals for setting up and operating research computing projects. They are designed to be used by researchers, students, and other users who need to follow complex workflows in a consistent and reproducible manner.</p>
+</div>
+</div>
+</section>
+<section id="basic-use" class="level2" data-number="0.2">
+<h2 data-number="0.2" class="anchored" data-anchor-id="basic-use"><span class="header-section-number">0.2</span> Basic use</h2>
+<p>To use an existing manual, fetch the template from GitHub:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template GoldenPlanetaryHealthGroup/ERA5-Download-Manual</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Here, <code>GoldenPlanetaryHealthGroup/ERA5-Download-Manual</code> is the GitHub repository for the manual you want to use.</p>
+<p>Quarto will create a new project from that template. The generated project contains a set of <code>.qmd</code> pages that step you through the setup process. You can read and execute the pages in order.</p>
+<p>A typical manual page follows this pattern:</p>
+<ol type="1">
+<li>discover the current project state;</li>
+<li>explain the setup step;</li>
+<li>ask the user for any project-specific values;</li>
+<li>generate or modify setup files;</li>
+<li>run a test or inspection;</li>
+<li>update the final readiness checklist.</li>
+</ol>
+</section>
+<section id="creating-a-new-manual" class="level2" data-number="0.3">
+<h2 data-number="0.3" class="anchored" data-anchor-id="creating-a-new-manual"><span class="header-section-number">0.3</span> Creating a new manual</h2>
+<p>To create a manual for your own workflow, start with a Quarto project and use the <code>quarto-manual</code> project type or extension in <code>_quarto.yml</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> quarto-manual</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then create one <code>.qmd</code> page for each setup step in your workflow.</p>
+<p>Each page should contain:</p>
+<ul>
+<li>a short explanation of what the step does;</li>
+<li>a code chunk that discovers the current project state;</li>
+<li>any user-editable variables for that step;</li>
+<li>code or export blocks that create the required files;</li>
+<li>an inspection or test that proves the step is complete.</li>
+</ul>
+<p>For example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 02 Request Specification</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Start from current project state</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> quarto_manual.project <span class="im">import</span> Project</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>project <span class="op">=</span> Project.discover()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Assemble</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>Create the request specification for this project.</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Inspect</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>Run the page-level check that confirms the request specification exists and is valid.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="export-blocks" class="level2" data-number="0.4">
+<h2 data-number="0.4" class="anchored" data-anchor-id="export-blocks"><span class="header-section-number">0.4</span> Export blocks</h2>
+<p>Manual pages can include special blocks that export files into the project.</p>
+<p>For example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>::: {.manual-project-source file="src/{{ project_package }}/request.py"}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_request():</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {}</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This block says:</p>
+<blockquote class="blockquote">
+<p>When the manual is exported, write this code to <code>src/{{ project_package }}/request.py</code>.</p>
+</blockquote>
+<p>Common block types include:</p>
+<ul>
+<li><code>.manual-lib-source</code> for reusable helper code;</li>
+<li><code>.manual-project-source</code> for project source files (Python, R, Julia etc.);</li>
+<li><code>.manual-project-test</code> for tests;</li>
+<li><code>.manual-project-script</code> for shell or Slurm scripts;</li>
+<li><code>.manual-project-config</code> for YAML, TOML, Markdown, or other configuration files;</li>
+<li><code>.manual-run</code> for code that runs in the page but is not exported;</li>
+<li><code>.manual-explain</code> for explanatory callouts.</li>
+</ul>
+</section>
+<section id="what-a-manual-produces" class="level2" data-number="0.5">
+<h2 data-number="0.5" class="anchored" data-anchor-id="what-a-manual-produces"><span class="header-section-number">0.5</span> What a manual produces</h2>
+<p>A manual produces setup evidence, not necessarily final research outputs.</p>
+<p>Depending on the workflow, that evidence might include:</p>
+<ul>
+<li>configuration files;</li>
+<li>source modules;</li>
+<li>helper scripts;</li>
+<li>Slurm scripts;</li>
+<li>package files;</li>
+<li>container recipes;</li>
+<li>tests;</li>
+<li>logs;</li>
+<li>a completed readiness checklist.</li>
+</ul>
+<p>Much like a pre-flight checklist, a manual should answer:</p>
+<blockquote class="blockquote">
+<p>Is this project ready to operate?</p>
+</blockquote>
+<p>The user still runs the actual workflow.</p>
+</section>
+<section id="internals" class="level2" data-number="0.6">
+<h2 data-number="0.6" class="anchored" data-anchor-id="internals"><span class="header-section-number">0.6</span> Internals</h2>
+<p>A Quarto Manual works by extending the Quarto template system. Instead of a single page, it is a structured, multi-document Quarto project template that contains ordered, executable <code>.qmd</code> pages, workflow-specific helper libraries, page-level tests, and a final readiness checklist.</p>
+</section>
+<section id="quarto-manual-template-demonstration" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Quarto Manual Template Demonstration</h1>
+<p>This page demonstrates the current Quarto Manual filter contract.</p>
+<p>It is intended to be read in two ways:</p>
+<ol type="1">
+<li>as a rendered Quarto page, where each manual block becomes a callout;</li>
+<li>as an executable/exportable manual page, where selected blocks write files when <code>RSE_MANUAL_EXPORT=1</code>.</li>
+</ol>
+<p>The export filter recognizes these classes:</p>
+<ul>
+<li><code>.manual-lib-source</code></li>
+<li><code>.manual-project-source</code></li>
+<li><code>.manual-project-test</code></li>
+<li><code>.manual-project-script</code></li>
+<li><code>.manual-project-config</code></li>
+</ul>
+<p>The rendering filter also recognizes:</p>
+<ul>
+<li><code>.manual-run</code></li>
+<li><code>.manual-explain</code></li>
+</ul>
+<p>The <code>.qmd</code> page remains the source of truth. The generated files are derived artifacts.</p>
+<section id="how-to-run-this-demonstration" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="how-to-run-this-demonstration"><span class="header-section-number">1.1</span> How to run this demonstration</h2>
+<p>Render normally to see the callouts:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render template.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Run with export enabled to write the generated files:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">RSE_MANUAL_EXPORT</span><span class="op">=</span>1 <span class="ex">quarto</span> render template.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Run in check mode to see what would be written without changing files:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="va">RSE_MANUAL_EXPORT</span><span class="op">=</span>1 <span class="va">RSE_MANUAL_CHECK</span><span class="op">=</span>1 <span class="ex">quarto</span> render template.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Override metadata variables with environment variables:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="va">RSE_MANUAL_EXPORT</span><span class="op">=</span>1 <span class="dt">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="va">RSE_MANUAL_VAR_PROJECT_NAME</span><span class="op">=</span><span class="st">"my-era5-project"</span> <span class="dt">\</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="va">RSE_MANUAL_VAR_PROJECT_PACKAGE</span><span class="op">=</span><span class="st">"my_era5_project"</span> <span class="dt">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="va">RSE_MANUAL_VAR_PROJECT_DIR</span><span class="op">=</span><span class="st">"generated/my-era5-project"</span> <span class="dt">\</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="va">RSE_MANUAL_VAR_PACKAGE_ROOT</span><span class="op">=</span><span class="st">"generated/my-era5-project/src/my_era5_project"</span> <span class="dt">\</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render template.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="why-this-step-exists" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="why-this-step-exists"><span class="header-section-number">1.2</span> Why this step exists</h2>
+<div class="manual-explain callout-note" title="Why This Step Exists">
+<p>A Quarto Manual is a multi-page executable template.</p>
+<p>Each page should explain one setup step, run or export the implementation needed for that step, and end with an inspection that proves the step is complete.</p>
+<p>This block uses <code>.manual-explain</code>.</p>
+<p>It is not exported. It only renders as a callout. If no title is provided, the rendering filter assigns the default title:</p>
+<blockquote class="blockquote">
+<p>Why This Step Exists</p>
+</blockquote>
+</div>
+</section>
+<section id="start-from-current-project-state" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="start-from-current-project-state"><span class="header-section-number">1.3</span> Start from current project state</h2>
+<div class="manual-run callout-tip" title="Discover Project State">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>project_name <span class="op">=</span> <span class="st">"</span><span class="sc">{{</span><span class="st"> project_name </span><span class="sc">}}</span><span class="st">"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>project_package <span class="op">=</span> <span class="st">"</span><span class="sc">{{</span><span class="st"> project_package </span><span class="sc">}}</span><span class="st">"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>project_dir <span class="op">=</span> Path(<span class="st">"</span><span class="sc">{{</span><span class="st"> project_dir </span><span class="sc">}}</span><span class="st">"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>package_root <span class="op">=</span> Path(<span class="st">"</span><span class="sc">{{</span><span class="st"> package_root </span><span class="sc">}}</span><span class="st">"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Project name: </span><span class="sc">{</span>project_name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Project package: </span><span class="sc">{</span>project_package<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Project directory: </span><span class="sc">{</span>project_dir<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Package root: </span><span class="sc">{</span>package_root<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <code>.manual-run</code> block is for code that should be visible and executable in the page. It is not exported by the current export filter.</p>
+</section>
+<section id="manual-library-export" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="manual-library-export"><span class="header-section-number">1.4</span> 1. Manual library export</h2>
+<div class="manual-lib-source" data-file="{{ manual_root }}/src/quarto_manual/checks.py">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> __future__ <span class="im">import</span> annotations</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expect_file(path: <span class="bu">str</span> <span class="op">|</span> Path) <span class="op">-&gt;</span> Path:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Assert that a file exists and return it as a Path."""</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> Path(path)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> path.exists(), <span class="ss">f"Expected path to exist: </span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> path.is_file(), <span class="ss">f"Expected file: </span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> path</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expect_dir(path: <span class="bu">str</span> <span class="op">|</span> Path) <span class="op">-&gt;</span> Path:</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Assert that a directory exists and return it as a Path."""</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> Path(path)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> path.exists(), <span class="ss">f"Expected path to exist: </span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> path.is_dir(), <span class="ss">f"Expected directory: </span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> path</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expect_command_succeeds(command: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Assert that a command exits successfully."""</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> subprocess.run(</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        command,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        check<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        capture_output<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        text<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> result.returncode <span class="op">==</span> <span class="dv">0</span>, (</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Command failed: "</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> <span class="st">" "</span>.join(command)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">STDOUT:</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> result.stdout</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">STDERR:</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> result.stderr</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This block demonstrates <code>.manual-lib-source</code>.</p>
+<p>When exported, it writes a reusable manual-library helper module to:</p>
+<pre class="text"><code>{{ manual_root }}/src/quarto_manual/checks.py</code></pre>
+<p>Because the code block language is <code>python</code>, the export filter adds a <code>#</code> comment header.</p>
+</section>
+<section id="project-source-export" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="project-source-export"><span class="header-section-number">1.5</span> 2. Project source export</h2>
+<div class="manual-project-source" data-file="{{ package_root }}/contract.py" title="Export Project Contract">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> __future__ <span class="im">import</span> annotations</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ProjectContract:</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Minimal project contract generated by a Quarto Manual page."""</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    project_name: <span class="bu">str</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    project_package: <span class="bu">str</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    project_dir: Path</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> discover(cls) <span class="op">-&gt;</span> <span class="st">"ProjectContract"</span>:</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cls(</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>            project_name<span class="op">=</span><span class="st">"</span><span class="sc">{{</span><span class="st"> project_name </span><span class="sc">}}</span><span class="st">"</span>,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            project_package<span class="op">=</span><span class="st">"</span><span class="sc">{{</span><span class="st"> project_package </span><span class="sc">}}</span><span class="st">"</span>,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            project_dir<span class="op">=</span>Path(<span class="st">"</span><span class="sc">{{</span><span class="st"> project_dir </span><span class="sc">}}</span><span class="st">"</span>).resolve(),</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> src_dir(<span class="va">self</span>) <span class="op">-&gt;</span> Path:</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.project_dir <span class="op">/</span> <span class="st">"src"</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> tests_dir(<span class="va">self</span>) <span class="op">-&gt;</span> Path:</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.project_dir <span class="op">/</span> <span class="st">"tests"</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> config_dir(<span class="va">self</span>) <span class="op">-&gt;</span> Path:</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.project_dir <span class="op">/</span> <span class="st">"config"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This block demonstrates <code>.manual-project-source</code>.</p>
+<p>It also demonstrates template-variable substitution inside both the target path and the code body.</p>
+<p>When exported, it writes:</p>
+<pre class="text"><code>{{ package_root }}/contract.py</code></pre>
+</section>
+<section id="project-config-export" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="project-config-export"><span class="header-section-number">1.6</span> 3. Project config export</h2>
+<div class="manual-project-config" data-file="{{ project_dir }}/config/manual.yml">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">manual</span><span class="kw">:</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">project_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"{{ project_name }}"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">project_package</span><span class="kw">:</span><span class="at"> </span><span class="st">"{{ project_package }}"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">manual_type</span><span class="kw">:</span><span class="at"> </span><span class="st">"{{ manual_type }}"</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">project_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">"{{ project_dir }}"</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">workflow</span><span class="kw">:</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"Template demonstration"</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">status</span><span class="kw">:</span><span class="at"> </span><span class="st">"prototype"</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ready_to_operate</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">checklist</span><span class="kw">:</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"project-contract"</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">label</span><span class="kw">:</span><span class="at"> </span><span class="st">"Project contract exists"</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">complete</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"tests-exist"</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">label</span><span class="kw">:</span><span class="at"> </span><span class="st">"Page-level tests exist"</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">complete</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"script-exists"</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">label</span><span class="kw">:</span><span class="at"> </span><span class="st">"Execution script exists"</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">complete</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This block demonstrates <code>.manual-project-config</code>.</p>
+<p>Because the language is <code>yaml</code>, the export filter uses the default <code>#</code> generated-file header.</p>
+<p>When exported, it writes:</p>
+<pre class="text"><code>{{ project_dir }}/config/manual.yml</code></pre>
+</section>
+<section id="project-script-export" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="project-script-export"><span class="header-section-number">1.7</span> 4. Project script export</h2>
+<div class="manual-project-script" data-file="{{ project_dir }}/scripts/check_project.sh" data-mode="0755">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="va">project_dir</span><span class="op">=</span><span class="st">"{{ project_dir }}"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Checking project directory: </span><span class="va">${project_dir}</span><span class="st">"</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">test</span> <span class="at">-d</span> <span class="st">"</span><span class="va">${project_dir}</span><span class="st">"</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">test</span> <span class="at">-d</span> <span class="st">"</span><span class="va">${project_dir}</span><span class="st">/config"</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="bu">test</span> <span class="at">-d</span> <span class="st">"</span><span class="va">${project_dir}</span><span class="st">/src"</span> <span class="kw">||</span> <span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">${project_dir}</span><span class="st">/src"</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">test</span> <span class="at">-d</span> <span class="st">"</span><span class="va">${project_dir}</span><span class="st">/tests"</span> <span class="kw">||</span> <span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">${project_dir}</span><span class="st">/tests"</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Project scaffold exists."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This block demonstrates <code>.manual-project-script</code>.</p>
+<p>The <code>mode="0755"</code> attribute demonstrates executable script export. When the filter writes the file, it should call <code>chmod 0755</code> for this target.</p>
+<p>When exported, it writes:</p>
+<pre class="text"><code>{{ project_dir }}/scripts/check_project.sh</code></pre>
+</section>
+<section id="project-test-export" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="project-test-export"><span class="header-section-number">1.8</span> 5. Project test export</h2>
+<div class="manual-project-test" data-file="{{ project_dir }}/tests/test_project_contract.py">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> {{ project_package }}.contract <span class="im">import</span> ProjectContract</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_project_contract_discovers_project():</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    project <span class="op">=</span> ProjectContract.discover()</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> project.project_name <span class="op">==</span> <span class="st">"</span><span class="sc">{{</span><span class="st"> project_name </span><span class="sc">}}</span><span class="st">"</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> project.project_package <span class="op">==</span> <span class="st">"</span><span class="sc">{{</span><span class="st"> project_package </span><span class="sc">}}</span><span class="st">"</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> project.project_dir.name <span class="op">==</span> Path(<span class="st">"</span><span class="sc">{{</span><span class="st"> project_dir </span><span class="sc">}}</span><span class="st">"</span>).name</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_project_contract_paths_are_named():</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    project <span class="op">=</span> ProjectContract.discover()</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> project.src_dir.name <span class="op">==</span> <span class="st">"src"</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> project.tests_dir.name <span class="op">==</span> <span class="st">"tests"</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> project.config_dir.name <span class="op">==</span> <span class="st">"config"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This block demonstrates <code>.manual-project-test</code>.</p>
+<p>When exported, it writes:</p>
+<pre class="text"><code>{{ project_dir }}/tests/test_project_contract.py</code></pre>
+<p>This is the page-level inspection artifact. It asks whether the project contract generated by this page is usable.</p>
+</section>
+<section id="markdown-export" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="markdown-export"><span class="header-section-number">1.9</span> 6. Markdown export</h2>
+<div class="manual-project-config" data-file="{{ project_dir }}/checklist.md">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Completed Checklist</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>This checklist is generated from <span class="in">`template.qmd`</span>.</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>The desired output of a manual is not the final scientific result. The desired output is a project that is ready to operate.</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Project contract exists</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Configuration exists</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Helper script exists</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Page-level tests exist</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Manual page can be re-rendered</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This block demonstrates Markdown export.</p>
+<p>Because the language is <code>markdown</code>, the export filter should use HTML comment headers:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Generated by rse-manual. --&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>When exported, it writes:</p>
+<pre class="text"><code>{{ project_dir }}/checklist.md</code></pre>
+</section>
+<section id="sql-export" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="sql-export"><span class="header-section-number">1.10</span> 7. SQL export</h2>
+<div class="manual-project-config" data-file="{{ project_dir }}/sql/inspect_project.sql">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'{{ project_name }}'</span> <span class="kw">as</span> project_name,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'{{ project_package }}'</span> <span class="kw">as</span> project_package,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'{{ manual_type }}'</span> <span class="kw">as</span> manual_type;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This block demonstrates a language that uses <code>--</code> comments in the generated header.</p>
+<p>When exported, it writes:</p>
+<pre class="text"><code>{{ project_dir }}/sql/inspect_project.sql</code></pre>
+</section>
+<section id="custom-callout-title" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="custom-callout-title"><span class="header-section-number">1.11</span> 8. Custom callout title</h2>
+<div class="manual-explain callout-note" title="Custom Title Example">
+<p>This block uses <code>.manual-explain</code>, but it provides its own title.</p>
+<p>The rendering filter should preserve this title instead of replacing it with the default title.</p>
+</div>
+</section>
+<section id="intentional-non-export-run-block" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="intentional-non-export-run-block"><span class="header-section-number">1.12</span> 9. Intentional non-export run block</h2>
+<div class="manual-run callout-tip" title="Run In This Page">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>expected_files <span class="op">=</span> [</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    Path(<span class="st">"</span><span class="sc">{{</span><span class="st"> project_dir </span><span class="sc">}}</span><span class="st">/config/manual.yml"</span>),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    Path(<span class="st">"</span><span class="sc">{{</span><span class="st"> project_dir </span><span class="sc">}}</span><span class="st">/scripts/check_project.sh"</span>),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    Path(<span class="st">"</span><span class="sc">{{</span><span class="st"> project_dir </span><span class="sc">}}</span><span class="st">/tests/test_project_contract.py"</span>),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    Path(<span class="st">"</span><span class="sc">{{</span><span class="st"> project_dir </span><span class="sc">}}</span><span class="st">/checklist.md"</span>),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> path <span class="kw">in</span> expected_files:</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This block demonstrates another <code>.manual-run</code> section. It is intentionally not exported.</p>
+<p>It is useful as page-level executable prose: something the user can run while working through the manual.</p>
+</section>
+<section id="page-completion-inspection" class="level2" data-number="1.13">
+<h2 data-number="1.13" class="anchored" data-anchor-id="page-completion-inspection"><span class="header-section-number">1.13</span> 10. Page completion inspection</h2>
+<div class="manual-explain callout-note" title="Completion Rule">
+<p>This page is complete when the exported artifacts exist and the page-level test passes.</p>
+<p>The manual should not need a hidden progress database. Completion is inferred from project evidence: files, configs, scripts, rendered outputs, logs, and passing tests.</p>
+</div>
+<p>A real page might end with a command like:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pytest</span> {{ project_dir }}/tests/test_project_contract.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For this template demonstration, the completion checklist is:</p>
+<ul>
+<li>the project contract source block has a valid target;</li>
+<li>the config block has a valid target;</li>
+<li>the script block has <code>mode="0755"</code>;</li>
+<li>the test block imports the generated project contract;</li>
+<li>the rendered page shows all manual block types as callouts;</li>
+<li>exporting writes files only when <code>RSE_MANUAL_EXPORT=1</code>.</li>
+</ul>
+</section>
+<section id="notes-for-manual-authors" class="level2" data-number="1.14">
+<h2 data-number="1.14" class="anchored" data-anchor-id="notes-for-manual-authors"><span class="header-section-number">1.14</span> 11. Notes for manual authors</h2>
+<p>Each export block should obey these rules:</p>
+<ol type="1">
+<li>Include exactly one export class.</li>
+<li>Include a <code>file="..."</code> attribute.</li>
+<li>Contain exactly one code block.</li>
+<li>Use template variables only when they are declared in YAML metadata or passed through environment variables.</li>
+<li>Keep explanatory prose outside export blocks unless the prose itself is the exported artifact.</li>
+<li>Use <code>.manual-run</code> for code that should run in the page but should not be exported.</li>
+<li>Use <code>.manual-explain</code> for conceptual explanation that should render as a callout but should not be exported.</li>
+</ol>
+<p>This page intentionally demonstrates the full contract expected by the current filters.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./checklist.html" class="pagination-link" aria-label="Quarto Manuals">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quarto Manuals</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

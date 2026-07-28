@@ -183,6 +183,10 @@ Much like a pre-flight checklist, a manual should answer:
 
 The user still runs the actual workflow.
 
-## Comparisons:
+## Comparisons
 
-quarto-manual vs Jupyter Book, Quarto, learnr, nbgrader, and marimo
+### Why not just write a really really good README?
+
+### Ok, then why not just write a really really good tutorial website?
+
+quarto-manual vs software carpentries, Jupyter Book, plain Quarto, learnr, nbgrader, marimo, binder

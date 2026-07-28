@@ -1,0 +1,587 @@
+---
+title: "Quarto Manual Template Demonstration"
+subtitle: "A minimal page showing every manual block supported by the current filters"
+format:
+  html:
+    toc: true
+    code-fold: false
+manual:
+  project_name: "demo-era5-project"
+  project_package: "demo_era5_project"
+  manual_type: "era5_pipeline"
+  project_dir: "generated/demo-era5-project"
+  package_root: "generated/demo-era5-project/src/demo_era5_project"
+  manual_root: "."
+author: TinasheMTapera
+date: last-modified
+---
+
+{{ << include README.md >> }}
+
+## Introduction
+
+A Quarto Manual is a structured, multi-document Quarto template. It contains ordered, 
+executable `.qmd` pages, workflow-specific helper libraries, page-level tests, and a final 
+readiness checklist. Organizations, research groups, and individuals can create their own Quarto Manuals
+to document and share procedural, complex workflows. 
+
+Manuals are common in many workplaces and every day life:
+
+- Flight check manuals for pilots and cabin passengers
+- HR training websites with modules and quizzes
+- Cleaning and maintenance procedures for hotels and restaurants
+- Standard operating procedures for experiments
+- Product assembly instructions for furniture, electronics, and appliances
+
+When instructions are more complex than simply reading can allow, manuals are 
+employed to ensure that critical procedures are followed correctly 
+and consistently, and — perhaps most importantly — rely on active participation from the user 
+and frequent spot checks to ensure that the workflow is going smoothly.
+
+Working with software need not be any different.
+
+::: {.callout-tip}
+
+Quarto Manuals are interactive, executable software manuals for setting up and operating 
+research computing projects. They are designed to be used by researchers, students, and 
+other users who need to follow complex workflows in a consistent and reproducible manner.
+
+:::
+
+## Basic use
+
+To use an existing manual, fetch the template from GitHub:
+
+```bash
+quarto use template GoldenPlanetaryHealthGroup/ERA5-Download-Manual
+```
+
+Here, `GoldenPlanetaryHealthGroup/ERA5-Download-Manual` is the GitHub repository for the manual you want to use.
+
+Quarto will create a new project from that template. The generated project contains a set of `.qmd` pages that step you through the setup process. You can read and execute the pages in order.
+
+A typical manual page follows this pattern:
+
+1. discover the current project state;
+2. explain the setup step;
+3. ask the user for any project-specific values;
+4. generate or modify setup files;
+5. run a test or inspection;
+6. update the final readiness checklist.
+
+## Creating a new manual
+
+To create a manual for your own workflow, start with a Quarto project and use the `quarto-manual` project type or extension in `_quarto.yml`:
+
+```yaml
+project:
+  type: quarto-manual
+```
+
+Then create one `.qmd` page for each setup step in your workflow.
+
+Each page should contain:
+
+- a short explanation of what the step does;
+- a code chunk that discovers the current project state;
+- any user-editable variables for that step;
+- code or export blocks that create the required files;
+- an inspection or test that proves the step is complete.
+
+For example:
+
+````markdown
+# 02 Request Specification
+
+## Start from current project state
+
+```python
+from quarto_manual.project import Project
+
+project = Project.discover()
+```
+
+## Assemble
+
+Create the request specification for this project.
+
+## Inspect
+
+Run the page-level check that confirms the request specification exists and is valid.
+````
+
+## Export blocks
+
+Manual pages can include special blocks that export files into the project.
+
+For example:
+
+````markdown
+::: {.manual-project-source file="src/{{ project_package }}/request.py"}
+```python
+def build_request():
+    return {}
+```
+:::
+````
+
+This block says:
+
+> When the manual is exported, write this code to `src/{{ project_package }}/request.py`.
+
+Common block types include:
+
+- `.manual-lib-source` for reusable helper code;
+- `.manual-project-source` for project source files (Python, R, Julia etc.);
+- `.manual-project-test` for tests;
+- `.manual-project-script` for shell or Slurm scripts;
+- `.manual-project-config` for YAML, TOML, Markdown, or other configuration files;
+- `.manual-run` for code that runs in the page but is not exported;
+- `.manual-explain` for explanatory callouts.
+
+## What a manual produces
+
+A manual produces setup evidence, not necessarily final research outputs.
+
+Depending on the workflow, that evidence might include:
+
+- configuration files;
+- source modules;
+- helper scripts;
+- Slurm scripts;
+- package files;
+- container recipes;
+- tests;
+- logs;
+- a completed readiness checklist.
+
+Much like a pre-flight checklist, a manual should answer:
+
+> Is this project ready to operate?
+
+The user still runs the actual workflow.
+
+## Internals
+
+A Quarto Manual works by extending the Quarto template system. 
+Instead of a single page, it is a structured, multi-document Quarto project template that 
+contains ordered, executable `.qmd` pages, workflow-specific helper libraries, page-level 
+tests, and a final readiness checklist.
+
+
+# Quarto Manual Template Demonstration
+
+This page demonstrates the current Quarto Manual filter contract.
+
+It is intended to be read in two ways:
+
+1. as a rendered Quarto page, where each manual block becomes a callout;
+2. as an executable/exportable manual page, where selected blocks write files when `RSE_MANUAL_EXPORT=1`.
+
+The export filter recognizes these classes:
+
+- `.manual-lib-source`
+- `.manual-project-source`
+- `.manual-project-test`
+- `.manual-project-script`
+- `.manual-project-config`
+
+The rendering filter also recognizes:
+
+- `.manual-run`
+- `.manual-explain`
+
+The `.qmd` page remains the source of truth. The generated files are derived artifacts.
+
+## How to run this demonstration
+
+Render normally to see the callouts:
+
+```bash
+quarto render template.qmd
+```
+
+Run with export enabled to write the generated files:
+
+```bash
+RSE_MANUAL_EXPORT=1 quarto render template.qmd
+```
+
+Run in check mode to see what would be written without changing files:
+
+```bash
+RSE_MANUAL_EXPORT=1 RSE_MANUAL_CHECK=1 quarto render template.qmd
+```
+
+Override metadata variables with environment variables:
+
+```bash
+RSE_MANUAL_EXPORT=1 \
+RSE_MANUAL_VAR_PROJECT_NAME="my-era5-project" \
+RSE_MANUAL_VAR_PROJECT_PACKAGE="my_era5_project" \
+RSE_MANUAL_VAR_PROJECT_DIR="generated/my-era5-project" \
+RSE_MANUAL_VAR_PACKAGE_ROOT="generated/my-era5-project/src/my_era5_project" \
+quarto render template.qmd
+```
+
+## Why this step exists
+
+::: {.manual-explain}
+A Quarto Manual is a multi-page executable template.
+
+Each page should explain one setup step, run or export the implementation needed for that step, and end with an inspection that proves the step is complete.
+
+This block uses `.manual-explain`.
+
+It is not exported. It only renders as a callout. If no title is provided, the rendering filter assigns the default title:
+
+> Why This Step Exists
+:::
+
+## Start from current project state
+
+::: {.manual-run title="Discover Project State"}
+```python
+from pathlib import Path
+
+project_name = "{{ project_name }}"
+project_package = "{{ project_package }}"
+project_dir = Path("{{ project_dir }}")
+package_root = Path("{{ package_root }}")
+
+print(f"Project name: {project_name}")
+print(f"Project package: {project_package}")
+print(f"Project directory: {project_dir}")
+print(f"Package root: {package_root}")
+```
+:::
+
+The `.manual-run` block is for code that should be visible and executable in the page. It is not exported by the current export filter.
+
+## 1. Manual library export
+
+::: {.manual-lib-source file="{{ manual_root }}/src/quarto_manual/checks.py"}
+```python
+from __future__ import annotations
+
+from pathlib import Path
+import subprocess
+
+
+def expect_file(path: str | Path) -> Path:
+    """Assert that a file exists and return it as a Path."""
+    path = Path(path)
+    assert path.exists(), f"Expected path to exist: {path}"
+    assert path.is_file(), f"Expected file: {path}"
+    return path
+
+
+def expect_dir(path: str | Path) -> Path:
+    """Assert that a directory exists and return it as a Path."""
+    path = Path(path)
+    assert path.exists(), f"Expected path to exist: {path}"
+    assert path.is_dir(), f"Expected directory: {path}"
+    return path
+
+
+def expect_command_succeeds(command: list[str]) -> None:
+    """Assert that a command exits successfully."""
+    result = subprocess.run(
+        command,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0, (
+        "Command failed: "
+        + " ".join(command)
+        + "\nSTDOUT:\n"
+        + result.stdout
+        + "\nSTDERR:\n"
+        + result.stderr
+    )
+```
+:::
+
+This block demonstrates `.manual-lib-source`.
+
+When exported, it writes a reusable manual-library helper module to:
+
+```text
+{{ manual_root }}/src/quarto_manual/checks.py
+```
+
+Because the code block language is `python`, the export filter adds a `#` comment header.
+
+## 2. Project source export
+
+::: {.emit- file="{{ package_root }}/contract.py" title="Export Project Contract"}
+```python
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+
+
+@dataclass(frozen=True)
+class ProjectContract:
+    """Minimal project contract generated by a Quarto Manual page."""
+
+    project_name: str
+    project_package: str
+    project_dir: Path
+
+    @classmethod
+    def discover(cls) -> "ProjectContract":
+        return cls(
+            project_name="{{ project_name }}",
+            project_package="{{ project_package }}",
+            project_dir=Path("{{ project_dir }}").resolve(),
+        )
+
+    @property
+    def src_dir(self) -> Path:
+        return self.project_dir / "src"
+
+    @property
+    def tests_dir(self) -> Path:
+        return self.project_dir / "tests"
+
+    @property
+    def config_dir(self) -> Path:
+        return self.project_dir / "config"
+```
+:::
+
+This block demonstrates `.manual-project-source`.
+
+It also demonstrates template-variable substitution inside both the target path and the code body.
+
+When exported, it writes:
+
+```text
+{{ package_root }}/contract.py
+```
+
+## 3. Project config export
+
+::: {.manual-project-config file="{{ project_dir }}/config/manual.yml"}
+```yaml
+manual:
+  project_name: "{{ project_name }}"
+  project_package: "{{ project_package }}"
+  manual_type: "{{ manual_type }}"
+  project_dir: "{{ project_dir }}"
+
+workflow:
+  name: "Template demonstration"
+  status: "prototype"
+  ready_to_operate: false
+
+checklist:
+  - id: "project-contract"
+    label: "Project contract exists"
+    complete: false
+  - id: "tests-exist"
+    label: "Page-level tests exist"
+    complete: false
+  - id: "script-exists"
+    label: "Execution script exists"
+    complete: false
+```
+:::
+
+This block demonstrates `.manual-project-config`.
+
+Because the language is `yaml`, the export filter uses the default `#` generated-file header.
+
+When exported, it writes:
+
+```text
+{{ project_dir }}/config/manual.yml
+```
+
+## 4. Project script export
+
+::: {.manual-project-script file="{{ project_dir }}/scripts/check_project.sh" mode="0755"}
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+project_dir="{{ project_dir }}"
+
+echo "Checking project directory: ${project_dir}"
+
+test -d "${project_dir}"
+test -d "${project_dir}/config"
+test -d "${project_dir}/src" || mkdir -p "${project_dir}/src"
+test -d "${project_dir}/tests" || mkdir -p "${project_dir}/tests"
+
+echo "Project scaffold exists."
+```
+:::
+
+This block demonstrates `.manual-project-script`.
+
+The `mode="0755"` attribute demonstrates executable script export. When the filter writes the file, it should call `chmod 0755` for this target.
+
+When exported, it writes:
+
+```text
+{{ project_dir }}/scripts/check_project.sh
+```
+
+## 5. Project test export
+
+::: {.manual-project-test file="{{ project_dir }}/tests/test_project_contract.py"}
+```python
+from pathlib import Path
+
+from {{ project_package }}.contract import ProjectContract
+
+
+def test_project_contract_discovers_project():
+    project = ProjectContract.discover()
+
+    assert project.project_name == "{{ project_name }}"
+    assert project.project_package == "{{ project_package }}"
+    assert project.project_dir.name == Path("{{ project_dir }}").name
+
+
+def test_project_contract_paths_are_named():
+    project = ProjectContract.discover()
+
+    assert project.src_dir.name == "src"
+    assert project.tests_dir.name == "tests"
+    assert project.config_dir.name == "config"
+```
+:::
+
+This block demonstrates `.manual-project-test`.
+
+When exported, it writes:
+
+```text
+{{ project_dir }}/tests/test_project_contract.py
+```
+
+This is the page-level inspection artifact. It asks whether the project contract generated by this page is usable.
+
+## 6. Markdown export
+
+::: {.manual-project-config file="{{ project_dir }}/checklist.md"}
+```markdown
+# Completed Checklist
+
+This checklist is generated from `template.qmd`.
+
+The desired output of a manual is not the final scientific result. The desired output is a project that is ready to operate.
+
+- [ ] Project contract exists
+- [ ] Configuration exists
+- [ ] Helper script exists
+- [ ] Page-level tests exist
+- [ ] Manual page can be re-rendered
+```
+:::
+
+This block demonstrates Markdown export.
+
+Because the language is `markdown`, the export filter should use HTML comment headers:
+
+```html
+<!-- Generated by rse-manual. -->
+```
+
+When exported, it writes:
+
+```text
+{{ project_dir }}/checklist.md
+```
+
+## 7. SQL export
+
+::: {.manual-project-config file="{{ project_dir }}/sql/inspect_project.sql"}
+```sql
+select
+  '{{ project_name }}' as project_name,
+  '{{ project_package }}' as project_package,
+  '{{ manual_type }}' as manual_type;
+```
+:::
+
+This block demonstrates a language that uses `--` comments in the generated header.
+
+When exported, it writes:
+
+```text
+{{ project_dir }}/sql/inspect_project.sql
+```
+
+## 8. Custom callout title
+
+::: {.manual-explain title="Custom Title Example"}
+This block uses `.manual-explain`, but it provides its own title.
+
+The rendering filter should preserve this title instead of replacing it with the default title.
+:::
+
+## 9. Intentional non-export run block
+
+::: {.manual-run}
+```python
+from pathlib import Path
+
+expected_files = [
+    Path("{{ project_dir }}/config/manual.yml"),
+    Path("{{ project_dir }}/scripts/check_project.sh"),
+    Path("{{ project_dir }}/tests/test_project_contract.py"),
+    Path("{{ project_dir }}/checklist.md"),
+]
+
+for path in expected_files:
+    print(path)
+```
+:::
+
+This block demonstrates another `.manual-run` section. It is intentionally not exported.
+
+It is useful as page-level executable prose: something the user can run while working through the manual.
+
+## 10. Page completion inspection
+
+::: {.manual-explain title="Completion Rule"}
+This page is complete when the exported artifacts exist and the page-level test passes.
+
+The manual should not need a hidden progress database. Completion is inferred from project evidence: files, configs, scripts, rendered outputs, logs, and passing tests.
+:::
+
+A real page might end with a command like:
+
+```bash
+pytest {{ project_dir }}/tests/test_project_contract.py
+```
+
+For this template demonstration, the completion checklist is:
+
+- the project contract source block has a valid target;
+- the config block has a valid target;
+- the script block has `mode="0755"`;
+- the test block imports the generated project contract;
+- the rendered page shows all manual block types as callouts;
+- exporting writes files only when `RSE_MANUAL_EXPORT=1`.
+
+## 11. Notes for manual authors
+
+Each export block should obey these rules:
+
+1. Include exactly one export class.
+2. Include a `file="..."` attribute.
+3. Contain exactly one code block.
+4. Use template variables only when they are declared in YAML metadata or passed through environment variables.
+5. Keep explanatory prose outside export blocks unless the prose itself is the exported artifact.
+6. Use `.manual-run` for code that should run in the page but should not be exported.
+7. Use `.manual-explain` for conceptual explanation that should render as a callout but should not be exported.
+
+This page intentionally demonstrates the full contract expected by the current filters.

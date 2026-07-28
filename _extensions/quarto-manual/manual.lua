@@ -1,4 +1,7 @@
 local callout_titles = {
+  ["manual-prereq"] = "Prerequisite",
+  ["manual-procedure"] = "Procedure",
+  ["manual-check"] = "Check",
   ["manual-lib-source"] = "Manual Library Export",
   ["manual-project-source"] = "Project Source Export",
   ["manual-project-test"] = "Project Test Export",
@@ -9,6 +12,9 @@ local callout_titles = {
 }
 
 local callout_classes = {
+  ["manual-prereq"] = "callout-important",
+  ["manual-procedure"] = "callout-tip",
+  ["manual-check"] = "callout-warning",
   ["manual-lib-source"] = "callout-note",
   ["manual-project-source"] = "callout-note",
   ["manual-project-test"] = "callout-warning",
@@ -18,39 +24,107 @@ local callout_classes = {
   ["manual-explain"] = "callout-note",
 }
 
--- function Div(el)
---   for class_name, callout_class in pairs(callout_classes) do
---     if el.classes:includes(class_name) then
---       el.classes:insert("callout")
---       el.classes:insert(callout_class)
---       if el.attributes["title"] == nil then
---         el.attributes["title"] = callout_titles[class_name]
---       end
---       return el
---     end
---   end
+local page_block_counts = nil
 
---   return el
--- end
+local function stringify(value)
+  return pandoc.utils.stringify(value)
+end
 
-function Div(el)
-  if el.classes:includes("manual-explain") then
-    quarto.log.output("[quarto-manual] rendering manual-explain as callout-note")
-    el.classes:insert("callout-note")
-    if el.attributes["title"] == nil then
-      el.attributes["title"] = "Why This Step Exists"
-    end
-    return el
+local function is_manual_page()
+  local page_number = quarto.metadata.get("manual.page")
+  return page_number ~= nil and stringify(page_number) ~= ""
+end
+
+local function ensure_callout(el, class_name)
+  local callout_class = callout_classes[class_name]
+  local title = callout_titles[class_name]
+
+  quarto.log.output("[quarto-manual] rendering " .. class_name .. " as " .. callout_class)
+
+  if not el.classes:includes("callout") then
+    el.classes:insert("callout")
   end
 
-  if el.classes:includes("manual-run") then
-    quarto.log.output("[quarto-manual] rendering manual-run as callout-tip")
-    el.classes:insert("callout-tip")
-    if el.attributes["title"] == nil then
-      el.attributes["title"] = "Run In This Page"
-    end
-    return el
+  if not el.classes:includes(callout_class) then
+    el.classes:insert(callout_class)
+  end
+
+  if el.attributes["title"] == nil then
+    el.attributes["title"] = title
   end
 
   return el
+end
+
+local function warn(message)
+  quarto.log.warning("[quarto-manual] " .. message)
+end
+
+local function validate_manual_page()
+  if not is_manual_page() then
+    return
+  end
+
+  local prereq_count = page_block_counts["manual-prereq"] or 0
+  local procedure_count = page_block_counts["manual-procedure"] or 0
+  local check_count = page_block_counts["manual-check"] or 0
+  local input_file = quarto.doc.input_file or "unknown-file"
+
+  if prereq_count ~= 1 then
+    warn(
+      input_file
+        .. " should contain exactly one .manual-prereq block, found "
+        .. tostring(prereq_count)
+        .. "."
+    )
+  end
+
+  if procedure_count < 1 then
+    warn(
+      input_file
+        .. " should contain at least one .manual-procedure block, found "
+        .. tostring(procedure_count)
+        .. "."
+    )
+  end
+
+  if check_count ~= 1 then
+    warn(
+      input_file
+        .. " should contain exactly one .manual-check block, found "
+        .. tostring(check_count)
+        .. "."
+    )
+  end
+end
+
+function Div(el)
+  for class_name, _ in pairs(callout_classes) do
+    if el.classes:includes(class_name) then
+      if page_block_counts ~= nil and page_block_counts[class_name] ~= nil then
+        page_block_counts[class_name] = page_block_counts[class_name] + 1
+      end
+
+      return ensure_callout(el, class_name)
+    end
+  end
+
+  return el
+end
+
+function Pandoc(doc)
+  page_block_counts = {
+    ["manual-prereq"] = 0,
+    ["manual-procedure"] = 0,
+    ["manual-check"] = 0,
+  }
+
+  doc = doc:walk({
+    Div = Div,
+  })
+
+  validate_manual_page()
+  page_block_counts = nil
+
+  return doc
 end
