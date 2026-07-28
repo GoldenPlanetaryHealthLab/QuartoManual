@@ -3,27 +3,37 @@ title: "Checklist"
 format: html
 ---
 
-A Quarto Manual is a checklist for preparing a project to run safely and
-deliberately. It does not do the final scientific work for the user. It helps
-the user confirm that the project is ready for that work.
+A Quarto Manual is an executable operations manual for a project. It does not
+do the final scientific work for the user. It helps the user assemble,
+configure, inspect, and verify the project so that the work can be done
+deliberately and visibly.
 
-Think of the manual as a pre-flight checklist:
+One useful way to think about a manual is through aviation. A flight manual is
+broader than a pre-flight checklist: it can cover preparation, operation,
+inspection, and verification. In the same way, a Quarto Manual can guide setup
+steps, operating procedures, and checks across the life of a project.
 
-- the full manual is the checklist;
-- each page is one checklist item or preparation stage;
+The checklist is one structural view of the manual:
+
+- the full manual is the operations guide;
+- the checklist is a summary of the manual's ordered pages;
+- each page is one operational step or preparation stage;
 - each page explains what must already be true;
 - each page shows what to do next;
 - each page proves whether that step worked.
 
-The checklist should move in order from page to page. Earlier pages establish
+The manual should move in order from page to page. Earlier pages establish
 conditions that later pages rely on. By the time the user reaches the final
-page, they should be able to answer a simple question:
+page, they should be able to answer questions like:
 
 > Is this project ready to operate?
+> Has this procedure been carried out correctly?
+> What still needs to be done?
 
 ## Checklist Structure
 
-A Quarto Manual checklist is made of ordered pages. Each page should have a
+A Quarto Manual checklist is derived from the manual's ordered pages. Each page
+should have a
 clear purpose and should leave behind evidence that the step was completed.
 That evidence should usually come from the real project state: files,
 directories, configuration, rendered outputs, logs, and passing checks.
@@ -38,14 +48,15 @@ manual:
 ---
 ```
 
-The `manual.page` field gives the page its place in the checklist. The manual
-can then use that ordering to summarize the checklist, report missing sections,
-and help the user see how much of the setup has been covered.
+The `manual.page` field gives the page its place in the manual. The checklist
+view can then use that ordering to summarize the manual, report missing
+sections, and help the user see how much of the procedure has been covered.
 
 ## What a Checklist Measures
 
 A good checklist is not just a set of instructions. It also measures whether
-the manual is complete and whether each page can prove its own outcome.
+the manual is structurally complete and whether each page can prove its own
+outcome.
 
 For example, a Quarto Manual can warn when:
 
@@ -62,7 +73,8 @@ It can also summarize useful manual-level facts, such as:
 
 ## Authoring Guidance
 
-When you write a Quarto Manual, focus on readiness rather than automation.
+When you write a Quarto Manual, focus on explicit procedure rather than hidden
+automation.
 
 Each page should help the user:
 
@@ -71,5 +83,130 @@ Each page should help the user:
 3. perform that step in an editable, visible way;
 4. verify that the step succeeded.
 
-The checklist is complete when the project is ready to proceed, not when the
-whole mission is finished.
+The checklist is complete when the manual has enough structure to guide the
+user through the procedure and verify the result. The manual itself may be used
+to prepare a project, operate it, inspect it, or hand it off.
+
+---
+
+## Implementation
+
+One possible implementation is a `Checklist` `dataclass` that summarizes a
+manual and its pages. In that design, the checklist is not the manual itself.
+It is a structured representation of the manual's ordered steps. Each page has
+a number, title, and semantic content for prerequisite, procedure, and check
+blocks.
+
+
+```{python}
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Callable, Iterable, Sequence
+
+
+CheckFn = Callable[["Checklist", "Page"], None]
+
+
+@dataclass(frozen=True)
+class Page:
+    """One checklist step in a Quarto Manual."""
+
+    title: str
+    number: int
+    prerequisite: str
+    procedures: tuple[str, ...]
+    check: str
+
+    def __post_init__(self) -> None:
+        if not self.title.strip():
+            raise ValueError("Page.title must not be empty.")
+
+        if self.number < 1:
+            raise ValueError("Page.number must be >= 1.")
+
+        if not self.prerequisite.strip():
+            raise ValueError("Page.prerequisite must not be empty.")
+
+        if not self.check.strip():
+            raise ValueError("Page.check must not be empty.")
+
+        if len(self.procedures) < 1:
+            raise ValueError("Page.procedures must contain at least one procedure block.")
+
+        if any(not step.strip() for step in self.procedures):
+            raise ValueError("Page.procedures may not contain empty procedure blocks.")
+
+    @property
+    def procedure_count(self) -> int:
+        return len(self.procedures)
+
+    def summary(self) -> dict:
+        return {
+            "title": self.title,
+            "number": self.number,
+            "prerequisite": self.prerequisite,
+            "procedure_count": self.procedure_count,
+            "check": self.check,
+        }
+
+
+@dataclass(frozen=True)
+class Checklist:
+    """Declarative description of a Quarto Manual."""
+
+    title: str
+    project_root: Path
+    pages: tuple[Page, ...] = field(default_factory=tuple)
+
+    def __post_init__(self) -> None:
+        if not self.title.strip():
+            raise ValueError("Checklist.title must not be empty.")
+
+        if len(self.pages) < 1:
+            raise ValueError("Checklist.pages must contain at least one page.")
+
+        numbers = [page.number for page in self.pages]
+        if len(numbers) != len(set(numbers)):
+            raise ValueError("Checklist page numbers must be unique.")
+
+        if numbers != sorted(numbers):
+            raise ValueError("Checklist pages must be ordered by page number.")
+
+    @property
+    def page_count(self) -> int:
+        return len(self.pages)
+
+    @property
+    def check_count(self) -> int:
+        return len(self.pages)
+
+    @property
+    def procedure_count(self) -> int:
+        return sum(page.procedure_count for page in self.pages)
+
+    def get_page(self, number: int) -> Page:
+        for page in self.pages:
+            if page.number == number:
+                return page
+        raise KeyError(f"No page found for number {number}.")
+
+    def summary(self) -> dict:
+        return {
+            "title": self.title,
+            "project_root": str(self.project_root),
+            "page_count": self.page_count,
+            "procedure_count": self.procedure_count,
+            "check_count": self.check_count,
+            "pages": [page.summary() for page in self.pages],
+        }
+
+    def __repr__(self) -> str:
+        return (
+            f"Checklist("
+            f"title={self.title!r}, "
+            f"pages={self.page_count}, "
+            f"project_root={str(self.project_root)!r})"
+        )
+```

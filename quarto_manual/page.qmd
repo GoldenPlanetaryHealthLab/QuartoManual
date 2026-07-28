@@ -3,7 +3,8 @@ title: "Manual Page"
 format: html
 ---
 
-Each Quarto Manual page is one checklist step. A page should tell the user:
+Each Quarto Manual page is one operational step in the manual. A page should
+tell the user:
 
 - what must already be true;
 - what they need to do now;
@@ -17,7 +18,8 @@ types:
 - exactly one `.manual-check` block.
 
 These blocks give the page a predictable structure for both the reader and the
-manual tooling.
+manual tooling. They also let the manual derive a checklist view across all
+pages without turning the manual into a hidden workflow engine.
 
 ## Required Page Structure
 
@@ -37,7 +39,7 @@ Then write the page using the required manual blocks.
 
 The prerequisite block explains what the user must already have before this
 step is actionable. This is the place to inspect the current project state,
-load helper code, or confirm that earlier checklist steps are complete.
+load helper code, or confirm that earlier manual steps are complete.
 
 There must be exactly one prerequisite block on the page.
 
@@ -57,9 +59,9 @@ environment_dir = project_root / ".venv"
 
 ### 2. Procedure Blocks
 
-Procedure blocks contain the actual step-by-step work for the page. A page may
-need one procedure block or several, depending on how much scaffolding you want
-to give the user.
+Procedure blocks contain the actual work of the page. A page may need one
+procedure block or several, depending on how much scaffolding you want to give
+the user.
 
 There must be at least one procedure block on the page.
 
@@ -81,7 +83,7 @@ writing a file and then installing dependencies.
 ### 3. Check Block
 
 The check block proves whether the page succeeded. This should inspect the real
-project state and fail clearly when the step is incomplete.
+project state and fail clearly when the step is incomplete or incorrect.
 
 There must be exactly one check block on the page.
 
@@ -98,7 +100,7 @@ assert environment_dir.is_dir(), "Expected .venv to be a directory"
 
 ## Complete Example
 
-The following page uses the required checklist structure from beginning to end.
+The following page uses the required manual structure from beginning to end.
 
 ```markdown
 ---
@@ -162,7 +164,7 @@ When writing a page, keep these rules in mind:
 - use exactly one `.manual-check` block;
 - let checks inspect real files, paths, configs, logs, or rendered outputs when
   possible;
-- keep the page focused on one checklist step.
+- keep the page focused on one operational step.
 
 The goal of a page is not just to explain a step. The goal is to help the user
 perform that step and prove that it is complete.

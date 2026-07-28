@@ -182,3 +182,7 @@ Much like a pre-flight checklist, a manual should answer:
 > Is this project ready to operate?
 
 The user still runs the actual workflow.
+
+## Comparisons:
+
+quarto-manual vs Jupyter Book, Quarto, learnr, nbgrader, and marimo
