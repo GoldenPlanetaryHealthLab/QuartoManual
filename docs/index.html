@@ -414,7 +414,7 @@ Tip
 </section>
 <section id="why-this-step-exists" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="why-this-step-exists"><span class="header-section-number">1.2</span> Why this step exists</h2>
-<div class="manual-explain callout-note" title="Why This Step Exists">
+<div class="manual-explain callout callout-note" title="Why This Step Exists">
 <p>A Quarto Manual is a multi-page executable template.</p>
 <p>Each page should explain one setup step, run or export the implementation needed for that step, and end with an inspection that proves the step is complete.</p>
 <p>This block uses <code>.manual-explain</code>.</p>
@@ -426,7 +426,7 @@ Tip
 </section>
 <section id="start-from-current-project-state" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="start-from-current-project-state"><span class="header-section-number">1.3</span> Start from current project state</h2>
-<div class="manual-run callout-tip" title="Discover Project State">
+<div class="manual-run" title="Discover Project State">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>project_name <span class="op">=</span> <span class="st">"</span><span class="sc">{{</span><span class="st"> project_name </span><span class="sc">}}</span><span class="st">"</span></span>
@@ -491,7 +491,7 @@ Tip
 </section>
 <section id="project-source-export" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="project-source-export"><span class="header-section-number">1.5</span> 2. Project source export</h2>
-<div class="manual-project-source" data-file="{{ package_root }}/contract.py" title="Export Project Contract">
+<div class="emit-" data-file="{{ package_root }}/contract.py" title="Export Project Contract">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> __future__ <span class="im">import</span> annotations</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
@@ -646,14 +646,14 @@ Tip
 </section>
 <section id="custom-callout-title" class="level2" data-number="1.11">
 <h2 data-number="1.11" class="anchored" data-anchor-id="custom-callout-title"><span class="header-section-number">1.11</span> 8. Custom callout title</h2>
-<div class="manual-explain callout-note" title="Custom Title Example">
+<div class="manual-explain callout callout-note" title="Custom Title Example">
 <p>This block uses <code>.manual-explain</code>, but it provides its own title.</p>
 <p>The rendering filter should preserve this title instead of replacing it with the default title.</p>
 </div>
 </section>
 <section id="intentional-non-export-run-block" class="level2" data-number="1.12">
 <h2 data-number="1.12" class="anchored" data-anchor-id="intentional-non-export-run-block"><span class="header-section-number">1.12</span> 9. Intentional non-export run block</h2>
-<div class="manual-run callout-tip" title="Run In This Page">
+<div class="manual-run">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>expected_files <span class="op">=</span> [</span>
@@ -671,7 +671,7 @@ Tip
 </section>
 <section id="page-completion-inspection" class="level2" data-number="1.13">
 <h2 data-number="1.13" class="anchored" data-anchor-id="page-completion-inspection"><span class="header-section-number">1.13</span> 10. Page completion inspection</h2>
-<div class="manual-explain callout-note" title="Completion Rule">
+<div class="manual-explain callout callout-note" title="Completion Rule">
 <p>This page is complete when the exported artifacts exist and the page-level test passes.</p>
 <p>The manual should not need a hidden progress database. Completion is inferred from project evidence: files, configs, scripts, rendered outputs, logs, and passing tests.</p>
 </div>

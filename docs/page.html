@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There must be exactly one prerequisite block on the page. In this manual, the prerequisite block should include the shared checklist definition so that each page starts from the same declared manual state.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </section>
 </section>
-<div class="manual-prereq">
+<div class="manual-prereq callout callout-important" title="Prerequisite">
 <section id="prerequisite-block-example" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="prerequisite-block-example"><span class="header-section-number">5.2</span> Prerequisite Block Example</h2>
 <!-- For computations during rendering, the following will run the class definition -->
@@ -255,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="page" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="page"><span class="header-section-number">5.4</span> Page</h2>
 <p>First, we’ll define a page in the checklist.</p>
-<div id="43d97bf3" class="cell" data-execution_count="1">
+<div id="6a2f6833" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> __future__ <span class="im">import</span> annotations</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass, field</span>
@@ -312,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The <code>Checklist</code> class is a container for the pages in the manual. It can be used to summarize the manual, report missing sections, and help the user see how much of the procedure has been covered.</p>
 <p>It has a simple initialization API requiring the title of the project, the root directory of the project, and a sequence of <code>Page</code> objects. The <code>Checklist</code> class validates that the pages are numbered in order and that there are no duplicate page numbers.</p>
-<div id="d7e807c2" class="cell" data-execution_count="2">
+<div id="785987ba" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
@@ -380,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This allows us to create a very simple checklist for a manual:</p>
-<div id="1a1b42db" class="cell" data-execution_count="3">
+<div id="d1beb782" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>project <span class="op">=</span> Checklist(project_title<span class="op">=</span><span class="st">"simple_example"</span>, project_root<span class="op">=</span>Path(<span class="st">"../examples"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -389,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>To see how <code>Pages</code> are added to the manual, see the next section.</p>
 <p>This page assumes the project directory exists and that the user has already chosen an environment name.</p>
-<div id="8fdde09c" class="cell" data-execution_count="4">
+<div id="05e6d735" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> project, <span class="st">"Expected project to be defined. Did you include the checklist.qmd file and run the first page?"</span></span>
@@ -406,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>::: {.manual-procedure}</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Create the Python virtual environment.</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>::: {#e022b0a4 .cell execution_count=5}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>::: {#4644296c .cell execution_count=5}</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.python .cell-code}</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> venv</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
@@ -428,7 +428,7 @@ There must be exactly one check block on the page.
 ::: {.manual-check}
 Confirm that the environment directory was created.
 
-::: {#d4d259ec .cell execution_count=6}
+::: {#7a6ba612 .cell execution_count=6}
 ``` {.python .cell-code}
 assert environment_dir.exists(), "Expected .venv to exist"
 assert environment_dir.is_dir(), "Expected .venv to be a directory"</code></pre>
@@ -452,7 +452,7 @@ This page creates the project's Python environment.
 Before continuing, confirm that you are in the project root and that Python is
 available.
 
-::: {#01bcebf6 .cell execution_count=7}
+::: {#e18dd2c7 .cell execution_count=7}
 ``` {.python .cell-code}
 from pathlib import Path
 
@@ -461,17 +461,17 @@ environment_dir = project_root / ".venv"</code></pre>
 <p>:::</p>
 <p>:::</p>
 <p>Some projects may also explain why this environment is needed and how it will be used by later pages.</p>
-<div class="manual-procedure">
+<div class="manual-procedure callout callout-tip" title="Procedure">
 <p>Create the virtual environment.</p>
-<div id="b8bf0b9e" class="cell" data-execution_count="8">
+<div id="9cea3f2f" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> venv</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>venv.create(environment_dir, with_pip<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div class="manual-procedure">
+<div class="manual-procedure callout callout-tip" title="Procedure">
 <p>Record the activation command for the user.</p>
-<div id="def1333d" class="cell" data-execution_count="9">
+<div id="c1b8ba8e" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>activation_hint <span class="op">=</span> <span class="st">"source .venv/bin/activate"</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(activation_hint)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -479,9 +479,9 @@ environment_dir = project_root / ".venv"</code></pre>
 </div>
 </div>
 </div>
-<div class="manual-check">
+<div class="manual-check callout callout-warning" title="Check">
 <p>Verify that the environment now exists.</p>
-<div id="7bb97230" class="cell" data-execution_count="10">
+<div id="4209c9b2" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> environment_dir.exists(), <span class="st">"Expected .venv to exist"</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> environment_dir.is_dir(), <span class="st">"Expected .venv to be a directory"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>

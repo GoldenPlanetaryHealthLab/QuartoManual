@@ -2,12 +2,6 @@ local callout_titles = {
   ["manual-prereq"] = "Prerequisite",
   ["manual-procedure"] = "Procedure",
   ["manual-check"] = "Check",
-  ["manual-lib-source"] = "Manual Library Export",
-  ["manual-project-source"] = "Project Source Export",
-  ["manual-project-test"] = "Project Test Export",
-  ["manual-project-script"] = "Project Script Export",
-  ["manual-project-config"] = "Project Config Export",
-  ["manual-run"] = "Run In This Page",
   ["manual-explain"] = "Why This Step Exists",
 }
 
@@ -15,12 +9,6 @@ local callout_classes = {
   ["manual-prereq"] = "callout-important",
   ["manual-procedure"] = "callout-tip",
   ["manual-check"] = "callout-warning",
-  ["manual-lib-source"] = "callout-note",
-  ["manual-project-source"] = "callout-note",
-  ["manual-project-test"] = "callout-warning",
-  ["manual-project-script"] = "callout-tip",
-  ["manual-project-config"] = "callout-important",
-  ["manual-run"] = "callout-tip",
   ["manual-explain"] = "callout-note",
 }
 
@@ -116,6 +104,7 @@ function Pandoc(doc)
   page_block_counts = {
     ["manual-prereq"] = 0,
     ["manual-procedure"] = 0,
+    ["manual-explain"] = 0,
     ["manual-check"] = 0,
   }
 
