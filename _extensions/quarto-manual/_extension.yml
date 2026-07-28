@@ -16,5 +16,4 @@ contributes:
       code-overflow: wrap
       code-line-numbers: true
       filters:
-        - manual-export.lua
         - manual.lua

@@ -1,0 +1,75 @@
+---
+title: "Checklist"
+format: html
+---
+
+A Quarto Manual is a checklist for preparing a project to run safely and
+deliberately. It does not do the final scientific work for the user. It helps
+the user confirm that the project is ready for that work.
+
+Think of the manual as a pre-flight checklist:
+
+- the full manual is the checklist;
+- each page is one checklist item or preparation stage;
+- each page explains what must already be true;
+- each page shows what to do next;
+- each page proves whether that step worked.
+
+The checklist should move in order from page to page. Earlier pages establish
+conditions that later pages rely on. By the time the user reaches the final
+page, they should be able to answer a simple question:
+
+> Is this project ready to operate?
+
+## Checklist Structure
+
+A Quarto Manual checklist is made of ordered pages. Each page should have a
+clear purpose and should leave behind evidence that the step was completed.
+That evidence should usually come from the real project state: files,
+directories, configuration, rendered outputs, logs, and passing checks.
+
+Use the page metadata to declare where a page belongs in the checklist:
+
+```yaml
+---
+title: "Assemble Python Environment"
+manual:
+  page: 2
+---
+```
+
+The `manual.page` field gives the page its place in the checklist. The manual
+can then use that ordering to summarize the checklist, report missing sections,
+and help the user see how much of the setup has been covered.
+
+## What a Checklist Measures
+
+A good checklist is not just a set of instructions. It also measures whether
+the manual is complete and whether each page can prove its own outcome.
+
+For example, a Quarto Manual can warn when:
+
+- a page has no prerequisite block;
+- a page has no check block;
+- a page has no procedure block;
+- pages are missing numbers or appear out of order.
+
+It can also summarize useful manual-level facts, such as:
+
+- the number of pages in the checklist;
+- the number of checks across the manual;
+- which pages are missing required sections.
+
+## Authoring Guidance
+
+When you write a Quarto Manual, focus on readiness rather than automation.
+
+Each page should help the user:
+
+1. inspect the current project state;
+2. understand one setup step;
+3. perform that step in an editable, visible way;
+4. verify that the step succeeded.
+
+The checklist is complete when the project is ready to proceed, not when the
+whole mission is finished.

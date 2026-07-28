@@ -1,0 +1,168 @@
+---
+title: "Manual Page"
+format: html
+---
+
+Each Quarto Manual page is one checklist step. A page should tell the user:
+
+- what must already be true;
+- what they need to do now;
+- how they can prove the step worked.
+
+To make that structure explicit, every page must use three semantic block
+types:
+
+- exactly one `.manual-prereq` block;
+- one or more `.manual-procedure` blocks;
+- exactly one `.manual-check` block.
+
+These blocks give the page a predictable structure for both the reader and the
+manual tooling.
+
+## Required Page Structure
+
+Start each page with normal Quarto metadata:
+
+```yaml
+---
+title: "Assemble Python Environment"
+manual:
+  page: 2
+---
+```
+
+Then write the page using the required manual blocks.
+
+### 1. Prerequisite Block
+
+The prerequisite block explains what the user must already have before this
+step is actionable. This is the place to inspect the current project state,
+load helper code, or confirm that earlier checklist steps are complete.
+
+There must be exactly one prerequisite block on the page.
+
+```markdown
+::: {.manual-prereq}
+This page assumes the project directory exists and that the user has already
+chosen an environment name.
+
+```{python}
+from pathlib import Path
+
+project_root = Path(".")
+environment_dir = project_root / ".venv"
+```
+:::
+```
+
+### 2. Procedure Blocks
+
+Procedure blocks contain the actual step-by-step work for the page. A page may
+need one procedure block or several, depending on how much scaffolding you want
+to give the user.
+
+There must be at least one procedure block on the page.
+
+```markdown
+::: {.manual-procedure}
+Create the Python virtual environment.
+
+```{python}
+import venv
+
+venv.create(environment_dir, with_pip=True)
+```
+:::
+```
+
+You can use multiple procedure blocks when the step has distinct parts, such as
+writing a file and then installing dependencies.
+
+### 3. Check Block
+
+The check block proves whether the page succeeded. This should inspect the real
+project state and fail clearly when the step is incomplete.
+
+There must be exactly one check block on the page.
+
+```markdown
+::: {.manual-check}
+Confirm that the environment directory was created.
+
+```{python}
+assert environment_dir.exists(), "Expected .venv to exist"
+assert environment_dir.is_dir(), "Expected .venv to be a directory"
+```
+:::
+```
+
+## Complete Example
+
+The following page uses the required checklist structure from beginning to end.
+
+```markdown
+---
+title: "Assemble Python Environment"
+manual:
+  page: 2
+---
+
+This page creates the project's Python environment.
+
+::: {.manual-prereq}
+Before continuing, confirm that you are in the project root and that Python is
+available.
+
+```{python}
+from pathlib import Path
+
+project_root = Path(".")
+environment_dir = project_root / ".venv"
+```
+:::
+
+Some projects may also explain why this environment is needed and how it will
+be used by later pages.
+
+::: {.manual-procedure}
+Create the virtual environment.
+
+```{python}
+import venv
+
+venv.create(environment_dir, with_pip=True)
+```
+:::
+
+::: {.manual-procedure}
+Record the activation command for the user.
+
+```{python}
+activation_hint = "source .venv/bin/activate"
+print(activation_hint)
+```
+:::
+
+::: {.manual-check}
+Verify that the environment now exists.
+
+```{python}
+assert environment_dir.exists(), "Expected .venv to exist"
+assert environment_dir.is_dir(), "Expected .venv to be a directory"
+```
+:::
+```
+
+## Authoring Rules
+
+When writing a page, keep these rules in mind:
+
+- use exactly one `.manual-prereq` block;
+- use at least one `.manual-procedure` block;
+- use exactly one `.manual-check` block;
+- let checks inspect real files, paths, configs, logs, or rendered outputs when
+  possible;
+- keep the page focused on one checklist step.
+
+The goal of a page is not just to explain a step. The goal is to help the user
+perform that step and prove that it is complete.
