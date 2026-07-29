@@ -4,349 +4,149 @@
     "href": "index.html",
     "title": "Quarto Manual",
     "section": "",
-    "text": "0.1 Introduction\n{{ &lt;&lt; include README.md &gt;&gt; }}\nA Quarto Manual is a structured, multi-document Quarto template. It contains ordered, executable .qmd pages, workflow-specific helper libraries, page-level tests, and a final readiness checklist. Organizations, research groups, and individuals can create their own Quarto Manuals to document and share procedural, complex workflows.\nManuals are common in many workplaces and every day life:\nWhen instructions are more complex than simply reading can allow, manuals are employed to ensure that critical procedures are followed correctly and consistently, and — perhaps most importantly — rely on active participation from the user and frequent spot checks to ensure that the workflow is going smoothly.\nWorking with software need not be any different.",
+    "text": "0.1 What Is A Quarto Manual?\nA Quarto Manual is an executable operations manual for a software or research workflow.\nUse a Quarto Manual when a workflow is too long, fragile, or context-specific for a README, but too visible and judgment-heavy to hide behind a single CLI.\nA manual gives the user ordered .qmd pages that:\nThe manual does not need to own a shared runtime object model. Instead, each page owns its own state and proves its own result.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
     ]
   },
   {
-    "objectID": "index.html#introduction",
-    "href": "index.html#introduction",
+    "objectID": "index.html#what-is-a-quarto-manual",
+    "href": "index.html#what-is-a-quarto-manual",
     "title": "Quarto Manual",
     "section": "",
-    "text": "Flight check manuals for pilots and cabin passengers\nHR training websites with modules and quizzes\nCleaning and maintenance procedures for hotels and restaurants\nStandard operating procedures for experiments\nProduct assembly instructions for furniture, electronics, and appliances\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nQuarto Manuals are interactive, executable software manuals for setting up and operating research computing projects. They are designed to be used by researchers, students, and other users who need to follow complex workflows in a consistent and reproducible manner.",
+    "text": "explain one step at a time;\nrun the code for that step;\nverify whether the step worked;\nmake dependencies between steps explicit.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
     ]
   },
   {
-    "objectID": "index.html#basic-use",
-    "href": "index.html#basic-use",
+    "objectID": "index.html#core-idea",
+    "href": "index.html#core-idea",
     "title": "Quarto Manual",
-    "section": "0.2 Basic use",
-    "text": "0.2 Basic use\nTo use an existing manual, fetch the template from GitHub:\nquarto use template GoldenPlanetaryHealthGroup/ERA5-Download-Manual\nHere, GoldenPlanetaryHealthGroup/ERA5-Download-Manual is the GitHub repository for the manual you want to use.\nQuarto will create a new project from that template. The generated project contains a set of .qmd pages that step you through the setup process. You can read and execute the pages in order.\nA typical manual page follows this pattern:\n\ndiscover the current project state;\nexplain the setup step;\nask the user for any project-specific values;\ngenerate or modify setup files;\nrun a test or inspection;\nupdate the final readiness checklist.",
+    "section": "0.2 Core Idea",
+    "text": "0.2 Core Idea\nThe central design rule is simple:\n\nA Quarto Manual is an ordered set of independent executable pages.\n\nEach page is a contract with three parts:\n\nprereq: prove that the page is allowed to run;\nprocedure: do one or more pieces of work;\ncheck: prove that the work succeeded.\n\nThis avoids hidden state between pages.\nIf page 3 depends on page 2, page 3 should enforce that dependency in its prerequisite block by checking visible project state:\n\nrequired files exist;\nrequired directories exist;\na previous test suite passes;\na required tool is installed;\na prior configuration file contains the expected values.\n\nPages therefore share a project, not a notebook kernel.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
     ]
   },
   {
-    "objectID": "index.html#creating-a-new-manual",
-    "href": "index.html#creating-a-new-manual",
+    "objectID": "index.html#why-this-shape",
+    "href": "index.html#why-this-shape",
     "title": "Quarto Manual",
-    "section": "0.3 Creating a new manual",
-    "text": "0.3 Creating a new manual\nTo create a manual for your own workflow, start with a Quarto project and use the quarto-manual project type or extension in _quarto.yml:\nproject:\n  type: quarto-manual\nThen create one .qmd page for each setup step in your workflow.\nEach page should contain:\n\na short explanation of what the step does;\na code chunk that discovers the current project state;\nany user-editable variables for that step;\ncode or export blocks that create the required files;\nan inspection or test that proves the step is complete.\n\nFor example:\n# 02 Request Specification\n\n## Start from current project state\n\n```python\nfrom quarto_manual.project import Project\n\nproject = Project.discover()\n```\n\n## Assemble\n\nCreate the request specification for this project.\n\n## Inspect\n\nRun the page-level check that confirms the request specification exists and is valid.",
+    "section": "0.3 Why This Shape?",
+    "text": "0.3 Why This Shape?\nThis structure is useful because it keeps responsibility local.\n\nThe page owns its own setup conditions.\nThe page owns the work it performs.\nThe page owns the test that proves the result.\n\nThis is close to familiar software design patterns:\n\nDesign by contract: prereq acts like a precondition and check acts like a postcondition.\nArrange / Act / Assert: prereq arranges the required state, procedure acts, and check asserts the result.\nIdempotent infrastructure steps: inspect current state, apply a change, then verify the target state.\n\nThat makes manuals easier to write, rerun, and debug.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
     ]
   },
   {
-    "objectID": "index.html#export-blocks",
-    "href": "index.html#export-blocks",
+    "objectID": "index.html#page-contract",
+    "href": "index.html#page-contract",
     "title": "Quarto Manual",
-    "section": "0.4 Export blocks",
-    "text": "0.4 Export blocks\nManual pages can include special blocks that export files into the project.\nFor example:\n::: {.manual-project-source file=\"src/{{ project_package }}/request.py\"}\n```python\ndef build_request():\n    return {}\n```\n:::\nThis block says:\n\nWhen the manual is exported, write this code to src/{{ project_package }}/request.py.\n\nCommon block types include:\n\n.manual-lib-source for reusable helper code;\n.manual-project-source for project source files (Python, R, Julia etc.);\n.manual-project-test for tests;\n.manual-project-script for shell or Slurm scripts;\n.manual-project-config for YAML, TOML, Markdown, or other configuration files;\n.manual-run for code that runs in the page but is not exported;\n.manual-explain for explanatory callouts.",
+    "section": "0.4 Page Contract",
+    "text": "0.4 Page Contract\nEvery manual page should contain:\n\nexactly one .manual-prereq block;\none or more .manual-procedure blocks;\nexactly one .manual-check block.\n\nThe Quarto Manual filter can validate that structure and render those blocks as semantic callouts.\n\n0.4.1 Prerequisite\nUse the prerequisite block to answer:\n\nWhat must already be true before this page can proceed?\n\nTypical prerequisite checks include:\n\nassert Path(\"README.md\").exists()\ntest -d data\npytest tests/test_previous_step.py\nstopifnot(file.exists(\"config.yml\"))\n\n\n\n0.4.2 Procedure\nUse one or more procedure blocks to answer:\n\nWhat should the user do on this page?\n\nProcedure blocks are where the page creates files, edits configuration, prepares data, runs commands, or materializes tests.\n\n\n0.4.3 Check\nUse the check block to answer:\n\nHow do we know this page worked?\n\nA check should test the concrete artifacts created by the procedure blocks above.\nFor example, a check might:\n\nassert that a config file exists;\nvalidate JSON or YAML contents;\nimport an emitted helper function;\nrun pytest, testthat, or unittest;\nverify that a shell script was written and is executable.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
     ]
   },
   {
-    "objectID": "index.html#what-a-manual-produces",
-    "href": "index.html#what-a-manual-produces",
+    "objectID": "index.html#minimal-example",
+    "href": "index.html#minimal-example",
     "title": "Quarto Manual",
-    "section": "0.5 What a manual produces",
-    "text": "0.5 What a manual produces\nA manual produces setup evidence, not necessarily final research outputs.\nDepending on the workflow, that evidence might include:\n\nconfiguration files;\nsource modules;\nhelper scripts;\nSlurm scripts;\npackage files;\ncontainer recipes;\ntests;\nlogs;\na completed readiness checklist.\n\nMuch like a pre-flight checklist, a manual should answer:\n\nIs this project ready to operate?\n\nThe user still runs the actual workflow.",
+    "section": "0.5 Minimal Example",
+    "text": "0.5 Minimal Example\nHere is the smallest useful page shape:\n---\ntitle: \"Create Configuration\"\nmanual:\n  page: 2\n---\n\n::: {.manual-prereq}\n\n::: {#3cf6d3c2 .cell execution_count=1}\n``` {.python .cell-code}\nfrom pathlib import Path\n\nassert Path(\"README.md\").exists()\nassert Path(\"data\").is_dir()\n```\n:::\n\n\n:::\n\n::: {.manual-procedure}\n\n::: {#d7bc5288 .cell execution_count=2}\n``` {.python .cell-code}\nfrom pathlib import Path\nimport json\n\nPath(\"config\").mkdir(exist_ok=True)\nPath(\"config/manual.json\").write_text(\n    json.dumps({\"status\": \"configured\"}, indent=2) + \"\\n\",\n    encoding=\"utf-8\",\n)\n```\n:::\n\n\n:::\n\n::: {.manual-check}\n\n::: {#fc1c4457 .cell execution_count=3}\n``` {.python .cell-code}\nfrom pathlib import Path\nimport json\n\nconfig = Path(\"config/manual.json\")\nassert config.exists()\nassert json.loads(config.read_text())[\"status\"] == \"configured\"\n```\n:::\n\n\n:::\nSee page.qmd for a fuller authoring template.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
     ]
   },
   {
-    "objectID": "index.html#internals",
-    "href": "index.html#internals",
+    "objectID": "index.html#relationship-to-quarto-emit",
+    "href": "index.html#relationship-to-quarto-emit",
     "title": "Quarto Manual",
-    "section": "0.6 Internals",
-    "text": "0.6 Internals\nA Quarto Manual works by extending the Quarto template system. Instead of a single page, it is a structured, multi-document Quarto project template that contains ordered, executable .qmd pages, workflow-specific helper libraries, page-level tests, and a final readiness checklist.",
+    "section": "0.6 Relationship To quarto-emit",
+    "text": "0.6 Relationship To quarto-emit\nQuarto Manual and quarto-emit have different jobs.\n\nQuarto Manual defines the structure of an executable manual page.\nquarto-emit optionally materializes reusable files from those pages.\n\nYou do not need quarto-emit to write a manual.\nUse quarto-emit when a page should produce conventional project artifacts such as:\n\nsrc/ modules\ntests/ suites\nscripts/\nconfig/ files\n\nFor example, a check block may also emit a real pytest file:\n::: {.manual-check .emit-test-py file=\"tests/test_manual_page.py\"}\n\n::: {#f2239306 .cell execution_count=4}\n``` {.python .cell-code}\nfrom pathlib import Path\n\n\ndef test_manual_page():\n    assert Path(\"config/manual.json\").exists()\n```\n:::\n\n\n:::\nThat keeps the page readable while still allowing the manual to materialize files for later reuse.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
     ]
   },
   {
-    "objectID": "index.html#how-to-run-this-demonstration",
-    "href": "index.html#how-to-run-this-demonstration",
+    "objectID": "index.html#author-workflow",
+    "href": "index.html#author-workflow",
     "title": "Quarto Manual",
-    "section": "1.1 How to run this demonstration",
-    "text": "1.1 How to run this demonstration\nRender normally to see the callouts:\nquarto render template.qmd\nRun with export enabled to write the generated files:\nRSE_MANUAL_EXPORT=1 quarto render template.qmd\nRun in check mode to see what would be written without changing files:\nRSE_MANUAL_EXPORT=1 RSE_MANUAL_CHECK=1 quarto render template.qmd\nOverride metadata variables with environment variables:\nRSE_MANUAL_EXPORT=1 \\\nRSE_MANUAL_VAR_PROJECT_NAME=\"my-era5-project\" \\\nRSE_MANUAL_VAR_PROJECT_PACKAGE=\"my_era5_project\" \\\nRSE_MANUAL_VAR_PROJECT_DIR=\"generated/my-era5-project\" \\\nRSE_MANUAL_VAR_PACKAGE_ROOT=\"generated/my-era5-project/src/my_era5_project\" \\\nquarto render template.qmd",
+    "section": "0.7 Author Workflow",
+    "text": "0.7 Author Workflow\nTo create a manual for your own procedure:\n\nStart from the Quarto Manual template.\nWrite one page per operational step.\nGive each page one prerequisite block, one or more procedure blocks, and one check block.\nKeep page state local and enforce dependencies through prerequisites.\nUse quarto-emit only when a page needs to materialize reusable files.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
     ]
   },
   {
-    "objectID": "index.html#why-this-step-exists",
-    "href": "index.html#why-this-step-exists",
+    "objectID": "index.html#operator-workflow",
+    "href": "index.html#operator-workflow",
     "title": "Quarto Manual",
-    "section": "1.2 Why this step exists",
-    "text": "1.2 Why this step exists\n\nA Quarto Manual is a multi-page executable template.\nEach page should explain one setup step, run or export the implementation needed for that step, and end with an inspection that proves the step is complete.\nThis block uses .manual-explain.\nIt is not exported. It only renders as a callout. If no title is provided, the rendering filter assigns the default title:\n\nWhy This Step Exists",
+    "section": "0.8 Operator Workflow",
+    "text": "0.8 Operator Workflow\nTo use an existing manual:\n\nFind the repository for the procedure manual.\nRun quarto use template &lt;ORG&gt;/&lt;PROCEDURE&gt;_manual.\nOpen the manual locally.\nWork through the pages in order.\nLet each page’s prerequisite and check blocks tell you whether you can proceed.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
     ]
   },
   {
-    "objectID": "index.html#start-from-current-project-state",
-    "href": "index.html#start-from-current-project-state",
+    "objectID": "index.html#scope-of-this-project",
+    "href": "index.html#scope-of-this-project",
     "title": "Quarto Manual",
-    "section": "1.3 Start from current project state",
-    "text": "1.3 Start from current project state\n\nfrom pathlib import Path\n\nproject_name = \"{{ project_name }}\"\nproject_package = \"{{ project_package }}\"\nproject_dir = Path(\"{{ project_dir }}\")\npackage_root = Path(\"{{ package_root }}\")\n\nprint(f\"Project name: {project_name}\")\nprint(f\"Project package: {project_package}\")\nprint(f\"Project directory: {project_dir}\")\nprint(f\"Package root: {package_root}\")\n\nThe .manual-run block is for code that should be visible and executable in the page. It is not exported by the current export filter.",
+    "section": "0.9 Scope Of This Project",
+    "text": "0.9 Scope Of This Project\nThis project is intentionally narrow.\nQuarto Manual should only extend Quarto in one functional way:\n\ngive manual pages semantic structure with prereq, procedure, and check blocks.\n\nEverything else should be optional:\n\nemitted source files\nemitted test suites\nhelper modules\nworkflow-specific libraries\n\nThose are choices a manual author may make, not requirements of the framework.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#manual-library-export",
-    "href": "index.html#manual-library-export",
-    "title": "Quarto Manual",
-    "section": "1.4 1. Manual library export",
-    "text": "1.4 1. Manual library export\n\nfrom __future__ import annotations\n\nfrom pathlib import Path\nimport subprocess\n\n\ndef expect_file(path: str | Path) -&gt; Path:\n    \"\"\"Assert that a file exists and return it as a Path.\"\"\"\n    path = Path(path)\n    assert path.exists(), f\"Expected path to exist: {path}\"\n    assert path.is_file(), f\"Expected file: {path}\"\n    return path\n\n\ndef expect_dir(path: str | Path) -&gt; Path:\n    \"\"\"Assert that a directory exists and return it as a Path.\"\"\"\n    path = Path(path)\n    assert path.exists(), f\"Expected path to exist: {path}\"\n    assert path.is_dir(), f\"Expected directory: {path}\"\n    return path\n\n\ndef expect_command_succeeds(command: list[str]) -&gt; None:\n    \"\"\"Assert that a command exits successfully.\"\"\"\n    result = subprocess.run(\n        command,\n        check=False,\n        capture_output=True,\n        text=True,\n    )\n\n    assert result.returncode == 0, (\n        \"Command failed: \"\n        + \" \".join(command)\n        + \"\\nSTDOUT:\\n\"\n        + result.stdout\n        + \"\\nSTDERR:\\n\"\n        + result.stderr\n    )\n\nThis block demonstrates .manual-lib-source.\nWhen exported, it writes a reusable manual-library helper module to:\n{{ manual_root }}/src/quarto_manual/checks.py\nBecause the code block language is python, the export filter adds a # comment header.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#project-source-export",
-    "href": "index.html#project-source-export",
-    "title": "Quarto Manual",
-    "section": "1.5 2. Project source export",
-    "text": "1.5 2. Project source export\n\nfrom __future__ import annotations\n\nfrom dataclasses import dataclass\nfrom pathlib import Path\n\n\n@dataclass(frozen=True)\nclass ProjectContract:\n    \"\"\"Minimal project contract generated by a Quarto Manual page.\"\"\"\n\n    project_name: str\n    project_package: str\n    project_dir: Path\n\n    @classmethod\n    def discover(cls) -&gt; \"ProjectContract\":\n        return cls(\n            project_name=\"{{ project_name }}\",\n            project_package=\"{{ project_package }}\",\n            project_dir=Path(\"{{ project_dir }}\").resolve(),\n        )\n\n    @property\n    def src_dir(self) -&gt; Path:\n        return self.project_dir / \"src\"\n\n    @property\n    def tests_dir(self) -&gt; Path:\n        return self.project_dir / \"tests\"\n\n    @property\n    def config_dir(self) -&gt; Path:\n        return self.project_dir / \"config\"\n\nThis block demonstrates .manual-project-source.\nIt also demonstrates template-variable substitution inside both the target path and the code body.\nWhen exported, it writes:\n{{ package_root }}/contract.py",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#project-config-export",
-    "href": "index.html#project-config-export",
-    "title": "Quarto Manual",
-    "section": "1.6 3. Project config export",
-    "text": "1.6 3. Project config export\n\nmanual:\n  project_name: \"{{ project_name }}\"\n  project_package: \"{{ project_package }}\"\n  manual_type: \"{{ manual_type }}\"\n  project_dir: \"{{ project_dir }}\"\n\nworkflow:\n  name: \"Template demonstration\"\n  status: \"prototype\"\n  ready_to_operate: false\n\nchecklist:\n  - id: \"project-contract\"\n    label: \"Project contract exists\"\n    complete: false\n  - id: \"tests-exist\"\n    label: \"Page-level tests exist\"\n    complete: false\n  - id: \"script-exists\"\n    label: \"Execution script exists\"\n    complete: false\n\nThis block demonstrates .manual-project-config.\nBecause the language is yaml, the export filter uses the default # generated-file header.\nWhen exported, it writes:\n{{ project_dir }}/config/manual.yml",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#project-script-export",
-    "href": "index.html#project-script-export",
-    "title": "Quarto Manual",
-    "section": "1.7 4. Project script export",
-    "text": "1.7 4. Project script export\n\n#!/usr/bin/env bash\nset -euo pipefail\n\nproject_dir=\"{{ project_dir }}\"\n\necho \"Checking project directory: ${project_dir}\"\n\ntest -d \"${project_dir}\"\ntest -d \"${project_dir}/config\"\ntest -d \"${project_dir}/src\" || mkdir -p \"${project_dir}/src\"\ntest -d \"${project_dir}/tests\" || mkdir -p \"${project_dir}/tests\"\n\necho \"Project scaffold exists.\"\n\nThis block demonstrates .manual-project-script.\nThe mode=\"0755\" attribute demonstrates executable script export. When the filter writes the file, it should call chmod 0755 for this target.\nWhen exported, it writes:\n{{ project_dir }}/scripts/check_project.sh",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#project-test-export",
-    "href": "index.html#project-test-export",
-    "title": "Quarto Manual",
-    "section": "1.8 5. Project test export",
-    "text": "1.8 5. Project test export\n\nfrom pathlib import Path\n\nfrom {{ project_package }}.contract import ProjectContract\n\n\ndef test_project_contract_discovers_project():\n    project = ProjectContract.discover()\n\n    assert project.project_name == \"{{ project_name }}\"\n    assert project.project_package == \"{{ project_package }}\"\n    assert project.project_dir.name == Path(\"{{ project_dir }}\").name\n\n\ndef test_project_contract_paths_are_named():\n    project = ProjectContract.discover()\n\n    assert project.src_dir.name == \"src\"\n    assert project.tests_dir.name == \"tests\"\n    assert project.config_dir.name == \"config\"\n\nThis block demonstrates .manual-project-test.\nWhen exported, it writes:\n{{ project_dir }}/tests/test_project_contract.py\nThis is the page-level inspection artifact. It asks whether the project contract generated by this page is usable.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#markdown-export",
-    "href": "index.html#markdown-export",
-    "title": "Quarto Manual",
-    "section": "1.9 6. Markdown export",
-    "text": "1.9 6. Markdown export\n\n# Completed Checklist\n\nThis checklist is generated from `template.qmd`.\n\nThe desired output of a manual is not the final scientific result. The desired output is a project that is ready to operate.\n\n- [ ] Project contract exists\n- [ ] Configuration exists\n- [ ] Helper script exists\n- [ ] Page-level tests exist\n- [ ] Manual page can be re-rendered\n\nThis block demonstrates Markdown export.\nBecause the language is markdown, the export filter should use HTML comment headers:\n&lt;!-- Generated by rse-manual. --&gt;\nWhen exported, it writes:\n{{ project_dir }}/checklist.md",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#sql-export",
-    "href": "index.html#sql-export",
-    "title": "Quarto Manual",
-    "section": "1.10 7. SQL export",
-    "text": "1.10 7. SQL export\n\nselect\n  '{{ project_name }}' as project_name,\n  '{{ project_package }}' as project_package,\n  '{{ manual_type }}' as manual_type;\n\nThis block demonstrates a language that uses -- comments in the generated header.\nWhen exported, it writes:\n{{ project_dir }}/sql/inspect_project.sql",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#custom-callout-title",
-    "href": "index.html#custom-callout-title",
-    "title": "Quarto Manual",
-    "section": "1.11 8. Custom callout title",
-    "text": "1.11 8. Custom callout title\n\nThis block uses .manual-explain, but it provides its own title.\nThe rendering filter should preserve this title instead of replacing it with the default title.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#intentional-non-export-run-block",
-    "href": "index.html#intentional-non-export-run-block",
-    "title": "Quarto Manual",
-    "section": "1.12 9. Intentional non-export run block",
-    "text": "1.12 9. Intentional non-export run block\n\nfrom pathlib import Path\n\nexpected_files = [\n    Path(\"{{ project_dir }}/config/manual.yml\"),\n    Path(\"{{ project_dir }}/scripts/check_project.sh\"),\n    Path(\"{{ project_dir }}/tests/test_project_contract.py\"),\n    Path(\"{{ project_dir }}/checklist.md\"),\n]\n\nfor path in expected_files:\n    print(path)\n\nThis block demonstrates another .manual-run section. It is intentionally not exported.\nIt is useful as page-level executable prose: something the user can run while working through the manual.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#page-completion-inspection",
-    "href": "index.html#page-completion-inspection",
-    "title": "Quarto Manual",
-    "section": "1.13 10. Page completion inspection",
-    "text": "1.13 10. Page completion inspection\n\nThis page is complete when the exported artifacts exist and the page-level test passes.\nThe manual should not need a hidden progress database. Completion is inferred from project evidence: files, configs, scripts, rendered outputs, logs, and passing tests.\n\nA real page might end with a command like:\npytest {{ project_dir }}/tests/test_project_contract.py\nFor this template demonstration, the completion checklist is:\n\nthe project contract source block has a valid target;\nthe config block has a valid target;\nthe script block has mode=\"0755\";\nthe test block imports the generated project contract;\nthe rendered page shows all manual block types as callouts;\nexporting writes files only when RSE_MANUAL_EXPORT=1.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#notes-for-manual-authors",
-    "href": "index.html#notes-for-manual-authors",
-    "title": "Quarto Manual",
-    "section": "1.14 11. Notes for manual authors",
-    "text": "1.14 11. Notes for manual authors\nEach export block should obey these rules:\n\nInclude exactly one export class.\nInclude a file=\"...\" attribute.\nContain exactly one code block.\nUse template variables only when they are declared in YAML metadata or passed through environment variables.\nKeep explanatory prose outside export blocks unless the prose itself is the exported artifact.\nUse .manual-run for code that should run in the page but should not be exported.\nUse .manual-explain for conceptual explanation that should render as a callout but should not be exported.\n\nThis page intentionally demonstrates the full contract expected by the current filters.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manual Template Demonstration</span>"
-    ]
-  },
-  {
-    "objectID": "checklist.html",
-    "href": "checklist.html",
-    "title": "2  Quarto Manuals",
-    "section": "",
-    "text": "2.1 Checklist Structure\nA Quarto Manual is an executable operations manual for a project. It helps the user assemble, configure, inspect, and verify the project so that the work can be done deliberately and visibly.\nOne useful way to think about a manual is through aviation. One pilot’s flight manual might cover route preparation, security and safety checks, pre-flight routines, operation, inspection, and periodic verification of the aircraft integrity during flight, takeoff and landing procedures, and emergency protocols. In the same way, a Quarto Manual can break up cognitively complex software workflows into manageable steps for yourself and your users.\nIt can guide setup and installation, operating procedures, and checks across the life of a project.\nChecklists and pages can be useful abstractions for describing a manual:\nIn addition, pages can have semantic meaning that gives us operational structure:\nA well-designed manual should move in order from page to page. Earlier pages establish conditions that later pages rely on. By the time the user reaches the final page, they should be able to answer questions like:\nA Quarto Manual checklist is derived from the manual’s ordered pages. Each page should have a clear purpose and should leave behind evidence that the step was completed. That evidence should usually come from the real project state: files, directories, configuration, rendered outputs, logs, and passing checks.\nWe’ll use the page metadata to declare where a page belongs in the checklist:\nThe manual.page field gives the page its place in the manual. The checklist view can then use that ordering to summarize the manual, report missing sections, and help the user see how much of the procedure has been covered.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Quarto Manuals</span>"
-    ]
-  },
-  {
-    "objectID": "checklist.html#checklist-structure",
-    "href": "checklist.html#checklist-structure",
-    "title": "2  Quarto Manuals",
-    "section": "",
-    "text": "---\ntitle: \"Assemble Python Environment\"\nmanual:\n  page: 2\n---",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Quarto Manuals</span>"
-    ]
-  },
-  {
-    "objectID": "checklist.html#what-a-checklist-measures",
-    "href": "checklist.html#what-a-checklist-measures",
-    "title": "2  Quarto Manuals",
-    "section": "2.2 What a Checklist Measures",
-    "text": "2.2 What a Checklist Measures\nA good checklist is not just a set of instructions. It also measures whether the manual is structurally complete and whether each page can prove its own outcome.\nFor example, a Quarto Manual can warn when:\n\na page has no prerequisite block;\na page has no check block;\na page has no procedure block;\npages are missing numbers or appear out of order.\n\nIt can also summarize useful manual-level facts, such as:\n\nthe number of pages in the checklist;\nthe number of checks across the manual;\nwhich pages are missing required sections.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Quarto Manuals</span>"
-    ]
-  },
-  {
-    "objectID": "checklist.html#authoring-guidance",
-    "href": "checklist.html#authoring-guidance",
-    "title": "2  Quarto Manuals",
-    "section": "2.3 Authoring Guidance",
-    "text": "2.3 Authoring Guidance\nWhen you write a Quarto Manual, focus on explicit procedure rather than hidden automation.\nEach page should help the user:\n\ninspect the current project state;\nunderstand one setup step;\nperform that step in an editable, visible way;\nverify that the step succeeded.\n\nThe checklist is complete when the manual has enough structure to guide the user through the procedure and verify the result. The manual itself may be used to prepare a project, operate it, inspect it, or hand it off.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Quarto Manuals</span>"
-    ]
-  },
-  {
-    "objectID": "impl_python.html",
-    "href": "impl_python.html",
-    "title": "3  Manual Python Implementation",
-    "section": "",
-    "text": "3.1 Implementation\nPython is great for object oriented workflows. One useful Python implementation for a manual is as a Checklist object. By using a dataclass, we can create a flexible checklist object that summarize a manual and its pages. In that design, the checklist is not the manual itself. It is a structured representation of the manual’s ordered steps. Each page has a number, title, and semantic content for prerequisite, procedure, and check blocks.",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Manual Python Implementation</span>"
-    ]
-  },
-  {
-    "objectID": "impl_python.html#page",
-    "href": "impl_python.html#page",
-    "title": "3  Manual Python Implementation",
-    "section": "3.2 Page",
-    "text": "3.2 Page\nFirst, we’ll define a page in the checklist.\n\nfrom __future__ import annotations\n\nfrom dataclasses import dataclass, field\nfrom pathlib import Path\nfrom typing import Callable, Iterable, Sequence\n\nimport warnings\n\n\nCheckFn = Callable[[\"Checklist\", \"Page\"], None]\n\n\n@dataclass(frozen=True)\nclass Page:\n    \"\"\"One checklist step in a Quarto Manual.\"\"\"\n\n    title: str\n    number: int\n    prerequisite: str\n    procedures: tuple[str, ...]\n    check: str\n\n    def __post_init__(self) -&gt; None:\n        if not self.title.strip():\n            raise ValueError(\"Page.title must not be empty.\")\n\n        if self.number &lt; 1:\n            raise ValueError(\"Page.number must be &gt;= 1.\")\n\n        if not self.prerequisite.strip():\n            raise ValueError(\"Page.prerequisite must not be empty.\")\n\n        if not self.check.strip():\n            raise ValueError(\"Page.check must not be empty.\")\n\n        if len(self.procedures) &lt; 1:\n            raise ValueError(\"Page.procedures must contain at least one procedure block.\")\n\n        if any(not step.strip() for step in self.procedures):\n            raise ValueError(\"Page.procedures may not contain empty procedure blocks.\")\n\n    @property\n    def procedure_count(self) -&gt; int:\n        return len(self.procedures)\n\n    def summary(self) -&gt; dict:\n        return {\n            \"title\": self.title,\n            \"number\": self.number,\n            \"prerequisite\": self.prerequisite,\n            \"procedure_count\": self.procedure_count,\n            \"check\": self.check,\n        }\n\nThe Checklist class is a container for the pages in the manual. It can be used to summarize the manual, report missing sections, and help the user see how much of the procedure has been covered.\nIt has a simple initialization API requiring the title of the project, the root directory of the project, and a sequence of Page objects. The Checklist class validates that the pages are numbered in order and that there are no duplicate page numbers.\n\nfrom pathlib import Path\n\n@dataclass(frozen=True)\nclass Checklist:\n    \"\"\"Declarative description of a Quarto Manual.\"\"\"\n\n    project_title: str\n    project_root: Path\n    pages: tuple[Page, ...] = field(default_factory=tuple)\n\n    def __post_init__(self) -&gt; None:\n        if not self.project_title.strip():\n            raise ValueError(\"Checklist.project_title must not be empty.\")\n\n        if not Path(self.project_root).is_dir():\n            raise ValueError(\"Checklist.project_root must be an existing directory.\")\n\n        if len(self.pages) &lt; 1:\n            warnings.warn(\n                \"Checklist.pages is empty; this is useful during testing, but an end-user manual should contain at least one page.\",\n                stacklevel=2,\n            )\n\n        numbers = [page.number for page in self.pages]\n        if len(numbers) != len(set(numbers)):\n            raise ValueError(\"Checklist page numbers must be unique.\")\n\n        if numbers != sorted(numbers):\n            raise ValueError(\"Checklist pages must be ordered by page number.\")\n\n    @property\n    def page_count(self) -&gt; int:\n        return len(self.pages)\n\n    @property\n    def check_count(self) -&gt; int:\n        return len(self.pages)\n\n    @property\n    def procedure_count(self) -&gt; int:\n        return sum(page.procedure_count for page in self.pages)\n\n    def get_page(self, number: int) -&gt; Page:\n        for page in self.pages:\n            if page.number == number:\n                return page\n        raise KeyError(f\"No page found for number {number}.\")\n\n    def summary(self) -&gt; dict:\n        return {\n            \"project_title\": self.project_title,\n            \"project_root\": str(self.project_root),\n            \"page_count\": self.page_count,\n            \"procedure_count\": self.procedure_count,\n            \"check_count\": self.check_count,\n            \"pages\": [page.summary() for page in self.pages],\n        }\n\n    def __repr__(self) -&gt; str:\n        return (\n            f\"Checklist(\"\n            f\"project_title={self.project_title!r}, \"\n            f\"pages={self.page_count}, \"\n            f\"project_root={str(self.project_root)!r})\"\n        )\n\nThis allows us to create a very simple checklist for a manual:\n\nfrom pathlib import Path\nproject = Checklist(project_title=\"simple_example\", project_root=Path(\"../examples\"))\n\n&lt;string&gt;:6: UserWarning: Checklist.pages is empty; this is useful during testing, but an end-user manual should contain at least one page.\n\n\nTo see how Pages are added to the manual, see the next section.",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Manual Python Implementation</span>"
-    ]
-  },
-  {
-    "objectID": "impl_r.html",
-    "href": "impl_r.html",
-    "title": "4  Manual R Implementation",
-    "section": "",
-    "text": "4.1 Implementation\nR is a brilliant language for tabular data workflows. One useful R implementation for a manual is as a dataframe with rows for instances of pages and their checks.\nTBD: implement quarto manuals in R.",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manual R Implementation</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
     ]
   },
   {
     "objectID": "page.html",
     "href": "page.html",
-    "title": "Manual Python Implementation",
+    "title": "2  Manual Pages",
     "section": "",
-    "text": "5.1 Required Page Structure\nEach Quarto Manual page is one operational step in the manual. A page should tell the user:\nTo make that structure explicit, every page must use three semantic block types:\nThese blocks give the page a predictable structure for both the reader and the manual tooling. They also let the manual derive a checklist view across all pages without turning the manual into a hidden workflow engine.\nStart each page with normal Quarto metadata:\nThen write the page using the required manual blocks.",
+    "text": "2.1 1. Prerequisites\nThis section illustrates the smallest useful shape of a Quarto Manual page, and serves as the working template for Quarto Manual authors.\nA Page should do three things:\nIn Quarto Manuals, we implement these requirements in specific block types, which means:\nUse the prerequisite block to check whether the page is allowed to proceed. This is where page-to-page dependency should be enforced.\nGood prerequisite checks look for visible project state:",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Manual Python Implementation</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Manual Pages</span>"
     ]
   },
   {
-    "objectID": "page.html#required-page-structure",
-    "href": "page.html#required-page-structure",
-    "title": "Manual Python Implementation",
+    "objectID": "page.html#prerequisites",
+    "href": "page.html#prerequisites",
+    "title": "2  Manual Pages",
     "section": "",
-    "text": "---\ntitle: \"Assemble Python Environment\"\nmanual:\n  page: 2\n---\n\n\n5.1.1 1. Prerequisite Block\nThe prerequisite block explains what the user must already have before this step is actionable. This is the place to inspect the current project state, load shared helper code, or confirm that earlier manual steps are complete.\nThere must be exactly one prerequisite block on the page. In this manual, the prerequisite block should include the shared checklist definition so that each page starts from the same declared manual state.1",
+    "text": "does a required file already exist?\ndid a previous page create the expected directory?\ndoes a previously emitted test suite pass?\nis the required tool available?\n\n\n\n\n\n\n\nTip\n\n\n\nThe easiest way to set up a prerequisite block is to use the tests you defined in the check block from a previous page.\n\n\n\nBefore running this page, confirm that the project already has a data/ directory and a README.md file.\n\nfrom pathlib import Path\n\nassert Path(\"../README.md\").exists(), \"Expected README.md to exist before this page runs.\"\nassert Path(\"../data\").is_dir(), \"Expected data/ directory from an earlier page.\"\n\nYou can also express prerequisites with shell checks:\n#| eval: false\ntest -f README.md\ntest -d data\nIf this page depends on tests from a previous page, run them here:\n#| eval: false\npytest tests/test_previous_step.py",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Manual Python Implementation</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Manual Pages</span>"
     ]
   },
   {
-    "objectID": "page.html#prerequisite-block-example",
-    "href": "page.html#prerequisite-block-example",
-    "title": "Manual Python Implementation",
-    "section": "5.2 Prerequisite Block Example",
-    "text": "5.2 Prerequisite Block Example",
+    "objectID": "page.html#procedure",
+    "href": "page.html#procedure",
+    "title": "2  Manual Pages",
+    "section": "2.2 2. Procedure",
+    "text": "2.2 2. Procedure\nProcedure blocks contain the work of the page. A page may use one procedure block or several.\nEach procedure block should do one clear part of the step.\n\nCreate a directory for project configuration files.\n\nfrom pathlib import Path\n\nPath(\"config\").mkdir(exist_ok=True)\n\n\n\nWrite a small JSON file that later pages can inspect.\n\nfrom pathlib import Path\nimport json\n\nconfig_path = Path(\"config/manual.json\")\nconfig_path.write_text(\n    json.dumps({\"status\": \"configured\"}, indent=2) + \"\\n\",\n    encoding=\"utf-8\",\n)",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Manual Python Implementation</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Manual Pages</span>"
     ]
   },
   {
-    "objectID": "page.html#implementation",
-    "href": "page.html#implementation",
-    "title": "Manual Python Implementation",
-    "section": "5.3 Implementation",
-    "text": "5.3 Implementation\nPython is great for object oriented workflows. One useful Python implementation for a manual is as a Checklist object. By using a dataclass, we can create a flexible checklist object that summarize a manual and its pages. In that design, the checklist is not the manual itself. It is a structured representation of the manual’s ordered steps. Each page has a number, title, and semantic content for prerequisite, procedure, and check blocks.",
+    "objectID": "page.html#check",
+    "href": "page.html#check",
+    "title": "2  Manual Pages",
+    "section": "2.3 3. Check",
+    "text": "2.3 3. Check\nUse the check block to prove that the page succeeded.\nChecks should assert the results of the procedure blocks above. If you want the page to emit a reusable test file, you can combine the manual check block with a quarto-emit class.\n\n\nfrom pathlib import Path\nimport json\n\n\ndef test_manual_page_created_config():\n    config_path = Path(\"config/manual.json\")\n    assert config_path.exists(), \"Expected config/manual.json to exist.\"\n\n    data = json.loads(config_path.read_text(encoding=\"utf-8\"))\n    assert data[\"status\"] == \"configured\"\n\n\nThis block serves two purposes:\n\nas a manual check, it shows the reader how to verify the page;\nas an emit block, it can materialize a real test file for later reuse.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Manual Python Implementation</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Manual Pages</span>"
     ]
   },
   {
-    "objectID": "page.html#page",
-    "href": "page.html#page",
-    "title": "Manual Python Implementation",
-    "section": "5.4 Page",
-    "text": "5.4 Page\nFirst, we’ll define a page in the checklist.\n\nfrom __future__ import annotations\n\nfrom dataclasses import dataclass, field\nfrom pathlib import Path\nfrom typing import Callable, Iterable, Sequence\n\nimport warnings\n\n\nCheckFn = Callable[[\"Checklist\", \"Page\"], None]\n\n\n@dataclass(frozen=True)\nclass Page:\n    \"\"\"One checklist step in a Quarto Manual.\"\"\"\n\n    title: str\n    number: int\n    prerequisite: str\n    procedures: tuple[str, ...]\n    check: str\n\n    def __post_init__(self) -&gt; None:\n        if not self.title.strip():\n            raise ValueError(\"Page.title must not be empty.\")\n\n        if self.number &lt; 1:\n            raise ValueError(\"Page.number must be &gt;= 1.\")\n\n        if not self.prerequisite.strip():\n            raise ValueError(\"Page.prerequisite must not be empty.\")\n\n        if not self.check.strip():\n            raise ValueError(\"Page.check must not be empty.\")\n\n        if len(self.procedures) &lt; 1:\n            raise ValueError(\"Page.procedures must contain at least one procedure block.\")\n\n        if any(not step.strip() for step in self.procedures):\n            raise ValueError(\"Page.procedures may not contain empty procedure blocks.\")\n\n    @property\n    def procedure_count(self) -&gt; int:\n        return len(self.procedures)\n\n    def summary(self) -&gt; dict:\n        return {\n            \"title\": self.title,\n            \"number\": self.number,\n            \"prerequisite\": self.prerequisite,\n            \"procedure_count\": self.procedure_count,\n            \"check\": self.check,\n        }\n\nThe Checklist class is a container for the pages in the manual. It can be used to summarize the manual, report missing sections, and help the user see how much of the procedure has been covered.\nIt has a simple initialization API requiring the title of the project, the root directory of the project, and a sequence of Page objects. The Checklist class validates that the pages are numbered in order and that there are no duplicate page numbers.\n\nfrom pathlib import Path\n\n@dataclass(frozen=True)\nclass Checklist:\n    \"\"\"Declarative description of a Quarto Manual.\"\"\"\n\n    project_title: str\n    project_root: Path\n    pages: tuple[Page, ...] = field(default_factory=tuple)\n\n    def __post_init__(self) -&gt; None:\n        if not self.project_title.strip():\n            raise ValueError(\"Checklist.project_title must not be empty.\")\n\n        if not Path(self.project_root).is_dir():\n            raise ValueError(\"Checklist.project_root must be an existing directory.\")\n\n        if len(self.pages) &lt; 1:\n            warnings.warn(\n                \"Checklist.pages is empty; this is useful during testing, but an end-user manual should contain at least one page.\",\n                stacklevel=2,\n            )\n\n        numbers = [page.number for page in self.pages]\n        if len(numbers) != len(set(numbers)):\n            raise ValueError(\"Checklist page numbers must be unique.\")\n\n        if numbers != sorted(numbers):\n            raise ValueError(\"Checklist pages must be ordered by page number.\")\n\n    @property\n    def page_count(self) -&gt; int:\n        return len(self.pages)\n\n    @property\n    def check_count(self) -&gt; int:\n        return len(self.pages)\n\n    @property\n    def procedure_count(self) -&gt; int:\n        return sum(page.procedure_count for page in self.pages)\n\n    def get_page(self, number: int) -&gt; Page:\n        for page in self.pages:\n            if page.number == number:\n                return page\n        raise KeyError(f\"No page found for number {number}.\")\n\n    def summary(self) -&gt; dict:\n        return {\n            \"project_title\": self.project_title,\n            \"project_root\": str(self.project_root),\n            \"page_count\": self.page_count,\n            \"procedure_count\": self.procedure_count,\n            \"check_count\": self.check_count,\n            \"pages\": [page.summary() for page in self.pages],\n        }\n\n    def __repr__(self) -&gt; str:\n        return (\n            f\"Checklist(\"\n            f\"project_title={self.project_title!r}, \"\n            f\"pages={self.page_count}, \"\n            f\"project_root={str(self.project_root)!r})\"\n        )\n\nThis allows us to create a very simple checklist for a manual:\n\nfrom pathlib import Path\nproject = Checklist(project_title=\"simple_example\", project_root=Path(\"../examples\"))\n\n&lt;string&gt;:6: UserWarning: Checklist.pages is empty; this is useful during testing, but an end-user manual should contain at least one page.\n\n\nTo see how Pages are added to the manual, see the next section.\nThis page assumes the project directory exists and that the user has already chosen an environment name.\n\nfrom pathlib import Path\n\nassert project, \"Expected project to be defined. Did you include the checklist.qmd file and run the first page?\"\nassert project.project_root.is_dir(), \"Expected project root to be a directory\"\n\nenvironment_dir = project.project_root / \".venv\"",
+    "objectID": "page.html#authoring-notes",
+    "href": "page.html#authoring-notes",
+    "title": "2  Manual Pages",
+    "section": "2.4 Authoring Notes",
+    "text": "2.4 Authoring Notes\nKeep page state local. Do not rely on notebook variables from another page. Instead:\n\nuse prerequisite blocks to enforce dependency on earlier pages;\nuse procedure blocks to create visible project artifacts;\nuse check blocks to test those artifacts directly.\n\nThat keeps each page independent, rerunnable, and easy to reason about.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Manual Python Implementation</span>"
-    ]
-  },
-  {
-    "objectID": "page.html#authoring-rules",
-    "href": "page.html#authoring-rules",
-    "title": "Manual Python Implementation",
-    "section": "5.5 Authoring Rules",
-    "text": "5.5 Authoring Rules\nWhen writing a page, keep these rules in mind:\n\nuse exactly one .manual-prereq block;\nuse at least one .manual-procedure block;\nuse exactly one .manual-check block;\nlet checks inspect real files, paths, configs, logs, or rendered outputs when possible;\nkeep the page focused on one operational step.\n\nThe goal of a page is not just to explain a step. The goal is to help the user perform that step and prove that it is complete.",
-    "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Manual Python Implementation</span>"
-    ]
-  },
-  {
-    "objectID": "page.html#footnotes",
-    "href": "page.html#footnotes",
-    "title": "Manual Python Implementation",
-    "section": "",
-    "text": "Notebook authoring can make cross-page state hard to reason about. By keeping the checklist definition in one included file, each page can recreate the same shared base objects in its own execution context. This gives authors one source of truth while avoiding hidden dependence on state from another page.↩︎",
-    "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Manual Python Implementation</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Manual Pages</span>"
     ]
   }
 ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Manual Python Implementation – Quarto Manual</title>
+<title>2&nbsp; Manual Pages – Quarto Manual</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./impl_r.html" rel="prev">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./page.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manual Python Implementation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./page.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manual Pages</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -147,31 +147,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manual Template Demonstration</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quarto Manuals</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./impl_python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manual Python Implementation</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./impl_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual R Implementation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./page.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manual Python Implementation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manual Pages</span></span></a>
   </div>
 </li>
     </ul>
@@ -184,12 +166,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#required-page-structure" id="toc-required-page-structure" class="nav-link active" data-scroll-target="#required-page-structure"><span class="header-section-number">5.1</span> Required Page Structure</a>
-  <ul class="collapse">
-  <li><a href="#prerequisite-block" id="toc-prerequisite-block" class="nav-link" data-scroll-target="#prerequisite-block"><span class="header-section-number">5.1.1</span> 1. Prerequisite Block</a></li>
-  </ul></li>
-  <li><a href="#procedure-blocks" id="toc-procedure-blocks" class="nav-link" data-scroll-target="#procedure-blocks"><span class="header-section-number">5.4.1</span> 2. Procedure Blocks</a></li>
-  <li><a href="#authoring-rules" id="toc-authoring-rules" class="nav-link" data-scroll-target="#authoring-rules"><span class="header-section-number">5.5</span> Authoring Rules</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites"><span class="header-section-number">2.1</span> <em>1. Prerequisites</em></a></li>
+  <li><a href="#procedure" id="toc-procedure" class="nav-link" data-scroll-target="#procedure"><span class="header-section-number">2.2</span> <em>2. Procedure</em></a></li>
+  <li><a href="#check" id="toc-check" class="nav-link" data-scroll-target="#check"><span class="header-section-number">2.3</span> <em>3. Check</em></a></li>
+  <li><a href="#authoring-notes" id="toc-authoring-notes" class="nav-link" data-scroll-target="#authoring-notes"><span class="header-section-number">2.4</span> <em>Authoring Notes</em></a></li>
   </ul>
 </nav>
     </div>
@@ -198,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Manual Python Implementation</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manual Pages</span></h1>
 </div>
 
 
@@ -215,298 +195,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Each Quarto Manual page is one operational step in the manual. A page should tell the user:</p>
-<ul>
-<li>what must already be true;</li>
-<li>what they need to do now;</li>
-<li>how they can prove the step worked.</li>
-</ul>
-<p>To make that structure explicit, every page must use three semantic block types:</p>
+<p>This section illustrates the smallest useful shape of a Quarto Manual page, and serves as the working template for Quarto Manual authors.</p>
+<p>A Page should do three things:</p>
+<ol type="1">
+<li>prove that the page is ready to run;</li>
+<li>perform one or more concrete procedure steps;</li>
+<li>prove that those steps worked.</li>
+</ol>
+<p>In Quarto Manuals, we implement these requirements in specific block types, which means:</p>
 <ul>
 <li>exactly one <code>.manual-prereq</code> block;</li>
 <li>one or more <code>.manual-procedure</code> blocks;</li>
 <li>exactly one <code>.manual-check</code> block.</li>
 </ul>
-<p>These blocks give the page a predictable structure for both the reader and the manual tooling. They also let the manual derive a checklist view across all pages without turning the manual into a hidden workflow engine.</p>
-<section id="required-page-structure" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="required-page-structure"><span class="header-section-number">5.1</span> Required Page Structure</h2>
-<p>Start each page with normal Quarto metadata:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Assemble Python Environment"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">manual</span><span class="kw">:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">page</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Then write the page using the required manual blocks.</p>
-<section id="prerequisite-block" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="prerequisite-block"><span class="header-section-number">5.1.1</span> 1. Prerequisite Block</h3>
-<p>The prerequisite block explains what the user must already have before this step is actionable. This is the place to inspect the current project state, load shared helper code, or confirm that earlier manual steps are complete.</p>
-<p>There must be exactly one prerequisite block on the page. In this manual, the prerequisite block should include the shared checklist definition so that each page starts from the same declared manual state.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-</section>
-</section>
-<div class="manual-prereq callout callout-important" title="Prerequisite">
-<section id="prerequisite-block-example" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="prerequisite-block-example"><span class="header-section-number">5.2</span> Prerequisite Block Example</h2>
-<!-- For computations during rendering, the following will run the class definition -->
-</section>
-<section id="implementation" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="implementation"><span class="header-section-number">5.3</span> Implementation</h2>
-<p>Python is great for object oriented workflows. One useful Python implementation for a manual is as a <code>Checklist</code> object. By using a <code>dataclass</code>, we can create a flexible checklist object that summarize a manual and its pages. In that design, the checklist is not the manual itself. It is a structured representation of the manual’s ordered steps. Each page has a number, title, and semantic content for prerequisite, procedure, and check blocks.</p>
-</section>
-<section id="page" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="page"><span class="header-section-number">5.4</span> Page</h2>
-<p>First, we’ll define a page in the checklist.</p>
-<div id="6a2f6833" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> __future__ <span class="im">import</span> annotations</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass, field</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Callable, Iterable, Sequence</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>CheckFn <span class="op">=</span> Callable[[<span class="st">"Checklist"</span>, <span class="st">"Page"</span>], <span class="va">None</span>]</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Page:</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""One checklist step in a Quarto Manual."""</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    title: <span class="bu">str</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    number: <span class="bu">int</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    prerequisite: <span class="bu">str</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    procedures: <span class="bu">tuple</span>[<span class="bu">str</span>, ...]</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    check: <span class="bu">str</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> __post_init__(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>.title.strip():</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Page.title must not be empty."</span>)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.number <span class="op">&lt;</span> <span class="dv">1</span>:</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Page.number must be &gt;= 1."</span>)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>.prerequisite.strip():</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Page.prerequisite must not be empty."</span>)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>.check.strip():</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Page.check must not be empty."</span>)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(<span class="va">self</span>.procedures) <span class="op">&lt;</span> <span class="dv">1</span>:</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Page.procedures must contain at least one procedure block."</span>)</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">any</span>(<span class="kw">not</span> step.strip() <span class="cf">for</span> step <span class="kw">in</span> <span class="va">self</span>.procedures):</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Page.procedures may not contain empty procedure blocks."</span>)</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> procedure_count(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.procedures)</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> summary(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> {</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>            <span class="st">"title"</span>: <span class="va">self</span>.title,</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>            <span class="st">"number"</span>: <span class="va">self</span>.number,</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>            <span class="st">"prerequisite"</span>: <span class="va">self</span>.prerequisite,</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>            <span class="st">"procedure_count"</span>: <span class="va">self</span>.procedure_count,</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            <span class="st">"check"</span>: <span class="va">self</span>.check,</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The <code>Checklist</code> class is a container for the pages in the manual. It can be used to summarize the manual, report missing sections, and help the user see how much of the procedure has been covered.</p>
-<p>It has a simple initialization API requiring the title of the project, the root directory of the project, and a sequence of <code>Page</code> objects. The <code>Checklist</code> class validates that the pages are numbered in order and that there are no duplicate page numbers.</p>
-<div id="785987ba" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Checklist:</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Declarative description of a Quarto Manual."""</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    project_title: <span class="bu">str</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    project_root: Path</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    pages: <span class="bu">tuple</span>[Page, ...] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">tuple</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> __post_init__(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>.project_title.strip():</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Checklist.project_title must not be empty."</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> Path(<span class="va">self</span>.project_root).is_dir():</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Checklist.project_root must be an existing directory."</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(<span class="va">self</span>.pages) <span class="op">&lt;</span> <span class="dv">1</span>:</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            warnings.warn(</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Checklist.pages is empty; this is useful during testing, but an end-user manual should contain at least one page."</span>,</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                stacklevel<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        numbers <span class="op">=</span> [page.number <span class="cf">for</span> page <span class="kw">in</span> <span class="va">self</span>.pages]</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(numbers) <span class="op">!=</span> <span class="bu">len</span>(<span class="bu">set</span>(numbers)):</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Checklist page numbers must be unique."</span>)</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> numbers <span class="op">!=</span> <span class="bu">sorted</span>(numbers):</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Checklist pages must be ordered by page number."</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> page_count(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.pages)</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> check_count(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.pages)</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> procedure_count(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span>(page.procedure_count <span class="cf">for</span> page <span class="kw">in</span> <span class="va">self</span>.pages)</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_page(<span class="va">self</span>, number: <span class="bu">int</span>) <span class="op">-&gt;</span> Page:</span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> page <span class="kw">in</span> <span class="va">self</span>.pages:</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> page.number <span class="op">==</span> number:</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> page</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">KeyError</span>(<span class="ss">f"No page found for number </span><span class="sc">{</span>number<span class="sc">}</span><span class="ss">."</span>)</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> summary(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> {</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>            <span class="st">"project_title"</span>: <span class="va">self</span>.project_title,</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>            <span class="st">"project_root"</span>: <span class="bu">str</span>(<span class="va">self</span>.project_root),</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>            <span class="st">"page_count"</span>: <span class="va">self</span>.page_count,</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>            <span class="st">"procedure_count"</span>: <span class="va">self</span>.procedure_count,</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>            <span class="st">"check_count"</span>: <span class="va">self</span>.check_count,</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>            <span class="st">"pages"</span>: [page.summary() <span class="cf">for</span> page <span class="kw">in</span> <span class="va">self</span>.pages],</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (</span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Checklist("</span></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"project_title=</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>project_title<span class="sc">!r}</span><span class="ss">, "</span></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"pages=</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>page_count<span class="sc">}</span><span class="ss">, "</span></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"project_root=</span><span class="sc">{</span><span class="bu">str</span>(<span class="va">self</span>.project_root)<span class="sc">!r}</span><span class="ss">)"</span></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>This allows us to create a very simple checklist for a manual:</p>
-<div id="d1beb782" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>project <span class="op">=</span> Checklist(project_title<span class="op">=</span><span class="st">"simple_example"</span>, project_root<span class="op">=</span>Path(<span class="st">"../examples"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>&lt;string&gt;:6: UserWarning: Checklist.pages is empty; this is useful during testing, but an end-user manual should contain at least one page.</code></pre>
-</div>
-</div>
-<p>To see how <code>Pages</code> are added to the manual, see the next section.</p>
-<p>This page assumes the project directory exists and that the user has already chosen an environment name.</p>
-<div id="05e6d735" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> project, <span class="st">"Expected project to be defined. Did you include the checklist.qmd file and run the first page?"</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> project.project_root.is_dir(), <span class="st">"Expected project root to be a directory"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>environment_dir <span class="op">=</span> project.project_root <span class="op">/</span> <span class="st">".venv"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-</div>
-<section id="procedure-blocks" class="level3" data-number="5.4.1">
-<h3 data-number="5.4.1" class="anchored" data-anchor-id="procedure-blocks"><span class="header-section-number">5.4.1</span> 2. Procedure Blocks</h3>
-<p>Procedure blocks contain the actual work of the page. A page may need one procedure block or several, depending on how much scaffolding you want to give the user.</p>
-<p>There must be at least one procedure block on the page.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>::: {.manual-procedure}</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Create the Python virtual environment.</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>::: {#4644296c .cell execution_count=5}</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.python .cell-code}</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> venv</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>venv.create(environment_dir, with_pip<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>:::</p>
-<p>:::</p>
-<pre><code>
-You can use multiple procedure blocks when the step has distinct parts, such as
-writing a file and then installing dependencies.
-
-### 3. Check Block
-
-The check block proves whether the page succeeded. This should inspect the real
-project state and fail clearly when the step is incomplete or incorrect.
-
-There must be exactly one check block on the page.
-
-```markdown
-::: {.manual-check}
-Confirm that the environment directory was created.
-
-::: {#7a6ba612 .cell execution_count=6}
-``` {.python .cell-code}
-assert environment_dir.exists(), "Expected .venv to exist"
-assert environment_dir.is_dir(), "Expected .venv to be a directory"</code></pre>
-<p>:::</p>
-<p>:::</p>
-<pre><code>
-## Complete Example
-
-The following page uses the required manual structure from beginning to end.
-
-```markdown
----
-title: "Assemble Python Environment"
-manual:
-  page: 2
----
-
-This page creates the project's Python environment.
-
-::: {.manual-prereq}
-Before continuing, confirm that you are in the project root and that Python is
-available.
-
-::: {#e18dd2c7 .cell execution_count=7}
-``` {.python .cell-code}
-from pathlib import Path
-
-project_root = Path(".")
-environment_dir = project_root / ".venv"</code></pre>
-<p>:::</p>
-<p>:::</p>
-<p>Some projects may also explain why this environment is needed and how it will be used by later pages.</p>
-<div class="manual-procedure callout callout-tip" title="Procedure">
-<p>Create the virtual environment.</p>
-<div id="9cea3f2f" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> venv</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>venv.create(environment_dir, with_pip<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-<div class="manual-procedure callout callout-tip" title="Procedure">
-<p>Record the activation command for the user.</p>
-<div id="c1b8ba8e" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>activation_hint <span class="op">=</span> <span class="st">"source .venv/bin/activate"</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(activation_hint)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>source .venv/bin/activate</code></pre>
-</div>
-</div>
-</div>
-<div class="manual-check callout callout-warning" title="Check">
-<p>Verify that the environment now exists.</p>
-<div id="4209c9b2" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> environment_dir.exists(), <span class="st">"Expected .venv to exist"</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> environment_dir.is_dir(), <span class="st">"Expected .venv to be a directory"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-<p>```</p>
-</section>
-<section id="authoring-rules" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="authoring-rules"><span class="header-section-number">5.5</span> Authoring Rules</h2>
-<p>When writing a page, keep these rules in mind:</p>
+<section id="prerequisites" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">2.1</span> <em>1. Prerequisites</em></h2>
+<p>Use the prerequisite block to check whether the page is allowed to proceed. This is where page-to-page dependency should be enforced.</p>
+<p>Good prerequisite checks look for visible project state:</p>
 <ul>
-<li>use exactly one <code>.manual-prereq</code> block;</li>
-<li>use at least one <code>.manual-procedure</code> block;</li>
-<li>use exactly one <code>.manual-check</code> block;</li>
-<li>let checks inspect real files, paths, configs, logs, or rendered outputs when possible;</li>
-<li>keep the page focused on one operational step.</li>
+<li>does a required file already exist?</li>
+<li>did a previous page create the expected directory?</li>
+<li>does a previously emitted test suite pass?</li>
+<li>is the required tool available?</li>
 </ul>
-<p>The goal of a page is not just to explain a step. The goal is to help the user perform that step and prove that it is complete.</p>
-
-
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The easiest way to set up a prerequisite block is to use the tests you defined in the check block from a previous page.</p>
+</div>
+</div>
+<div class="manual-prereq callout callout-important" title="Confirm Required State">
+<p>Before running this page, confirm that the project already has a <code>data/</code> directory and a <code>README.md</code> file.</p>
+<div id="6195f632" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path(<span class="st">"../README.md"</span>).exists(), <span class="st">"Expected README.md to exist before this page runs."</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path(<span class="st">"../data"</span>).is_dir(), <span class="st">"Expected data/ directory from an earlier page."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You can also express prerequisites with shell checks:</p>
+<pre class="{bash}"><code>#| eval: false
+test -f README.md
+test -d data</code></pre>
+<p>If this page depends on tests from a previous page, run them here:</p>
+<pre class="{bash}"><code>#| eval: false
+pytest tests/test_previous_step.py</code></pre>
+</div>
 </section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>Notebook authoring can make cross-page state hard to reason about. By keeping the checklist definition in one included file, each page can recreate the same shared base objects in its own execution context. This gives authors one source of truth while avoiding hidden dependence on state from another page.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
+<section id="procedure" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="procedure"><span class="header-section-number">2.2</span> <em>2. Procedure</em></h2>
+<p>Procedure blocks contain the work of the page. A page may use one procedure block or several.</p>
+<p>Each procedure block should do one clear part of the step.</p>
+<div class="manual-procedure callout callout-tip" title="Create A Configuration Directory">
+<p>Create a directory for project configuration files.</p>
+<div id="9e2d3339" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"config"</span>).mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="manual-procedure callout callout-tip" title="Write A Minimal Configuration File">
+<p>Write a small JSON file that later pages can inspect.</p>
+<div id="80c2a66d" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>config_path <span class="op">=</span> Path(<span class="st">"config/manual.json"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>config_path.write_text(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    json.dumps({<span class="st">"status"</span>: <span class="st">"configured"</span>}, indent<span class="op">=</span><span class="dv">2</span>) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    encoding<span class="op">=</span><span class="st">"utf-8"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="check" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="check"><span class="header-section-number">2.3</span> <em>3. Check</em></h2>
+<p>Use the check block to prove that the page succeeded.</p>
+<p>Checks should assert the results of the procedure blocks above. If you want the page to emit a reusable test file, you can combine the manual check block with a <code>quarto-emit</code> class.</p>
+<div class="manual-check emit-test-py callout callout-warning" data-file="tests/test_manual_page.py" title="Verify Page Outcome">
+<div id="9ddef2ba" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_manual_page_created_config():</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    config_path <span class="op">=</span> Path(<span class="st">"config/manual.json"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> config_path.exists(), <span class="st">"Expected config/manual.json to exist."</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> json.loads(config_path.read_text(encoding<span class="op">=</span><span class="st">"utf-8"</span>))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> data[<span class="st">"status"</span>] <span class="op">==</span> <span class="st">"configured"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>This block serves two purposes:</p>
+<ul>
+<li>as a manual check, it shows the reader how to verify the page;</li>
+<li>as an emit block, it can materialize a real test file for later reuse.</li>
+</ul>
+</section>
+<section id="authoring-notes" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="authoring-notes"><span class="header-section-number">2.4</span> <em>Authoring Notes</em></h2>
+<p>Keep page state local. Do not rely on notebook variables from another page. Instead:</p>
+<ul>
+<li>use prerequisite blocks to enforce dependency on earlier pages;</li>
+<li>use procedure blocks to create visible project artifacts;</li>
+<li>use check blocks to test those artifacts directly.</li>
+</ul>
+<p>That keeps each page independent, rerunnable, and easy to reason about.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -912,8 +714,8 @@ environment_dir = project_root / ".venv"</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./impl_r.html" class="pagination-link" aria-label="Manual R Implementation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual R Implementation</span></span>
+      <a href="./index.html" class="pagination-link" aria-label="Quarto Manuals">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
