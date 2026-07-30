@@ -5,3 +5,7 @@
 
 sandbox
 _book
+data
+*.err
+*.out
+logs

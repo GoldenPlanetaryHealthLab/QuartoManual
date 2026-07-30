@@ -1,0 +1,20 @@
+project:
+  type: book
+  output-dir: ../docs
+  render: 
+    - "*.qmd"
+
+book:
+  title: Quarto Manual
+  chapters:
+    - index.qmd
+    - page.qmd
+
+format:
+  html:
+    toc: true
+    theme: cosmo
+    filters:
+      - _extensions/quarto-manual/manual.lua
+      - _extensions/TinasheMTapera/quarto-emit/quarto-emit.lua
+

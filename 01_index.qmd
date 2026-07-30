@@ -1,0 +1,20 @@
+---
+title: "Quarto Manuals"
+subtitle: "Executable operations manuals built from independent Quarto pages"
+format:
+  html:
+    toc: true
+    code-fold: false
+author: Tinashe M. Tapera
+date: last-modified
+filters:
+  - _extensions/quarto-manual/manual.lua
+execute: 
+  eval: false
+---
+
+## What Is A Quarto Manual?
+
+A very slimmed down and simplified description because this is the file that ships.
+
+It must contain some prompting text and placeholders for the user to get started.
