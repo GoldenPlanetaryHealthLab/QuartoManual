@@ -308,32 +308,35 @@ St., Albany, NY 12084-1234, USA, Email: \href{mailto:ttapera@hsph.harvard.edu}{t
   workflows are blowing up in complexity and scale. scientists need
   rigour in their workflows.
 \item
-  to get around this, we could write good docs. but good docs have
-  limitations:
+  to get around this, we could write better and better docs. but even
+  great docs have limitations:
 
   \begin{itemize}
   \item
-    good docs break down in usefulness when we have to scale
+    docs are something you \emph{read}, not something you \emph{do},
+    meaning they break down in usefulness when we have to scale to
+    longer and more complicated procedures
   \item
-    good docs are not executable, meaning artifacts are not reproducible
+    docs are not executable, meaning artifacts of progress are not
+    reproducible, testable, or verifiable
   \item
     good docs do not have a flexible feedback loop to confirm the user
     is acting correctly
   \end{itemize}
 \item
-  What about command line wrappers? They are executable but they are
-  totally inflexible.
+  \emph{What about building command line wrappers around existing
+  tools?} They are executable but they are totally inflexible.
 
   \begin{itemize}
   \item
     You build it once and everyone has to do it that way, or
   \item
-    you inundate yourself with a million flags and options to try to
-    make it flexible. This is not a good solution for repetitive but
-    unexpectedly parametric workflows.
+    You inundate your software with several flags, arguments, and
+    runtime options to try to make it flexible. This is not a good
+    solution for repetitive but unexpectedly parametric workflows.
   \end{itemize}
 \item
-  what about AI, LLMs, agents?
+  \emph{What about AI, LLMs, agents?}
 
   \begin{itemize}
   \item
@@ -343,12 +346,15 @@ St., Albany, NY 12084-1234, USA, Email: \href{mailto:ttapera@hsph.harvard.edu}{t
   \item
     Additionally (opinion) agents are not yet mature enough to be
     reliable for some of the complex workflows we have in mind (though
-    we are working on it with agentic workflows).
+    we are working on it with agentic workflows). Most users are still
+    in the dyadic, ``paste text into the box and read what comes out''
+    turn-based workflow, which is not sufficient for many of the complex
+    workflows we do.
   \end{itemize}
 \item
-  To solve this in the meantime, we need a new type of documentation
-  that is executable, flexible, and scalable. This is where Quarto comes
-  in.
+  To solve this, we need a new type of documentation that is executable,
+  flexible, and scalable. This is where Quarto and
+  notebook-driven-development (NDD) comes in.
 \item
   We propose Quarto Manuals, an executable documentation framework that
   is flexible, scalable, and reproducible. Internally, a Quarto Manual
@@ -392,7 +398,7 @@ St., Albany, NY 12084-1234, USA, Email: \href{mailto:ttapera@hsph.harvard.edu}{t
   materialized by Quarto's custom Divs, and powered in the backend by a
   simple but powerful file export extension, \texttt{quarto-emit}.
 \item
-  For manual Authors:
+  Workflow for manual \emph{authors}:
 
   \begin{itemize}
   \item
@@ -413,32 +419,39 @@ St., Albany, NY 12084-1234, USA, Email: \href{mailto:ttapera@hsph.harvard.edu}{t
     reduce implementation overhead for the extension and allow for
     flexibility in workflow design.
   \item
-    \texttt{git\ push} to push the manual to a GitHub repository (or
-    code hosting site of your choice)
+    Authors \texttt{git\ push} their manuals to an organization's GitHub
+    repository (or code hosting site of your choice)
   \end{itemize}
 \item
-  For manual Users:
+  For manual \emph{users}:
 
   \begin{itemize}
   \item
     In your home directory or otherwise,
     \texttt{quarto\ use\ template\ MyLab/SetupMyProject} clones the
-    SetupMyProject Manual project to your local machine.
+    \texttt{SetupMyProject} Manual to your local machine.
   \item
-    Step through the pages of the manual, leaving behind setup artifacts
-    as you go, like .venv files, .Renviron files, and other scripts or
-    configuration files. These artifacts are reproducible and can be
-    used to set up your project environment.
+    Step through the pages of the manual, hardcoding critical,
+    context-specific variables (like your cluster configuration, your
+    desired Python version, etc.) and executing the code as you go.
   \item
-    Run \texttt{quarto\ render} to render the manual to HTML, PDF, or
-    DOCX. If the manual has checks implemented in a testing suite,
+    With each page, leave behind setup artifacts as you go, like
+    environment files (\texttt{.venv}, \texttt{.Renviron}) scripts
+    (\texttt{setup.sh}, \texttt{install.R}), and other configuration
+    files (\texttt{config.toml}, \texttt{settings.json},
+    \texttt{pyproject.toml}).
+  \item
+    Run \texttt{quarto\ render} to render the whole manual to HTML, PDF,
+    or DOCX. If the manual has checks implemented in a testing suite,
     quarto render will execute the testing suite, providing you with a
     visual report of your progress in the manual and whether you are
     implementing the workflow correctly.
   \item
     If all goes well, you now have a fully setup project as the original
     author intended, and you can now start working on your
-    implementation of the project.
+    implementation of the project. If it doesn't you can go back to the
+    exact Point of Failure (POF) and fix the issue, or you can reach out
+    to the original author for help.
   \end{itemize}
 \end{itemize}
 
