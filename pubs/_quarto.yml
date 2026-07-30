@@ -1,0 +1,16 @@
+project:
+  title: "publications"
+  output-dir: "outputs"
+  render: 
+    - usrse2026/poster.qmd
+    - usrse2026/usrse2026.qmd
+  
+format: 
+  poster-typst: default
+  html:
+    toc: true
+    theme: cosmo
+    # filters:
+    #   - _extensions/quarto-manual/manual.lua
+    #   - _extensions/TinasheMTapera/quarto-emit/quarto-emit.lua
+

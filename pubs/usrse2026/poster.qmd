@@ -1,0 +1,279 @@
+---
+title: Quarto Manuals
+author: Edenian
+subtitle: Executable software operations manuals built from interdependent Quarto pages
+# header_font: "Roboto"
+header_logo: "dummy-thchan.png"
+# header_block_color: "BF40BF"
+# heading_color: "EADDCA"
+# body_color: "ffffff"
+# body_font: "JetBrains Mono"
+format:
+  poster-typst: 
+    keep-typ: true
+execute:
+  eval: false
+---
+
+PLACEHOLDER CONTENT. NOT YET IMPLEMENTED
+
+```{r}
+#| echo: false
+library(ggplot2)
+var <- "JN.1"
+today_date <- Sys.Date()
+```
+
+```{=typst}
+#import "@preview/showybox:2.0.4": showybox 
+#let main = rgb("#6b1f50")
+
+#showybox(
+  title-style: (
+    boxed-style: (
+      anchor: (
+        x: center,
+        y: horizon
+      ),
+      radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt),
+    )
+  ),
+  frame: (
+    title-color: main,
+    body-color: main.lighten(80%),
+    footer-color: main.lighten(60%),
+    border-color: main.darken(20%),
+    radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)
+
+  ),
+  title: "tl;dr",
+  footer: text(size: 30pt, weight: 600, emph("Check it out, you can also add Typst code to make math functions or diagrams."))
+)[
+  This is a Typst template that can be used with Quarto to execute code and automatically render outputs like text, plots, and tables.
+  Forget about copying and pasting screenshots 
+
+  $ frac(diff^n f, diff x_i ... diff x_j)(a_1, a_2, ..., a_n) = frac(diff^n f, diff x_j ... diff x_i)(a_1, a_2, ..., a_n) $
+]
+```
+
+:::{.block fill="white" inset="30pt" radius="6pt"}
+
+# **INSTALLATION**
+
+To install this poster template, go to your project root and run:
+
+```bash
+quarto install extension https://codeberg.org/edenian-prince/quarto-typst-poster/archive/main.zip
+```
+
+You can also add the template/demo quarto document by running the code below,
+but note, it adds all the files in the repo currently..
+
+```bash
+quarto use template https://codeberg.org/edenian-prince/quarto-typst-poster/archive/main.zip
+```
+
+:::
+
+::::{.block fill="white" inset="30pt" radius="6pt"}
+
+
+# **USAGE**
+
+After installing, change the format in your Quarto document's yaml front matter to `format: poster-typst`
+
+```markdown
+---
+format:
+  poster-typst: default
+---
+```
+
+You can also add other options in the front matter like a title, subtitle, and color options. See the codeberg repo for a complete list of options.
+
+
+# **ADDING SECTIONS**
+
+This format is a Typst canvas, but Quarto is where you write the sections that contain text, code, and outputs. These sections are what you are 
+reading now. To create these sections in white blocks (or whatever color you want...), wrap your sections in fenced divs like this:
+
+````markdown
+:::{.block fill="white" inset="30pt" radius="6pt"}
+
+Headings, text, and code go here
+
+:::
+````
+
+
+::::
+
+
+
+:::{.block fill="white" inset="30pt" radius="6pt"}
+
+# **ADDING PLOTS**
+
+Run put your code in the Quarto document like you normally would and it will render here.
+
+- Center the plot with `#| fig-align: center` 
+- Adjust the width with `#| fig-width: 12`
+- Adjust the height with `#| fig-height: 9`
+- Adjust plot attributes in your code
+
+```{r}
+#| message: false 
+#| warning: false
+#| echo: false 
+#| fig-width: 12
+#| fig-height: 9
+#| fig-align: center 
+mpg2 <- data.frame(
+  name = c("Sedan", "SUV", "Truck", "Hybrid", "Electric"),
+  value = c(25, 18, 15, 45, 120)
+)
+data <- data.frame(x=rnorm(100))
+
+# Custom a few word of the title only:
+my_title <- expression(paste("A ", italic(bold("blue")), " histogram"))
+ggplot( data=data, aes(x=x)) + 
+  geom_histogram(fill="skyblue", alpha=0.8) +
+  ggtitle(my_title) +
+  theme_minimal() +
+  theme(
+        plot.title = element_text(size=38),
+        axis.title.x = element_text(size=30),
+        axis.text.x = element_text(size=30),
+        axis.title.y = element_text(size=30),
+        axis.text.y = element_text(size=30)
+  )
+
+
+```
+Add a footer or something underneath
+
+:::
+
+:::{.block fill="white" inset="30pt" radius="6pt"}
+
+# **ADDING TABLES**
+
+Likewise, you can add tables by doing the same as above.
+
+
+```{r}
+#| message: false 
+#| warning: false
+#| echo: false 
+#| fig-width: 12
+#| fig-height: 9
+#| fig-align: center 
+library(gtsummary)
+# Setting JAMA theme for gtsummary
+theme_gtsummary_journal("jama")
+#> Setting theme "JAMA"
+# Themes can be combined by including more than one
+theme_gtsummary_compact()
+#> Setting theme "Compact"
+
+gt_table <- trial |>
+  select(age, grade, trt) |>
+  tbl_summary(by = trt) |>
+  as_gt() |>
+  gt::tab_options(
+    table.font.size = gt::px(30)
+  )
+
+library(tinytable)
+library(gt)
+x <- gtcars |>
+  select(1:3) |> 
+  head() 
+
+x |>
+  tt(width = c(.25, .55, .25)) |>
+  style_tt(align = c("lcc")) |> 
+  style_tt(
+    j = 3, 
+    i = which(x$year == 2015),
+    color = "red"
+)
+```
+
+`tinytable` seems to look the best in this format fyi.
+
+:::
+
+
+
+:::{.block fill="white" inset="30pt" radius="6pt"}
+
+# **TYPST CODE**
+
+You can add Typst snippets in the Quarto doc like this with showybox.
+This is how I made the `tl;dr` and `Source Code` blocks.
+
+````markdown
+```{=typst}
+#import "@preview/showybox:2.0.4": showybox 
+
+#showybox(...)
+
+```
+````
+
+:::
+
+:::{.block fill="white" inset="30pt" radius="6pt"}
+
+# **RENDER THE POSTER**
+
+````bash 
+quarto render poster.qmd
+````
+
+:::
+
+
+
+```{=typst}
+
+#showybox(
+  title-style: (
+    boxed-style: (
+      anchor: (
+        x: center,
+        y: horizon
+      ),
+      radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt),
+    )
+  ),
+  frame: (
+    title-color: main,
+    body-color: main.lighten(80%),
+    footer-color: main.lighten(60%),
+    border-color: main.darken(20%),
+    radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)
+  ),
+  title: "Source Code",
+)[
+```
+<!-- im adding the qr code between the typst block here, fyi -->
+
+```{r}
+#| echo: false
+#| fig-align: center 
+#| fig-height: 5
+#| fig-wigth: 6
+code <- qrcode::qr_code("https://codeberg.org/edenian-prince/quarto-typst-poster ")
+plot(code)
+```
+
+```{=typst}
+]
+```
+
+
+
+
+
