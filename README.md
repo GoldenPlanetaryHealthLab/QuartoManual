@@ -1,5 +1,7 @@
 ## Abstract
 
+[![hackmd-github-sync-badge](https://hackmd.io/_App6vg9Tr-d0id8Uj675Q/badge)](https://hackmd.io/_App6vg9Tr-d0id8Uj675Q)
+
 - programming is already hard and the data is only going to get bigger. workflows are blowing up in complexity and scale. scientists need rigour in their workflows.
 
 - to get around this, we could write better and better docs. but even great docs have limitations:
