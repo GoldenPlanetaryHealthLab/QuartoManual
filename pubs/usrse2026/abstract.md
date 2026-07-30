@@ -1,6 +1,5 @@
 ## Abstract
 
-
 - programming is already hard and the data is only going to get bigger. workflows are blowing up in complexity and scale. scientists need rigour in their workflows.
 
 - to get around this, we could write better and better docs. but even great docs have limitations:
