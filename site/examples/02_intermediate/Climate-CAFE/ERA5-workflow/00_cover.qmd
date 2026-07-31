@@ -4,7 +4,7 @@ format: html
 ---
 
 
-::: {.callout-important}
+::: {.callout-tip}
 
 Adapted from [Climate-CAFE](https://github.com/Climate-CAFE/era5-daily-heat-aggregation-python)
 
@@ -24,11 +24,12 @@ commented prose and executable code:
 
 In each of these files, over 40% of it is simply trying to explain
 to the user what to do, why, and how to do it. This is a lot of overhead for a 
-user to digest, and it is not interactive, can only be read as grey
-text in an editor, and is not executable. Quarto Manuals allows us to break up 
+user to digest, and it is not interactive, can only be read as greyed-out
+text in your editor, and is not executable. A Quarto Manual allows us to break up 
 the prose and code into a more interactive, executable, and digestible format,
 and decorate our prose with headers, callouts, tables, and other formatting to 
-make it more readable and engaging.
+make it more readable and engaging, which lowers the barrier to entry for users
+for very little additional effort.
 
 :::
 
@@ -54,6 +55,15 @@ Comments are included within the code repository with descriptions of how to man
 - [Database of Global Administrative Areas](https://gadm.org/)
 
 ## Workflow
+
+
+::: {.callout-tip}
+
+For optimal learning, the section below should instead be coupled code and prose blocks in each individual Manual Page...
+
+:::
+
+
 Three scripts are included in the code repository.    
 
 1) 01_Query_ERA5_CDSAPI_Kenya_v1.py applies the cdsapi package to query hourly ERA5-Land data from the Copernicus CDS using the cdsapi package.  
@@ -72,6 +82,15 @@ Three scripts are included in the code repository.
    - The resulting output is a dataframe with Kenya administrative boundaries and a time series of daily mean, minimum, and maximum for 2-m temperature, 2-m dew point temperature, skin temperature, heat index, and humidex.
   
 ## Dependencies
+
+
+::: {.callout-tip}
+
+The section below could be implemented as the first page of a Quarto Manual, with each dependency being a prerequisite check for the operator to confirm before proceeding to the next step.
+A pytest suite would be very easy to implement here, and on page two, to check for.
+
+:::
+
 Packages used in this repository include:
 
 - import cdsapi for era5 data query
@@ -92,6 +111,15 @@ Packages used in this repository include:
 - import re for using regular expression
   
 ## References
+
+
+::: {.callout-tip}
+
+With Quarto, we can take advantage of the rich publishing ecosystem to include references directly from `bibtex` files, rather than having to manually format them in the markdown as below.
+
+:::
+
+
 Humidex estimation references:
 
 - K.R. Spangler, S. Liang, and G.A. Wellenius. "Wet-Bulb Globe Temperature, Universal Thermal Climate Index, and Other Heat Metrics for US Counties, 2000-2020." Scientific Data (2022). doi: 10.1038/s41597-022-01405-3

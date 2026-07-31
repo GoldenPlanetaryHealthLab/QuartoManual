@@ -3,8 +3,15 @@ title: "Quarto Manuals"
 format: html
 ---
 
-This is a cover page for the Quarto Manual. It is a simple page that can be used to introduce the manual and provide some context for the reader.
+This site documents and explains Quarto Manuals as a lightweight framework for 
+executable software operation manuals.
 
-Like the cover page of a book, this page should be used to provide a brief overview of the manual and its purpose. It can also be used to provide some background information on the topic of the manual.
+This documentation will explain:
 
+- the minimal starter template that Manual authors ship to End Users;
+- the framework rules that make the template a Manual Page;
+- full examples showing how the template scales from simple to advanced work.
 
+The examples on this site are rendered copies of the kinds of project files the 
+End-User should expect after running `quarto use template GITHUB_ORG/MANUAL_REPO`
+to use a manual of that type.

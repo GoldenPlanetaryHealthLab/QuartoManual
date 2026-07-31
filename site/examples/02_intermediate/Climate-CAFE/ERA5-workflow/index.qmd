@@ -1,0 +1,30 @@
+---
+title: "Climate-CAFE ERA5 Workflow"
+subtitle: "A Quarto Manual adaptation of a real ERA5 download and aggregation project"
+format:
+  html:
+    toc: true
+    code-fold: false
+author: Tinashe M. Tapera
+date: last-modified
+filters:
+  - _extensions/quarto-manual/manual.lua
+execute:
+  eval: false
+---
+
+## Overview
+
+This example adapts a real ERA5 download and aggregation workflow into a
+multi-page Quarto Manual.
+
+Compared with the simple staging example, this manual has more moving parts:
+
+- credentials for an external data service;
+- repeated parameter choices for time, place, and variables;
+- large downloaded artifacts;
+- downstream aggregation steps that depend on earlier outputs.
+
+That is exactly where Quarto Manuals are useful: the workflow is repetitive and
+important, but still too context-specific to collapse into a single rigid
+command-line wrapper.
