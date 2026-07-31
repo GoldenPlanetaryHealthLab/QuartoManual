@@ -1,0 +1,42 @@
+---
+title: "Helper Functions: SLURM & Submitit"
+format: gfm
+execute:
+  eval: false
+---
+
+This notebook collects miscellaneous functions that are useful for the RSE 
+Workbench. 
+
+
+To see the ongoing result of a SLURM job with `submitit`, we can use the following helper function:
+
+```{python}
+#| sorting-hat: keep
+from pathlib import Path
+from typing import Any
+
+from rich.console import Console
+from rich.panel import Panel
+from rich.text import Text
+
+console = Console()
+
+
+def show_submitit_job(job: Any) -> Any:
+    """Show stdout/stderr for a submitit job and return its result when done."""
+
+    console.print(f"Job ID: {job.job_id}")
+    console.print(f"Done: {job.done()}")
+
+    stdout = job.stdout() or "<empty>"
+    stderr = job.stderr() or "<empty>"
+
+    console.print(Panel(Text(stdout[-8000:] or "<empty>"), title="stdout", border_style="green"))
+    console.print(Panel(Text(stderr[-8000:] or "<empty>"), title="stderr", border_style="red"))
+
+    if not job.done():
+        return None
+
+    return job.result()
+```

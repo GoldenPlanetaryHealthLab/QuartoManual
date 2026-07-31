@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quarto Manual</title>
+<title>4&nbsp; Manual Pages – Quarto Manual</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -33,7 +68,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./00_cover.html" rel="next">
+<link href="./examples/index.html" rel="next">
+<link href="./01_misc-helpers.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -84,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals Explained</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./10_page-tasks.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual Pages</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -120,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals Explained</span></span></a>
   </div>
 </li>
@@ -138,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_page-tasks.html" class="sidebar-item-text sidebar-link">
+  <a href="./10_page-tasks.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual Pages</span></span></a>
   </div>
 </li>
@@ -354,25 +390,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-a-quarto-manual" id="toc-what-is-a-quarto-manual" class="nav-link active" data-scroll-target="#what-is-a-quarto-manual"><span class="header-section-number">0.1</span> <em>What Is A Quarto Manual?</em></a></li>
-  <li><a href="#core-idea" id="toc-core-idea" class="nav-link" data-scroll-target="#core-idea"><span class="header-section-number">0.2</span> <em>Core Idea</em></a></li>
-  <li><a href="#why-this-shape" id="toc-why-this-shape" class="nav-link" data-scroll-target="#why-this-shape"><span class="header-section-number">0.3</span> <em>Why This Shape?</em></a></li>
-  <li><a href="#page-contract" id="toc-page-contract" class="nav-link" data-scroll-target="#page-contract"><span class="header-section-number">0.4</span> <em>Page Contract</em></a></li>
-  <li><a href="#the-backend-quarto-emit" id="toc-the-backend-quarto-emit" class="nav-link" data-scroll-target="#the-backend-quarto-emit"><span class="header-section-number">0.5</span> <em>The Backend: <code>quarto-emit</code></em></a></li>
-  <li><a href="#author-workflow" id="toc-author-workflow" class="nav-link" data-scroll-target="#author-workflow"><span class="header-section-number">0.6</span> <em>Author Workflow</em></a></li>
-  <li><a href="#operator-workflow" id="toc-operator-workflow" class="nav-link" data-scroll-target="#operator-workflow"><span class="header-section-number">0.7</span> <em>Operator Workflow</em></a></li>
-  <li><a href="#scope-of-this-project" id="toc-scope-of-this-project" class="nav-link" data-scroll-target="#scope-of-this-project"><span class="header-section-number">0.8</span> <em>Scope Of This Project</em></a></li>
-  <li><a href="#examples-on-this-site" id="toc-examples-on-this-site" class="nav-link" data-scroll-target="#examples-on-this-site"><span class="header-section-number">0.9</span> <em>Examples On This Site</em></a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites"><span class="header-section-number">4.1</span> <em>1. Prerequisites</em></a></li>
+  <li><a href="#procedure" id="toc-procedure" class="nav-link" data-scroll-target="#procedure"><span class="header-section-number">4.2</span> <em>2. Procedure</em></a></li>
+  <li><a href="#check" id="toc-check" class="nav-link" data-scroll-target="#check"><span class="header-section-number">4.3</span> <em>3. Check</em></a></li>
+  <li><a href="#authoring-notes" id="toc-authoring-notes" class="nav-link" data-scroll-target="#authoring-notes"><span class="header-section-number">4.4</span> <em>Authoring Notes</em></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals Explained</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./10_page-tasks.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual Pages</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Quarto Manual</h1>
-<p class="subtitle lead">A guide to creating and using Quarto Manuals</p>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual Pages</span></h1>
 </div>
 
 
@@ -389,154 +419,130 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="what-is-a-quarto-manual" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="what-is-a-quarto-manual"><span class="header-section-number">0.1</span> <em>What Is A Quarto Manual?</em></h2>
-<p>A Quarto Manual is an executable operations manual for a software or research workflow.</p>
-<p>Use a Quarto Manual when a workflow is too long, fragile, or context-specific for a README, but too visible and judgment-heavy to hide behind a single CLI.</p>
-<p>A manual gives the user ordered <code>.qmd</code> pages that:</p>
-<ul>
-<li>explain one step at a time;</li>
-<li>run the code for that step;</li>
-<li>verify whether the step worked;</li>
-<li>make dependencies between steps explicit.</li>
-</ul>
-<p>In practice, Quarto Manuals are best understood as operator-facing procedure books for software and research workflows.</p>
-</section>
-<section id="core-idea" class="level2" data-number="0.2">
-<h2 data-number="0.2" class="anchored" data-anchor-id="core-idea"><span class="header-section-number">0.2</span> <em>Core Idea</em></h2>
-<p>The central design rule is simple:</p>
-<blockquote class="blockquote">
-<p>A Quarto Manual is an ordered set of independent executable pages.</p>
-</blockquote>
-<p>Each Page is a contract with three parts:</p>
+<p>This section illustrates the smallest useful shape of a Quarto Manual page, and serves as the working template for Quarto Manual authors.</p>
+<p>A Page should do three things:</p>
 <ol type="1">
-<li><code>prereq</code>: prove that the page is allowed to run;</li>
-<li><code>procedure</code>: do one or more pieces of work;</li>
-<li><code>check</code>: prove that the work succeeded.</li>
+<li>prove that the page is ready to run;</li>
+<li>perform one or more concrete procedure steps;</li>
+<li>prove that those steps worked.</li>
 </ol>
-<p>Pages should share a project, not a notebook kernel<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<p>If page 3 depends on page 2, page 3 should deliberately enforce that dependency in its prerequisite block by checking visible project state:</p>
-<ul>
-<li>required files exist;</li>
-<li>required directories exist;</li>
-<li>a previous test suite passes;</li>
-<li>a required tool is installed;</li>
-<li>a prior configuration file contains the expected values.</li>
-</ul>
-<p>That allows a manual to orchestrate setup and operation without relying on hidden cross-page state.</p>
-<p>For more complex, non-linear dependencies, Quarto Manuals may reach their limit. In that case, consider moving directly to a DAG-based workflow orchestrator such as <a href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a> or <a href="https://www.nextflow.io/">Nextflow</a>, and injecting that into the Manual as a single page that runs the orchestrator.</p>
-</section>
-<section id="why-this-shape" class="level2" data-number="0.3">
-<h2 data-number="0.3" class="anchored" data-anchor-id="why-this-shape"><span class="header-section-number">0.3</span> <em>Why This Shape?</em></h2>
-<p>This structure keeps responsibility local.</p>
-<ul>
-<li>The page owns its own setup conditions.</li>
-<li>The page owns the work it performs.</li>
-<li>The page owns the test that proves the result.</li>
-</ul>
-<p>This is close to familiar software design patterns:</p>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Design_by_contract">Design by contract</a>: <code>prereq</code> acts like a precondition and <code>check</code> acts like a postcondition.</li>
-<li><a href="https://docs.pytest.org/en/stable/explanation/anatomy.html">Arrange / Act / Assert</a>: <code>prereq</code> arranges the required state, <code>procedure</code> acts, and <code>check</code> asserts the result.</li>
-<li><a href="https://en.wikipedia.org/wiki/Idempotence">Idempotent</a> infrastructure steps: inspect current state, apply a change, then verify the target state. Once it’s been run, you don’t have to run it again, and doing so won’t break anything.</li>
-</ul>
-</section>
-<section id="page-contract" class="level2" data-number="0.4">
-<h2 data-number="0.4" class="anchored" data-anchor-id="page-contract"><span class="header-section-number">0.4</span> <em>Page Contract</em></h2>
-<p>Every manual page should contain:</p>
+<p>In Quarto Manuals, we implement these requirements in specific block types, which means:</p>
 <ul>
 <li>exactly one <code>.manual-prereq</code> block;</li>
 <li>one or more <code>.manual-procedure</code> blocks;</li>
 <li>exactly one <code>.manual-check</code> block.</li>
 </ul>
-<p>The Quarto Manual filter can validate that structure and render those blocks as semantic callouts.</p>
-<p>See <a href="./10_page-tasks.html">Manual Pages</a> for the fuller authoring template.</p>
-</section>
-<section id="the-backend-quarto-emit" class="level2" data-number="0.5">
-<h2 data-number="0.5" class="anchored" data-anchor-id="the-backend-quarto-emit"><span class="header-section-number">0.5</span> <em>The Backend: <code>quarto-emit</code></em></h2>
-<p><code>quarto-emit</code> is an extension to Quarto that can materialize reusable files from a Quarto page by wrapping the text of a code block in a file write operation. It is optional, but becomes quite powerful when combined with the Quarto Manual structure.</p>
-<p>Quarto Manual and <code>quarto-emit</code> have different jobs.</p>
+<section id="prerequisites" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">4.1</span> <em>1. Prerequisites</em></h2>
+<p>Use the prerequisite block to check whether the page is allowed to proceed. This is where page-to-page dependency should be enforced.</p>
+<p>Good prerequisite checks look for visible project state:</p>
 <ul>
-<li>Quarto Manual defines the structure of an executable manual page.</li>
-<li><code>quarto-emit</code> optionally materializes reusable files from those pages.</li>
+<li>does a required file already exist?</li>
+<li>did a previous page create the expected directory?</li>
+<li>does a previously emitted test suite pass?</li>
+<li>is the required tool available?</li>
 </ul>
-<p>You do not need <code>quarto-emit</code> to write a manual.</p>
-<p>Use <code>quarto-emit</code> when a page should produce conventional project artifacts such as:</p>
-<ul>
-<li><code>src/</code> modules;</li>
-<li><code>tests/</code> suites;</li>
-<li><code>scripts/</code>;</li>
-<li><code>config/</code> files.</li>
-</ul>
-</section>
-<section id="author-workflow" class="level2" data-number="0.6">
-<h2 data-number="0.6" class="anchored" data-anchor-id="author-workflow"><span class="header-section-number">0.6</span> <em>Author Workflow</em></h2>
-<p>To create a manual for your own procedure:</p>
-<ol type="1">
-<li>Start from the Quarto Manual template.</li>
-<li>Write one page per operational step.</li>
-<li>Give each page one prerequisite block, one or more procedure blocks, and one check block.</li>
-<li>Keep page state local and enforce dependencies through prerequisites.</li>
-<li>Use <code>quarto-emit</code> only when a page needs to materialize reusable files.</li>
-</ol>
-<p>The shipped template should stay lean and prompt-driven. Treat the template as the source of truth, then use richer examples on the documentation site to show what a mature manual can look like.</p>
-</section>
-<section id="operator-workflow" class="level2" data-number="0.7">
-<h2 data-number="0.7" class="anchored" data-anchor-id="operator-workflow"><span class="header-section-number">0.7</span> <em>Operator Workflow</em></h2>
-<p>To use an existing manual:</p>
-<ol type="1">
-<li>Find the repository for the procedure manual.</li>
-<li>Run <code>quarto use template &lt;ORG&gt;/&lt;PROCEDURE&gt;_manual</code>.</li>
-<li>Open the manual locally.</li>
-<li>Work through the pages in order.</li>
-<li>Let each page’s prerequisite and check blocks tell you whether you can proceed.</li>
-</ol>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As you read through this website documentation, though, keep in mind that the operator workflow is to have cloned the manual and be reading the pages in VSCode, Jupyter, or whatever editor they prefer, while also actively running the code in the procedure blocks. The rendered website is a documentation artifact to help readers consume the content.</p>
+<p>The easiest way to set up a prerequisite block is to use the tests you defined in the check block from a previous page.</p>
+</div>
+</div>
+<div class="manual-prereq callout callout-important" title="Confirm Required State">
+<p>Before running this page, confirm that the project already has a <code>data/</code> directory and a <code>README.md</code> file.</p>
+<div id="6e314345" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path(<span class="st">"README.md"</span>).exists(), <span class="st">"Expected README.md to exist before this page runs."</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path(<span class="st">"_extensions"</span>).is_dir(), <span class="st">"Expected _extensions directory to exist before this page runs."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You can also express prerequisites with shell checks:</p>
+<pre class="{bash}"><code>#| eval: false
+test -f README.md
+test -d data</code></pre>
+<p>If this page depends on tests from a previous page, run them here:</p>
+<pre class="{bash}"><code>#| eval: false
+pytest tests/test_previous_step.py</code></pre>
+</div>
+</section>
+<section id="procedure" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="procedure"><span class="header-section-number">4.2</span> <em>2. Procedure</em></h2>
+<p>Procedure blocks contain the work of the page. A page may use one procedure block or several.</p>
+<p>Each procedure block should do one clear part of the step.</p>
+<div class="manual-procedure callout callout-tip" title="Create A Configuration Directory">
+<p>Create a directory for project configuration files.</p>
+<div id="2beec58b" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"config"</span>).mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="manual-procedure callout callout-tip" title="Write A Minimal Configuration File">
+<p>Write a small JSON file that later pages can inspect.</p>
+<div id="b1223d43" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>config_path <span class="op">=</span> Path(<span class="st">"config/manual.json"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>config_path.write_text(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    json.dumps({<span class="st">"status"</span>: <span class="st">"configured"</span>}, indent<span class="op">=</span><span class="dv">2</span>) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    encoding<span class="op">=</span><span class="st">"utf-8"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
-<section id="scope-of-this-project" class="level2" data-number="0.8">
-<h2 data-number="0.8" class="anchored" data-anchor-id="scope-of-this-project"><span class="header-section-number">0.8</span> <em>Scope Of This Project</em></h2>
-<p>This project is intentionally narrow.</p>
-<p>Quarto Manual should only extend Quarto in one functional way:</p>
+<section id="check" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="check"><span class="header-section-number">4.3</span> <em>3. Check</em></h2>
+<p>Use the check block to prove that the page succeeded.</p>
+<p>Checks should assert the results of the procedure blocks above. If you want the page to emit a reusable test file, you can combine the manual check block with a <code>quarto-emit</code> class.</p>
+<div class="manual-check emit-test-py callout callout-warning" data-file="tests/test_manual_page.py" title="Verify Page Outcome">
+<div id="ebe0679b" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_manual_page_created_config():</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    config_path <span class="op">=</span> Path(<span class="st">"config/manual.json"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> config_path.exists(), <span class="st">"Expected config/manual.json to exist."</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> json.loads(config_path.read_text(encoding<span class="op">=</span><span class="st">"utf-8"</span>))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> data[<span class="st">"status"</span>] <span class="op">==</span> <span class="st">"configured"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>This block serves two purposes:</p>
 <ul>
-<li>give manual pages semantic structure with <code>prereq</code>, <code>procedure</code>, and <code>check</code> blocks.</li>
-</ul>
-<p>Everything else should be optional, but frictionless to add, thanks to <code>quarto-emit</code>:</p>
-<ul>
-<li>emitted source files;</li>
-<li>emitted test suites;</li>
-<li>helper modules;</li>
-<li>workflow-specific libraries.</li>
+<li>as a manual check, it shows the reader how to verify the page;</li>
+<li>as an emit block, it can materialize a real test file for later reuse.</li>
 </ul>
 </section>
-<section id="examples-on-this-site" class="level2" data-number="0.9">
-<h2 data-number="0.9" class="anchored" data-anchor-id="examples-on-this-site"><span class="header-section-number">0.9</span> <em>Examples On This Site</em></h2>
-<p>This site includes three example manuals that scale in sophistication:</p>
+<section id="authoring-notes" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="authoring-notes"><span class="header-section-number">4.4</span> <em>Authoring Notes</em></h2>
+<p>Keep page state local. Do not rely on notebook variables from another page. Instead:</p>
 <ul>
-<li>a simple data-staging workflow;</li>
-<li>an intermediate ERA5 acquisition and aggregation workflow;</li>
-<li>an advanced RSE workbench environment workflow.</li>
+<li>use prerequisite blocks to enforce dependency on earlier pages;</li>
+<li>use procedure blocks to create visible project artifacts;</li>
+<li>use check blocks to test those artifacts directly.</li>
 </ul>
-<p>Each example is intentionally more complete than the shipped template, with more creative (and hopefully more elegant) implementations and problem solving strategies involving real-world use cases.</p>
+<p>That keeps each page independent, rerunnable, and easy to reason about.</p>
+<p>To order your pages, we recommend using a consistent naming convention in filenames, e.g., <code>01_page-&lt;description&gt;.qmd</code>, <code>02_page-&lt;description&gt;.qmd</code>, etc., where:</p>
+<ul>
+<li><code>index.qmd</code> is reserved for the index page of the manual;</li>
+<li>file <code>00</code> is reserved for the cover page;</li>
+<li>files <code>01-09</code> are reserved for orientation, miscellaneous functions, and other helper pages;</li>
+<li>files <code>10-99</code> are reserved for the main workflow pages, which should be ordered numerically to reflect the intended workflow order, with the optional suffix <code>[NN]a</code>, <code>[NN]b</code>, etc. for pages that are logically grouped together.</li>
+<li>Use underscores in filenames to separate entities, e.g., section and page type: <code>01_misc-helpers.qmd</code> and <code>02_misc-API-keys.qmd</code> are miscellaneous prerequisites, and are functionally different from <code>10_page-task-description.qmd</code>, <code>11_page-run-analysis.qmd</code>, etc. with explicit procedures</li>
+<li>Use dashes in filenames to separate words within an entity, e.g., <code>10_page-task-description.qmd</code>, <code>11_page-run-analysis.qmd</code>, etc.</li>
+</ul>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>A notebook kernel is a program that runs code in a specific programming language, such as Python or R. It allows users to test out code iteratively in a Read-Eval-Print Loop (REPL) workflow. REPL workflows are great for exploration, and arguably were the foundational technology behind the rise of accessible data science. One of the main criticisms of notebooks, however, is that they can hide the state of your code (<a href="https://www.researchgate.net/figure/An-example-of-a-hidden-state-in-Jupyter-Notebook-with-three-different-execution-variations_fig3_391056804">see here</a>), which makes it hard to reason about your project. Quarto Manuals avoid that problem primarily by using Quarto Markdown, which is plain text, and secondarily by encouraging page independence in its design. Any interdependence is made explicit through side-effects that Manual Authors must deliberately insert.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -942,10 +948,13 @@ Important
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./01_misc-helpers.html" class="pagination-link" aria-label="Helper Pages">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Helper Pages</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./00_cover.html" class="pagination-link" aria-label="Cover Page">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cover Page</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./examples/index.html" class="pagination-link" aria-label="Examples">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

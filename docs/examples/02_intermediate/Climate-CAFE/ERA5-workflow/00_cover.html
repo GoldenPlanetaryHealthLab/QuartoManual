@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quarto Manual</title>
+<title>10&nbsp; Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics – Quarto Manual</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,24 +26,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./00_cover.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html" rel="next">
+<link href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html" rel="prev">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals Explained</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html">A Climate-CAFE ERA5 Workflow</a></li><li class="breadcrumb-item"><a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quarto Manual</a> 
+      <a href="../../../../">Quarto Manual</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -120,25 +121,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals Explained</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cover Page</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_misc-helpers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../01_misc-helpers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Helper Pages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_page-tasks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../10_page-tasks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual Pages</span></span></a>
   </div>
 </li>
@@ -155,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></span></a>
   </div>
 </li>
@@ -163,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">A Data Staging Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -172,25 +173,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/01_simple/NSAPH-data-processing/data-staging-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cover Page: Data Staging with stagecoach</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Helper Page: Notes About Data Staging &amp; UV</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stage The Dataset - Option 1: Bare Symlinks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stage The Dataset - Option 2: Using stagecoach</span></span></a>
   </div>
 </li>
@@ -198,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">A Climate-CAFE ERA5 Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -207,31 +208,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">CDS API Access</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Query ERA5-Land For Kenya</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Build The Aggregation Fishnet</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Using The Fishnet</span></span></a>
   </div>
 </li>
@@ -239,7 +240,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">RSE Workbench: An Environment Generator Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -248,97 +249,97 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">RSE Workbench Manual</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/01_misc-rse-workbench-apptainer.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/01_misc-rse-workbench-apptainer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Helper Functions: Singularity/Apptainer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/02_misc-rse-workbench-slurm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/02_misc-rse-workbench-slurm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Helper Functions: SLURM &amp; Submitit</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/10_project_contract.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/10_project_contract.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Project Contract</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Platform Image</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Build Platform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/13_spack_yaml.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/13_spack_yaml.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Scientific System Dependency Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/14_language_packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/14_language_packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Data Science Language Package Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/15_activation_contract.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/15_activation_contract.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Activation Contract</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/16_validate_activation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/16_validate_activation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Validate Activation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/17_install_spack.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/17_install_spack.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Install Spack Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/18_validate_r.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/18_validate_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Validate R From Spack</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/19_install_language_packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/19_install_language_packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Install Language Package Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Validate Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Build Final SIF</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/22_launch_vscode.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/22_launch_vscode.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Launch VS Code Tunnel</span></span></a>
   </div>
 </li>
@@ -354,25 +355,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-a-quarto-manual" id="toc-what-is-a-quarto-manual" class="nav-link active" data-scroll-target="#what-is-a-quarto-manual"><span class="header-section-number">0.1</span> <em>What Is A Quarto Manual?</em></a></li>
-  <li><a href="#core-idea" id="toc-core-idea" class="nav-link" data-scroll-target="#core-idea"><span class="header-section-number">0.2</span> <em>Core Idea</em></a></li>
-  <li><a href="#why-this-shape" id="toc-why-this-shape" class="nav-link" data-scroll-target="#why-this-shape"><span class="header-section-number">0.3</span> <em>Why This Shape?</em></a></li>
-  <li><a href="#page-contract" id="toc-page-contract" class="nav-link" data-scroll-target="#page-contract"><span class="header-section-number">0.4</span> <em>Page Contract</em></a></li>
-  <li><a href="#the-backend-quarto-emit" id="toc-the-backend-quarto-emit" class="nav-link" data-scroll-target="#the-backend-quarto-emit"><span class="header-section-number">0.5</span> <em>The Backend: <code>quarto-emit</code></em></a></li>
-  <li><a href="#author-workflow" id="toc-author-workflow" class="nav-link" data-scroll-target="#author-workflow"><span class="header-section-number">0.6</span> <em>Author Workflow</em></a></li>
-  <li><a href="#operator-workflow" id="toc-operator-workflow" class="nav-link" data-scroll-target="#operator-workflow"><span class="header-section-number">0.7</span> <em>Operator Workflow</em></a></li>
-  <li><a href="#scope-of-this-project" id="toc-scope-of-this-project" class="nav-link" data-scroll-target="#scope-of-this-project"><span class="header-section-number">0.8</span> <em>Scope Of This Project</em></a></li>
-  <li><a href="#examples-on-this-site" id="toc-examples-on-this-site" class="nav-link" data-scroll-target="#examples-on-this-site"><span class="header-section-number">0.9</span> <em>Examples On This Site</em></a></li>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview"><span class="header-section-number">10.1</span> <em>Project Overview</em></a></li>
+  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage"><span class="header-section-number">10.2</span> <em>Usage</em></a></li>
+  <li><a href="#notes-on-computation" id="toc-notes-on-computation" class="nav-link" data-scroll-target="#notes-on-computation"><span class="header-section-number">10.3</span> <em>Notes on Computation</em></a></li>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources"><span class="header-section-number">10.4</span> <em>Data Sources</em></a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow"><span class="header-section-number">10.5</span> <em>Workflow</em></a></li>
+  <li><a href="#dependencies" id="toc-dependencies" class="nav-link" data-scroll-target="#dependencies"><span class="header-section-number">10.6</span> <em>Dependencies</em></a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10.7</span> <em>References</em></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals Explained</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html">A Climate-CAFE ERA5 Workflow</a></li><li class="breadcrumb-item"><a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Quarto Manual</h1>
-<p class="subtitle lead">A guide to creating and using Quarto Manuals</p>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span></h1>
 </div>
 
 
@@ -389,154 +387,162 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="what-is-a-quarto-manual" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="what-is-a-quarto-manual"><span class="header-section-number">0.1</span> <em>What Is A Quarto Manual?</em></h2>
-<p>A Quarto Manual is an executable operations manual for a software or research workflow.</p>
-<p>Use a Quarto Manual when a workflow is too long, fragile, or context-specific for a README, but too visible and judgment-heavy to hide behind a single CLI.</p>
-<p>A manual gives the user ordered <code>.qmd</code> pages that:</p>
-<ul>
-<li>explain one step at a time;</li>
-<li>run the code for that step;</li>
-<li>verify whether the step worked;</li>
-<li>make dependencies between steps explicit.</li>
-</ul>
-<p>In practice, Quarto Manuals are best understood as operator-facing procedure books for software and research workflows.</p>
-</section>
-<section id="core-idea" class="level2" data-number="0.2">
-<h2 data-number="0.2" class="anchored" data-anchor-id="core-idea"><span class="header-section-number">0.2</span> <em>Core Idea</em></h2>
-<p>The central design rule is simple:</p>
-<blockquote class="blockquote">
-<p>A Quarto Manual is an ordered set of independent executable pages.</p>
-</blockquote>
-<p>Each Page is a contract with three parts:</p>
-<ol type="1">
-<li><code>prereq</code>: prove that the page is allowed to run;</li>
-<li><code>procedure</code>: do one or more pieces of work;</li>
-<li><code>check</code>: prove that the work succeeded.</li>
-</ol>
-<p>Pages should share a project, not a notebook kernel<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<p>If page 3 depends on page 2, page 3 should deliberately enforce that dependency in its prerequisite block by checking visible project state:</p>
-<ul>
-<li>required files exist;</li>
-<li>required directories exist;</li>
-<li>a previous test suite passes;</li>
-<li>a required tool is installed;</li>
-<li>a prior configuration file contains the expected values.</li>
-</ul>
-<p>That allows a manual to orchestrate setup and operation without relying on hidden cross-page state.</p>
-<p>For more complex, non-linear dependencies, Quarto Manuals may reach their limit. In that case, consider moving directly to a DAG-based workflow orchestrator such as <a href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a> or <a href="https://www.nextflow.io/">Nextflow</a>, and injecting that into the Manual as a single page that runs the orchestrator.</p>
-</section>
-<section id="why-this-shape" class="level2" data-number="0.3">
-<h2 data-number="0.3" class="anchored" data-anchor-id="why-this-shape"><span class="header-section-number">0.3</span> <em>Why This Shape?</em></h2>
-<p>This structure keeps responsibility local.</p>
-<ul>
-<li>The page owns its own setup conditions.</li>
-<li>The page owns the work it performs.</li>
-<li>The page owns the test that proves the result.</li>
-</ul>
-<p>This is close to familiar software design patterns:</p>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Design_by_contract">Design by contract</a>: <code>prereq</code> acts like a precondition and <code>check</code> acts like a postcondition.</li>
-<li><a href="https://docs.pytest.org/en/stable/explanation/anatomy.html">Arrange / Act / Assert</a>: <code>prereq</code> arranges the required state, <code>procedure</code> acts, and <code>check</code> asserts the result.</li>
-<li><a href="https://en.wikipedia.org/wiki/Idempotence">Idempotent</a> infrastructure steps: inspect current state, apply a change, then verify the target state. Once it’s been run, you don’t have to run it again, and doing so won’t break anything.</li>
-</ul>
-</section>
-<section id="page-contract" class="level2" data-number="0.4">
-<h2 data-number="0.4" class="anchored" data-anchor-id="page-contract"><span class="header-section-number">0.4</span> <em>Page Contract</em></h2>
-<p>Every manual page should contain:</p>
-<ul>
-<li>exactly one <code>.manual-prereq</code> block;</li>
-<li>one or more <code>.manual-procedure</code> blocks;</li>
-<li>exactly one <code>.manual-check</code> block.</li>
-</ul>
-<p>The Quarto Manual filter can validate that structure and render those blocks as semantic callouts.</p>
-<p>See <a href="./10_page-tasks.html">Manual Pages</a> for the fuller authoring template.</p>
-</section>
-<section id="the-backend-quarto-emit" class="level2" data-number="0.5">
-<h2 data-number="0.5" class="anchored" data-anchor-id="the-backend-quarto-emit"><span class="header-section-number">0.5</span> <em>The Backend: <code>quarto-emit</code></em></h2>
-<p><code>quarto-emit</code> is an extension to Quarto that can materialize reusable files from a Quarto page by wrapping the text of a code block in a file write operation. It is optional, but becomes quite powerful when combined with the Quarto Manual structure.</p>
-<p>Quarto Manual and <code>quarto-emit</code> have different jobs.</p>
-<ul>
-<li>Quarto Manual defines the structure of an executable manual page.</li>
-<li><code>quarto-emit</code> optionally materializes reusable files from those pages.</li>
-</ul>
-<p>You do not need <code>quarto-emit</code> to write a manual.</p>
-<p>Use <code>quarto-emit</code> when a page should produce conventional project artifacts such as:</p>
-<ul>
-<li><code>src/</code> modules;</li>
-<li><code>tests/</code> suites;</li>
-<li><code>scripts/</code>;</li>
-<li><code>config/</code> files.</li>
-</ul>
-</section>
-<section id="author-workflow" class="level2" data-number="0.6">
-<h2 data-number="0.6" class="anchored" data-anchor-id="author-workflow"><span class="header-section-number">0.6</span> <em>Author Workflow</em></h2>
-<p>To create a manual for your own procedure:</p>
-<ol type="1">
-<li>Start from the Quarto Manual template.</li>
-<li>Write one page per operational step.</li>
-<li>Give each page one prerequisite block, one or more procedure blocks, and one check block.</li>
-<li>Keep page state local and enforce dependencies through prerequisites.</li>
-<li>Use <code>quarto-emit</code> only when a page needs to materialize reusable files.</li>
-</ol>
-<p>The shipped template should stay lean and prompt-driven. Treat the template as the source of truth, then use richer examples on the documentation site to show what a mature manual can look like.</p>
-</section>
-<section id="operator-workflow" class="level2" data-number="0.7">
-<h2 data-number="0.7" class="anchored" data-anchor-id="operator-workflow"><span class="header-section-number">0.7</span> <em>Operator Workflow</em></h2>
-<p>To use an existing manual:</p>
-<ol type="1">
-<li>Find the repository for the procedure manual.</li>
-<li>Run <code>quarto use template &lt;ORG&gt;/&lt;PROCEDURE&gt;_manual</code>.</li>
-<li>Open the manual locally.</li>
-<li>Work through the pages in order.</li>
-<li>Let each page’s prerequisite and check blocks tell you whether you can proceed.</li>
-</ol>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As you read through this website documentation, though, keep in mind that the operator workflow is to have cloned the manual and be reading the pages in VSCode, Jupyter, or whatever editor they prefer, while also actively running the code in the procedure blocks. The rendered website is a documentation artifact to help readers consume the content.</p>
+<p>Adapted from <a href="https://github.com/Climate-CAFE/era5-daily-heat-aggregation-python">Climate-CAFE</a></p>
+<p>While the script examples are fairly comprehensive by their own right, examining the original repository reveals some critical limitations of not using Quarto Manuals as a documentation and presentation tool.</p>
+<p>Using the quick one liner below (thanks ChatGPT) we can get the ratio of commented prose and executable code:</p>
+<p><code>rg --files -g '*.py' | fzf --preview 'awk '\''/^[[:space:]]*#/ {comments++} /^[[:space:]]*$/ {next} !/^[[:space:]]*#/ {code++} END {total=comments+code; printf "comments: %d (%.1f%%)\ncode: %d (%.1f%%)\n", comments, 100*comments/total, code, 100*code/total}'\'' {}'</code></p>
+<ul>
+<li><code>01_Query_ERA5_CDSAPI_Kenya_v1.py</code>: <strong>52% comments, 48% code</strong></li>
+<li><code>02_Aggregate_ERA5_Kenya_SetFishnet_v1.py</code>: <strong>52.9% comments, 47.1% code</strong></li>
+<li><code>03_Aggregate_ERA5_Kenya_UseFishnet_v1.py</code>: <strong>40.8% comments, 59.2% code</strong></li>
+</ul>
+<p>In each of these files, over 40% of it is simply trying to explain to the user what to do, why, and how to do it. This is a lot of overhead for a user to digest, and it is not interactive, can only be read as greyed-out text in your editor, and is not executable. A Quarto Manual allows us to couple the prose and code into a more interactive, executable, and digestible format by decorate our prose with headers, callouts, tables, and other formatting to make it more readable and engaging, which lowers the barrier to entry for users for very little additional effort.</p>
+<p>To demonstrate this, I prompted ChatGPT to convert the Climate-CAFE scripts into a Quarto Manual based on the extension’s thesis you read in the introductory sections.</p>
+<p>How does it compare to reading each script here?:</p>
+<ul>
+<li><a href="https://github.com/Climate-CAFE/era5-daily-heat-aggregation-python/blob/main/code/01_Query_ERA5_CDSAPI_Kenya_v1.py">01_Query_ERA5_CDSAPI_Kenya_v1.py</a></li>
+<li><a href="https://github.com/Climate-CAFE/era5-daily-heat-aggregation-python/blob/main/code/02_Aggregate_ERA5_Kenya_SetFishnet_v1.py">02_Aggregate_ERA5_Kenya_SetFishnet_v1.py</a></li>
+<li><a href="https://github.com/Climate-CAFE/era5-daily-heat-aggregation-python/blob/main/code/03_Aggregate_ERA5_Kenya_UseFishnet_v1.py">03_Aggregate_ERA5_Kenya_UseFishnet_v1.py</a></li>
+</ul>
 </div>
 </div>
+<section id="project-overview" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="project-overview"><span class="header-section-number">10.1</span> <em>Project Overview</em></h2>
+<p>Using the Python cdsapi package, ERA5-Land hourly temperature measures are downloaded from the Copernicus Climate Data Store (CDS). Heat index and humidex metrics are derived from ERA5-Land hourly 2-meter temperature and 2-meter dew point temperature. Daily mean, maximum, and minimum measures are assessed across administrative boundaries for 2-meter temperature, 2-meter dew point temperature, skin temperature, heat index and humidex. Kenya is used as a demonstration area for the Copernicus CDS API query and spatial aggregation, using administrative boundaries from the Database of Global Administrative Areas.</p>
 </section>
-<section id="scope-of-this-project" class="level2" data-number="0.8">
-<h2 data-number="0.8" class="anchored" data-anchor-id="scope-of-this-project"><span class="header-section-number">0.8</span> <em>Scope Of This Project</em></h2>
-<p>This project is intentionally narrow.</p>
-<p>Quarto Manual should only extend Quarto in one functional way:</p>
+<section id="usage" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="usage"><span class="header-section-number">10.2</span> <em>Usage</em></h2>
+<p>This repository provides the building blocks for the query of any data from the Copernicus CDS. Code for spatial aggregation of ERA5-Land hourly netCDF files from their native raster format to daily measures averaged across administrative boundaries are also included, using the geopandas, shapely, xarray, and rioxarray packages. These spatial aggregation methods can be used to derive measures from ERA5-Land in analysis of sociodemographic disparities or epidemiologic studies of temperature and health outcomes.</p>
+<p>Comments are included within the code repository with descriptions of how to manipulate the ERA5 API language to query additional variables, time frames, or spatial extents. Please note that users will need to set up an account with the Copernicus CDS for the API query to function effectively. For more information on the cdsapi package and details about how to set up an account and access the necessary user ID and API key inputs for the API query please see: https://cds.climate.copernicus.eu/how-to-api#install-the-cds-api-client</p>
+</section>
+<section id="notes-on-computation" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="notes-on-computation"><span class="header-section-number">10.3</span> <em>Notes on Computation</em></h2>
 <ul>
-<li>give manual pages semantic structure with <code>prereq</code>, <code>procedure</code>, and <code>check</code> blocks.</li>
-</ul>
-<p>Everything else should be optional, but frictionless to add, thanks to <code>quarto-emit</code>:</p>
-<ul>
-<li>emitted source files;</li>
-<li>emitted test suites;</li>
-<li>helper modules;</li>
-<li>workflow-specific libraries.</li>
+<li>This code was run to generate the 24 years of heat measures across Kenya administrative boundaries using a shared computing cluster at Boston University. The use of a computing cluster allows for intensive computation to run more quickly and to run without the limits of conventional storage options on a single computer.</li>
+<li>The query of the data using cdsapi is done in monthly chunks due to restrictions in the CDS API.</li>
+<li>Each 1-month period of ERA5-Land data across Kenya with the three variables (2-m temp, dew point temp, skin temp) took about several minutes to download and is approximately 24MB for the raster file storage.</li>
+<li>For the 24 years, and 12 files each year, this results in just under 9 GB of storage for the raw raster data.</li>
+<li>The aggregation loop that computes the ward-level results takes about several hours per year to output the resulting .csv file on a local computer. In a .csv format, each year’s data is ~162MB after including additional columns with geographic parameters for the larger geographies in which wards are nested.</li>
+<li>The computation efficiency and size will vary by use case. Aggregating to a smaller administrative boundary, or using a less spatially resolved raw product (such as ERA5, Non-Land with is a 25km grid) will reduce the needed computation resources.</li>
 </ul>
 </section>
-<section id="examples-on-this-site" class="level2" data-number="0.9">
-<h2 data-number="0.9" class="anchored" data-anchor-id="examples-on-this-site"><span class="header-section-number">0.9</span> <em>Examples On This Site</em></h2>
-<p>This site includes three example manuals that scale in sophistication:</p>
+<section id="data-sources" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="data-sources"><span class="header-section-number">10.4</span> <em>Data Sources</em></h2>
 <ul>
-<li>a simple data-staging workflow;</li>
-<li>an intermediate ERA5 acquisition and aggregation workflow;</li>
-<li>an advanced RSE workbench environment workflow.</li>
+<li><a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land">ERA5-Land hourly data from 1950 to present</a></li>
+<li><a href="https://gadm.org/">Database of Global Administrative Areas</a></li>
 </ul>
-<p>Each example is intentionally more complete than the shipped template, with more creative (and hopefully more elegant) implementations and problem solving strategies involving real-world use cases.</p>
-
-
 </section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>A notebook kernel is a program that runs code in a specific programming language, such as Python or R. It allows users to test out code iteratively in a Read-Eval-Print Loop (REPL) workflow. REPL workflows are great for exploration, and arguably were the foundational technology behind the rise of accessible data science. One of the main criticisms of notebooks, however, is that they can hide the state of your code (<a href="https://www.researchgate.net/figure/An-example-of-a-hidden-state-in-Jupyter-Notebook-with-three-different-execution-variations_fig3_391056804">see here</a>), which makes it hard to reason about your project. Quarto Manuals avoid that problem primarily by using Quarto Markdown, which is plain text, and secondarily by encouraging page independence in its design. Any interdependence is made explicit through side-effects that Manual Authors must deliberately insert.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<section id="workflow" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="workflow"><span class="header-section-number">10.5</span> <em>Workflow</em></h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For optimal learning, the section below should instead be coupled code and prose blocks in each individual Manual Page…</p>
+</div>
+</div>
+<p>Three scripts are included in the code repository.</p>
+<ol type="1">
+<li>01_Query_ERA5_CDSAPI_Kenya_v1.py applies the cdsapi package to query hourly ERA5-Land data from the Copernicus CDS using the cdsapi package.
+<ul>
+<li>The necessary code to set your API key in your Python environment is provided, as well as a description of the necessary inputs for an effective API query, including the dataset, spatial extent, time frame, and variables requested.</li>
+<li>The query is broken down into queries for data every month. A for loop is used to query these one-month data cuts across the 24-year period of the full dataset. These cuts were set as the Copernicus CDS API restricts the amount of data accessible in a single pull.</li>
+<li><em>Please Note</em>: The API query can be time-consuming and the resulting output can be extremely large if the API query is not correctly specified. When first using the API for a new use case, consider requesting only a few hours or days of data for a small spatial area in order to get an estimate for the time and data size that will be queried with larger sets.</li>
+</ul></li>
+<li>02_Aggregate_ERA5_Kenya_SetFishnet_v1.py is the first in a two-step process for aggregating the queried rasters to the administrative boundaries.
+<ul>
+<li>A fishnet approach is used, where a grid of points is established and the merged with points representing the spatial extent of the administrative boundaries for the area of interest.</li>
+<li>This is set as a separate file because it can be very time consuming with a highly spatially resolved raster. The ERA5-Land dataset is shared at a 9 km grid resolution, so this runs quickly in this application.</li>
+<li>More details about the use of a fishnet for spatial aggregation of raster data can be found here: <a href="https://github.com/Climate-CAFE/population_weighting_raster_data">https://github.com/Climate-CAFE/population_weighting_raster_data</a></li>
+</ul></li>
+<li>03_Aggregate_ERA5_Kenya_UseFishnet_v1.py uses the fishnet grid set up in script 2, and merges the grid with centroids for the administrative boundaries in Kenya.
+<ul>
+<li>The raster data time series is reset from Coordinated Universal Time (UTC) to East Africa Time (EAT).</li>
+<li>Hourly heat index and humidex are estimated from the 2-m temperature and 2-m dew point temperature.</li>
+<li>Daily mean, minimum, and maximum are assessed across the raster, and then joined to the extraction points (the union of the fishnet grid and adminstrative centroids).</li>
+<li>Spatially weighted averages across the administrative boundaries are computed from the extraction points.</li>
+<li>The resulting output is a dataframe with Kenya administrative boundaries and a time series of daily mean, minimum, and maximum for 2-m temperature, 2-m dew point temperature, skin temperature, heat index, and humidex.</li>
+</ul></li>
 </ol>
+</section>
+<section id="dependencies" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="dependencies"><span class="header-section-number">10.6</span> <em>Dependencies</em></h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The section below could be implemented as the first page of a Quarto Manual, with each dependency being a prerequisite check for the operator to confirm before proceeding to the next step. A pytest suite would be very easy to implement here, and on page two, to check for.</p>
+</div>
+</div>
+<p>Packages used in this repository include:</p>
+<ul>
+<li>import cdsapi for era5 data query</li>
+<li>import geopandas for spatial operations on geometric types</li>
+<li>import xarray for raster data</li>
+<li>import rioxarray for raster data</li>
+<li>import shapely for manipulation and analysis of geometric objects</li>
+<li>from osgeo import gdal, ogr for creating a fishnet grid</li>
+<li>import os for creating/removing a file path</li>
+<li>import glob for findng all the pathnames matching a specified pattern</li>
+<li>import numpy for scientific computing</li>
+<li>import pandas for manipulation of structured data</li>
+<li>from functools import reduce for merging datasets</li>
+<li>import math for mathematical calculations</li>
+<li>import pytz for cross platform timezone calculations</li>
+<li>from datetime import datetime for manipulating dates and times</li>
+<li>import xvec for extending Xarray to work with vector data</li>
+<li>import re for using regular expression</li>
+</ul>
+</section>
+<section id="references" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="references"><span class="header-section-number">10.7</span> <em>References</em></h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>With Quarto, we can take advantage of the rich publishing ecosystem to include references directly from <code>bibtex</code> files, rather than having to manually format them in the markdown as below.</p>
+</div>
+</div>
+<p>Humidex estimation references:</p>
+<ul>
+<li>K.R. Spangler, S. Liang, and G.A. Wellenius. “Wet-Bulb Globe Temperature, Universal Thermal Climate Index, and Other Heat Metrics for US Counties, 2000-2020.” Scientific Data (2022). doi: 10.1038/s41597-022-01405-3</li>
+<li>Lawrence, M. G. The relationship between relative humidity and the dewpoint temperature in moist air - A simple conversion and applications. B. Am. Meteorol. Soc. 86, 225–233, https://doi.org/10.1175/Bams-86-2-225 (2005).</li>
+</ul>
+<p>Heat index (weathermetrics package) reference:</p>
+<ul>
+<li>Anderson GB, Bell ML, Peng RD. 2013. Methods to calculate the heat index as an exposure metric in environmental health research. Environmental Health Perspectives 121(10):1111-1119.</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -942,10 +948,13 @@ Important
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html" class="pagination-link" aria-label="A Climate-CAFE ERA5 Workflow">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">A Climate-CAFE ERA5 Workflow</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./00_cover.html" class="pagination-link" aria-label="Cover Page">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cover Page</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html" class="pagination-link" aria-label="CDS API Access">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">CDS API Access</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

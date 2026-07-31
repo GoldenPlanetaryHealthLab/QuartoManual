@@ -1,0 +1,28 @@
+---
+title: "A Data Staging Workflow"
+subtitle: "A minimal Quarto Manual for connecting a project to its inputs"
+format:
+  html:
+    toc: true
+    code-fold: false
+author: Tinashe M. Tapera
+date: last-modified
+execute:
+  eval: false
+---
+
+## Overview
+
+This example shows the smallest useful Quarto Manual in practice.
+
+The operator's goal is simple: connect a registered dataset into a project
+workspace in a reproducible way.
+
+The manual therefore stays small:
+
+- a cover page explains the purpose of data staging;
+- a helper page provides shared context;
+- one workflow page performs and checks the staging step.
+
+This is the kind of manual a researcher might keep close at hand and rerun
+whenever a new project needs the same setup.

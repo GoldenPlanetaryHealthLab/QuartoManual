@@ -1,0 +1,183 @@
+---
+title: "Quarto Manuals Explained"
+subtitle: "A guide to creating and using Quarto Manuals"
+---
+
+## What Is A Quarto Manual?
+
+A Quarto Manual is an executable operations manual for a software or research
+workflow.
+
+Use a Quarto Manual when a workflow is too long, fragile, or context-specific
+for a README, but too visible and judgment-heavy to hide behind a single CLI.
+
+A manual gives the user ordered `.qmd` pages that:
+
+- explain one step at a time;
+- run the code for that step;
+- verify whether the step worked;
+- make dependencies between steps explicit.
+
+In practice, Quarto Manuals are best understood as operator-facing procedure
+books for software and research workflows.
+
+## Core Idea
+
+The central design rule is simple:
+
+> A Quarto Manual is an ordered set of independent executable pages.
+
+Each Page is a contract with three parts:
+
+1. `prereq`: prove that the page is allowed to run;
+2. `procedure`: do one or more pieces of work;
+3. `check`: prove that the work succeeded.
+
+Pages should share a project, not a notebook kernel[^1].
+
+[^1]: A notebook kernel is a program that runs code in a specific programming 
+language, such as Python or R. It allows users to test out code iteratively in
+a Read-Eval-Print Loop (REPL) workflow. REPL workflows are great for exploration,
+and arguably were the foundational technology behind the rise of accessible data science.
+One of the main criticisms of notebooks, however, is that they 
+can hide the state of your code ([see here](https://www.researchgate.net/figure/An-example-of-a-hidden-state-in-Jupyter-Notebook-with-three-different-execution-variations_fig3_391056804)), which makes it hard to reason about your project. Quarto 
+Manuals avoid that problem primarily by using Quarto Markdown, which is plain
+text, and secondarily by encouraging page independence in its design. 
+Any interdependence is made explicit through side-effects that Manual Authors 
+must deliberately insert.
+
+If page 3 depends on page 2, page 3 should deliberately enforce that dependency in its
+prerequisite block by checking visible project state:
+
+- required files exist;
+- required directories exist;
+- a previous test suite passes;
+- a required tool is installed;
+- a prior configuration file contains the expected values.
+
+That allows a manual to orchestrate setup and operation without relying on
+hidden cross-page state.
+
+For more complex, non-linear dependencies, Quarto Manuals may reach their limit. In that case,
+consider moving directly to a DAG-based workflow orchestrator such as [Snakemake](https://snakemake.readthedocs.io/en/stable/) or [Nextflow](https://www.nextflow.io/),
+and injecting that into the Manual as a single page that runs the 
+orchestrator.
+
+## Why This Shape?
+
+This structure keeps responsibility local.
+
+- The page owns its own setup conditions.
+- The page owns the work it performs.
+- The page owns the test that proves the result.
+
+This is close to familiar software design patterns:
+
+- [Design by contract](https://en.wikipedia.org/wiki/Design_by_contract):
+  `prereq` acts like a precondition and `check` acts like a postcondition.
+- [Arrange / Act / Assert](https://docs.pytest.org/en/stable/explanation/anatomy.html):
+  `prereq` arranges the required state, `procedure` acts, and `check`
+  asserts the result.
+- [Idempotent](https://en.wikipedia.org/wiki/Idempotence) infrastructure steps:
+  inspect current state, apply a change, then verify the target state. Once it's been run, you don't have to run it again, and doing so won't break anything.
+
+## Page Contract
+
+Every manual page should contain:
+
+- exactly one `.manual-prereq` block;
+- one or more `.manual-procedure` blocks;
+- exactly one `.manual-check` block.
+
+The Quarto Manual filter can validate that structure and render those blocks as
+semantic callouts.
+
+See [Manual Pages](10_page-tasks.qmd) for the fuller authoring template.
+
+## The Backend: `quarto-emit`
+
+`quarto-emit` is an extension to Quarto that can materialize reusable files from a 
+Quarto page by wrapping the text of a code block in a file write operation. It is 
+optional, but becomes quite powerful when combined with the Quarto Manual structure.
+
+Quarto Manual and `quarto-emit` have different jobs.
+
+- Quarto Manual defines the structure of an executable manual page.
+- `quarto-emit` optionally materializes reusable files from those pages.
+
+You do not need `quarto-emit` to write a manual.
+
+Use `quarto-emit` when a page should produce conventional project artifacts
+such as:
+
+- `src/` modules;
+- `tests/` suites;
+- `scripts/`;
+- `config/` files.
+
+## Author Workflow
+
+To create a manual for your own procedure:
+
+1. Start from the Quarto Manual template.
+2. Write one page per operational step.
+3. Give each page one prerequisite block, one or more procedure blocks, and
+   one check block.
+4. Keep page state local and enforce dependencies through prerequisites.
+5. Use `quarto-emit` only when a page needs to materialize reusable files.
+
+The shipped template should stay lean and prompt-driven. Treat the template as
+the source of truth, then use richer examples on the documentation site to show
+what a mature manual can look like.
+
+## Operator Workflow
+
+To use an existing manual:
+
+1. Find the repository for the procedure manual.
+2. Run `quarto use template <ORG>/<PROCEDURE>_manual`.
+3. Open the manual locally.
+4. Work through the pages in order.
+5. Let each page's prerequisite and check blocks tell you whether you can
+   proceed.
+
+
+::: {.callout-important}
+
+As you read through this website documentation, though,
+keep in mind that the operator workflow is to have cloned
+the manual and be reading the pages in VSCode, Jupyter,
+or whatever editor they prefer, while also actively running
+the code in the procedure blocks. The rendered website is a
+documentation artifact to help readers consume the content.
+
+:::
+
+
+## Scope Of This Project
+
+This project is intentionally narrow.
+
+Quarto Manual should only extend Quarto in one functional way:
+
+- give manual pages semantic structure with `prereq`, `procedure`, and `check`
+  blocks.
+
+Everything else should be optional, but frictionless to add, thanks to `quarto-emit`:
+
+- emitted source files;
+- emitted test suites;
+- helper modules;
+- workflow-specific libraries.
+
+## Examples On This Site
+
+This site includes three example manuals that scale in sophistication:
+
+- a simple data-staging workflow;
+- an intermediate ERA5 acquisition and aggregation workflow;
+- an advanced RSE workbench environment workflow.
+
+Each example is intentionally more complete than the shipped template, with more 
+creative (and hopefully more elegant) implementations and problem solving strategies
+involving real-world use cases.

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quarto Manual</title>
+<title>8&nbsp; Stage The Dataset - Option 1: Bare Symlinks – Quarto Manual</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,27 +23,63 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./00_cover.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html" rel="next">
+<link href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.html" rel="prev">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals Explained</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html">A Data Staging Workflow</a></li><li class="breadcrumb-item"><a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stage The Dataset - Option 1: Bare Symlinks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quarto Manual</a> 
+      <a href="../../../../">Quarto Manual</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -120,25 +156,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals Explained</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cover Page</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_misc-helpers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../01_misc-helpers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Helper Pages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_page-tasks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../10_page-tasks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual Pages</span></span></a>
   </div>
 </li>
@@ -155,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></span></a>
   </div>
 </li>
@@ -163,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">A Data Staging Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -172,25 +208,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/01_simple/NSAPH-data-processing/data-staging-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cover Page: Data Staging with stagecoach</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Helper Page: Notes About Data Staging &amp; UV</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stage The Dataset - Option 1: Bare Symlinks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stage The Dataset - Option 2: Using stagecoach</span></span></a>
   </div>
 </li>
@@ -198,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">A Climate-CAFE ERA5 Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -207,31 +243,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">CDS API Access</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Query ERA5-Land For Kenya</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Build The Aggregation Fishnet</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Using The Fishnet</span></span></a>
   </div>
 </li>
@@ -239,7 +275,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">RSE Workbench: An Environment Generator Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -248,97 +284,97 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">RSE Workbench Manual</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/01_misc-rse-workbench-apptainer.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/01_misc-rse-workbench-apptainer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Helper Functions: Singularity/Apptainer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/02_misc-rse-workbench-slurm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/02_misc-rse-workbench-slurm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Helper Functions: SLURM &amp; Submitit</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/10_project_contract.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/10_project_contract.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Project Contract</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Platform Image</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Build Platform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/13_spack_yaml.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/13_spack_yaml.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Scientific System Dependency Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/14_language_packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/14_language_packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Data Science Language Package Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/15_activation_contract.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/15_activation_contract.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Activation Contract</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/16_validate_activation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/16_validate_activation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Validate Activation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/17_install_spack.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/17_install_spack.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Install Spack Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/18_validate_r.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/18_validate_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Validate R From Spack</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/19_install_language_packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/19_install_language_packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Install Language Package Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Validate Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Build Final SIF</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/22_launch_vscode.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/22_launch_vscode.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Launch VS Code Tunnel</span></span></a>
   </div>
 </li>
@@ -354,25 +390,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-a-quarto-manual" id="toc-what-is-a-quarto-manual" class="nav-link active" data-scroll-target="#what-is-a-quarto-manual"><span class="header-section-number">0.1</span> <em>What Is A Quarto Manual?</em></a></li>
-  <li><a href="#core-idea" id="toc-core-idea" class="nav-link" data-scroll-target="#core-idea"><span class="header-section-number">0.2</span> <em>Core Idea</em></a></li>
-  <li><a href="#why-this-shape" id="toc-why-this-shape" class="nav-link" data-scroll-target="#why-this-shape"><span class="header-section-number">0.3</span> <em>Why This Shape?</em></a></li>
-  <li><a href="#page-contract" id="toc-page-contract" class="nav-link" data-scroll-target="#page-contract"><span class="header-section-number">0.4</span> <em>Page Contract</em></a></li>
-  <li><a href="#the-backend-quarto-emit" id="toc-the-backend-quarto-emit" class="nav-link" data-scroll-target="#the-backend-quarto-emit"><span class="header-section-number">0.5</span> <em>The Backend: <code>quarto-emit</code></em></a></li>
-  <li><a href="#author-workflow" id="toc-author-workflow" class="nav-link" data-scroll-target="#author-workflow"><span class="header-section-number">0.6</span> <em>Author Workflow</em></a></li>
-  <li><a href="#operator-workflow" id="toc-operator-workflow" class="nav-link" data-scroll-target="#operator-workflow"><span class="header-section-number">0.7</span> <em>Operator Workflow</em></a></li>
-  <li><a href="#scope-of-this-project" id="toc-scope-of-this-project" class="nav-link" data-scroll-target="#scope-of-this-project"><span class="header-section-number">0.8</span> <em>Scope Of This Project</em></a></li>
-  <li><a href="#examples-on-this-site" id="toc-examples-on-this-site" class="nav-link" data-scroll-target="#examples-on-this-site"><span class="header-section-number">0.9</span> <em>Examples On This Site</em></a></li>
+  <li><a href="#prerequisite" id="toc-prerequisite" class="nav-link active" data-scroll-target="#prerequisite"><span class="header-section-number">8.1</span> <em>1. Prerequisite</em></a></li>
+  <li><a href="#procedure" id="toc-procedure" class="nav-link" data-scroll-target="#procedure"><span class="header-section-number">8.2</span> <em>2. Procedure</em></a></li>
+  <li><a href="#check" id="toc-check" class="nav-link" data-scroll-target="#check"><span class="header-section-number">8.3</span> <em>3. Check</em></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals Explained</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html">A Data Staging Workflow</a></li><li class="breadcrumb-item"><a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stage The Dataset - Option 1: Bare Symlinks</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Quarto Manual</h1>
-<p class="subtitle lead">A guide to creating and using Quarto Manuals</p>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stage The Dataset - Option 1: Bare Symlinks</span></h1>
 </div>
 
 
@@ -389,154 +418,77 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="what-is-a-quarto-manual" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="what-is-a-quarto-manual"><span class="header-section-number">0.1</span> <em>What Is A Quarto Manual?</em></h2>
-<p>A Quarto Manual is an executable operations manual for a software or research workflow.</p>
-<p>Use a Quarto Manual when a workflow is too long, fragile, or context-specific for a README, but too visible and judgment-heavy to hide behind a single CLI.</p>
-<p>A manual gives the user ordered <code>.qmd</code> pages that:</p>
-<ul>
-<li>explain one step at a time;</li>
-<li>run the code for that step;</li>
-<li>verify whether the step worked;</li>
-<li>make dependencies between steps explicit.</li>
-</ul>
-<p>In practice, Quarto Manuals are best understood as operator-facing procedure books for software and research workflows.</p>
-</section>
-<section id="core-idea" class="level2" data-number="0.2">
-<h2 data-number="0.2" class="anchored" data-anchor-id="core-idea"><span class="header-section-number">0.2</span> <em>Core Idea</em></h2>
-<p>The central design rule is simple:</p>
-<blockquote class="blockquote">
-<p>A Quarto Manual is an ordered set of independent executable pages.</p>
-</blockquote>
-<p>Each Page is a contract with three parts:</p>
-<ol type="1">
-<li><code>prereq</code>: prove that the page is allowed to run;</li>
-<li><code>procedure</code>: do one or more pieces of work;</li>
-<li><code>check</code>: prove that the work succeeded.</li>
-</ol>
-<p>Pages should share a project, not a notebook kernel<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<p>If page 3 depends on page 2, page 3 should deliberately enforce that dependency in its prerequisite block by checking visible project state:</p>
-<ul>
-<li>required files exist;</li>
-<li>required directories exist;</li>
-<li>a previous test suite passes;</li>
-<li>a required tool is installed;</li>
-<li>a prior configuration file contains the expected values.</li>
-</ul>
-<p>That allows a manual to orchestrate setup and operation without relying on hidden cross-page state.</p>
-<p>For more complex, non-linear dependencies, Quarto Manuals may reach their limit. In that case, consider moving directly to a DAG-based workflow orchestrator such as <a href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a> or <a href="https://www.nextflow.io/">Nextflow</a>, and injecting that into the Manual as a single page that runs the orchestrator.</p>
-</section>
-<section id="why-this-shape" class="level2" data-number="0.3">
-<h2 data-number="0.3" class="anchored" data-anchor-id="why-this-shape"><span class="header-section-number">0.3</span> <em>Why This Shape?</em></h2>
-<p>This structure keeps responsibility local.</p>
-<ul>
-<li>The page owns its own setup conditions.</li>
-<li>The page owns the work it performs.</li>
-<li>The page owns the test that proves the result.</li>
-</ul>
-<p>This is close to familiar software design patterns:</p>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Design_by_contract">Design by contract</a>: <code>prereq</code> acts like a precondition and <code>check</code> acts like a postcondition.</li>
-<li><a href="https://docs.pytest.org/en/stable/explanation/anatomy.html">Arrange / Act / Assert</a>: <code>prereq</code> arranges the required state, <code>procedure</code> acts, and <code>check</code> asserts the result.</li>
-<li><a href="https://en.wikipedia.org/wiki/Idempotence">Idempotent</a> infrastructure steps: inspect current state, apply a change, then verify the target state. Once it’s been run, you don’t have to run it again, and doing so won’t break anything.</li>
-</ul>
-</section>
-<section id="page-contract" class="level2" data-number="0.4">
-<h2 data-number="0.4" class="anchored" data-anchor-id="page-contract"><span class="header-section-number">0.4</span> <em>Page Contract</em></h2>
-<p>Every manual page should contain:</p>
-<ul>
-<li>exactly one <code>.manual-prereq</code> block;</li>
-<li>one or more <code>.manual-procedure</code> blocks;</li>
-<li>exactly one <code>.manual-check</code> block.</li>
-</ul>
-<p>The Quarto Manual filter can validate that structure and render those blocks as semantic callouts.</p>
-<p>See <a href="./10_page-tasks.html">Manual Pages</a> for the fuller authoring template.</p>
-</section>
-<section id="the-backend-quarto-emit" class="level2" data-number="0.5">
-<h2 data-number="0.5" class="anchored" data-anchor-id="the-backend-quarto-emit"><span class="header-section-number">0.5</span> <em>The Backend: <code>quarto-emit</code></em></h2>
-<p><code>quarto-emit</code> is an extension to Quarto that can materialize reusable files from a Quarto page by wrapping the text of a code block in a file write operation. It is optional, but becomes quite powerful when combined with the Quarto Manual structure.</p>
-<p>Quarto Manual and <code>quarto-emit</code> have different jobs.</p>
-<ul>
-<li>Quarto Manual defines the structure of an executable manual page.</li>
-<li><code>quarto-emit</code> optionally materializes reusable files from those pages.</li>
-</ul>
-<p>You do not need <code>quarto-emit</code> to write a manual.</p>
-<p>Use <code>quarto-emit</code> when a page should produce conventional project artifacts such as:</p>
-<ul>
-<li><code>src/</code> modules;</li>
-<li><code>tests/</code> suites;</li>
-<li><code>scripts/</code>;</li>
-<li><code>config/</code> files.</li>
-</ul>
-</section>
-<section id="author-workflow" class="level2" data-number="0.6">
-<h2 data-number="0.6" class="anchored" data-anchor-id="author-workflow"><span class="header-section-number">0.6</span> <em>Author Workflow</em></h2>
-<p>To create a manual for your own procedure:</p>
-<ol type="1">
-<li>Start from the Quarto Manual template.</li>
-<li>Write one page per operational step.</li>
-<li>Give each page one prerequisite block, one or more procedure blocks, and one check block.</li>
-<li>Keep page state local and enforce dependencies through prerequisites.</li>
-<li>Use <code>quarto-emit</code> only when a page needs to materialize reusable files.</li>
-</ol>
-<p>The shipped template should stay lean and prompt-driven. Treat the template as the source of truth, then use richer examples on the documentation site to show what a mature manual can look like.</p>
-</section>
-<section id="operator-workflow" class="level2" data-number="0.7">
-<h2 data-number="0.7" class="anchored" data-anchor-id="operator-workflow"><span class="header-section-number">0.7</span> <em>Operator Workflow</em></h2>
-<p>To use an existing manual:</p>
-<ol type="1">
-<li>Find the repository for the procedure manual.</li>
-<li>Run <code>quarto use template &lt;ORG&gt;/&lt;PROCEDURE&gt;_manual</code>.</li>
-<li>Open the manual locally.</li>
-<li>Work through the pages in order.</li>
-<li>Let each page’s prerequisite and check blocks tell you whether you can proceed.</li>
-</ol>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As you read through this website documentation, though, keep in mind that the operator workflow is to have cloned the manual and be reading the pages in VSCode, Jupyter, or whatever editor they prefer, while also actively running the code in the procedure blocks. The rendered website is a documentation artifact to help readers consume the content.</p>
+<p>NOT YET IMPLEMENTED: This page will show how to stage the dataset using bare symlinks.</p>
 </div>
 </div>
-</section>
-<section id="scope-of-this-project" class="level2" data-number="0.8">
-<h2 data-number="0.8" class="anchored" data-anchor-id="scope-of-this-project"><span class="header-section-number">0.8</span> <em>Scope Of This Project</em></h2>
-<p>This project is intentionally narrow.</p>
-<p>Quarto Manual should only extend Quarto in one functional way:</p>
-<ul>
-<li>give manual pages semantic structure with <code>prereq</code>, <code>procedure</code>, and <code>check</code> blocks.</li>
-</ul>
-<p>Everything else should be optional, but frictionless to add, thanks to <code>quarto-emit</code>:</p>
-<ul>
-<li>emitted source files;</li>
-<li>emitted test suites;</li>
-<li>helper modules;</li>
-<li>workflow-specific libraries.</li>
-</ul>
-</section>
-<section id="examples-on-this-site" class="level2" data-number="0.9">
-<h2 data-number="0.9" class="anchored" data-anchor-id="examples-on-this-site"><span class="header-section-number">0.9</span> <em>Examples On This Site</em></h2>
-<p>This site includes three example manuals that scale in sophistication:</p>
-<ul>
-<li>a simple data-staging workflow;</li>
-<li>an intermediate ERA5 acquisition and aggregation workflow;</li>
-<li>an advanced RSE workbench environment workflow.</li>
-</ul>
-<p>Each example is intentionally more complete than the shipped template, with more creative (and hopefully more elegant) implementations and problem solving strategies involving real-world use cases.</p>
-
-
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>A notebook kernel is a program that runs code in a specific programming language, such as Python or R. It allows users to test out code iteratively in a Read-Eval-Print Loop (REPL) workflow. REPL workflows are great for exploration, and arguably were the foundational technology behind the rise of accessible data science. One of the main criticisms of notebooks, however, is that they can hide the state of your code (<a href="https://www.researchgate.net/figure/An-example-of-a-hidden-state-in-Jupyter-Notebook-with-three-different-execution-variations_fig3_391056804">see here</a>), which makes it hard to reason about your project. Quarto Manuals avoid that problem primarily by using Quarto Markdown, which is plain text, and secondarily by encouraging page independence in its design. Any interdependence is made explicit through side-effects that Manual Authors must deliberately insert.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<p>This page shows the manual page contract in the context of a real staging task.</p>
+<p>The operator must:</p>
+<ol type="1">
+<li>confirm that the project is ready to receive the staged data;</li>
+<li>create the staged input location;</li>
+<li>verify that the staged path now exists and points where expected.</li>
 </ol>
+<section id="prerequisite" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="prerequisite"><span class="header-section-number">8.1</span> <em>1. Prerequisite</em></h2>
+<div class="manual-prereq callout callout-important" title="Confirm Required State">
+<p>Before running this page, confirm that the project already exists and that the operator is working from its root.</p>
+<div id="5201cbc0" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path(<span class="st">"README.md"</span>).exists(), <span class="st">"Expected README.md to exist before staging data."</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"data"</span>).mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="procedure" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="procedure"><span class="header-section-number">8.2</span> <em>2. Procedure</em></h2>
+<div class="manual-procedure callout callout-tip" title="Declare The Target Dataset">
+<p>Record the dataset identifier and the intended staging location.</p>
+<div id="2fa32a35" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dataset_name <span class="op">=</span> <span class="st">"example_registered_dataset"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>stage_path <span class="op">=</span> Path(<span class="st">"data"</span>) <span class="op">/</span> dataset_name</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="manual-procedure callout callout-tip" title="Create The Staging Link">
+<p>Create the staged location. In a real manual this could call <code>stagecoach</code> or another institutional tool.</p>
+<div id="a89de96b" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dataset_name <span class="op">=</span> <span class="st">"example_registered_dataset"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>stage_path <span class="op">=</span> Path(<span class="st">"data"</span>) <span class="op">/</span> dataset_name</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>stage_path.mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="check" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="check"><span class="header-section-number">8.3</span> <em>3. Check</em></h2>
+<div class="manual-check callout callout-warning" title="Verify Stage Result">
+<div id="a8e6b1a1" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dataset_name <span class="op">=</span> <span class="st">"example_registered_dataset"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>stage_path <span class="op">=</span> Path(<span class="st">"data"</span>) <span class="op">/</span> dataset_name</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> stage_path.exists(), <span class="st">"Expected staged dataset path to exist."</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> stage_path.is_dir(), <span class="st">"Expected staged dataset path to be a directory."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>This page is intentionally small. It demonstrates that the framework still works when the workflow itself is simple.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -942,10 +894,13 @@ Important
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.html" class="pagination-link" aria-label="Helper Page: Notes About Data Staging &amp; UV">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Helper Page: Notes About Data Staging &amp; UV</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./00_cover.html" class="pagination-link" aria-label="Cover Page">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cover Page</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html" class="pagination-link" aria-label="Stage The Dataset - Option 2: Using stagecoach">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stage The Dataset - Option 2: Using stagecoach</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

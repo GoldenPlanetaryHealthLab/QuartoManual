@@ -79,3 +79,10 @@ by Quarto's custom Divs, and powered in the backend by a simple but powerful fil
     - Run `quarto render` to render the whole manual to HTML, PDF, or DOCX. If the manual has checks implemented in a testing suite, quarto render will execute the testing suite, providing you with a visual report of your progress in the manual and whether you are implementing the workflow correctly.
 
     - If all goes well, you now have a fully setup project as the original author intended, and you can now start working on your implementation of the project. If it doesn't you can go back to the exact Point of Failure (POF) and fix the issue, or you can reach out to the original author for help.
+
+## Feature Roadmap
+
+- [ ] stylize each block so it is visually distinct
+- [ ] use Lua to print out useful render messages when blocks are being processed
+- [ ] can Lua be used to connect checks and prereqs across pages? Maybe?
+- [ ] setup a testing suite in a separate repo

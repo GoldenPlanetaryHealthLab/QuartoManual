@@ -1,0 +1,31 @@
+---
+title: "RSE Workbench: An Environment Generator Workflow"
+subtitle: "An advanced Quarto Manual for assembling reproducible HPC environments"
+format:
+  html:
+    toc: true
+    code-fold: false
+author: Tinashe M. Tapera
+date: last-modified
+execute:
+  eval: false
+---
+
+## Overview
+
+This example shows Quarto Manuals at their most ambitious in the current
+project: a reproducible RSE workbench assembled across many pages.
+
+Unlike the smaller examples, this manual spans platform setup, container
+construction, language package management, activation checks, and scheduler
+integration.
+
+It is included here as a case study in scale.
+
+Some of the page names retain language from the earlier development history of
+the workbench. That is acceptable for the example because the important point is
+that each page still behaves like a manual page:
+
+- check whether the step is ready to run;
+- perform one concrete part of the environment assembly;
+- verify that the result is usable before proceeding.
