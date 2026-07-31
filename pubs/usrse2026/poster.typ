@@ -411,7 +411,7 @@
 
 #show: doc => poster(
   title: "Quarto Manuals",
-  subtitle: "Executable software operations manuals built from interdependent Quarto pages",
+  subtitle: "Executable software operations manuals built from independent Quarto pages",
   author: "Edenian",
   header_logo: "dummy-thchan.png",
 doc,

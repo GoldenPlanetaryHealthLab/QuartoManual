@@ -133,7 +133,7 @@
 
 
 \shorttitle{Executable software operations manuals built from
-interdependent Quarto pages}
+independent Quarto pages}
 
 
 \usepackage{etoolbox}
@@ -305,156 +305,73 @@ St., Albany, NY 12084-1234, USA, Email: \href{mailto:ttapera@hsph.harvard.edu}{t
 \subsection{Abstract}\label{abstract}
 
 \begin{itemize}
+\tightlist
 \item
-  programming is already hard and the data is only going to get bigger.
-  workflows are blowing up in complexity and scale. scientists need
-  rigour in their workflows.
+  Programming is already difficult, and research data workflows are
+  growing in scale and complexity {[}CITE NEEDED{]}. Scientists need
+  workflow rigor, not just working code.
 \item
-  to get around this, we could write better and better docs. but even
-  great docs have limitations:
+  Traditional documentation helps, but it breaks down for large,
+  multi-step, order-dependent workflows. It is not executable,
+  reproducible, or able to confirm that a user is proceeding correctly.
+  {[}CITE PROBABLY NEEDED{]}
+\item
+  Command-line wrappers are executable, but often too rigid: either the
+  workflow is over-constrained, or flexibility is pushed into an
+  unwieldy number of flags and options.
+\item
+  AI and agentic systems are promising, but today they are still limited
+  by (FACT) non-determinism {[}CITE NEEDED{]} and (OPINION) uneven
+  reliability in complex scientific workflows (though we are working to
+  address these issues with agentic workflows).
+\item
+  We propose \textbf{Quarto Manuals}, a framework for executable
+  software manuals built on Quarto starter templates and extensions.
+\item
+  A Quarto Manual guides users through a workflow as ordered,
+  interactive pages that combine explanation, code execution, and
+  verification.
+\item
+  Manuals are flexible across audiences, projects, organizations, and
+  programming languages, while remaining reproducible because their side
+  effects are explicit and inspectable.
+\item
+  Rather than hiding workflow decisions, Quarto Manuals keep them
+  visible and editable, which is especially important in research
+  computing environments with local constraints and judgment calls.
+\item
+  The backend is powered by \textbf{\texttt{quarto-emit}}, a lightweight
+  extension that materializes conventional workflow artifacts from
+  manual pages when needed.
+\item
+  We demonstrate the approach with three examples of increasing
+  sophistication: a simple manual, an intermediate manual, and a complex
+  manual.
+\item
+  For authors, Quarto Manuals provide a structured but adaptable
+  template for turning complex recurring workflows into reusable
+  manuals.
+\item
+  For operators, they provide a stepwise, testable process for leaving
+  behind reproducible setup artifacts and confirming progress in a
+  structured way through the workflow.
+\end{itemize}
 
-  \begin{itemize}
-  \item
-    docs are something you \emph{read}, not something you \emph{do},
-    meaning they break down in usefulness when we have to scale to
-    longer and more complicated procedures
-  \item
-    docs are not executable, meaning artifacts of progress are not
-    reproducible, testable, or verifiable
-  \item
-    good docs do not have a flexible feedback loop to confirm the user
-    is acting correctly
-  \end{itemize}
-\item
-  \emph{What about building command line wrappers around existing
-  tools?} They are executable but they are totally inflexible.
+\subsection{Feature Roadmap}\label{feature-roadmap}
 
-  \begin{itemize}
-  \item
-    You build it once and everyone has to do it that way, or
-  \item
-    You inundate your software with several flags, arguments, and
-    runtime options to try to make it flexible. This is not a good
-    solution for repetitive but unexpectedly parametric workflows.
-  \end{itemize}
-\item
-  \emph{What about AI, LLMs, agents?}
-
-  \begin{itemize}
-  \item
-    This is a promising solution, but (fact) LLMs are non-deterministic,
-    meaning some steps in larger and more complex workflows will
-    inevitably have results that may not be reproducible.
-  \item
-    Additionally (opinion) agents are not yet mature enough to be
-    reliable for some of the complex workflows we have in mind (though
-    we are working on it with agentic workflows). Most users are still
-    in the dyadic, ``paste text into the box and read what comes out''
-    turn-based workflow, which is not sufficient for many of the complex
-    workflows we do.
-  \end{itemize}
-\item
-  To solve this, we need a new type of documentation that is executable,
-  flexible, and scalable. This is where Quarto and
-  notebook-driven-development (NDD) comes in.
-\item
-  We propose Quarto Manuals, an executable documentation framework that
-  is flexible, scalable, and reproducible. Internally, a Quarto Manual
-  is a custom starter template and extension for Quarto.
-\item
-  benefits:
-
-  \begin{itemize}
-  \item
-    flexible: can be used for different audiences, can be used for
-    different purposes, can be used for different programming languages
-  \item
-    scalable: can be used for different projects, can be used for
-    different teams, can be used for different organizations, and can
-    scale in complexity required of the project
-  \item
-    reproducible: side effects are intentional, meaning they can be used
-    to generate reproducible artifacts for the workflow itself
-  \item
-    relies on quarto and can leverage the full ecosystem of quarto,
-    including quarto extensions, quarto publishing, and quarto rendering
-  \end{itemize}
-\item
-  drawbacks:
-
-  \begin{itemize}
-  \item
-    requires some programming knowledge to use
-  \item
-    requires quarto; might be a new framework for some
-  \item
-    requires active user participation, not fully automated (but this is
-    a feature, not a bug)
-  \end{itemize}
-\item
-  we show three examples in action: a simple example, an intermediate
-  example, and a complex example.
-\item
-  Importantly, we use \texttt{quarto-emit}, a new extension, for the
-  backend. A Quarto Manual is just a cognitive framework physically
-  materialized by Quarto's custom Divs, and powered in the backend by a
-  simple but powerful file export extension, \texttt{quarto-emit}.
-\item
-  Workflow for manual \emph{authors}:
-
-  \begin{itemize}
-  \item
-    Authors call
-    \texttt{quarto\ use\ template\ GoldenPlanetaryHealthLab/QuartoManuals}
-    to create a new Quarto Manual that instructs users on how to do
-    something complex and procedural, for e.g., ``SetupMyProject''
-  \item
-    Helpful prompts throughout the template help guide manual authors to
-    use the template effectively, but leave them with the flexibility to
-    implement their workflows to their desired level of sophistication.
-  \item
-    Authors implement each page check with a testing suite to give the
-    user feedback on whether they are implementing the workflow
-    correctly.
-  \item
-    inter-page dependencies are gently suggested, but not enforced to
-    reduce implementation overhead for the extension and allow for
-    flexibility in workflow design.
-  \item
-    Authors \texttt{git\ push} their manuals to an organization's GitHub
-    repository (or code hosting site of your choice)
-  \end{itemize}
-\item
-  For manual \emph{users}:
-
-  \begin{itemize}
-  \item
-    In your home directory or otherwise,
-    \texttt{quarto\ use\ template\ MyLab/SetupMyProject} clones the
-    \texttt{SetupMyProject} Manual to your local machine.
-  \item
-    Step through the pages of the manual, hardcoding critical,
-    context-specific variables (like your cluster configuration, your
-    desired Python version, etc.) and executing the code as you go.
-  \item
-    With each page, leave behind setup artifacts as you go, like
-    environment files (\texttt{.venv}, \texttt{.Renviron}) scripts
-    (\texttt{setup.sh}, \texttt{install.R}), and other configuration
-    files (\texttt{config.toml}, \texttt{settings.json},
-    \texttt{pyproject.toml}).
-  \item
-    Run \texttt{quarto\ render} to render the whole manual to HTML, PDF,
-    or DOCX. If the manual has checks implemented in a testing suite,
-    quarto render will execute the testing suite, providing you with a
-    visual report of your progress in the manual and whether you are
-    implementing the workflow correctly.
-  \item
-    If all goes well, you now have a fully setup project as the original
-    author intended, and you can now start working on your
-    implementation of the project. If it doesn't you can go back to the
-    exact Point of Failure (POF) and fix the issue, or you can reach out
-    to the original author for help.
-  \end{itemize}
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  abstract as prose
+\item[$\square$]
+  stylize each block so it is visually distinct
+\item[$\square$]
+  use Lua to print out useful render messages when blocks are being
+  processed
+\item[$\square$]
+  can Lua be used to connect checks and prereqs across pages? Maybe?
+\item[$\square$]
+  setup a testing suite in a separate repo
 \end{itemize}
 
 \subsection{Hypotheses, Aims, and
