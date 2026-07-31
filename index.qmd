@@ -15,7 +15,7 @@ execute:
 
 ## What Is A Quarto Manual?
 
-A Quarto Manual is a Quarto book that guides the user through a series of software steps by organizing it into interdependent, executable Quarto pages.
+A Quarto Manual is a Quarto book that guides the user through a series of software steps by organizing it into independent, executable Quarto pages.
 
 Each Page of a Manual should:
 

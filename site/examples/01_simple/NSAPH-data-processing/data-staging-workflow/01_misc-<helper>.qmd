@@ -1,0 +1,16 @@
+---
+title: "Helper Notes"
+format: html
+---
+
+This helper page collects the small pieces of context an operator may need
+before staging data.
+
+Typical notes for this workflow would include:
+
+- how to confirm that `stagecoach` is installed;
+- how to locate the dataset manifest or registry entry;
+- who to contact if dataset access has not yet been granted;
+- where staged inputs should appear inside the project.
+
+In a simple manual, a helper page should stay short and practical.

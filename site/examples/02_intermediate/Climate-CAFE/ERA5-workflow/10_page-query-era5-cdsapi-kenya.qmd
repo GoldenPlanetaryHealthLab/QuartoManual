@@ -1,0 +1,69 @@
+---
+title: "Query ERA5-Land For Kenya"
+subtitle: "Download the first project artifacts from CDS"
+format: html
+execute:
+  eval: false
+---
+
+This page turns the first Climate-CAFE script into a manual step the operator
+can execute and verify.
+
+::: {.manual-prereq title="Confirm Access To CDS"}
+
+Before querying ERA5-Land data, confirm that the required client library and
+credentials are available.
+
+```{python}
+#| eval: false
+from pathlib import Path
+
+assert Path("README.md").exists(), "Expected to run this page from the project root."
+assert Path.home().joinpath(".cdsapirc").exists(), "Expected CDS credentials in ~/.cdsapirc."
+```
+
+:::
+
+::: {.manual-procedure title="Declare The Query Scope"}
+
+Define the minimum set of parameters needed for a first ERA5-Land query.
+
+```{python}
+#| eval: false
+request = {
+    "dataset": "reanalysis-era5-land",
+    "country": "Kenya",
+    "year": "2020",
+    "month": "01",
+}
+request
+```
+
+:::
+
+::: {.manual-procedure title="Prepare The Output Directory"}
+
+Create a location for raw downloaded files.
+
+```{python}
+#| eval: false
+from pathlib import Path
+
+raw_dir = Path("data/raw/era5land")
+raw_dir.mkdir(parents=True, exist_ok=True)
+raw_dir
+```
+
+:::
+
+::: {.manual-check title="Verify Query Readiness"}
+
+```{python}
+from pathlib import Path
+
+raw_dir = Path("data/raw/era5land")
+assert raw_dir.exists(), "Expected the raw ERA5-Land directory to exist."
+assert raw_dir.is_dir(), "Expected data/raw/era5land to be a directory."
+```
+
+:::

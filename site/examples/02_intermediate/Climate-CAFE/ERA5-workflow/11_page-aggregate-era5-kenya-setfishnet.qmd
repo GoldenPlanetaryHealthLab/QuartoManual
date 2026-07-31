@@ -1,0 +1,63 @@
+---
+title: "Build The Aggregation Fishnet"
+subtitle: "Prepare the geometry used for later spatial summaries"
+format: html
+execute:
+  eval: false
+---
+
+This page represents the first aggregation step. It depends on the project
+already having a place for derived artifacts and any required boundary data.
+
+::: {.manual-prereq title="Confirm Aggregation Inputs"}
+
+```{python}
+#| eval: false
+from pathlib import Path
+
+assert Path("data/raw/era5land").is_dir(), "Expected raw ERA5-Land directory from the query step."
+Path("data/interim").mkdir(parents=True, exist_ok=True)
+```
+
+:::
+
+::: {.manual-procedure title="Prepare The Fishnet Output Directory"}
+
+```{python}
+#| eval: false
+from pathlib import Path
+
+fishnet_dir = Path("data/interim/fishnet")
+fishnet_dir.mkdir(parents=True, exist_ok=True)
+```
+
+:::
+
+::: {.manual-procedure title="Describe The Intended Fishnet Artifact"}
+
+```{python}
+#| eval: false
+from pathlib import Path
+
+fishnet_manifest = Path("data/interim/fishnet/README.txt")
+fishnet_manifest.write_text(
+    "This directory will hold the fishnet geometry used for ERA5 aggregation.\n",
+    encoding="utf-8",
+)
+```
+
+:::
+
+::: {.manual-check title="Verify Fishnet Step Output"}
+
+```{python}
+from pathlib import Path
+
+fishnet_dir = Path("data/interim/fishnet")
+fishnet_manifest = fishnet_dir / "README.txt"
+
+assert fishnet_dir.is_dir(), "Expected fishnet output directory to exist."
+assert fishnet_manifest.exists(), "Expected fishnet manifest file to exist."
+```
+
+:::
