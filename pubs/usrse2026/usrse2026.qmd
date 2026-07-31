@@ -1,7 +1,7 @@
 ---
 title: "Quarto Manuals"
 # If blank, the running header is the title in upper case.
-shorttitle: "Executable software operations manuals built from interdependent Quarto pages"
+shorttitle: "Executable software operations manuals built from independent Quarto pages"
 # Set names and affiliations.
 # It is nice to specify everyone's orcid, if possible.
 # There can be only one corresponding author, but declaring one is optional.

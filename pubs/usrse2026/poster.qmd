@@ -1,7 +1,7 @@
 ---
 title: Quarto Manuals
 author: Edenian
-subtitle: Executable software operations manuals built from interdependent Quarto pages
+subtitle: Executable software operations manuals built from independent Quarto pages
 # header_font: "Roboto"
 header_logo: "dummy-thchan.png"
 # header_block_color: "BF40BF"
