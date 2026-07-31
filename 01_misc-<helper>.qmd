@@ -1,0 +1,9 @@
+---
+title: "Helper Functions"
+format: html
+---
+
+It might be helpful to have the following resources available to you as you 
+work through the manual. Some are required, others are merely useful.
+
+EXAMPLES

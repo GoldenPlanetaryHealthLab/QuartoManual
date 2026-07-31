@@ -50,8 +50,9 @@ directory and a `README.md` file.
 #| eval: false
 from pathlib import Path
 
-assert Path("../README.md").exists(), "Expected README.md to exist before this page runs."
-assert Path("../data").is_dir(), "Expected data/ directory from an earlier page."
+assert Path("README.md").exists(), "Expected README.md to exist before this page runs."
+
+assert Path("_extensions").is_dir(), "Expected _extensions directory to exist before this page runs."
 ```
 
 You can also express prerequisites with shell checks:
@@ -149,3 +150,12 @@ Instead:
 - use check blocks to test those artifacts directly.
 
 That keeps each page independent, rerunnable, and easy to reason about.
+
+To order your pages, we recommend using a consistent naming convention in filenames, e.g., `01_page-<description>.qmd`, `02_page-<description>.qmd`, etc., where:
+
+- `index.qmd` is reserved for the index page of the manual;
+- file `00` is reserved for the cover page;
+- files `01-09` are reserved for orientation, miscellaneous functions, and other helper pages;
+- files `10-99` are reserved for the main workflow pages, which should be ordered numerically to reflect the intended workflow order, with the optional suffix `[NN]a`, `[NN]b`, etc. for pages that are logically grouped together.
+- Use underscores in filenames to separate entities, e.g., section and page type: `01_misc-helpers.qmd` and `02_misc-API-keys.qmd` are miscellaneous prerequisites, and are functionally different from `10_page-task-description.qmd`, `11_page-run-analysis.qmd`, etc. with explicit procedures
+- Use dashes in filenames to separate words within an entity, e.g., `10_page-task-description.qmd`, `11_page-run-analysis.qmd`, etc.

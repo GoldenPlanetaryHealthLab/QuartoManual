@@ -1,0 +1,29 @@
+---
+title: "Data Staging with stagecoach"
+subtitle: "A guide to staging data with the stagecoach tool"
+format: html
+---
+
+
+::: {.callout-tip}
+
+Adapted from the Golden Planetary Health Lab Handbook's [Data Staging Guide](https://goldenplanetaryhealthlab.github.io/02_guides/02_projects-and-reproducibility/stagecoach.html), this page provides a guide to data staging using the `stagecoach` tool.
+
+This is an example of a very simple manual that can live in your home dir, that 
+you can quickly break out and use for every project you need to stage data for.
+Just change the variables and execute the notebooks again. Or, you can use it
+as many times as is necessary before you memorize the workflow...
+
+Which is one of the intended goals of manuals: to help you learn a workflow by 
+doing it, and if you do it enough times, then you can do it without the manual.
+
+:::
+
+
+Data staging is the process of preparing and organizing data for analysis. In the Golden Lab, we use a tool called stagecoach to help with this process. stagecoach allows users to request access to datasets using a digital manifest. In doing so, it ensures that the exact resources you request for your project are made available to you in a computationally reproducible manner, reducing the risk of errors and missing steps.
+
+This manual instructs you on how to use stagecoach to stage data for your 
+project. It is designed to be flexible enough to be used by other people and 
+projects, but still reproducible and robust enough to ensure you don't have to 
+look up or copy-paste the same steps over and over again. This is a great 
+scenario for a simple operator's manual.

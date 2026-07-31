@@ -1,8 +1,6 @@
 ---
-title: "Cover Page"
+title: "My Quarto Manual"
 format: html
 ---
 
-This page must contain some prompting text and placeholders for the
-manual author to describe the project and workflow that the manual
-will guide the user through. It's the landing page of using a manual.
+This Quarto Manual is for...

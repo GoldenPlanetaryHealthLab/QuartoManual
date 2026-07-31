@@ -1,0 +1,10 @@
+---
+title: "Quarto Manuals"
+format: html
+---
+
+This is a cover page for the Quarto Manual. It is a simple page that can be used to introduce the manual and provide some context for the reader.
+
+Like the cover page of a book, this page should be used to provide a brief overview of the manual and its purpose. It can also be used to provide some background information on the topic of the manual.
+
+
