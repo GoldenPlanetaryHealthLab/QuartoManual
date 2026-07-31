@@ -1,0 +1,239 @@
+---
+title: "Quarto Manuals"
+# If blank, the running header is the title in upper case.
+shorttitle: "Executable software operations manuals built from interdependent Quarto pages"
+# Set names and affiliations.
+# It is nice to specify everyone's orcid, if possible.
+# There can be only one corresponding author, but declaring one is optional.
+author:
+  - name: Tinashe M. Tapera
+    corresponding: true
+    orcid: 0000-0001-9080-5010
+    email: ttapera@hsph.harvard.edu
+    url: https://GoldenPlanetaryHealthLab.github.io/QuartoManuals
+    # Roles are optional. 
+    # Select from the CRediT: Contributor Roles Taxonomy https://credit.niso.org/
+    # conceptualization, data curation, formal analysis, funding acquisition, investigation, 
+    # methodology, project administration, resources, software, supervision, validation, 
+    # visualization, writing, editing
+    roles:
+      - conceptualization
+      - writing
+    affiliations:
+      - id: id1
+        name: "Ana and Blanca's University"
+        group: Clinical Psychology Program
+        department: Department of Psychology
+        address: 1234 Capital St.
+        city: Albany
+        region: NY
+        country: USA
+        postal-code: 12084-1234
+  - name: Chris
+    orcid: 0000-0000-0000-0002
+    roles:
+      - project administration
+      - formal analysis
+    affiliations: 
+      - ref: id1
+  - name: Danielle
+    orcid: 0000-0000-0000-0003
+    deceased: true
+    roles:
+      - formal analysis
+      - writing
+    affiliations:
+      - name: "Danielle's Primary Affiliation"
+      - name: "Danielle's Secondary Affiliation"
+    # Because Dolorita is unaffiliated, specify her city instead
+  - name: Michelle
+    orcid: 0000-0000-0000-0004
+    roles:
+      - writing
+      - methodology
+      - formal analysis
+    # List city and region/state for unaffiliated authors
+    affiliations:
+      - city: Buffalo
+        region: NY
+blank-lines-above-author-note: 2
+author-note:
+  status-changes: 
+    # Example: [Author name] is now at [affiliation].
+    affiliation-change: Carina Mengano is now at Generic University.
+    # Example: [Author name] is deceased.
+    deceased: ~
+  # Disclosures condensed to one paragraph, but you can start a field with two line breaks to break them up: \n\nNew Paragraph
+  disclosures:
+    # Example: This study was registered at X (Identifier Y).
+    study-registration: ~
+    # Acknowledge and cite data/materials to be shared.
+    data-sharing: ~
+    # Example: This article is based on data published in [Reference].
+    # Example: This article is based on the dissertation completed by [citation].  
+    related-report: ~
+    # Example: [Author name] has been a paid consultant for Corporation X, which funded this study.
+    conflict-of-interest: The authors have no conflicts of interest to disclose.
+    # Example: This study was supported by Grant [Grant Number] from [Funding Source].
+    financial-support: ~
+    # Example: The authors are grateful to [Person] for [Reason].
+    gratitude: ~
+    # Example. Because the authors are equal contributors, order of authorship was determined by a fair coin toss.
+    authorship-agreements: ~
+abstract: "to be fleshed out from bullet form below"
+# Put as many keywords at you like
+keywords: 
+  - APA Style
+  - Quarto
+  - Markdown
+  - apaquarto
+# Optional statement about the importance of the paper. The heading can be customized in the language field.
+impact-statement: "Scientific programming workflows are becoming increasingly complex, while existing support mechanisms remain poorly matched to that complexity. Traditional documentation is flexible but non-executable, command-line wrappers are executable but often too rigid, and current agentic systems are promising but not yet sufficiently reliable for many high-stakes workflow setup tasks. We propose Quarto Manuals, an executable documentation framework built on Quarto that helps authors create flexible, scalable, and reproducible workflow manuals composed of structured pages with explicit procedures and checks. Powered by the quarto-emit backend, Quarto Manuals enable authors to create executable documentation that allows users to conveniently step through scientific computing workflows while generating reproducible project artifacts and receiving immediate feedback on whether each step has been implemented correctly."
+# If true, a word count will appear below the keywords (tables, figure captions, and references excluded in count.)
+word-count: false
+# If true, tables and figures are mingled with the text instead of listed at the end of the document.
+floatsintext: true
+# Numbered lines (.pdf and .docx only)
+numbered-lines: false
+# File with references
+bibliography: ../bibliography.bib
+# Suppress title page
+suppress-title-page: false
+# Link citations to references
+link-citations: true
+# Masks references that appear in the masked-citations list
+mask: false
+masked-citations:
+  - schneider2012cattell
+  - schneider2015intelligence
+# If true, nocite references are prefixed with asterisks
+meta-analysis: true
+nocite: |
+  @bentley1929instructions, @cohen2003applied
+# If true, adds today's date below author affiliations. If text, can be any value.
+# This is not standard APA format, but it is convenient.
+# Works with docx, html, and typst. 
+draft-date: false
+# Language options. See https://quarto.org/docs/authoring/language.html
+lang: en
+# Additional language options
+language:
+  citation-last-author-separator: "and"
+  citation-masked-author: "Masked Citation"
+  citation-masked-date: "n.d."
+  citation-masked-title: "Masked Title"
+  email: "Email"
+  title-block-author-note: "Author Note"
+  title-block-correspondence-note: "Correspondence concerning this article should be addressed to"
+  title-block-role-introduction: "Author roles were classified using the Contributor Role Taxonomy (CRediT; [credit.niso.org](https://credit.niso.org)) as follows:"
+  title-impact-statement: "Impact Statement"
+  references-meta-analysis: "References marked with an asterisk indicate studies included in the meta-analysis."
+# Keep `false` to remain consistent with APA style. If `true`, replaces ampersands with `and` or word specified in `citation-last-author-separator` in parenthetical citations. 
+no-ampersand-parenthetical: false
+fontsize: 12pt
+execute: 
+  cache: true
+format:
+  apaquarto-html: 
+    toc: true
+  # apaquarto-docx: 
+  #   toc: false
+  # apaquarto-typst: 
+  #   keep-typ: true
+  #   list-of-figures: false
+  #   list-of-tables: false
+  #   toc: true
+  #   papersize: "us-letter"
+  #   numbersections: true
+  apaquarto-pdf:
+    # Can be jou (journal), man (manuscript), stu (student), or doc (document)
+    documentmode: man
+    keep-tex: true
+    pdf-standard: ua-2
+---
+
+{{< include abstract.md >}}
+
+## Hypotheses, Aims, and Objectives
+
+The last paragraph of the introduction usually states the specific hypotheses of the study, often in a way that links them to the research design.
+
+# Method
+
+General remarks on method. This paragraph is optional. Not all papers require each of these sections. Edit them as needed. Consult the [Journal Article Reporting Standards](https://apastyle.apa.org/jars) for what is needed for your type of article.
+
+## Participants
+
+Who are they? How were they recruited? Report criteria for participant inclusion and exclusion. Perhaps some basic demographic stats are in order. A table is a great way to avoid repetition in statistical reporting.
+
+## Measures
+
+This section can also be titled **Materials** or **Apparatus**. Whatever tools, equipment, or measurement devices used in the study should be described.
+
+### Measure A
+
+Describe Measure A.
+
+### Measure B
+
+Describe Measure B.
+
+#### Subscale B1
+
+A paragraph after a 4th-level header will appear on the same line as the header.
+
+#### Subscale B2
+
+A paragraph after a 4th-level header will appear on the same line as the header.
+
+##### Subscale B2a
+
+A paragraph after a 5th-level header will appear on the same line as the header.
+
+##### Subscale B2b
+
+A paragraph after a 5th-level header will appear on the same line as the header.
+
+## Procedure
+
+What did participants do? How are the data going to be analyzed?
+
+# Results
+
+## Descriptive Statistics
+
+Describe the basic characteristics of the primary variables. My ideal is to describe the variables well enough that someone conducting a meta-analysis can include the study without needing to ask for additional information.
+
+<!-- Add Additional Sections as Needed -->
+
+@tbl-mymarkdowntable2 is an example of a plain markdown table. Note the that the caption begins with a colon.
+
+| Letters | Numbers |
+|:-------:|:-------:|
+| A       | 1       |
+| B       | 2       |
+| C       | 3       |
+
+: My Caption. {#tbl-mymarkdowntable2 apa-note="My note"}
+
+
+
+# Discussion
+
+Describe results in non-statistical terms. <!-- Add sections as needed. -->
+
+## Limitations and Future Directions
+
+Every study has limitations. Based on this study, some additional steps might include...
+
+
+## Conclusion
+
+Describe the main point of the paper. 
+
+# References
+
+<!-- References will auto-populate in the refs div below -->
+
+::: {#refs}
+:::
