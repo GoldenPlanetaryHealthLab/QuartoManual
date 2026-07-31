@@ -4,9 +4,10 @@
     "href": "index.html",
     "title": "Quarto Manual",
     "section": "",
-    "text": "0.1 What Is A Quarto Manual?\nA Quarto Manual is an executable operations manual for a software or research workflow.\nUse a Quarto Manual when a workflow is too long, fragile, or context-specific for a README, but too visible and judgment-heavy to hide behind a single CLI.\nA manual gives the user ordered .qmd pages that:\nThe manual does not need to own a shared runtime object model. Instead, each page owns its own state and proves its own result.",
+    "text": "0.1 What Is A Quarto Manual?\nA Quarto Manual is an executable operations manual for a software or research workflow.\nUse a Quarto Manual when a workflow is too long, fragile, or context-specific for a README, but too visible and judgment-heavy to hide behind a single CLI.\nA manual gives the user ordered .qmd pages that:\nIn practice, Quarto Manuals are best understood as operator-facing procedure books for software and research workflows.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
     ]
   },
   {
@@ -16,7 +17,8 @@
     "section": "",
     "text": "explain one step at a time;\nrun the code for that step;\nverify whether the step worked;\nmake dependencies between steps explicit.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
     ]
   },
   {
@@ -24,9 +26,10 @@
     "href": "index.html#core-idea",
     "title": "Quarto Manual",
     "section": "0.2 Core Idea",
-    "text": "0.2 Core Idea\nThe central design rule is simple:\n\nA Quarto Manual is an ordered set of independent executable pages.\n\nEach page is a contract with three parts:\n\nprereq: prove that the page is allowed to run;\nprocedure: do one or more pieces of work;\ncheck: prove that the work succeeded.\n\nThis avoids hidden state between pages.\nIf page 3 depends on page 2, page 3 should enforce that dependency in its prerequisite block by checking visible project state:\n\nrequired files exist;\nrequired directories exist;\na previous test suite passes;\na required tool is installed;\na prior configuration file contains the expected values.\n\nPages therefore share a project, not a notebook kernel.",
+    "text": "0.2 Core Idea\nThe central design rule is simple:\n\nA Quarto Manual is an ordered set of independent executable pages.\n\nEach Page is a contract with three parts:\n\nprereq: prove that the page is allowed to run;\nprocedure: do one or more pieces of work;\ncheck: prove that the work succeeded.\n\nPages should share a project, not a notebook kernel1.\nIf page 3 depends on page 2, page 3 should deliberately enforce that dependency in its prerequisite block by checking visible project state:\n\nrequired files exist;\nrequired directories exist;\na previous test suite passes;\na required tool is installed;\na prior configuration file contains the expected values.\n\nThat allows a manual to orchestrate setup and operation without relying on hidden cross-page state.\nFor more complex, non-linear dependencies, Quarto Manuals may reach their limit. In that case, consider moving directly to a DAG-based workflow orchestrator such as Snakemake or Nextflow, and injecting that into the Manual as a single page that runs the orchestrator.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
     ]
   },
   {
@@ -34,9 +37,10 @@
     "href": "index.html#why-this-shape",
     "title": "Quarto Manual",
     "section": "0.3 Why This Shape?",
-    "text": "0.3 Why This Shape?\nThis structure is useful because it keeps responsibility local.\n\nThe page owns its own setup conditions.\nThe page owns the work it performs.\nThe page owns the test that proves the result.\n\nThis is close to familiar software design patterns:\n\nDesign by contract: prereq acts like a precondition and check acts like a postcondition.\nArrange / Act / Assert: prereq arranges the required state, procedure acts, and check asserts the result.\nIdempotent infrastructure steps: inspect current state, apply a change, then verify the target state.\n\nThat makes manuals easier to write, rerun, and debug.",
+    "text": "0.3 Why This Shape?\nThis structure keeps responsibility local.\n\nThe page owns its own setup conditions.\nThe page owns the work it performs.\nThe page owns the test that proves the result.\n\nThis is close to familiar software design patterns:\n\nDesign by contract: prereq acts like a precondition and check acts like a postcondition.\nArrange / Act / Assert: prereq arranges the required state, procedure acts, and check asserts the result.\nIdempotent infrastructure steps: inspect current state, apply a change, then verify the target state. Once it’s been run, you don’t have to run it again, and doing so won’t break anything.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
     ]
   },
   {
@@ -44,109 +48,752 @@
     "href": "index.html#page-contract",
     "title": "Quarto Manual",
     "section": "0.4 Page Contract",
-    "text": "0.4 Page Contract\nEvery manual page should contain:\n\nexactly one .manual-prereq block;\none or more .manual-procedure blocks;\nexactly one .manual-check block.\n\nThe Quarto Manual filter can validate that structure and render those blocks as semantic callouts.\n\n0.4.1 Prerequisite\nUse the prerequisite block to answer:\n\nWhat must already be true before this page can proceed?\n\nTypical prerequisite checks include:\n\nassert Path(\"README.md\").exists()\ntest -d data\npytest tests/test_previous_step.py\nstopifnot(file.exists(\"config.yml\"))\n\n\n\n0.4.2 Procedure\nUse one or more procedure blocks to answer:\n\nWhat should the user do on this page?\n\nProcedure blocks are where the page creates files, edits configuration, prepares data, runs commands, or materializes tests.\n\n\n0.4.3 Check\nUse the check block to answer:\n\nHow do we know this page worked?\n\nA check should test the concrete artifacts created by the procedure blocks above.\nFor example, a check might:\n\nassert that a config file exists;\nvalidate JSON or YAML contents;\nimport an emitted helper function;\nrun pytest, testthat, or unittest;\nverify that a shell script was written and is executable.",
+    "text": "0.4 Page Contract\nEvery manual page should contain:\n\nexactly one .manual-prereq block;\none or more .manual-procedure blocks;\nexactly one .manual-check block.\n\nThe Quarto Manual filter can validate that structure and render those blocks as semantic callouts.\nSee Manual Pages for the fuller authoring template.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
     ]
   },
   {
-    "objectID": "index.html#minimal-example",
-    "href": "index.html#minimal-example",
+    "objectID": "index.html#the-backend-quarto-emit",
+    "href": "index.html#the-backend-quarto-emit",
     "title": "Quarto Manual",
-    "section": "0.5 Minimal Example",
-    "text": "0.5 Minimal Example\nHere is the smallest useful page shape:\n---\ntitle: \"Create Configuration\"\nmanual:\n  page: 2\n---\n\n::: {.manual-prereq}\n\n::: {#3cf6d3c2 .cell execution_count=1}\n``` {.python .cell-code}\nfrom pathlib import Path\n\nassert Path(\"README.md\").exists()\nassert Path(\"data\").is_dir()\n```\n:::\n\n\n:::\n\n::: {.manual-procedure}\n\n::: {#d7bc5288 .cell execution_count=2}\n``` {.python .cell-code}\nfrom pathlib import Path\nimport json\n\nPath(\"config\").mkdir(exist_ok=True)\nPath(\"config/manual.json\").write_text(\n    json.dumps({\"status\": \"configured\"}, indent=2) + \"\\n\",\n    encoding=\"utf-8\",\n)\n```\n:::\n\n\n:::\n\n::: {.manual-check}\n\n::: {#fc1c4457 .cell execution_count=3}\n``` {.python .cell-code}\nfrom pathlib import Path\nimport json\n\nconfig = Path(\"config/manual.json\")\nassert config.exists()\nassert json.loads(config.read_text())[\"status\"] == \"configured\"\n```\n:::\n\n\n:::\nSee page.qmd for a fuller authoring template.",
+    "section": "0.5 The Backend: quarto-emit",
+    "text": "0.5 The Backend: quarto-emit\nquarto-emit is an extension to Quarto that can materialize reusable files from a Quarto page by wrapping the text of a code block in a file write operation. It is optional, but becomes quite powerful when combined with the Quarto Manual structure.\nQuarto Manual and quarto-emit have different jobs.\n\nQuarto Manual defines the structure of an executable manual page.\nquarto-emit optionally materializes reusable files from those pages.\n\nYou do not need quarto-emit to write a manual.\nUse quarto-emit when a page should produce conventional project artifacts such as:\n\nsrc/ modules;\ntests/ suites;\nscripts/;\nconfig/ files.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#relationship-to-quarto-emit",
-    "href": "index.html#relationship-to-quarto-emit",
-    "title": "Quarto Manual",
-    "section": "0.6 Relationship To quarto-emit",
-    "text": "0.6 Relationship To quarto-emit\nQuarto Manual and quarto-emit have different jobs.\n\nQuarto Manual defines the structure of an executable manual page.\nquarto-emit optionally materializes reusable files from those pages.\n\nYou do not need quarto-emit to write a manual.\nUse quarto-emit when a page should produce conventional project artifacts such as:\n\nsrc/ modules\ntests/ suites\nscripts/\nconfig/ files\n\nFor example, a check block may also emit a real pytest file:\n::: {.manual-check .emit-test-py file=\"tests/test_manual_page.py\"}\n\n::: {#f2239306 .cell execution_count=4}\n``` {.python .cell-code}\nfrom pathlib import Path\n\n\ndef test_manual_page():\n    assert Path(\"config/manual.json\").exists()\n```\n:::\n\n\n:::\nThat keeps the page readable while still allowing the manual to materialize files for later reuse.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
     ]
   },
   {
     "objectID": "index.html#author-workflow",
     "href": "index.html#author-workflow",
     "title": "Quarto Manual",
-    "section": "0.7 Author Workflow",
-    "text": "0.7 Author Workflow\nTo create a manual for your own procedure:\n\nStart from the Quarto Manual template.\nWrite one page per operational step.\nGive each page one prerequisite block, one or more procedure blocks, and one check block.\nKeep page state local and enforce dependencies through prerequisites.\nUse quarto-emit only when a page needs to materialize reusable files.",
+    "section": "0.6 Author Workflow",
+    "text": "0.6 Author Workflow\nTo create a manual for your own procedure:\n\nStart from the Quarto Manual template.\nWrite one page per operational step.\nGive each page one prerequisite block, one or more procedure blocks, and one check block.\nKeep page state local and enforce dependencies through prerequisites.\nUse quarto-emit only when a page needs to materialize reusable files.\n\nThe shipped template should stay lean and prompt-driven. Treat the template as the source of truth, then use richer examples on the documentation site to show what a mature manual can look like.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
     ]
   },
   {
     "objectID": "index.html#operator-workflow",
     "href": "index.html#operator-workflow",
     "title": "Quarto Manual",
-    "section": "0.8 Operator Workflow",
-    "text": "0.8 Operator Workflow\nTo use an existing manual:\n\nFind the repository for the procedure manual.\nRun quarto use template &lt;ORG&gt;/&lt;PROCEDURE&gt;_manual.\nOpen the manual locally.\nWork through the pages in order.\nLet each page’s prerequisite and check blocks tell you whether you can proceed.",
+    "section": "0.7 Operator Workflow",
+    "text": "0.7 Operator Workflow\nTo use an existing manual:\n\nFind the repository for the procedure manual.\nRun quarto use template &lt;ORG&gt;/&lt;PROCEDURE&gt;_manual.\nOpen the manual locally.\nWork through the pages in order.\nLet each page’s prerequisite and check blocks tell you whether you can proceed.\n\n\n\n\n\n\n\nImportant\n\n\n\nAs you read through this website documentation, though, keep in mind that the operator workflow is to have cloned the manual and be reading the pages in VSCode, Jupyter, or whatever editor they prefer, while also actively running the code in the procedure blocks. The rendered website is a documentation artifact to help readers consume the content.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
     ]
   },
   {
     "objectID": "index.html#scope-of-this-project",
     "href": "index.html#scope-of-this-project",
     "title": "Quarto Manual",
-    "section": "0.9 Scope Of This Project",
-    "text": "0.9 Scope Of This Project\nThis project is intentionally narrow.\nQuarto Manual should only extend Quarto in one functional way:\n\ngive manual pages semantic structure with prereq, procedure, and check blocks.\n\nEverything else should be optional:\n\nemitted source files\nemitted test suites\nhelper modules\nworkflow-specific libraries\n\nThose are choices a manual author may make, not requirements of the framework.",
+    "section": "0.8 Scope Of This Project",
+    "text": "0.8 Scope Of This Project\nThis project is intentionally narrow.\nQuarto Manual should only extend Quarto in one functional way:\n\ngive manual pages semantic structure with prereq, procedure, and check blocks.\n\nEverything else should be optional, but frictionless to add, thanks to quarto-emit:\n\nemitted source files;\nemitted test suites;\nhelper modules;\nworkflow-specific libraries.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals</span>"
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
     ]
   },
   {
-    "objectID": "page.html",
-    "href": "page.html",
-    "title": "2  Manual Pages",
+    "objectID": "index.html#examples-on-this-site",
+    "href": "index.html#examples-on-this-site",
+    "title": "Quarto Manual",
+    "section": "0.9 Examples On This Site",
+    "text": "0.9 Examples On This Site\nThis site includes three example manuals that scale in sophistication:\n\na simple data-staging workflow;\nan intermediate ERA5 acquisition and aggregation workflow;\nan advanced RSE workbench environment workflow.\n\nEach example is intentionally more complete than the shipped template, with more creative (and hopefully more elegant) implementations and problem solving strategies involving real-world use cases.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#footnotes",
+    "href": "index.html#footnotes",
+    "title": "Quarto Manual",
     "section": "",
-    "text": "2.1 1. Prerequisites\nThis section illustrates the smallest useful shape of a Quarto Manual page, and serves as the working template for Quarto Manual authors.\nA Page should do three things:\nIn Quarto Manuals, we implement these requirements in specific block types, which means:\nUse the prerequisite block to check whether the page is allowed to proceed. This is where page-to-page dependency should be enforced.\nGood prerequisite checks look for visible project state:",
+    "text": "A notebook kernel is a program that runs code in a specific programming language, such as Python or R. It allows users to test out code iteratively in a Read-Eval-Print Loop (REPL) workflow. REPL workflows are great for exploration, and arguably were the foundational technology behind the rise of accessible data science. One of the main criticisms of notebooks, however, is that they can hide the state of your code (see here), which makes it hard to reason about your project. Quarto Manuals avoid that problem primarily by using Quarto Markdown, which is plain text, and secondarily by encouraging page independence in its design. Any interdependence is made explicit through side-effects that Manual Authors must deliberately insert.↩︎",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Manual Pages</span>"
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Manuals Explained</span>"
     ]
   },
   {
-    "objectID": "page.html#prerequisites",
-    "href": "page.html#prerequisites",
-    "title": "2  Manual Pages",
+    "objectID": "00_cover.html",
+    "href": "00_cover.html",
+    "title": "2  Cover Page",
     "section": "",
-    "text": "does a required file already exist?\ndid a previous page create the expected directory?\ndoes a previously emitted test suite pass?\nis the required tool available?\n\n\n\n\n\n\n\nTip\n\n\n\nThe easiest way to set up a prerequisite block is to use the tests you defined in the check block from a previous page.\n\n\n\nBefore running this page, confirm that the project already has a data/ directory and a README.md file.\n\nfrom pathlib import Path\n\nassert Path(\"../README.md\").exists(), \"Expected README.md to exist before this page runs.\"\nassert Path(\"../data\").is_dir(), \"Expected data/ directory from an earlier page.\"\n\nYou can also express prerequisites with shell checks:\n#| eval: false\ntest -f README.md\ntest -d data\nIf this page depends on tests from a previous page, run them here:\n#| eval: false\npytest tests/test_previous_step.py",
+    "text": "Like a traditional book, the Cover Page of a Quarto Manual provides a high-level overview of the manual’s purpose and scope. It is the first page an operator sees when opening the manual, and it should be clear, concise, and informative, and may use images, examples, and other elements to enrich the operator’s understanding of the manual’s content.\nThis site documents and explains Quarto Manuals as a lightweight framework for executable software operation manuals for three different scientific workflows.\nFor each project, the documentation will illustrate:\n\nthe minimal starter template that Manual authors ship to End Users;\nthe framework rules that make the template a Manual Page;\nthe specific use cases and applications of the manual in each workflow;\nfull examples showing how the template scales from simple to advanced work.\n\nThe examples you’re reading on this rendered website are identical to the rendered output of the project files an End-User should expect after running quarto use template GITHUB_ORG/MANUAL_REPO to use a manual of that type and executing the workflow in their own environment.\nTODO: Visual abstract goes here!!!",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Manual Pages</span>"
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Cover Page</span>"
     ]
   },
   {
-    "objectID": "page.html#procedure",
-    "href": "page.html#procedure",
-    "title": "2  Manual Pages",
-    "section": "2.2 2. Procedure",
-    "text": "2.2 2. Procedure\nProcedure blocks contain the work of the page. A page may use one procedure block or several.\nEach procedure block should do one clear part of the step.\n\nCreate a directory for project configuration files.\n\nfrom pathlib import Path\n\nPath(\"config\").mkdir(exist_ok=True)\n\n\n\nWrite a small JSON file that later pages can inspect.\n\nfrom pathlib import Path\nimport json\n\nconfig_path = Path(\"config/manual.json\")\nconfig_path.write_text(\n    json.dumps({\"status\": \"configured\"}, indent=2) + \"\\n\",\n    encoding=\"utf-8\",\n)",
+    "objectID": "01_misc-helpers.html",
+    "href": "01_misc-helpers.html",
+    "title": "3  Helper Pages",
+    "section": "",
+    "text": "3.1 Authoring Notes\nHelper pages are optional support pages that sit between the cover and the main workflow.\nUse a helper page when operators need preliminary shared context that does not belong to a single procedure page, for example:\nDo not add helper pages by default. If a manual can stay clear without them, the manual should stay smaller. A good rule of thumb is that a task that leads to the final outcome should be in a Manual Page; a task that is required for all of the steps to work, but is not itself a step toward the final outcome, should be in a Helper Page. For example, API Keys.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Manual Pages</span>"
+      "Introduction",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Helper Pages</span>"
     ]
   },
   {
-    "objectID": "page.html#check",
-    "href": "page.html#check",
-    "title": "2  Manual Pages",
-    "section": "2.3 3. Check",
-    "text": "2.3 3. Check\nUse the check block to prove that the page succeeded.\nChecks should assert the results of the procedure blocks above. If you want the page to emit a reusable test file, you can combine the manual check block with a quarto-emit class.\n\n\nfrom pathlib import Path\nimport json\n\n\ndef test_manual_page_created_config():\n    config_path = Path(\"config/manual.json\")\n    assert config_path.exists(), \"Expected config/manual.json to exist.\"\n\n    data = json.loads(config_path.read_text(encoding=\"utf-8\"))\n    assert data[\"status\"] == \"configured\"\n\n\nThis block serves two purposes:\n\nas a manual check, it shows the reader how to verify the page;\nas an emit block, it can materialize a real test file for later reuse.",
+    "objectID": "10_page-tasks.html",
+    "href": "10_page-tasks.html",
+    "title": "4  Manual Pages",
+    "section": "",
+    "text": "4.1 1. Prerequisites\nThis section illustrates the smallest useful shape of a Quarto Manual page, and serves as the working template for Quarto Manual authors.\nA Page should do three things:\nIn Quarto Manuals, we implement these requirements in specific block types, which means:\nUse the prerequisite block to check whether the page is allowed to proceed. This is where page-to-page dependency should be enforced.\nGood prerequisite checks look for visible project state:",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Manual Pages</span>"
+      "Introduction",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manual Pages</span>"
     ]
   },
   {
-    "objectID": "page.html#authoring-notes",
-    "href": "page.html#authoring-notes",
-    "title": "2  Manual Pages",
-    "section": "2.4 Authoring Notes",
-    "text": "2.4 Authoring Notes\nKeep page state local. Do not rely on notebook variables from another page. Instead:\n\nuse prerequisite blocks to enforce dependency on earlier pages;\nuse procedure blocks to create visible project artifacts;\nuse check blocks to test those artifacts directly.\n\nThat keeps each page independent, rerunnable, and easy to reason about.",
+    "objectID": "10_page-tasks.html#prerequisites",
+    "href": "10_page-tasks.html#prerequisites",
+    "title": "4  Manual Pages",
+    "section": "",
+    "text": "does a required file already exist?\ndid a previous page create the expected directory?\ndoes a previously emitted test suite pass?\nis the required tool available?\n\n\n\n\n\n\n\nTip\n\n\n\nThe easiest way to set up a prerequisite block is to use the tests you defined in the check block from a previous page.\n\n\n\nBefore running this page, confirm that the project already has a data/ directory and a README.md file.\n\nfrom pathlib import Path\n\nassert Path(\"README.md\").exists(), \"Expected README.md to exist before this page runs.\"\n\nassert Path(\"_extensions\").is_dir(), \"Expected _extensions directory to exist before this page runs.\"\n\nYou can also express prerequisites with shell checks:\n#| eval: false\ntest -f README.md\ntest -d data\nIf this page depends on tests from a previous page, run them here:\n#| eval: false\npytest tests/test_previous_step.py",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Manual Pages</span>"
+      "Introduction",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manual Pages</span>"
+    ]
+  },
+  {
+    "objectID": "10_page-tasks.html#procedure",
+    "href": "10_page-tasks.html#procedure",
+    "title": "4  Manual Pages",
+    "section": "4.2 2. Procedure",
+    "text": "4.2 2. Procedure\nProcedure blocks contain the work of the page. A page may use one procedure block or several.\nEach procedure block should do one clear part of the step.\n\nCreate a directory for project configuration files.\n\nfrom pathlib import Path\n\nPath(\"config\").mkdir(exist_ok=True)\n\n\n\nWrite a small JSON file that later pages can inspect.\n\nfrom pathlib import Path\nimport json\n\nconfig_path = Path(\"config/manual.json\")\nconfig_path.write_text(\n    json.dumps({\"status\": \"configured\"}, indent=2) + \"\\n\",\n    encoding=\"utf-8\",\n)",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manual Pages</span>"
+    ]
+  },
+  {
+    "objectID": "10_page-tasks.html#check",
+    "href": "10_page-tasks.html#check",
+    "title": "4  Manual Pages",
+    "section": "4.3 3. Check",
+    "text": "4.3 3. Check\nUse the check block to prove that the page succeeded.\nChecks should assert the results of the procedure blocks above. If you want the page to emit a reusable test file, you can combine the manual check block with a quarto-emit class.\n\n\nfrom pathlib import Path\nimport json\n\n\ndef test_manual_page_created_config():\n    config_path = Path(\"config/manual.json\")\n    assert config_path.exists(), \"Expected config/manual.json to exist.\"\n\n    data = json.loads(config_path.read_text(encoding=\"utf-8\"))\n    assert data[\"status\"] == \"configured\"\n\n\nThis block serves two purposes:\n\nas a manual check, it shows the reader how to verify the page;\nas an emit block, it can materialize a real test file for later reuse.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manual Pages</span>"
+    ]
+  },
+  {
+    "objectID": "10_page-tasks.html#authoring-notes",
+    "href": "10_page-tasks.html#authoring-notes",
+    "title": "4  Manual Pages",
+    "section": "4.4 Authoring Notes",
+    "text": "4.4 Authoring Notes\nKeep page state local. Do not rely on notebook variables from another page. Instead:\n\nuse prerequisite blocks to enforce dependency on earlier pages;\nuse procedure blocks to create visible project artifacts;\nuse check blocks to test those artifacts directly.\n\nThat keeps each page independent, rerunnable, and easy to reason about.\nTo order your pages, we recommend using a consistent naming convention in filenames, e.g., 01_page-&lt;description&gt;.qmd, 02_page-&lt;description&gt;.qmd, etc., where:\n\nindex.qmd is reserved for the index page of the manual;\nfile 00 is reserved for the cover page;\nfiles 01-09 are reserved for orientation, miscellaneous functions, and other helper pages;\nfiles 10-99 are reserved for the main workflow pages, which should be ordered numerically to reflect the intended workflow order, with the optional suffix [NN]a, [NN]b, etc. for pages that are logically grouped together.\nUse underscores in filenames to separate entities, e.g., section and page type: 01_misc-helpers.qmd and 02_misc-API-keys.qmd are miscellaneous prerequisites, and are functionally different from 10_page-task-description.qmd, 11_page-run-analysis.qmd, etc. with explicit procedures\nUse dashes in filenames to separate words within an entity, e.g., 10_page-task-description.qmd, 11_page-run-analysis.qmd, etc.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manual Pages</span>"
+    ]
+  },
+  {
+    "objectID": "examples/index.html",
+    "href": "examples/index.html",
+    "title": "5  Examples",
+    "section": "",
+    "text": "5.1 What To Expect From These Examples\nThe starter template shipped by Quarto Manuals is deliberately lean. The examples on this site show what that template looks like once it has been adapted to real work.\nEach example mirrors the same Page contract:\nWhat changes across examples is not the framework, but the complexity of the workflow being narrated.",
+    "crumbs": [
+      "Examples",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Examples</span>"
+    ]
+  },
+  {
+    "objectID": "examples/index.html#what-to-expect-from-these-examples",
+    "href": "examples/index.html#what-to-expect-from-these-examples",
+    "title": "5  Examples",
+    "section": "",
+    "text": "one prerequisite block;\none or more procedure blocks;\none check block.",
+    "crumbs": [
+      "Examples",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Examples</span>"
+    ]
+  },
+  {
+    "objectID": "examples/index.html#the-three-example-levels",
+    "href": "examples/index.html#the-three-example-levels",
+    "title": "5  Examples",
+    "section": "5.2 The Three Example Levels",
+    "text": "5.2 The Three Example Levels\n\n5.2.1 Simple\nThe simple example shows a data-staging workflow. It demonstrates the smallest useful manual:\n\na short cover page;\na helper page for shared context;\none task page that checks state, performs the operation, and verifies the result.\n\n\n\n5.2.2 Intermediate\nThe intermediate example adapts a real ERA5 data acquisition and aggregation workflow into ordered manual pages. It shows how the same page contract scales when:\n\ncredentials matter;\nlarge data movement is involved;\nmulti-step processing requires several pages;\neach page leaves behind artifacts that later pages can inspect.\n\n\n\n5.2.3 Advanced\nThe advanced example documents a reproducible RSE workbench for shared HPC infrastructure. It shows how Quarto Manuals can support a long, multi-page project assembly process involving containers, package managers, scheduler support, and repeated validation.",
+    "crumbs": [
+      "Examples",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Examples</span>"
+    ]
+  },
+  {
+    "objectID": "examples/index.html#how-to-read-these-examples",
+    "href": "examples/index.html#how-to-read-these-examples",
+    "title": "5  Examples",
+    "section": "5.3 How To Read These Examples",
+    "text": "5.3 How To Read These Examples\nRead the examples as rendered manuals, not just as documentation prose.\nThey are intended to show what an operator would see after cloning a manual template and opening the pages locally.\nThat is why the examples are more complete than the root template: the template teaches by prompting, while the examples teach by demonstration.",
+    "crumbs": [
+      "Examples",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Examples</span>"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html",
+    "title": "A Data Staging Workflow",
+    "section": "",
+    "text": "Overview\nThis example shows the smallest useful Quarto Manual in practice.\nThe operator’s goal is simple: connect a registered dataset into a project workspace in a reproducible way.\nThe manual therefore stays small:\nThis is the kind of manual a researcher might keep close at hand and rerun whenever a new project needs the same setup.",
+    "crumbs": [
+      "A Data Staging Workflow"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html#overview",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html#overview",
+    "title": "A Data Staging Workflow",
+    "section": "",
+    "text": "a cover page explains the purpose of data staging;\na helper page provides shared context;\none workflow page performs and checks the staging step.",
+    "crumbs": [
+      "A Data Staging Workflow"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/00_cover.html",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/00_cover.html",
+    "title": "6  Cover Page: Data Staging with stagecoach",
+    "section": "",
+    "text": "Tip\n\n\n\nAdapted from the Golden Planetary Health Lab Handbook’s Data Staging Guide, this page provides a guide to data staging using the stagecoach tool.\nThis is an example of a very simple manual that can live in your home dir, that you can quickly break out and use for every project you need to stage data for. Just change the variables and execute the notebooks again. Or, you can use it as many times as is necessary before you memorize the workflow…\nWhich is one of the intended goals of manuals: to help you learn a workflow by doing it, and if you do it enough times, then you can do it without the manual.\n\n\nData staging is the process of preparing and organizing data for analysis. In the Golden Lab, we use a tool called stagecoach to help with this process. stagecoach allows users to request access to datasets using a digital manifest. In doing so, it ensures that the exact resources you request for your project are made available to you in a computationally reproducible manner, reducing the risk of errors and missing steps.\nThis manual instructs you on how to use stagecoach to stage data for your project. It is designed to be flexible enough to be used by other people and projects, but still reproducible and robust enough to ensure you don’t have to look up or copy-paste the same steps over and over again. This is a great scenario for a simple operator’s manual.",
+    "crumbs": [
+      "A Data Staging Workflow",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Cover Page: Data Staging with stagecoach</span>"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.html",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.html",
+    "title": "7  Helper Page: Notes About Data Staging & UV",
+    "section": "",
+    "text": "This helper page collects the small pieces of context an operator may need before staging data.\nTypical notes for this workflow would include:\n\nhow to locate the dataset manifest or registry entry;\nwho to contact if dataset access has not yet been granted;\nhow to confirm that uv is installed for Python project management;\nwhere staged inputs should appear inside the project.\n\nIn a simple manual, a helper page should stay short and practical.\nRunning this cell will confirm that uv is installed and available in the current environment:\n#| eval: false\n\nuv --version",
+    "crumbs": [
+      "A Data Staging Workflow",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Helper Page: Notes About Data Staging & UV</span>"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html",
+    "title": "8  Stage The Dataset - Option 1: Bare Symlinks",
+    "section": "",
+    "text": "8.1 1. Prerequisite\nThis page shows the manual page contract in the context of a real staging task.\nThe operator must:",
+    "crumbs": [
+      "A Data Staging Workflow",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Stage The Dataset - Option 1: Bare Symlinks</span>"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html#prerequisite",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html#prerequisite",
+    "title": "8  Stage The Dataset - Option 1: Bare Symlinks",
+    "section": "",
+    "text": "Before running this page, confirm that the project already exists and that the operator is working from its root.\n\nfrom pathlib import Path\n\nassert Path(\"README.md\").exists(), \"Expected README.md to exist before staging data.\"\nPath(\"data\").mkdir(exist_ok=True)",
+    "crumbs": [
+      "A Data Staging Workflow",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Stage The Dataset - Option 1: Bare Symlinks</span>"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html#procedure",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html#procedure",
+    "title": "8  Stage The Dataset - Option 1: Bare Symlinks",
+    "section": "8.2 2. Procedure",
+    "text": "8.2 2. Procedure\n\nRecord the dataset identifier and the intended staging location.\n\nfrom pathlib import Path\n\ndataset_name = \"example_registered_dataset\"\nstage_path = Path(\"data\") / dataset_name\n\n\n\nCreate the staged location. In a real manual this could call stagecoach or another institutional tool.\n\nfrom pathlib import Path\n\ndataset_name = \"example_registered_dataset\"\nstage_path = Path(\"data\") / dataset_name\n\nstage_path.mkdir(exist_ok=True)",
+    "crumbs": [
+      "A Data Staging Workflow",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Stage The Dataset - Option 1: Bare Symlinks</span>"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html#check",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html#check",
+    "title": "8  Stage The Dataset - Option 1: Bare Symlinks",
+    "section": "8.3 3. Check",
+    "text": "8.3 3. Check\n\n\nfrom pathlib import Path\n\ndataset_name = \"example_registered_dataset\"\nstage_path = Path(\"data\") / dataset_name\n\nassert stage_path.exists(), \"Expected staged dataset path to exist.\"\nassert stage_path.is_dir(), \"Expected staged dataset path to be a directory.\"\n\n\nThis page is intentionally small. It demonstrates that the framework still works when the workflow itself is simple.",
+    "crumbs": [
+      "A Data Staging Workflow",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Stage The Dataset - Option 1: Bare Symlinks</span>"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html",
+    "title": "9  Stage The Dataset - Option 2: Using stagecoach",
+    "section": "",
+    "text": "9.1 1. Prerequisite\nThis page shows the manual page contract in the context of a real staging task.\nThe operator must:",
+    "crumbs": [
+      "A Data Staging Workflow",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Stage The Dataset - Option 2: Using stagecoach</span>"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html#prerequisite",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html#prerequisite",
+    "title": "9  Stage The Dataset - Option 2: Using stagecoach",
+    "section": "",
+    "text": "Before running this page, confirm that the project already exists and that the operator is working from its root.\n\nfrom pathlib import Path\n\nassert Path(\"README.md\").exists(), \"Expected README.md to exist before staging data.\"\nPath(\"data\").mkdir(exist_ok=True)",
+    "crumbs": [
+      "A Data Staging Workflow",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Stage The Dataset - Option 2: Using stagecoach</span>"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html#procedure",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html#procedure",
+    "title": "9  Stage The Dataset - Option 2: Using stagecoach",
+    "section": "9.2 2. Procedure",
+    "text": "9.2 2. Procedure\n\nRecord the dataset identifier and the intended staging location.\n\nfrom pathlib import Path\n\ndataset_name = \"example_registered_dataset\"\nstage_path = Path(\"data\") / dataset_name\n\n\n\nCreate the staged location. In a real manual this could call stagecoach or another institutional tool.\n\nfrom pathlib import Path\n\ndataset_name = \"example_registered_dataset\"\nstage_path = Path(\"data\") / dataset_name\n\nstage_path.mkdir(exist_ok=True)",
+    "crumbs": [
+      "A Data Staging Workflow",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Stage The Dataset - Option 2: Using stagecoach</span>"
+    ]
+  },
+  {
+    "objectID": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html#check",
+    "href": "examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html#check",
+    "title": "9  Stage The Dataset - Option 2: Using stagecoach",
+    "section": "9.3 3. Check",
+    "text": "9.3 3. Check\n\n\nfrom pathlib import Path\n\ndataset_name = \"example_registered_dataset\"\nstage_path = Path(\"data\") / dataset_name\n\nassert stage_path.exists(), \"Expected staged dataset path to exist.\"\nassert stage_path.is_dir(), \"Expected staged dataset path to be a directory.\"\n\n\nThis page is intentionally small. It demonstrates that the framework still works when the workflow itself is simple.",
+    "crumbs": [
+      "A Data Staging Workflow",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Stage The Dataset - Option 2: Using stagecoach</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html",
+    "title": "A Climate-CAFE ERA5 Workflow",
+    "section": "",
+    "text": "Overview\nThis example adapts a real ERA5 download and aggregation workflow into a multi-page Quarto Manual.\nCompared with the simple staging example, this manual has more moving parts:\nThat is exactly where Quarto Manuals are useful: the workflow is repetitive and important, but still too context-specific to collapse into a single rigid command-line wrapper.",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html#overview",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html#overview",
+    "title": "A Climate-CAFE ERA5 Workflow",
+    "section": "",
+    "text": "credentials for an external data service;\nrepeated parameter choices for time, place, and variables;\nlarge downloaded artifacts;\ndownstream aggregation steps that depend on earlier outputs.",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html",
+    "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
+    "section": "",
+    "text": "10.1 Project Overview\nUsing the Python cdsapi package, ERA5-Land hourly temperature measures are downloaded from the Copernicus Climate Data Store (CDS). Heat index and humidex metrics are derived from ERA5-Land hourly 2-meter temperature and 2-meter dew point temperature. Daily mean, maximum, and minimum measures are assessed across administrative boundaries for 2-meter temperature, 2-meter dew point temperature, skin temperature, heat index and humidex. Kenya is used as a demonstration area for the Copernicus CDS API query and spatial aggregation, using administrative boundaries from the Database of Global Administrative Areas.",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#usage",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#usage",
+    "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
+    "section": "10.2 Usage",
+    "text": "10.2 Usage\nThis repository provides the building blocks for the query of any data from the Copernicus CDS. Code for spatial aggregation of ERA5-Land hourly netCDF files from their native raster format to daily measures averaged across administrative boundaries are also included, using the geopandas, shapely, xarray, and rioxarray packages. These spatial aggregation methods can be used to derive measures from ERA5-Land in analysis of sociodemographic disparities or epidemiologic studies of temperature and health outcomes.\nComments are included within the code repository with descriptions of how to manipulate the ERA5 API language to query additional variables, time frames, or spatial extents. Please note that users will need to set up an account with the Copernicus CDS for the API query to function effectively. For more information on the cdsapi package and details about how to set up an account and access the necessary user ID and API key inputs for the API query please see: https://cds.climate.copernicus.eu/how-to-api#install-the-cds-api-client",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#notes-on-computation",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#notes-on-computation",
+    "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
+    "section": "10.3 Notes on Computation",
+    "text": "10.3 Notes on Computation\n\nThis code was run to generate the 24 years of heat measures across Kenya administrative boundaries using a shared computing cluster at Boston University. The use of a computing cluster allows for intensive computation to run more quickly and to run without the limits of conventional storage options on a single computer.\nThe query of the data using cdsapi is done in monthly chunks due to restrictions in the CDS API.\nEach 1-month period of ERA5-Land data across Kenya with the three variables (2-m temp, dew point temp, skin temp) took about several minutes to download and is approximately 24MB for the raster file storage.\nFor the 24 years, and 12 files each year, this results in just under 9 GB of storage for the raw raster data.\nThe aggregation loop that computes the ward-level results takes about several hours per year to output the resulting .csv file on a local computer. In a .csv format, each year’s data is ~162MB after including additional columns with geographic parameters for the larger geographies in which wards are nested.\nThe computation efficiency and size will vary by use case. Aggregating to a smaller administrative boundary, or using a less spatially resolved raw product (such as ERA5, Non-Land with is a 25km grid) will reduce the needed computation resources.",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#data-sources",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#data-sources",
+    "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
+    "section": "10.4 Data Sources",
+    "text": "10.4 Data Sources\n\nERA5-Land hourly data from 1950 to present\nDatabase of Global Administrative Areas",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#workflow",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#workflow",
+    "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
+    "section": "10.5 Workflow",
+    "text": "10.5 Workflow\n\n\n\n\n\n\nTip\n\n\n\nFor optimal learning, the section below should instead be coupled code and prose blocks in each individual Manual Page…\n\n\nThree scripts are included in the code repository.\n\n01_Query_ERA5_CDSAPI_Kenya_v1.py applies the cdsapi package to query hourly ERA5-Land data from the Copernicus CDS using the cdsapi package.\n\nThe necessary code to set your API key in your Python environment is provided, as well as a description of the necessary inputs for an effective API query, including the dataset, spatial extent, time frame, and variables requested.\nThe query is broken down into queries for data every month. A for loop is used to query these one-month data cuts across the 24-year period of the full dataset. These cuts were set as the Copernicus CDS API restricts the amount of data accessible in a single pull.\nPlease Note: The API query can be time-consuming and the resulting output can be extremely large if the API query is not correctly specified. When first using the API for a new use case, consider requesting only a few hours or days of data for a small spatial area in order to get an estimate for the time and data size that will be queried with larger sets.\n\n02_Aggregate_ERA5_Kenya_SetFishnet_v1.py is the first in a two-step process for aggregating the queried rasters to the administrative boundaries.\n\nA fishnet approach is used, where a grid of points is established and the merged with points representing the spatial extent of the administrative boundaries for the area of interest.\nThis is set as a separate file because it can be very time consuming with a highly spatially resolved raster. The ERA5-Land dataset is shared at a 9 km grid resolution, so this runs quickly in this application.\nMore details about the use of a fishnet for spatial aggregation of raster data can be found here: https://github.com/Climate-CAFE/population_weighting_raster_data\n\n03_Aggregate_ERA5_Kenya_UseFishnet_v1.py uses the fishnet grid set up in script 2, and merges the grid with centroids for the administrative boundaries in Kenya.\n\nThe raster data time series is reset from Coordinated Universal Time (UTC) to East Africa Time (EAT).\nHourly heat index and humidex are estimated from the 2-m temperature and 2-m dew point temperature.\nDaily mean, minimum, and maximum are assessed across the raster, and then joined to the extraction points (the union of the fishnet grid and adminstrative centroids).\nSpatially weighted averages across the administrative boundaries are computed from the extraction points.\nThe resulting output is a dataframe with Kenya administrative boundaries and a time series of daily mean, minimum, and maximum for 2-m temperature, 2-m dew point temperature, skin temperature, heat index, and humidex.",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#dependencies",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#dependencies",
+    "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
+    "section": "10.6 Dependencies",
+    "text": "10.6 Dependencies\n\n\n\n\n\n\nTip\n\n\n\nThe section below could be implemented as the first page of a Quarto Manual, with each dependency being a prerequisite check for the operator to confirm before proceeding to the next step. A pytest suite would be very easy to implement here, and on page two, to check for.\n\n\nPackages used in this repository include:\n\nimport cdsapi for era5 data query\nimport geopandas for spatial operations on geometric types\nimport xarray for raster data\nimport rioxarray for raster data\nimport shapely for manipulation and analysis of geometric objects\nfrom osgeo import gdal, ogr for creating a fishnet grid\nimport os for creating/removing a file path\nimport glob for findng all the pathnames matching a specified pattern\nimport numpy for scientific computing\nimport pandas for manipulation of structured data\nfrom functools import reduce for merging datasets\nimport math for mathematical calculations\nimport pytz for cross platform timezone calculations\nfrom datetime import datetime for manipulating dates and times\nimport xvec for extending Xarray to work with vector data\nimport re for using regular expression",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#references",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#references",
+    "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
+    "section": "10.7 References",
+    "text": "10.7 References\n\n\n\n\n\n\nTip\n\n\n\nWith Quarto, we can take advantage of the rich publishing ecosystem to include references directly from bibtex files, rather than having to manually format them in the markdown as below.\n\n\nHumidex estimation references:\n\nK.R. Spangler, S. Liang, and G.A. Wellenius. “Wet-Bulb Globe Temperature, Universal Thermal Climate Index, and Other Heat Metrics for US Counties, 2000-2020.” Scientific Data (2022). doi: 10.1038/s41597-022-01405-3\nLawrence, M. G. The relationship between relative humidity and the dewpoint temperature in moist air - A simple conversion and applications. B. Am. Meteorol. Soc. 86, 225–233, https://doi.org/10.1175/Bams-86-2-225 (2005).\n\nHeat index (weathermetrics package) reference:\n\nAnderson GB, Bell ML, Peng RD. 2013. Methods to calculate the heat index as an exposure metric in environmental health research. Environmental Health Perspectives 121(10):1111-1119.",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html",
+    "title": "11  CDS API Access",
+    "section": "",
+    "text": "Caution\n\n\n\nThe following was generated by ChatGPT, but is used only as a demonstration of how a Quarto Manual can be used to explain a workflow.\n\n\nBefore downloading ERA5 data, the operator must have access to the Copernicus Climate Data Store.\nThis helper page is where the manual can explain:\n\nhow to create a CDS account;\nwhere to find the API key;\nhow to store credentials safely;\nhow to test that the Python cdsapi client can authenticate.\n\nThis kind of shared setup belongs naturally on a helper page because multiple later workflow pages depend on it.",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>CDS API Access</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html",
+    "title": "12  Query ERA5-Land For Kenya",
+    "section": "",
+    "text": "Caution\n\n\n\nThe following was generated by ChatGPT, but is used only as a demonstration of how a Quarto Manual can be used to explain a workflow.\nSource: 01_Query_ERA5_CDSAPI_Kenya_v1.py\n\n\nThis page turns the first Climate-CAFE script into a manual step the operator can execute and verify.\n\nBefore querying ERA5-Land data, confirm that the CDS client, credentials, and project output location are available.\n\nfrom pathlib import Path\n\nassert Path(\"README.md\").exists(), \"Expected to run this page from the project root.\"\nassert Path.home().joinpath(\".cdsapirc\").exists(), \"Expected CDS credentials in ~/.cdsapirc.\"\n\n\n\nThe source script defines a CDS request for hourly ERA5-Land variables over Kenya, then loops over monthly time windows because the CDS restricts large requests.\n\n# Pseudocode based on 01_Query_ERA5_CDSAPI_Kenya_v1.py\ndataset = \"reanalysis-era5-land\"\nvariables = [\n    \"2m_temperature\",\n    \"2m_dewpoint_temperature\",\n    \"skin_temperature\",\n]\narea = {\n    \"north\": \"...\",\n    \"west\": \"...\",\n    \"south\": \"...\",\n    \"east\": \"...\",\n}\ntime_range = {\n    \"years\": range(2000, 2024),\n    \"months\": [\"01\", \"02\", \"...\", \"12\"],\n    \"hours\": [\"00:00\", \"01:00\", \"...\", \"23:00\"],\n}\n\n\n\nThe source script retrieves one month at a time and writes each result to a raw data directory.\n\nfrom pathlib import Path\n\nraw_dir = Path(\"data/raw/era5land\")\nraw_dir.mkdir(parents=True, exist_ok=True)\n\n# Pseudocode based on 01_Query_ERA5_CDSAPI_Kenya_v1.py\nfor year in time_range[\"years\"]:\n    for month in time_range[\"months\"]:\n        target = raw_dir / f\"era5land_kenya_{year}_{month}.nc\"\n        # client.retrieve(\n        #     dataset,\n        #     {\n        #         \"variable\": variables,\n        #         \"year\": str(year),\n        #         \"month\": month,\n        #         \"day\": [\"01\", \"...\", \"31\"],\n        #         \"time\": time_range[\"hours\"],\n        #         \"area\": [area[\"north\"], area[\"west\"], area[\"south\"], area[\"east\"]],\n        #         \"format\": \"netcdf\",\n        #     },\n        #     str(target),\n        # )\n\n\n\n\nfrom pathlib import Path\n\nraw_dir = Path(\"data/raw/era5land\")\nassert raw_dir.exists(), \"Expected the raw ERA5-Land directory to exist.\"\nassert raw_dir.is_dir(), \"Expected data/raw/era5land to be a directory.\"",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Query ERA5-Land For Kenya</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html",
+    "title": "13  Build The Aggregation Fishnet",
+    "section": "",
+    "text": "This page represents the first aggregation step. It depends on the project already having a place for derived artifacts and any required boundary data.",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Build The Aggregation Fishnet</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html#footnotes",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html#footnotes",
+    "title": "13  Build The Aggregation Fishnet",
+    "section": "",
+    "text": "Notice that ChatGPT did not use a prereq block here to check for the existence of the boundary file. As an author, you’re not punished for that, but this code block should stick out to you as a reader because it is a prerequisite for the aggregation step — it should go into its own manual-prereq block.↩︎",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Build The Aggregation Fishnet</span>"
+    ]
+  },
+  {
+    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html",
+    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html",
+    "title": "14  Aggregate ERA5 Using The Fishnet",
+    "section": "",
+    "text": "Caution\n\n\n\nThe following was generated by ChatGPT, but is used only as a demonstration of how a Quarto Manual can be used to explain a workflow.\nSource: 03_Aggregate_ERA5_Kenya_UseFishnet_v1.py\n\n\nThis page stands in for the final aggregation step, where prepared geometry and downloaded ERA5 files are brought together into analysis-ready summaries.\n\n\nfrom pathlib import Path\n\nassert Path(\"data/interim/fishnet\").is_dir(), \"Expected fishnet directory from the previous page.\"\nassert Path(\"data/raw/era5land\").is_dir(), \"Expected raw ERA5-Land files from the query step.\"\n\n\n\nThe source script loads each monthly ERA5 file, resets timestamps from UTC to East Africa Time, and prepares the hourly fields needed for downstream heat metrics.\n\n# Pseudocode based on 03_Aggregate_ERA5_Kenya_UseFishnet_v1.py\nraw_files = [\"data/raw/era5land/era5land_kenya_YYYY_MM.nc\", \"...\"]\ntimezone = \"Africa/Nairobi\"\n\n# for path in raw_files:\n#     ds = xarray.open_dataset(path)\n#     ds = convert_from_utc_to_local_time(ds, timezone)\n\n\n\nThe source script derives hourly heat index and humidex, summarizes them to daily statistics, joins them to the fishnet extraction points, and computes weighted averages across administrative boundaries.\n\nfrom pathlib import Path\n\nprocessed_dir = Path(\"data/processed\")\nprocessed_dir.mkdir(parents=True, exist_ok=True)\nsummary_path = Path(\"data/processed/era5_daily_summary.csv\")\n\n# Pseudocode based on 03_Aggregate_ERA5_Kenya_UseFishnet_v1.py\n# hourly = derive_heat_index_and_humidex(ds)\n# daily = summarize_to_daily_min_mean_max(hourly)\n# joined = join_daily_values_to_extraction_points(daily, \"data/interim/fishnet/...\")\n# weighted = compute_boundary_weighted_averages(joined)\n# weighted.to_csv(summary_path, index=False)\n\n\n\n\nfrom pathlib import Path\n\nprocessed_dir = Path(\"data/processed\")\nsummary_path = Path(\"data/processed/era5_daily_summary.csv\")\n\nassert processed_dir.is_dir(), \"Expected processed output directory to exist.\"\n\n# This page is complete when the operator can describe:\n# - the UTC to EAT time reset,\n# - the hourly heat metric derivation,\n# - the daily min/mean/max summary,\n# - and the weighted aggregation from fishnet points to boundaries.",
+    "crumbs": [
+      "A Climate-CAFE ERA5 Workflow",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Aggregate ERA5 Using The Fishnet</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html",
+    "title": "RSE Workbench: An Environment Generator Workflow",
+    "section": "",
+    "text": "Overview\nThis example shows Quarto Manuals at their most ambitious in the current project: a reproducible RSE workbench assembled across many pages.\nUnlike the smaller examples, this manual spans platform setup, container construction, language package management, activation checks, and scheduler integration.\nIt is included here as a case study in scale.\nSome of the page names retain language from the earlier development history of the workbench. That is acceptable for the example because the important point is that each page still behaves like a manual page:",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html#overview",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html#overview",
+    "title": "RSE Workbench: An Environment Generator Workflow",
+    "section": "",
+    "text": "check whether the step is ready to run;\nperform one concrete part of the environment assembly;\nverify that the result is usable before proceeding.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/00_cover.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/00_cover.html",
+    "title": "15  RSE Workbench Manual",
+    "section": "",
+    "text": "Important\n\n\n\nAdapted from my RSE Workbench Repo\nThe RSE workbench was the major inspiration for manuals. As you can see, creating a singularity container for reproducible data science on the cluster is a long, involved process. I was able to line up 12 notebooks of procedures, each with specific code to run, artifacts and files left behind, and checks to make at each stage. The end product is that I can now launch 5 or 6 simultaneous project workspaces on the cluster, each of which is running in an isolated singularity container (think Docker and Kubernetes, but on HPC), specifically configured for the project, including Linux dependencies, geospatial packages, my editor of choice, etc.\nPutting all of these together for the first time in a critical project is a lengthy, several day process. Redoing it each and every single time a project counts as critical is Sisyphean. The RSE Workbench Manual allows me to learn the complicated procedure once, then duplicate the pages for a new project, change the paths, insert and remove a few project specific packages, and then recompile a new singularity container for the new project in a matter of minutes. This is a huge time saver, and it was also a great way to learn how tools like Spack, Singularity, and Quarto work together to create a reproducible computing environment.\n\n\nResearch software engineers often inherit or support projects where critical setup assumptions are implicit:\n\nWhere does the project live?\nWhich files are project-owned?\nWhich data are raw, interim, or processed?\nWhich dependencies are system-level versus language-level?\nWhich steps must happen before others?\nWhich runtime assumptions come from the HPC cluster?\nHow do we know the environment is ready?\nHow do we hand the project off to another researcher or RSE?\n\nA README can explain setup commands, and a CLI can automate a stable workflow. Both are useful. But many research projects sit between those extremes.\nA README works well when setup is short, linear, stable, and mostly copy-pasteable. A CLI works well when the workflow is predictable enough for a developer to encode the right defaults. RSE Workbench targets the harder middle case: setup procedures where order matters, later steps depend on earlier artifacts, users need to edit project-specific variables, files are generated along the way, and success needs to be verified.\nThe goal of this manual is not to replace documentation, package managers, containers, workflow engines, or tests. The goal is to compose them into a guided, editable project assembly process.\nThis initial use case is reproducible computing environments for climate and public health data science on shared HPC infrastructure.\nThe current prototype is designed around:\n\nproject-owned files;\ndata, code, and notebook organization;\nR and Python analysis code;\nQuarto notebooks and reports;\nSpack-managed system dependencies;\nlanguage-level package management;\ncontainer and runtime isolation;\nactivation and dependency-check scripts;\nSlurm launch support;\npytest-based project inspections.\n\nFuture manuals could target other recurring workflows, such as:\n\na lab’s standard data analysis pipeline;\na machine-learning workflow;\na geospatial processing workflow;\nan end-to-end data cleaning, modeling, and deployment workflow.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>RSE Workbench Manual</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/01_misc-rse-workbench-apptainer.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/01_misc-rse-workbench-apptainer.html",
+    "title": "16  Helper Functions: Singularity/Apptainer",
+    "section": "",
+    "text": "This notebook collects miscellaneous functions that are useful for the RSE Workbench.\nHere are a couple of functions that allow us to quickly build our singularity image and iterate on it by executing commands inside the image. These functions are:\n\nfrom __future__ import annotations\n\nfrom pathlib import Path\nfrom typing import Any\n\nfrom rich.columns import Columns\nfrom rich.console import Console\nfrom rich.panel import Panel\nfrom rich.syntax import Syntax\n\nconsole = Console()\n\n\ndef spython_exec(\n    command: str,\n    image: str | Path,\n    options: list[str] | None = None,\n    writable: bool = False,\n    fakeroot: bool = False,\n    bind_project: str | Path | None = None,\n    return_result: bool = True,\n) -&gt; dict[str, Any]:\n    \"\"\"Execute a command in a Singularity image through spython.\"\"\"\n\n    from spython.main import Client\n\n    exec_options = list(options or [\"--no-home\"])\n\n    if writable and \"--writable\" not in exec_options:\n        exec_options.append(\"--writable\")\n\n    if fakeroot and \"--fakeroot\" not in exec_options:\n        exec_options.append(\"--fakeroot\")\n\n    if bind_project:\n        exec_options += [\"--bind\", f\"{Path(bind_project)}:/work\"]\n\n    return Client.execute(\n        image=str(image),\n        command=[\"bash\", \"--noprofile\", \"--norc\", \"-c\", command],\n        options=exec_options,\n        sudo=False,\n        return_result=return_result,\n    )\n\n\ndef normalize_spython_result(result: Any) -&gt; dict[str, Any]:\n    \"\"\"Normalize spython's mixed result shapes into stdout/stderr/code.\"\"\"\n\n    if not isinstance(result, dict):\n        return {\"stdout\": str(result), \"stderr\": \"\", \"return_code\": None, \"raw\": result}\n\n    message = result.get(\"message\", \"\")\n    return_code = result.get(\"return_code\", None)\n\n    if isinstance(message, list):\n        stdout = message[0] if len(message) &gt; 0 else \"\"\n        stderr = message[1] if len(message) &gt; 1 else \"\"\n    else:\n        stdout = message or \"\"\n        stderr = \"\"\n\n    return {\n        \"stdout\": stdout,\n        \"stderr\": stderr,\n        \"return_code\": return_code,\n        \"raw\": result,\n    }\n\n\ndef show_spython(result: Any, *, tail: int | None = None) -&gt; dict[str, Any]:\n    \"\"\"Render a spython result in a notebook-friendly panel.\"\"\"\n\n    normalized = normalize_spython_result(result)\n    stdout = normalized[\"stdout\"]\n    stderr = normalized[\"stderr\"]\n\n    if tail:\n        stdout = \"\\n\".join(stdout.splitlines()[-tail:])\n        stderr = \"\\n\".join(stderr.splitlines()[-tail:])\n\n    console.print(\n        Panel(\n            Columns(\n                [\n                    Panel(Syntax(stdout or \"&lt;empty&gt;\", \"text\"), title=\"stdout / message\", border_style=\"green\"),\n                    Panel(\n                        Syntax(stderr or \"&lt;empty&gt;\", \"text\"),\n                        title=\"stderr\",\n                        border_style=\"red\" if normalized[\"return_code\"] else \"yellow\",\n                    ),\n                ]\n            ),\n            title=f\"Exit code: {normalized['return_code']}\",\n            border_style=\"green\" if normalized[\"return_code\"] == 0 else \"red\",\n        )\n    )\n\n    return normalized\n\nTo see the ongoing result of a job with submitit, we can use the following helper function:\n\nfrom pathlib import Path\nfrom typing import Any\n\nfrom rich.console import Console\nfrom rich.panel import Panel\nfrom rich.text import Text\n\nconsole = Console()\n\n\ndef show_submitit_job(job: Any) -&gt; Any:\n    \"\"\"Show stdout/stderr for a submitit job and return its result when done.\"\"\"\n\n    console.print(f\"Job ID: {job.job_id}\")\n    console.print(f\"Done: {job.done()}\")\n\n    stdout = job.stdout() or \"&lt;empty&gt;\"\n    stderr = job.stderr() or \"&lt;empty&gt;\"\n\n    console.print(Panel(Text(stdout[-8000:] or \"&lt;empty&gt;\"), title=\"stdout\", border_style=\"green\"))\n    console.print(Panel(Text(stderr[-8000:] or \"&lt;empty&gt;\"), title=\"stderr\", border_style=\"red\"))\n\n    if not job.done():\n        return None\n\n    return job.result()",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Helper Functions: Singularity/Apptainer</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/02_misc-rse-workbench-slurm.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/02_misc-rse-workbench-slurm.html",
+    "title": "17  Helper Functions: SLURM & Submitit",
+    "section": "",
+    "text": "This notebook collects miscellaneous functions that are useful for the RSE Workbench.\nTo see the ongoing result of a SLURM job with submitit, we can use the following helper function:\n\nfrom pathlib import Path\nfrom typing import Any\n\nfrom rich.console import Console\nfrom rich.panel import Panel\nfrom rich.text import Text\n\nconsole = Console()\n\n\ndef show_submitit_job(job: Any) -&gt; Any:\n    \"\"\"Show stdout/stderr for a submitit job and return its result when done.\"\"\"\n\n    console.print(f\"Job ID: {job.job_id}\")\n    console.print(f\"Done: {job.done()}\")\n\n    stdout = job.stdout() or \"&lt;empty&gt;\"\n    stderr = job.stderr() or \"&lt;empty&gt;\"\n\n    console.print(Panel(Text(stdout[-8000:] or \"&lt;empty&gt;\"), title=\"stdout\", border_style=\"green\"))\n    console.print(Panel(Text(stderr[-8000:] or \"&lt;empty&gt;\"), title=\"stderr\", border_style=\"red\"))\n\n    if not job.done():\n        return None\n\n    return job.result()",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Helper Functions: SLURM & Submitit</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/10_project_contract.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/10_project_contract.html",
+    "title": "18  Project Contract",
+    "section": "",
+    "text": "This notebook defines the project contract. It answers one question:\n\nWhat is this project, and how should the rest of the workbench refer to it?\n\nA project contract is the single source of truth describing a project’s identity, platform configuration, resource defaults, and filesystem layout.\nThe contract is intentionally declarative. It does not build containers, install software, submit Slurm jobs, or activate environments. Instead, later notebooks consume the contract to discover where files belong and how the project should be configured.\nAll derived paths—such as the Singularity image, Slurm directories, environment locations, and configuration files—are computed by the contract itself. Downstream notebooks should use the contract rather than reconstructing paths themselves.\n\nfrom __future__ import annotations\n\nimport os\nfrom dataclasses import dataclass\nfrom pathlib import Path\n\n\n@dataclass(frozen=True)\nclass ProjectContract:\n    \"\"\"Declarative description of an RSE Workbench project.\"\"\"\n\n    # -------------------------------------------------------------------------\n    # Project identity\n    # -------------------------------------------------------------------------\n\n    project_name: str\n    project_root: Path\n    workbench_dir: Path\n\n    # -------------------------------------------------------------------------\n    # Platform configuration\n    # -------------------------------------------------------------------------\n\n    image_mode: str = \"build\"          # build | sandbox\n    base_image: str = \"docker://spack/rockylinux9:develop\"\n\n    r_version: str = \"4.5.1\"\n    python_version: str = \"3.14\"\n\n    enable_direnv: bool = True\n\n    # -------------------------------------------------------------------------\n    # Slurm defaults\n    # -------------------------------------------------------------------------\n\n    slurm_build_partition: str = \"hsph\"\n    slurm_build_cpus: int = 6\n    slurm_build_mem: str = \"32G\"\n    slurm_build_hours: int = 2\n    slurm_email: str | None = None\n\n    # -------------------------------------------------------------------------\n    # Validation\n    # -------------------------------------------------------------------------\n\n    def __post_init__(self):\n\n        if not self.project_name:\n            raise ValueError(\"project_name must not be empty.\")\n\n        if self.image_mode not in {\"build\", \"sandbox\"}:\n            raise ValueError(\n                \"image_mode must be either 'build' or 'sandbox'.\"\n            )\n\n    # -------------------------------------------------------------------------\n    # Core directories\n    # -------------------------------------------------------------------------\n\n    @property\n    def project_dir(self) -&gt; Path:\n        return self.project_root / self.project_name\n\n    @property\n    def runtime_dir(self) -&gt; Path:\n        return self.workbench_dir / \"projects\" / self.project_name\n\n    @property\n    def devcontainer_dir(self) -&gt; Path:\n        return self.project_dir / \".devcontainer\"\n\n    @property\n    def env_dir(self) -&gt; Path:\n        return self.project_dir / \"env\"\n\n    @property\n    def filter_bin_dir(self) -&gt; Path:\n        return self.env_dir / \"bin\"\n\n    @property\n    def container_home(self) -&gt; Path:\n        return self.project_dir / \".container-home\"\n\n    @property\n    def container_tmp(self) -&gt; Path:\n        return self.project_dir / \".container-tmp\"\n\n    # -------------------------------------------------------------------------\n    # Slurm directories\n    # -------------------------------------------------------------------------\n\n    @property\n    def slurm_dir(self) -&gt; Path:\n        return self.project_dir / \"slurm\"\n\n    @property\n    def submitit_dir(self) -&gt; Path:\n        return self.slurm_dir / \"submitit\"\n\n    @property\n    def launch_dir(self) -&gt; Path:\n        return self.slurm_dir / \"launch\"\n\n    @property\n    def launch_log_dir(self) -&gt; Path:\n        return self.launch_dir / \"logs\"\n\n    @property\n    def launch_script(self) -&gt; Path:\n        return self.launch_dir / \"launch_container.sbatch\"\n\n    @property\n    def install_dir(self) -&gt; Path:\n        return self.slurm_dir / \"install\"\n\n    @property\n    def install_log_dir(self) -&gt; Path:\n        return self.install_dir / \"logs\"\n\n    @property\n    def install_script(self) -&gt; Path:\n        return self.install_dir / \"install_container.sbatch\"\n\n    # -------------------------------------------------------------------------\n    # Platform files\n    # -------------------------------------------------------------------------\n\n    @property\n    def singularity_def(self) -&gt; Path:\n        return self.devcontainer_dir / \"Singularity.def\"\n\n    @property\n    def build_image(self) -&gt; Path:\n        return self.devcontainer_dir / \"Singularity.sif\"\n\n    @property\n    def sandbox_image(self) -&gt; Path:\n        return Path(\n            f\"/tmp/{os.environ['USER']}-{self.project_name}-sandbox\"\n        )\n\n    @property\n    def singularity_image(self) -&gt; Path:\n        if self.image_mode == \"sandbox\":\n            return self.sandbox_image\n        return self.build_image\n\n    @property\n    def spack_yaml(self) -&gt; Path:\n        return self.project_dir / \"spack.yaml\"\n\n    @property\n    def rproject_toml(self) -&gt; Path:\n        return self.project_dir / \"rproject.toml\"\n\n    @property\n    def pyproject_toml(self) -&gt; Path:\n        return self.project_dir / \"pyproject.toml\"\n\n    @property\n    def activate_script(self) -&gt; Path:\n        return self.env_dir / \"activate.sh\"\n\n    # -------------------------------------------------------------------------\n    # Filesystem helpers\n    # -------------------------------------------------------------------------\n\n    @property\n    def directories(self) -&gt; list[Path]:\n        \"\"\"Directories expected to exist for every project.\"\"\"\n\n        return [\n            self.project_dir,\n            self.devcontainer_dir,\n            self.env_dir,\n            self.filter_bin_dir,\n            self.container_home,\n            self.container_tmp,\n            self.submitit_dir,\n            self.launch_dir,\n            self.launch_log_dir,\n            self.install_dir,\n            self.install_log_dir,\n        ]\n\n    def create_directories(self) -&gt; None:\n        \"\"\"Create the standard project directory structure.\"\"\"\n\n        for path in self.directories:\n            path.mkdir(parents=True, exist_ok=True)\n\n    # -------------------------------------------------------------------------\n    # Convenience\n    # -------------------------------------------------------------------------\n\n    def summary(self) -&gt; dict:\n\n        return {\n            \"project_name\": self.project_name,\n            \"project_dir\": str(self.project_dir),\n            \"runtime_dir\": str(self.runtime_dir),\n            \"image_mode\": self.image_mode,\n            \"base_image\": self.base_image,\n            \"singularity_image\": str(self.singularity_image),\n            \"singularity_definition\": str(self.singularity_def),\n            \"spack_yaml\": str(self.spack_yaml),\n            \"rproject_toml\": str(self.rproject_toml),\n            \"pyproject_toml\": str(self.pyproject_toml),\n            \"env_dir\": str(self.env_dir),\n            \"activate_script\": str(self.activate_script),\n            \"container_home\": str(self.container_home),\n            \"container_tmp\": str(self.container_tmp),\n            \"partition\": self.slurm_build_partition,\n            \"cpus\": self.slurm_build_cpus,\n            \"memory\": self.slurm_build_mem,\n            \"hours\": self.slurm_build_hours,\n        }\n\n    def __repr__(self) -&gt; str:\n\n        return (\n            f\"ProjectContract(\"\n            f\"project='{self.project_name}', \"\n            f\"mode='{self.image_mode}', \"\n            f\"project_dir='{self.project_dir}')\"\n        )\n\nThe only information that must be supplied is the information a user actually chooses for a project.\nFirst, choose the image mode.\n\nSandbox mode points the workbench at a writable sandbox image for rapid experimentation.\nBuild mode points the workbench at the final read-only SIF used for production work.\n\nEvery later notebook should simply use project_contract.singularity_image; none of them need to know how that path is chosen.\n\nIMAGE_MODE = \"build\"\n\nNext, define the project itself.\nThese values describe the project’s identity and the platform it will use. Everything else is derived automatically from this information.\n\nfrom pathlib import Path\nfrom pyprojroot import here\n\nPROJECT_NAME = \"prospectorDHSMadagascar\"\nassert PROJECT_NAME, \"Please choose a project name.\"\n\nPROJECT_ROOT = Path(\n    \"/n/holylabs/LABS/cgolden_lab/Lab/frontier/works/prospectors\"\n)\n\nWORKBENCH_DIR = here()\nBASE_IMAGE = \"docker://spack/rockylinux9:develop\"\nR_VERSION = \"4.5.1\"\nPYTHON_VERSION = \"3.14\"\nENABLE_DIRENV = True\n\nFinally, choose the default Slurm resources that later notebooks should use when building images or installing project environments. These are simply defaults—they do not launch any jobs.\n\nSLURM_PARTITION = \"hsph\"\nSLURM_CPUS = 6\nSLURM_MEM = \"32G\"\nSLURM_HOURS = 2\nSLURM_EMAIL = (\n    \"aaaapr3lk7gfdswioulcmvi3te@harvard.org.slack.com\"\n)\n\nConstruct the project contract. From this point onward, every notebook should obtain project configuration and filesystem locations from project_contract.\n\nfrom rse_workbench.project_contract import ProjectContract\n\nproject_contract = ProjectContract(\n\n    project_name=PROJECT_NAME,\n    project_root=PROJECT_ROOT,\n    workbench_dir=WORKBENCH_DIR,\n    image_mode=IMAGE_MODE,\n    base_image=BASE_IMAGE,\n    r_version=R_VERSION,\n    python_version=PYTHON_VERSION,\n    enable_direnv=ENABLE_DIRENV,\n    slurm_build_partition=SLURM_PARTITION,\n    slurm_build_cpus=SLURM_CPUS,\n    slurm_build_mem=SLURM_MEM,\n    slurm_build_hours=SLURM_HOURS,\n    slurm_email=SLURM_EMAIL,\n)\n\nNext, create the standard project directory layout. Because the contract knows which directories belong to every project, later notebooks can safely assume these locations already exist.\n\nproject_contract.create_directories()\n\nFinally, inspect the contract as a quick sanity check before continuing.\n\nproject_contract.summary()\n\nStop here.\nThe next notebook uses this contract to define the project’s base platform image.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Project Contract</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.html",
+    "title": "19  Platform Image",
+    "section": "",
+    "text": "19.1 Platform tools\nTo begin, we must first set the foundations of a software platform, i.e., what kind of computer to isolate. This notebook defines the platform image in Singularity. It should only answer:\nThe platform image must not yet know about /work/.spack-env/view, R_HOME, rv libraries, Quarto project extensions, or project-specific activation.\nWe import the Installable class, which allows us to define additional platform-level tools, like code, rv, uv, and quarto. These tools are installed in the platform image, and are available to all projects that use this platform image.\nAnd we also import the compose_platform_recipe and recipe_to_definition functions, which allow us to compose a Singularity definition file from our platform and basic installables. This is a structured way to define the platform image, and is wrapped in a Python function for our convenience.\nHere, we’re attaching VSCode to the container. VSCode is the decided -upon IDE for this project, but it could be whatever you want! By using the Installable class, we can define any additional platform-level tools, like rv, uv, and quarto. These tools are installed in the platform image, and are available to all projects that use this platform image.\ncode = Installable(\n    name=\"code\",\n    kind=\"binary\",\n    path=\"/usr/local/bin/code\",\n    commands=[\n        r'''\ntmpdir=\"$(mktemp -d)\"\ncd \"$tmpdir\"\ncurl -L --fail --show-error --output vscode_cli.tar.gz \"https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64\"\ntar -xzf vscode_cli.tar.gz\nCODE_BIN=\"$(find \"$tmpdir\" -type f -name code | head -n 1)\"\ntest -n \"$CODE_BIN\"\ntest -x \"$CODE_BIN\" || chmod +x \"$CODE_BIN\"\ninstall -m 0755 \"$CODE_BIN\" /usr/local/bin/code\n/usr/local/bin/code --version\n'''\n    ],\n    test=[\"command -v code\", \"code --version\"],\n)\nTo manage our R and Python environments, we use rv and uv, respectively. These are installed in the platform image, and are available as binaries:\nrv = Installable(\n    name=\"rv\",\n    kind=\"binary\",\n    path=\"/usr/local/bin/rv\",\n    commands=[\n        r'''\ncurl -sSL https://raw.githubusercontent.com/A2-ai/rv/refs/heads/main/scripts/install.sh | bash\nRV_BIN=\"$(find /root/.local/bin /home -path '*/.local/bin/rv' -type f 2&gt;/dev/null | head -n 1)\"\nif [ -z \"$RV_BIN\" ]; then\n  RV_BIN=\"$(find / -path '*/.local/bin/rv' -type f 2&gt;/dev/null | head -n 1)\"\nfi\ntest -n \"$RV_BIN\"\ninstall -m 0755 \"$RV_BIN\" /usr/local/bin/rv\n'''\n    ],\n    test=[\"command -v rv\", \"rv --version\"],\n)\n\nuv = Installable(\n    name=\"uv\",\n    kind=\"binary\",\n    path=\"/usr/local/bin/uv\",\n    commands=[\n        r'''\ncurl -LsSf https://astral.sh/uv/install.sh | sh\nUV_BIN=\"$(find /root/.local/bin /home -path '*/.local/bin/uv' -type f 2&gt;/dev/null | head -n 1)\"\nif [ -z \"$UV_BIN\" ]; then\n  UV_BIN=\"$(find / -path '*/.local/bin/uv' -type f 2&gt;/dev/null | head -n 1)\"\nfi\ntest -n \"$UV_BIN\"\ninstall -m 0755 \"$UV_BIN\" /usr/local/bin/uv\n'''\n    ],\n    test=[\"command -v uv\", \"uv --version\"],\n)\nWe will also install Quarto, which is a publishing system for data science. Quarto is installed in the platform image, and is available as a binary:\nquarto = Installable(\n    name=\"quarto\",\n    kind=\"binary\",\n    path=\"/usr/local/bin/quarto\",\n    commands=[\n        r'''\nQUARTO_VERSION=\"1.9.38\"\nif [ \"$(uname -m)\" = \"aarch64\" ]; then\n  QUARTO_ARCH=\"arm64\"\nelse\n  QUARTO_ARCH=\"amd64\"\nfi\n\nmkdir -p \"/opt/quarto/${QUARTO_VERSION}\"\ncurl -o quarto.tar.gz -L \\\n  \"https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-${QUARTO_ARCH}.tar.gz\"\ntar -zxvf quarto.tar.gz -C \"/opt/quarto/${QUARTO_VERSION}\" --strip-components=1\nrm quarto.tar.gz\ntest -x \"/opt/quarto/${QUARTO_VERSION}/bin/quarto\"\nln -sf \"/opt/quarto/${QUARTO_VERSION}/bin/quarto\" /usr/local/bin/quarto\n'''\n    ],\n    test=[\"command -v quarto\", \"quarto --version\"],\n)\narf is useful but not a required part of the platform image. Keep it optional until embedded R is stable.\narf = Installable(\n    name=\"arf\",\n    kind=\"cargo\",\n    path=\"/usr/local/bin/arf\",\n    commands=[\n        r'''\ncurl --proto '=https' --tlsv1.2 -LsSf https://github.com/eitsupi/arf/releases/latest/download/arf-console-installer.sh | sh\nARF_BIN=\"$(find /root/.cargo/bin /home -path '*/.cargo/bin/arf' -type f 2&gt;/dev/null | head -n 1)\"\nif [ -z \"$ARF_BIN\" ]; then\n  ARF_BIN=\"$(find / -path '*/.cargo/bin/arf' -type f 2&gt;/dev/null | head -n 1)\"\nfi\ntest -n \"$ARF_BIN\"\ninstall -m 0755 \"$ARF_BIN\" /usr/local/bin/arf\n'''\n    ],\n    test=[\"command -v arf\", \"arf --version\"],\n)",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Platform Image</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.html#compose-definition",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.html#compose-definition",
+    "title": "19  Platform Image",
+    "section": "19.2 Compose definition",
+    "text": "19.2 Compose definition\nWe use the spython library to compose a Singularity definition file from our platform and basic installables. This is a structured way to define the platform image, and is wrapped in a Python function for your convenience:\n\nrecipe = compose_platform_recipe(\n    base_image=BASE_IMAGE,\n    installables=[code, rv, uv, quarto],\n    dnf_update=[\n        \"dnf install -y ca-certificates tar gzip which findutils file shadow-utils lsof\",\n        \"dnf install -y epel-release\",\n        \"dnf install -y python3 python3-pip\",\n        \"mkdir -p /work /tmp/spack-user-config /tmp/spack-user-cache /tmp/spack-misc-cache\",\n    ],\n)\n\nWhen working with Spack, you’ll want to set the following environment variables in the platform image, so that we can be sure that it always knows how to reference Spack’s configuration and cache directories:\n\nrecipe.environ.extend(\n    [\n        \"PATH=/usr/local/bin:/opt/spack/bin:/usr/bin:/usr/sbin:/sbin:/bin\",\n        \"SPACK_DISABLE_LOCAL_CONFIG=true\",\n        \"SPACK_USER_CONFIG_PATH=/tmp/spack-user-config\",\n        \"SPACK_USER_CACHE_PATH=/tmp/spack-user-cache\",\n        \"SPACK_MISC_CACHE_PATH=/tmp/spack-misc-cache\",\n    ]\n)\n\nFinally, we write the Singularity definition to file:\n\ndefinition = recipe_to_definition(recipe)\nproject_contract.singularity_def.write_text(definition)\nprint(definition)\n\nTo learn more about Singularity, see the Singularity documentation.\nThe next notebook builds and tests this basic image.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Platform Image</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.html",
+    "title": "20  Build Platform",
+    "section": "",
+    "text": "20.1 Platform-only validation\nThis notebook builds the platform image and tests the platform contract.\nDo not mount /work. Do not activate a project Spack environment yet. Do not run rv sync, quarto check, or VS Code tunnel commands yet. These actions will obfuscate your ability to validate the platform.\nThe following code may take some time as it runs in the foreground:\nIf the installables in the previous notebook are correct, the platform image should pass the following tests. Feel free to add more if you need!\nshow_spython(\n    spython_exec(\n        command=r'''\nset -euo pipefail\n\necho \"PATH=$PATH\"\nwhich spack\nwhich python3\nwhich rv\nwhich uv\nwhich code\nwhich quarto\n\nspack --version\npython3 --version\nrv --version\nuv --version\ncode --version\nquarto --version\n''',\n        image=project_contract.base_image,\n        options=[\"--no-home\"],\n    ),\n    tail=120,\n)\nExpected result:\nNote that the above tests are just for the platform; they are not expected to be carried over to the final image — that will be tested independently.\n#TODO insert computational tests here e.g. pytest, assert statements, etc.\nStop here and debug if the platform contract fails.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Build Platform</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.html#platform-only-validation",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.html#platform-only-validation",
+    "title": "20  Build Platform",
+    "section": "",
+    "text": "spack works\npython3 works\nrv works\nuv works\ncode works\nquarto works",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Build Platform</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/13_spack_yaml.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/13_spack_yaml.html",
+    "title": "21  Scientific System Dependency Layer",
+    "section": "",
+    "text": "This notebook writes spack.yaml. It should only answer:\n\nWhat scientific system dependencies does this project require?\n\nDo not install the environment here, yet. Simply define the system dependencies that Spack can provide:\n\nfrom __future__ import annotations\n\nfrom pathlib import Path\nfrom typing import Any\n\nimport yaml\n\n\ndef _dedupe(items: list[str]) -&gt; list[str]:\n    seen = set()\n    result = []\n    for item in items:\n        if item not in seen:\n            result.append(item)\n            seen.add(item)\n    return result\n\n\ndef default_spack_env(\n    *,\n    r_version: str,\n    python_version: str,\n    extra_specs: list[str] | None = None,\n    default_specs: list[str] = [\n        \"libiconv\",\n        \"ncurses\",\n        \"openblas\",\n        \"curl\",\n        \"openssl\",\n        \"pkgconf\",\n        \"abseil-cpp\",\n        \"zlib\",\n        \"zlib-ng+compat\",\n        \"cmake\",\n        \"gmake\",\n        \"git\",\n        \"libx11\",\n        \"libxml2\",\n        \"freetype\",\n        \"libjpeg\",\n        \"libjpeg-turbo\",\n        \"libpng\",\n        \"libtiff\",\n        \"libwebp +libwebpmux\",\n        \"icu4c\",\n        \"fontconfig\",\n        \"fribidi\",\n        \"harfbuzz\",\n        \"libgit2\",\n        \"cairo\",\n        \"readline\",\n        \"libuv\",\n    ]\n) -&gt; dict[str, Any]:\n    \"\"\"Return a default system-dependency-only Spack environment.\"\"\"\n\n    specs = [f\"r@{r_version}\", f\"python@{python_version}\"]\n    specs.extend(default_specs)\n    specs.extend(extra_specs or [])\n\n    return {\n        \"spack\": {\n            \"specs\": _dedupe(specs),\n            \"view\": \"/work/.spack-env/view\",\n            \"config\": {\n                \"install_tree\": {\"root\": \"/work/.spack-env/install\"},\n                \"source_cache\": \"/work/.spack/cache/source\",\n                \"misc_cache\": \"/work/.spack/cache/misc\",\n                \"build_stage\": [\"/work/.spack/stage\"],\n                \"shared_linking\": {\n                    \"type\": \"rpath\",\n                    \"missing_library_policy\": \"error\",\n                },\n            },\n        }\n    }\n\n\ndef write_spack_yaml(path: Path, spack_env: dict[str, Any]) -&gt; Path:\n    \"\"\"Write spack.yaml idempotently, creating parent directories first.\"\"\"\n    import yaml\n\n    path.parent.mkdir(parents=True, exist_ok=True)\n    path.write_text(yaml.safe_dump(spack_env, sort_keys=False))\n    return path\n\n\nfrom rse_workbench.sci_sysdeps import default_spack_env, write_spack_yaml\n\nThe following is what I typically see necessary for R and Python computing:\n\nDEFAULT_SYSTEM_SPECS = [\n    \"r@4.5.1 +X\",\n    \"python@3.14\",\n    \"libiconv\",\n    \"ncurses\",\n    \"openblas\",\n    \"curl\",\n    \"openssl\",\n    \"pkgconf\",\n    \"abseil-cpp\",\n    \"zlib\",\n    \"zlib-ng+compat\",\n    \"cmake\",\n    \"gmake\",\n    \"git\",\n    \"libx11\",\n    \"libxml2\",\n    \"freetype\",\n    \"libjpeg\",\n    \"libjpeg-turbo\",\n    \"libpng\",\n    \"libtiff\",\n    \"libwebp +libwebpmux\",\n    \"icu4c\",\n    \"fontconfig\",\n    \"fribidi\",\n    \"harfbuzz\",\n    \"libgit2\",\n    \"cairo +X\",\n    \"readline\",\n    \"libuv\",\n    \"udunits\"    \n]\n\nWe can extend the default specs with some simple Python:\n\nDEFAULT_SYSTEM_SPECS.extend([\n    \"glpk\", \"libxml2\", \"flexiblas\", \"proj\", \"geos\", \"gdal\"\n])\n\nIt can be useful to predict the system dependencies using R’s pak::pkg_sysreqs() function. If you need to customize the compiler or any other configuration, do so in the dictionary below, and the changes will reflect when you run write_spack_yaml().\n\nspack_env = {\n    \"spack\": {\n        \"specs\": list(set(DEFAULT_SYSTEM_SPECS)),\n        \"view\": \"/work/.spack-env/view\",\n        \"packages\": {\n            \"all\": {\n                \"compiler\": [\"gcc@11.5.0\"]\n            }\n        },\n        \"config\": {\n            \"install_tree\": {\"root\": \"/work/.spack-env/install\"},\n            \"source_cache\": \"/work/.spack/cache/source\",\n            \"misc_cache\": \"/work/.spack/cache/misc\",\n            \"build_stage\": [\"/work/.spack/stage\"],\n            \"shared_linking\": {\n                \"type\": \"rpath\",\n                \"missing_library_policy\": \"error\",\n            },\n        },\n    }\n}\n\nwrite_spack_yaml(project_contract.spack_yaml, spack_env)\nproject_contract.spack_yaml\n\n\nprint(project_contract.spack_yaml.read_text())\n\nStop here. The next notebook writes language package declarations.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Scientific System Dependency Layer</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/14_language_packages.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/14_language_packages.html",
+    "title": "22  Data Science Language Package Layer",
+    "section": "",
+    "text": "This notebook writes rproject.toml and pyproject.toml.\nDo not run rv sync or uv sync here.\n\nfrom __future__ import annotations\n\nfrom pathlib import Path\nfrom typing import Any\n\n\ndef _dedupe(items: list[str]) -&gt; list[str]:\n    seen = set()\n    result = []\n    for item in items:\n        if item not in seen:\n            result.append(item)\n            seen.add(item)\n    return result\n\nfrom typing import Any\n\n\ndef default_rproject(\n    project_name: str,\n    r_version: str,\n    packages: list[str],\n    git_dependencies: list[dict[str, str]] | None = None,\n) -&gt; dict[str, Any]:\n    \"\"\"Return the default rv project configuration.\n\n    Parameters\n    ----------\n    project_name\n        Name of the project.\n\n    r_version\n        Required R version.\n\n    packages\n        CRAN-style package dependencies.\n\n    git_dependencies\n        Optional git dependencies.\n\n    library\n        Project-local rv library location. Relative paths are resolved\n        relative to the project directory by rv.\n    \"\"\"\n\n    dependencies: list[Any] = _dedupe(packages)\n\n    if git_dependencies:\n        dependencies.extend(git_dependencies)\n\n    return {\n        \"project\": {\n            \"name\": project_name,\n            \"r_version\": r_version,\n            \"repositories\": [\n                {\n                    \"alias\": \"PPM\",\n                    \"url\": \"https://packagemanager.posit.co/cran/latest\",\n                    \"force_source\": True\n                }\n            ],\n            \"dependencies\": dependencies,\n        },\n    }\n\n\ndef default_pyproject(\n    project_name: str,\n    python_version: str,\n    packages: list[str],\n) -&gt; dict[str, Any]:\n    \"\"\"Return the default uv project file data.\"\"\"\n\n    return {\n        \"project\": {\n            \"name\": project_name,\n            \"version\": \"0.1.0\",\n            \"requires-python\": f\"&gt;={python_version}\",\n            \"dependencies\": _dedupe(packages),\n        }\n    }\n\n\ndef _toml_value(value: Any) -&gt; str:\n    if isinstance(value, str):\n        return '\"' + value.replace('\"', '\\\\\"') + '\"'\n    if isinstance(value, bool):\n        return \"true\" if value else \"false\"\n    if isinstance(value, (int, float)):\n        return str(value)\n    if isinstance(value, list):\n        if not value:\n            return \"[]\"\n        if all(not isinstance(item, dict) for item in value):\n            return \"[\" + \", \".join(_toml_value(item) for item in value) + \"]\"\n    raise TypeError(f\"Unsupported TOML value: {value!r}\")\n\n\ndef _fallback_toml_dumps(data: dict[str, Any]) -&gt; str:\n    lines: list[str] = []\n\n    def write_table(prefix: list[str], table: dict[str, Any]) -&gt; None:\n        if prefix:\n            lines.append(f\"[{'.'.join(prefix)}]\")\n\n        deferred: list[tuple[str, dict[str, Any]]] = []\n        arrays: list[tuple[str, list[dict[str, Any]]]] = []\n\n        for key, value in table.items():\n            if isinstance(value, dict):\n                deferred.append((key, value))\n            elif isinstance(value, list) and value and all(isinstance(item, dict) for item in value):\n                arrays.append((key, value))\n            else:\n                lines.append(f\"{key} = {_toml_value(value)}\")\n\n        lines.append(\"\")\n\n        for key, value in deferred:\n            write_table(prefix + [key], value)\n\n        for key, values in arrays:\n            for item in values:\n                lines.append(f\"[[{'.'.join(prefix + [key])}]]\")\n                for item_key, item_value in item.items():\n                    lines.append(f\"{item_key} = {_toml_value(item_value)}\")\n                lines.append(\"\")\n\n    write_table([], data)\n    return \"\\n\".join(lines).rstrip() + \"\\n\"\n\n\ndef _toml_dumps(data: dict[str, Any]) -&gt; str:\n    try:\n        import tomli_w\n    except ImportError:\n        return _fallback_toml_dumps(data)\n\n    return tomli_w.dumps(data)\n\ndef write_rproject_toml(path: Path, rproject: dict[str, Any]) -&gt; Path:\n    \"\"\"Write rproject.toml idempotently.\"\"\"\n\n    path.parent.mkdir(parents=True, exist_ok=True)\n    path.write_text(_toml_dumps(rproject))\n    return path\n\n\ndef write_pyproject_toml(path: Path, pyproject: dict[str, Any]) -&gt; Path:\n    \"\"\"Write pyproject.toml idempotently.\"\"\"\n\n    path.parent.mkdir(parents=True, exist_ok=True)\n    path.write_text(_toml_dumps(pyproject))\n    return path\n\nHere’s the default set of R and Python packages I’ll typically have; make it leaner for faster builds, and add more as needed for your project. Bounce between this notebook and the Spack environment notebook to add any system dependencies you need for your R and Python packages.\n\nDEFAULT_R_PACKAGES = [\n    \"box\", # we use this for namespacing and dependency injection\n    \"remotes\",\n    \"rprojroot\", # always travel with this\n    \"stringi\",\n    \"targets\",\n    \"tarchetypes\",\n    \"usethis\",\n    \"httpgd\",\n    \"httpuv\",\n    \"parsermd\",\n    \"rmarkdown\",\n    \"skimr\",\n    \"DiagrammeR\",\n    \"svglite\",\n    \"later\",\n    \"rstudioapi\",\n    \"dplyr\",\n    \"languageserver\",\n    \"here\",\n    \"fledge\",\n    \"readr\",\n    \"stringr\",\n    \"withr\",\n    \"readxl\",\n    \"tidyverse\",\n    \"websocket\",\n    \"codetools\",\n    \"quarto\",\n    \"rlang\",\n    \"purrr\",\n    \"tibble\",\n    \"devtools\",\n    \"jsonlite\",\n]\n\nDEFAULT_R_GIT_DEPENDENCIES = [\n    {\n        \"name\": \"sess\",\n        \"git\": \"https://github.com/REditorSupport/vscode-R\",\n        \"branch\": \"master\",\n        \"directory\": \"sess\",\n    }\n]\n\nDEFAULT_PYTHON_PACKAGES = [\n    \"numpy\",\n    \"pandas\",\n    \"ipykernel\",\n    \"jupyterlab\",\n]\n\n\nfrom rse_workbench.datascience import (\n    default_pyproject,\n    default_rproject,\n    write_pyproject_toml,\n    write_rproject_toml,\n)\n\n\nrproject = default_rproject(\n    project_name=project_contract.project_name,\n    r_version=project_contract.r_version,\n    packages=DEFAULT_R_PACKAGES,\n    git_dependencies=DEFAULT_R_GIT_DEPENDENCIES,\n)\n\npyproject = default_pyproject(\n    project_name=project_contract.project_name,\n    python_version=project_contract.python_version,\n    packages=DEFAULT_PYTHON_PACKAGES,\n)\n\nwrite_rproject_toml(project_contract.rproject_toml, rproject)\nwrite_pyproject_toml(project_contract.pyproject_toml, pyproject)\n\n\nprint(project_contract.rproject_toml.read_text())\nprint(project_contract.pyproject_toml.read_text())\n\nStop here. The next notebook writes the runtime activation contract.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Data Science Language Package Layer</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/15_activation_contract.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/15_activation_contract.html",
+    "title": "23  Activation Contract",
+    "section": "",
+    "text": "23.1 Optional host-side .envrc\nThis notebook writes the canonical project runtime activation script.\nThe activation script prepares the runtime environment. It does not install packages.\nCanonical runtime contract:\n.envrc is for host-side convenience only. It should not activate the container runtime on the host.\nfrom textwrap import dedent\n\nif project_contract.enable_direnv:\n    envrc = project_contract.project_dir / \".envrc\"\n    envrc.write_text(\n        dedent(\n            f'''\\\n            export LAUNCHSCRIPT=\"{str(project_contract.launch_script)}\"\n            export LAUNCHLOGDIR=\"{str(project_contract.launch_log_dir)}\"\n            export LATEST_LAUNCH_ERR=\"$(ls -t \"$LAUNCHLOGDIR\"/launch-*.err 2&gt;/dev/null | head -n1)\"\n            export LATEST_LAUNCH_OUT=\"$(ls -t \"$LAUNCHLOGDIR\"/launch-*.out 2&gt;/dev/null | head -n1)\"\n            '''\n        )\n    )\n    envrc.chmod(0o644)\n    envrc\nStop here. The next notebook tests activation with the project mounted.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>Activation Contract</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/16_validate_activation.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/16_validate_activation.html",
+    "title": "24  Validate Activation",
+    "section": "",
+    "text": "This notebook tests only project activation.\nDo not install Spack packages. Do not run rv sync. Do not run Quarto checks.\n\nfrom rse_workbench.helpers import spython_exec, show_spython\n\n\nshow_spython(\n    spython_exec(\n        command=r'''\nset -euo pipefail\nsource /work/env/activate.sh\n\necho \"PATH=$PATH\"\necho \"PKG_CONFIG_PATH=${PKG_CONFIG_PATH:-}\"\necho \"CPATH=${CPATH:-}\"\necho \"LIBRARY_PATH=${LIBRARY_PATH:-}\"\necho \"LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-}\"\necho \"R_HOME=${R_HOME:-}\"\n\nwhich spack\nwhich python3\nspack debug report\nspack env status\n''',\n        image=project_contract.base_image,\n        options=[\"--no-home\"],\n        bind_project=project_contract.project_dir,\n    )\n)\n\nExpected result:\nspack is visible\npython3 is visible\nproject Spack environment activates\nR_HOME is empty\nStop here if activation fails.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>Validate Activation</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/17_install_spack.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/17_install_spack.html",
+    "title": "25  Install Spack Layer",
+    "section": "",
+    "text": "This notebook installs the project Spack layer. Spack works by creating a project specific DAG of dependencies and finding the best way to build them. Installation will usually work, but you can use this notebook to debug installation issues.\nDo not run rv sync, uv sync, Quarto checks, or VS Code, yet.\n\nfrom pathlib import Path\nfrom typing import Any\nfrom spython.main import Client\nfrom pathlib import Path\nimport os\n\ndef install_in_container(\n    project_dir: Path,\n    SINGULARITY_IMAGE: Path,\n    runtime_command: str = INSTALL_RUNTIME_COMMAND,\n) -&gt; dict[str, Any]:\n    \"\"\"Install the project Spack and data science environments inside the final SIF.\"\"\"\n\n\n    project_dir = Path(project_dir)\n    SINGULARITY_IMAGE = Path(SINGULARITY_IMAGE)\n\n    container_home = project_dir / \".container-home\"\n    container_tmp = project_dir / \".container-tmp\"\n\n    container_home.mkdir(parents=True, exist_ok=True)\n    container_tmp.mkdir(parents=True, exist_ok=True)\n\n    os.environ.update({\n        \"SINGULARITYENV_R_LIBS\": \"\",\n        \"SINGULARITYENV_R_LIBS_USER\": \"\",\n        \"SINGULARITYENV_R_LIBS_SITE\": \"\",\n        \"SINGULARITYENV_SPACK_DISABLE_LOCAL_CONFIG\": \"true\",\n    })\n\n    options = [\n        \"--cleanenv\",\n        \"--home\", f\"{container_home}:/home/rse\",\n        \"--bind\", f\"{project_dir}:/work\",\n        \"--bind\", f\"{container_tmp}:/tmp\",\n    ]\n\n    return Client.execute(\n        image=str(SINGULARITY_IMAGE),\n        command=[\"bash\", \"--noprofile\", \"--norc\", \"-lc\", runtime_command],\n        options=options,\n        sudo=False,\n        return_result=True,\n    )\n\n\nimport submitit\nfrom rse_workbench.helpers import show_submitit_job\nfrom rse_workbench.install_spack import install_in_container\n\n\nexecutor = submitit.AutoExecutor(folder=str(project_contract.submitit_dir / \"%j\"))\nexecutor.update_parameters(\n    timeout_min=project_contract.slurm_build_hours * 60,\n    slurm_partition=project_contract.slurm_build_partition,\n    mem_gb=float(project_contract.slurm_build_mem.rstrip(\"G\")),\n    cpus_per_task=project_contract.slurm_build_cpus,\n    slurm_job_name=f\"install-spack-{project_contract.project_name}\",\n    mail_user=project_contract.slurm_email,\n)\n\n\nSPACK_INSTALL_COMMAND = r'''\nset -euo pipefail\n\ndf -h /tmp /work\nsource /work/env/activate.sh\n\nwhich spack\nwhich python3\nspack debug report\nspack concretize --force\nspack install --deprecated --fail-fast -j6 --no-checksum\nspack find\n\necho SPACK_INSTALL_DONE\n'''\n\n\njob = executor.submit(\n    install_in_container,\n    project_dir=project_contract.project_dir,\n    SINGULARITY_IMAGE=project_contract.singularity_image,\n    runtime_command=SPACK_INSTALL_COMMAND,\n)\njob.job_id\n\n\nresult = show_submitit_job(job)\nif result is not None:\n    print(''.join(result['message']))\n\nStop here until the Spack layer succeeds.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>Install Spack Layer</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/18_validate_r.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/18_validate_r.html",
+    "title": "26  Validate R From Spack",
+    "section": "",
+    "text": "This notebook validates the R installation after the Spack layer is installed.\nDo not install R packages here.\n\nfrom rse_workbench.helpers import spython_exec, show_spython\n\n\nshow_spython(\n    spython_exec(\n        command=r'''\nset -euo pipefail\nsource /work/env/activate.sh\n\nwhich R\nwhich Rscript\nR --version\nRscript -e 'cat(\"R.home=\", R.home(), \"\\n\", sep=\"\"); print(.libPaths()); print(capabilities()[c(\"cairo\", \"png\", \"jpeg\", \"tiff\")])'\n''',\n        image=project_contract.singularity_image,\n        options=[\"--no-home\"],\n        bind_project=project_contract.project_dir,\n    ),\n    tail=160,\n)\n\nExpected result:\n\nR starts\nRscript starts\ncairo, png, jpeg, and tiff capabilities are TRUE\n\nStop here if R capabilities are wrong.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Validate R From Spack</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/19_install_language_packages.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/19_install_language_packages.html",
+    "title": "27  Install Language Package Layer",
+    "section": "",
+    "text": "This notebook installs R and Python project packages after Spack and R have already been validated.\nNote that from here on out, you should be binding your fake $HOME directory to CONTAINER_HOME, and your fake $TMP directory to CONTAINER_TMP, so that R and Python package installations can write to a writable home and tmp directory.\n\nimport submitit\nfrom rse_workbench.helpers import show_submitit_job\nfrom rse_workbench.build_install import install_in_container\n\n\nexecutor = submitit.AutoExecutor(folder=str(project_contract.submitit_dir / \"%j\"))\nexecutor.update_parameters(\n    timeout_min=project_contract.slurm_build_hours * 60,\n    slurm_partition=project_contract.slurm_build_partition,\n    mem_gb=float(project_contract.slurm_build_mem.rstrip(\"G\")),\n    cpus_per_task=project_contract.slurm_build_cpus,\n    slurm_job_name=f\"install-langs-{project_contract.project_name}\",\n    mail_user=project_contract.slurm_email,\n)\n\n\nLANGUAGE_INSTALL_COMMAND = r'''\nset -euo pipefail\n\nsource /work/env/activate.sh\n\nwhich R\nwhich Rscript\nwhich rv\nwhich python3\nwhich uv\n\nrv init\nrv sync\nrv summary\n\nuv sync || true\n\necho LANGUAGE_INSTALL_DONE\n'''\n\n\njob = executor.submit(\n    install_in_container,\n    project_dir=project_contract.project_dir,\n    SINGULARITY_IMAGE=project_contract.singularity_image,\n    runtime_command=LANGUAGE_INSTALL_COMMAND,\n)\njob.job_id\n\n\nresult = show_submitit_job(job)\nif result is not None:\n    print(''.join(result['message']))\n\n\nshow_spython(\n    spython_exec(\n        command=r\"\"\"\nset -euo pipefail\n\nsource /work/env/activate.sh\ncd /work\n\nrv sync\n\nRscript -e '\ncat(\"R.home(): \", R.home(), \"\\n\\n\")\ncat(\".libPaths():\\n\")\nprint(.libPaths())\ncat(\"\\nknitr:\\n\")\nprint(find.package(\"knitr\"))\ncat(\"\\nrmarkdown:\\n\")\nprint(find.package(\"rmarkdown\"))\n'\n\nquarto check knitr\n\"\"\",\n        image=project_contract.singularity_image,\n        options=[\n            \"--home\", f\"{project_contract.container_home}:/home/rse\",\n            \"--bind\", f\"{project_contract.container_tmp}:/tmp\",\n        ],\n        bind_project=project_contract.project_dir,\n    ),\n    tail=240,\n)\n\nStop here until language package installation succeeds.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Install Language Package Layer</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.html",
+    "title": "28  Validate Quarto",
+    "section": "",
+    "text": "28.1 Extension policy\nThis notebook validates Quarto after Spack, R, and language packages are installed.\nStart with Quarto itself and a minimal render. Only then render project notebooks or extension-backed documents.\nIf project notebooks require executable filters like sorting-hat or ripper, place them under:\nThe activation script already prepends /work/env/bin to PATH.\nDo not rely on arbitrary /work/dev/&lt;filter&gt; paths unless those files are created by a notebook and made executable.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Validate Quarto</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.html#extension-policy",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.html#extension-policy",
+    "title": "28  Validate Quarto",
+    "section": "",
+    "text": "/work/env/bin",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Validate Quarto</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html",
+    "title": "29  Build Final SIF",
+    "section": "",
+    "text": "29.1 1. Verify the container runtime\nThis notebook builds the final read-only SIF from the validated platform definition.\nBuild:\nInstall Spack and System Dependencies:\nInstall Data Science Languages and Packages:\nThis section verifies that each layer of the environment is functioning correctly independently before testing that the layers communicate correctly.\nThe architecture is expected to look like:\nAt each stage we test a single contract before moving to the next.\nThe container should provide the basic executables required for the project.\ncommand = r\"\"\"\nset -euo pipefail\necho \"============================================================\"\necho \"1. Base container tools (before activation)\"\necho \"============================================================\"\n\ncommand -v spack\ncommand -v rv\ncommand -v uv\ncommand -v quarto\nquarto --version\necho\n\necho \"============================================================\"\necho \"2. Activate project\"\necho \"============================================================\"\n\ncd /work\nsource /work/env/activate.sh\necho\n\necho \"============================================================\"\necho \"3. Tool discovery after activation\"\necho \"============================================================\"\n\ncommand -v spack\ncommand -v R\ncommand -v Rscript\ncommand -v rv\ncommand -v quarto\necho\n\necho \"============================================================\"\necho \"4. Spack\"\necho \"============================================================\"\n\nspack env status\nspack find r\necho\n\necho \"============================================================\"\necho \"5. rv\"\necho \"============================================================\"\n\nrv cache\nrv sync\necho\n\necho \"============================================================\"\necho \"6. R\"\necho \"============================================================\"\n\nRscript -e '\ncat(\"R.home():\\n\")\nprint(R.home())\ncat(\"\\n.libPaths():\\n\")\nprint(.libPaths())\n\npkgs &lt;- c(\n  \"rlang\",\n  \"knitr\",\n  \"rmarkdown\"\n)\n\nfor (pkg in pkgs) {\n  cat(\"\\n=====================================\\n\")\n  cat(pkg, \"\\n\")\n  cat(\"=====================================\\n\")\n  cat(\"find.package():\\n\")\n  print(find.package(pkg, quiet = TRUE))\n  cat(\"\\nrequireNamespace():\\n\")\n  print(requireNamespace(pkg, quietly = FALSE))\n  cat(\"\\nlibrary():\\n\")\n  try(library(pkg, character.only = TRUE))\n  cat(\"\\npackageVersion():\\n\")\n  print(packageVersion(pkg))\n}\n'\necho\n\necho \"============================================================\"\necho \"7. Quarto discovery\"\necho \"============================================================\"\n\nexport QUARTO_R=\"$(command -v Rscript)\"\necho \"QUARTO_R=${QUARTO_R}\"\nquarto check knitr --log-level DEBUG\n\"\"\"\nExpected:",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Build Final SIF</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html#verify-the-container-runtime",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html#verify-the-container-runtime",
+    "title": "29  Build Final SIF",
+    "section": "",
+    "text": "every executable is found\nQuarto prints its version",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Build Final SIF</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html#verify-that-spack-owns-the-r-installation",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html#verify-that-spack-owns-the-r-installation",
+    "title": "29  Build Final SIF",
+    "section": "29.2 2. Verify that Spack owns the R installation",
+    "text": "29.2 2. Verify that Spack owns the R installation\nActivate the project environment and inspect the R installation.\n\nshow_spython(\n    spython_exec(\n        command=r'''\ncd /work\n\nsource /work/env/activate.sh\n\nspack env status\nspack find r\n\nRscript -e '\ncat(\"R.home():\\n\")\nprint(R.home())\n\ncat(\"\\n.libPaths():\\n\")\nprint(.libPaths())\n'\n''',\n        image=SINGULARITY_IMAGE,\n        options=[\n            \"--home\", f\"{CONTAINER_HOME}:/home/rse\",\n            \"--bind\", f\"{CONTAINER_TMP}:/tmp\",\n        ],\n        bind_project=PROJECT_DIR,\n    ),\n)\n\nExpected:\n\nthe project Spack environment is active\nR.home() points inside .spack-env\n.libPaths() contains\n\n/work/.rv/library\n/work/.spack-env/.../R/library",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Build Final SIF</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html#verify-that-rv-owns-the-project-r-packages",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html#verify-that-rv-owns-the-project-r-packages",
+    "title": "29  Build Final SIF",
+    "section": "29.3 3. Verify that rv owns the project R packages",
+    "text": "29.3 3. Verify that rv owns the project R packages\nSynchronize the project packages and verify that they can be loaded.\n\nshow_spython(\n    spython_exec(\n        command=r'''\nrv sync\n\nRscript -e '\ncat(\".libPaths():\\n\")\nprint(.libPaths())\n\npkgs &lt;- c(\"rlang\", \"knitr\", \"rmarkdown\")\n\nfor (pkg in pkgs) {\n  cat(\"\\n=============================\\n\")\n  cat(pkg, \"\\n\")\n  cat(\"=============================\\n\")\n\n  print(find.package(pkg, quiet = TRUE))\n  print(requireNamespace(pkg, quietly = FALSE))\n}\n'\n''',\n        image=SINGULARITY_IMAGE,\n        options=[\n            \"--home\", f\"{CONTAINER_HOME}:/home/rse\",\n            \"--bind\", f\"{CONTAINER_TMP}:/tmp\",\n        ],\n        bind_project=PROJECT_DIR,\n    ),\n)\n\nExpected:\nTRUE\nTRUE\nTRUE\nfor all three packages.",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Build Final SIF</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html#verify-that-quarto-discovers-the-same-r-installation",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html#verify-that-quarto-discovers-the-same-r-installation",
+    "title": "29  Build Final SIF",
+    "section": "29.4 4. Verify that Quarto discovers the same R installation",
+    "text": "29.4 4. Verify that Quarto discovers the same R installation\nExplicitly tell Quarto which R executable to use.\nexport QUARTO_R=\"$(command -v Rscript)\"\n\nquarto check knitr --log-level DEBUG\nExpected:\n\nQuarto reports the same R installation\nknitr is detected\nrmarkdown is detected",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Build Final SIF</span>"
+    ]
+  },
+  {
+    "objectID": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/22_launch_vscode.html",
+    "href": "examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/22_launch_vscode.html",
+    "title": "30  Launch VS Code Tunnel",
+    "section": "",
+    "text": "This notebook writes the VS Code launch script.\nThe launch script should not install packages. It assumes prior notebooks have already installed and validated the environment.\n\nfrom simple_slurm import Slurm\nfrom pathlib import Path\n\nImportantly, we add a “clean” argument here; if True, it’ll remove any existing cached VSCode tunnel state found in CONTAINER_HOME/.vscode-server. This is useful if you want to reset the VSCode tunnel state, but it will also remove any cached extensions and settings. If you want to preserve your VSCode tunnel state, set clean to False.\n\nclean = True\n\nruntime_command = [\n    \"set -euo pipefail\",\n    \"source /work/env/activate.sh\",\n    \"cd /work\",\n    \"which code\",\n    \"code tunnel user login --provider github\",\n    \"rm -rf /home/rse/.vscode-server\" if clean else \"echo 'Preserving existing VSCode tunnel state'\",\n    f\"code tunnel --accept-server-license-terms --name {project_contract.project_name}\",\n]\nruntime_command\n\n\nslurm = Slurm(\n    job_name=f\"{project_contract.project_name}-vscode\",\n    cpus_per_task=project_contract.slurm_build_cpus,\n    mem=project_contract.slurm_build_mem,\n    time=\"04:00:00\",\n    partition=project_contract.slurm_build_partition,\n    mail_user=project_contract.slurm_email,\n    output=str(project_contract.launch_log_dir / \"launch-%j.out\"),\n    error=str(project_contract.launch_log_dir / \"launch-%j.err\"),\n)\n\nslurm.add_cmd(\"set -o errexit -o nounset -o pipefail\")\nslurm.add_cmd(f'PROJECT_DIR=\"{project_contract.project_dir}\"')\nslurm.add_cmd('SIF=\"${PROJECT_DIR}/.devcontainer/Singularity.sif\"')\nslurm.add_cmd('CONTAINER_HOME=\"${PROJECT_DIR}/.container-home\"')\nslurm.add_cmd('CONTAINER_TMP=\"${PROJECT_DIR}/.container-tmp\"')\nslurm.add_cmd('mkdir -p \"${PROJECT_DIR}/slurm/launch/logs\"')\nslurm.add_cmd('mkdir -p \"${CONTAINER_HOME}\" \"${CONTAINER_TMP}\"')\nslurm.add_cmd('cd \"${PROJECT_DIR}\"')\n\n\nslurm.add_cmd(r'''\necho \"=================== Slurm sitrep ==================\"\necho \"Date:         $(date)\"\necho \"Host:         $(hostname)\"\necho \"User:         $(whoami)\"\necho \"Job ID:       ${SLURM_JOB_ID}\"\necho \"Project:      ${PROJECT_DIR}\"\necho \"SIF:          ${SIF}\"\necho \"Home:         ${CONTAINER_HOME}\"\necho \"Tmp:          ${CONTAINER_TMP}\"\necho \"===================================================\"\n\nmodule purge\n''')\n\n\ncontainer_command = \" && \".join(runtime_command)\n\nslurm.add_cmd(\n    r'''singularity exec \\\n  --bind \"${PROJECT_DIR}:/work\" \\\n  --home \"${CONTAINER_HOME}:/home/rse\" \\\n  --bind \"${CONTAINER_TMP}:/tmp\" \\\n  \"${SIF}\" \\\n  bash --noprofile --norc -lc ''' + repr(container_command)\n)\n\n\nproject_contract.launch_script.parent.mkdir(parents=True, exist_ok=True)\nproject_contract.launch_script.write_text(slurm.script(convert=False))\nproject_contract.launch_script.chmod(0o755)\nprint(project_contract.launch_script.read_text())\n\nLaunch manually from the project directory:\nsbatch \"$LAUNCHSCRIPT\"",
+    "crumbs": [
+      "RSE Workbench: An Environment Generator Workflow",
+      "<span class='chapter-number'>30</span>  <span class='chapter-title'>Launch VS Code Tunnel</span>"
     ]
   }
 ]

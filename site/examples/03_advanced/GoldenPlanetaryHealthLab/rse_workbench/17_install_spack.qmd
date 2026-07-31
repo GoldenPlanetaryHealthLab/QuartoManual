@@ -1,17 +1,8 @@
 ---
-title: "08 Install Spack Layer"
+title: "Install Spack Layer"
 format: gfm
 execute:
   eval: false
-filters:
-  - sorting-hat
-  - ripper
-extensions:
-  ripper:
-    output-name: "install_spack"
-    output-dir: "../../src/rse_workbench"
-  sorting-hat:
-    keep: python
 ---
 
 This notebook installs the project Spack layer. Spack works by creating

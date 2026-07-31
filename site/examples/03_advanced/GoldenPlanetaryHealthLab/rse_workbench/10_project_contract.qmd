@@ -1,17 +1,8 @@
 ---
-title: "01 Project Contract"
+title: "Project Contract"
 format: gfm
 execute:
   eval: false
-filters:
-  - sorting-hat
-  - ripper
-extensions:
-  ripper:
-    output-name: "project_contract"
-    output-dir: "../../src/rse_workbench"
-  sorting-hat:
-    keep: python
 ---
 This notebook defines the project contract.
 It answers one question:

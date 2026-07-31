@@ -1,5 +1,5 @@
 ---
-title: "06 Activation Contract"
+title: "Activation Contract"
 format: gfm
 execute:
   eval: false

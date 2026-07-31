@@ -1,0 +1,63 @@
+project:
+  type: quarto-manual
+  output-dir: ../docs
+  render: 
+    - "*.qmd"
+
+book:
+  title: Quarto Manual
+
+  chapters:
+    - part: "Introduction"
+      chapters:
+        - index.qmd
+        - 00_cover.qmd
+        - 01_misc-helpers.qmd
+        - 10_page-tasks.qmd
+    
+    - part: "Examples"
+      chapters:
+        - examples/index.qmd
+        
+    - part: examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.qmd
+      chapters: 
+        - examples/01_simple/NSAPH-data-processing/data-staging-workflow/00_cover.qmd
+        - examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.qmd
+        - examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.qmd
+        - examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.qmd
+
+    - part: examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.qmd
+      chapters: 
+        - examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.qmd
+        - examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.qmd
+        - examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.qmd
+        - examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.qmd
+        - examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.qmd
+
+    - part: examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.qmd
+      chapters: 
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/00_cover.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/01_misc-rse-workbench-apptainer.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/02_misc-rse-workbench-slurm.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/10_project_contract.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/13_spack_yaml.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/14_language_packages.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/15_activation_contract.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/16_validate_activation.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/17_install_spack.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/18_validate_r.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/19_install_language_packages.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.qmd
+        - examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/22_launch_vscode.qmd
+    
+format:
+  html:
+    toc: true
+    theme: cosmo
+    filters:
+      - _extensions/quarto-manual/manual.lua
+      - _extensions/TinasheMTapera/quarto-emit/quarto-emit.lua
+

@@ -1,17 +1,27 @@
 ---
-title: "Quarto Manuals"
+title: "Cover Page"
 format: html
 ---
 
-This site documents and explains Quarto Manuals as a lightweight framework for 
-executable software operation manuals.
+Like a traditional book, the Cover Page of a Quarto Manual provides a high-level 
+overview of the manual's purpose and scope. It is the first page an operator sees 
+when opening the manual, and it should be clear, concise, and informative,
+and may use images, examples, and other elements to enrich the operator's 
+understanding of the manual's content.
 
-This documentation will explain:
+This site documents and explains Quarto Manuals as a lightweight framework for 
+executable software operation manuals for three different scientific workflows.
+
+For each project, the documentation will illustrate:
 
 - the minimal starter template that Manual authors ship to End Users;
 - the framework rules that make the template a Manual Page;
+- the specific use cases and applications of the manual in each workflow;
 - full examples showing how the template scales from simple to advanced work.
 
-The examples on this site are rendered copies of the kinds of project files the 
-End-User should expect after running `quarto use template GITHUB_ORG/MANUAL_REPO`
-to use a manual of that type.
+The examples you're reading on this rendered website are identical to the 
+rendered output of the project files an End-User should expect after 
+running `quarto use template GITHUB_ORG/MANUAL_REPO` to use a manual of that type
+and executing the workflow in their own environment.
+
+TODO: Visual abstract goes here!!!

@@ -1,17 +1,8 @@
 ---
-title: "02 Platform Image"
+title: "Platform Image"
 format: gfm
 execute:
   eval: false
-filters:
-  - sorting-hat
-  - ripper
-extensions:
-  ripper:
-    output-name: "platform_image"
-    output-dir: "../../src/rse_workbench"
-  sorting-hat:
-    keep: python
 ---
 
 To begin, we must first set the foundations of a software platform, i.e., what kind

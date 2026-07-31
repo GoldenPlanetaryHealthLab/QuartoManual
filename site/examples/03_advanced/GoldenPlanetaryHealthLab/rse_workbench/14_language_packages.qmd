@@ -1,17 +1,9 @@
 ---
-title: "05 Data Science Language Package Layer"
+title: "Data Science Language Package Layer"
 format: gfm
 execute:
   eval: false
-filters:
-  - sorting-hat
-  - ripper
-extensions:
-  ripper:
-    output-name: "datascience"
-    output-dir: "../../src/rse_workbench"
-  sorting-hat:
-    keep: python
+
 ---
 
 This notebook writes `rproject.toml` and `pyproject.toml`.

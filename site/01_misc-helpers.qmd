@@ -6,7 +6,7 @@ format: html
 Helper pages are optional support pages that sit between the cover and the main
 workflow.
 
-Use a helper page when operators need shared context that does not belong to a
+Use a helper page when operators need preliminary shared context that does not belong to a
 single procedure page, for example:
 
 - credential setup;
@@ -18,4 +18,7 @@ single procedure page, for example:
 ## Authoring Notes
 
 Do not add helper pages by default. If a manual can stay clear without them, the
-manual should stay smaller.
+manual should stay smaller. A good rule of thumb is that a task that leads to the final
+outcome should be in a Manual Page; a task that is required for all of the steps to work, 
+but is not itself a step toward the final outcome, should be in a Helper Page.
+For example, API Keys.

@@ -1,5 +1,5 @@
 ---
-title: "Data Staging with stagecoach"
+title: "Cover Page: Data Staging with stagecoach"
 subtitle: "A guide to staging data with the stagecoach tool"
 format: html
 ---

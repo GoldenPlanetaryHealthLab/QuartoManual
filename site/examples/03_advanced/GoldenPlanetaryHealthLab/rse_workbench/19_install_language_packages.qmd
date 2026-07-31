@@ -1,5 +1,5 @@
 ---
-title: "10 Install Language Package Layer"
+title: "Install Language Package Layer"
 format: gfm
 execute:
   eval: false

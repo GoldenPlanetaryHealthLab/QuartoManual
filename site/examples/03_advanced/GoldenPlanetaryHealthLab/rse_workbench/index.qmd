@@ -1,14 +1,12 @@
 ---
-title: "RSE Workbench"
-subtitle: "An advanced Quarto Manual for assembling a reproducible HPC workbench"
+title: "RSE Workbench: An Environment Generator Workflow"
+subtitle: "An advanced Quarto Manual for assembling reproducible HPC environments"
 format:
   html:
     toc: true
     code-fold: false
 author: Tinashe M. Tapera
 date: last-modified
-filters:
-  - _extensions/quarto-manual/manual.lua
 execute:
   eval: false
 ---

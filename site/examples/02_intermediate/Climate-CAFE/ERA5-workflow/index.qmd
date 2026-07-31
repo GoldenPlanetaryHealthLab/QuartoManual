@@ -1,5 +1,5 @@
 ---
-title: "Climate-CAFE ERA5 Workflow"
+title: "A Climate-CAFE ERA5 Workflow"
 subtitle: "A Quarto Manual adaptation of a real ERA5 download and aggregation project"
 format:
   html:
@@ -7,8 +7,6 @@ format:
     code-fold: false
 author: Tinashe M. Tapera
 date: last-modified
-filters:
-  - _extensions/quarto-manual/manual.lua
 execute:
   eval: false
 ---

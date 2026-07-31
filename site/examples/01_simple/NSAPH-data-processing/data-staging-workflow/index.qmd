@@ -1,5 +1,5 @@
 ---
-title: "Data Staging Manual"
+title: "A Data Staging Workflow"
 subtitle: "A minimal Quarto Manual for connecting a project to its inputs"
 format:
   html:
@@ -7,8 +7,6 @@ format:
     code-fold: false
 author: Tinashe M. Tapera
 date: last-modified
-filters:
-  - _extensions/quarto-manual/manual.lua
 execute:
   eval: false
 ---

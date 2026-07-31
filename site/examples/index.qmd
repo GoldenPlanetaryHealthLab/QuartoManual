@@ -7,8 +7,6 @@ format:
     code-fold: false
 author: Tinashe M. Tapera
 date: last-modified
-filters:
-  - _extensions/quarto-manual/manual.lua
 execute:
   eval: false
 ---

@@ -1,17 +1,8 @@
 ---
-title: "Miscellaneous Helper Functions"
+title: "Helper Functions: Singularity/Apptainer"
 format: gfm
 execute:
   eval: false
-filters:
-    - sorting-hat
-    - ripper
-extensions:
-  ripper:
-    output-name: "helpers"
-    output-dir: "../../src/rse_workbench"
-  sorting-hat:
-        keep: python
 ---
 
 This notebook collects miscellaneous functions that are useful for the RSE 

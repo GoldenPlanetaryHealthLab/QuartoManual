@@ -1,0 +1,24 @@
+---
+title: "Helper Page: Notes About Data Staging & UV"
+format: html
+---
+
+This helper page collects the small pieces of context an operator may need
+before staging data.
+
+Typical notes for this workflow would include:
+
+- how to locate the dataset manifest or registry entry;
+- who to contact if dataset access has not yet been granted;
+- how to confirm that `uv` is installed for Python project management;
+- where staged inputs should appear inside the project.
+
+In a simple manual, a helper page should stay short and practical.
+
+Running this cell will confirm that `uv` is installed and available in the current environment:
+
+```{bash}
+#| eval: false
+
+uv --version
+```

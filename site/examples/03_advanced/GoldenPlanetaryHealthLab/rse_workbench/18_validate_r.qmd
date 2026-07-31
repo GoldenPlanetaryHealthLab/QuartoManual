@@ -1,5 +1,5 @@
 ---
-title: "09 Validate R From Spack"
+title: "Validate R From Spack"
 format: gfm
 execute:
   eval: false

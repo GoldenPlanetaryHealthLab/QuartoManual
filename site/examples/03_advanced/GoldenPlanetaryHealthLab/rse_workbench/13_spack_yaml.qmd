@@ -1,17 +1,8 @@
 ---
-title: "04 Scientific System Dependency Layer"
+title: "Scientific System Dependency Layer"
 format: gfm
 execute:
   eval: false
-filters:
-  - sorting-hat
-  - ripper
-extensions:
-  ripper:
-    output-name: "sysdep_stack"
-    output-dir: "../../src/rse_workbench"
-  sorting-hat:
-    keep: python
 ---
 
 This notebook writes `spack.yaml`. It should only answer:

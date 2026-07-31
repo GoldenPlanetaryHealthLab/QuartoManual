@@ -18,18 +18,27 @@ commented prose and executable code:
 
 `rg --files -g '*.py' | fzf --preview 'awk '\''/^[[:space:]]*#/ {comments++} /^[[:space:]]*$/ {next} !/^[[:space:]]*#/ {code++} END {total=comments+code; printf "comments: %d (%.1f%%)\ncode: %d (%.1f%%)\n", comments, 100*comments/total, code, 100*code/total}'\'' {}'`
 
-01_Query_ERA5_CDSAPI_Kenya_v1.py: 52% comments, 48% code
-02_Aggregate_ERA5_Kenya_SetFishnet_v1.py: 52.9% comments, 47.1% code
-03_Aggregate_ERA5_Kenya_UseFishnet_v1.py: 40.8% comments, 59.2% code
+- `01_Query_ERA5_CDSAPI_Kenya_v1.py`: **52% comments, 48% code**
+- `02_Aggregate_ERA5_Kenya_SetFishnet_v1.py`: **52.9% comments, 47.1% code**
+- `03_Aggregate_ERA5_Kenya_UseFishnet_v1.py`: **40.8% comments, 59.2% code**
 
 In each of these files, over 40% of it is simply trying to explain
 to the user what to do, why, and how to do it. This is a lot of overhead for a 
 user to digest, and it is not interactive, can only be read as greyed-out
-text in your editor, and is not executable. A Quarto Manual allows us to break up 
-the prose and code into a more interactive, executable, and digestible format,
-and decorate our prose with headers, callouts, tables, and other formatting to 
+text in your editor, and is not executable. A Quarto Manual allows us to couple 
+the prose and code into a more interactive, executable, and digestible format
+by decorate our prose with headers, callouts, tables, and other formatting to 
 make it more readable and engaging, which lowers the barrier to entry for users
 for very little additional effort.
+
+To demonstrate this, I prompted ChatGPT to convert the Climate-CAFE 
+scripts into a Quarto Manual based on the extension's thesis you read in the introductory sections. 
+
+How does it compare to reading each script here?:
+
+- [01_Query_ERA5_CDSAPI_Kenya_v1.py](https://github.com/Climate-CAFE/era5-daily-heat-aggregation-python/blob/main/code/01_Query_ERA5_CDSAPI_Kenya_v1.py)
+- [02_Aggregate_ERA5_Kenya_SetFishnet_v1.py](https://github.com/Climate-CAFE/era5-daily-heat-aggregation-python/blob/main/code/02_Aggregate_ERA5_Kenya_SetFishnet_v1.py)
+- [03_Aggregate_ERA5_Kenya_UseFishnet_v1.py](https://github.com/Climate-CAFE/era5-daily-heat-aggregation-python/blob/main/code/03_Aggregate_ERA5_Kenya_UseFishnet_v1.py)
 
 :::
 

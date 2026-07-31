@@ -41,8 +41,10 @@ a Read-Eval-Print Loop (REPL) workflow. REPL workflows are great for exploration
 and arguably were the foundational technology behind the rise of accessible data science.
 One of the main criticisms of notebooks, however, is that they 
 can hide the state of your code ([see here](https://www.researchgate.net/figure/An-example-of-a-hidden-state-in-Jupyter-Notebook-with-three-different-execution-variations_fig3_391056804)), which makes it hard to reason about your project. Quarto 
-Manuals avoid that problem by encouraging page independence, and enforcing interdependence
-through explicit side-effects that Manual Authors must deliberately consider.
+Manuals avoid that problem primarily by using Quarto Markdown, which is plain
+text, and secondarily by encouraging page independence in its design. 
+Any interdependence is made explicit through side-effects that Manual Authors 
+must deliberately insert.
 
 If page 3 depends on page 2, page 3 should deliberately enforce that dependency in its
 prerequisite block by checking visible project state:
@@ -139,6 +141,19 @@ To use an existing manual:
 5. Let each page's prerequisite and check blocks tell you whether you can
    proceed.
 
+
+::: {.callout-important}
+
+As you read through this website documentation, though,
+keep in mind that the operator workflow is to have cloned
+the manual and be reading the pages in VSCode, Jupyter,
+or whatever editor they prefer, while also actively running
+the code in the procedure blocks. The rendered website is a
+documentation artifact to help readers consume the content.
+
+:::
+
+
 ## Scope Of This Project
 
 This project is intentionally narrow.
@@ -148,14 +163,12 @@ Quarto Manual should only extend Quarto in one functional way:
 - give manual pages semantic structure with `prereq`, `procedure`, and `check`
   blocks.
 
-Everything else should be optional — but frictionless to add — for the manual author:
+Everything else should be optional, but frictionless to add, thanks to `quarto-emit`:
 
 - emitted source files;
 - emitted test suites;
 - helper modules;
 - workflow-specific libraries.
-
-Those are choices a manual author may make, not requirements of the framework.
 
 ## Examples On This Site
 

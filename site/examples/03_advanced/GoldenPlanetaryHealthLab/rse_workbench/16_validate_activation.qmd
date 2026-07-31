@@ -1,5 +1,5 @@
 ---
-title: "07 Validate Activation"
+title: "Validate Activation"
 format: gfm
 execute:
   eval: false
