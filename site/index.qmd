@@ -1,3 +1,8 @@
+---
+title: "Quarto Manuals Explained"
+subtitle: "A guide to creating and using Quarto Manuals"
+---
+
 ## Abstract
 
 A Quarto Manual is a structured, multi-document Quarto template. It contains ordered, 
