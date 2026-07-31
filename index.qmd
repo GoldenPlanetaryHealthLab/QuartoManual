@@ -62,8 +62,8 @@ page. Prefer visible project artifacts instead:
 
 - files and directories;
 - configuration files;
-- emitted scripts or tests;
+- emitted scripts or testing suites;
 - environment checks and command output.
 
-When pages depend on one another, express that dependency in the page's
-prerequisite block.
+When pages computationally depend on one another, express that dependency in the page's
+prerequisite block using side-effects like tests, files, scripts, or environment variables.
