@@ -33,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -78,26 +79,6 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
   <li><a href="#feature-roadmap" id="toc-feature-roadmap" class="nav-link" data-scroll-target="#feature-roadmap">Feature Roadmap</a></li>
-  <li><a href="#hypotheses-aims-and-objectives" id="toc-hypotheses-aims-and-objectives" class="nav-link" data-scroll-target="#hypotheses-aims-and-objectives">Hypotheses, Aims, and Objectives</a></li>
-  </ul></li>
-  <li><a href="#method" id="toc-method" class="nav-link" data-scroll-target="#method">Method</a>
-  <ul class="collapse">
-  <li><a href="#participants" id="toc-participants" class="nav-link" data-scroll-target="#participants">Participants</a></li>
-  <li><a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures">Measures</a>
-  <ul class="collapse">
-  <li><a href="#measure-a" id="toc-measure-a" class="nav-link" data-scroll-target="#measure-a">Measure A</a></li>
-  <li><a href="#measure-b" id="toc-measure-b" class="nav-link" data-scroll-target="#measure-b">Measure B</a></li>
-  </ul></li>
-  <li><a href="#procedure" id="toc-procedure" class="nav-link" data-scroll-target="#procedure">Procedure</a></li>
-  </ul></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
-  <ul class="collapse">
-  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics">Descriptive Statistics</a></li>
-  </ul></li>
-  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a>
-  <ul class="collapse">
-  <li><a href="#limitations-and-future-directions" id="toc-limitations-and-future-directions" class="nav-link" data-scroll-target="#limitations-and-future-directions">Limitations and Future Directions</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -162,144 +143,59 @@ div.csl-indent {
 <h1 class="title unnumbered">Quarto Manuals</h1>
 <section id="abstract" class="level2">
 <h2 data-anchor-id="abstract">Abstract</h2>
-<ul>
-<li>Programming is already difficult, and research data workflows are growing in scale and complexity [CITE NEEDED]. Scientists need workflow rigor, not just working code.</li>
-<li>Traditional documentation helps, but it breaks down for large, multi-step, order-dependent workflows. It is not executable, reproducible, or able to confirm that a user is proceeding correctly. [CITE PROBABLY NEEDED]</li>
-<li>Command-line wrappers are executable, but often too rigid: either the workflow is over-constrained, or flexibility is pushed into an unwieldy number of flags and options.</li>
-<li>AI and agentic systems are promising, but today they are still limited by (FACT) non-determinism [CITE NEEDED] and (OPINION) uneven reliability in complex scientific workflows (though we are working to address these issues with agentic workflows).</li>
-<li>We propose <strong>Quarto Manuals</strong>, a framework for executable software manuals built on Quarto starter templates and extensions.</li>
-<li>A Quarto Manual guides users through a workflow as ordered, interactive pages that combine explanation, code execution, and verification.</li>
-<li>Manuals are flexible across audiences, projects, organizations, and programming languages, while remaining reproducible because their side effects are explicit and inspectable.</li>
-<li>Rather than hiding workflow decisions, Quarto Manuals keep them visible and editable, which is especially important in research computing environments with local constraints and judgment calls.</li>
-<li>The backend is powered by <strong><code>quarto-emit</code></strong>, a lightweight extension that materializes conventional workflow artifacts from manual pages when needed.</li>
-<li>We demonstrate the approach with three examples of increasing sophistication: a simple manual, an intermediate manual, and a complex manual.</li>
-<li>For authors, Quarto Manuals provide a structured but adaptable template for turning complex recurring workflows into reusable manuals.</li>
-<li>For operators, they provide a stepwise, testable process for leaving behind reproducible setup artifacts and confirming progress in a structured way through the workflow.</li>
-</ul>
+<p>Software development is continuing to expand in both scale and complexity, evidenced by the growth of global repository counts and large-scale software archives<span class="citation" data-cites="GithubInnovationGraph martinelliSoftwareHeritageActivity2026">(<a href="#ref-martinelliSoftwareHeritageActivity2026" role="doc-biblioref">Martinelli, 2026</a>; <a href="#ref-GithubInnovationGraph" role="doc-biblioref"><strong>GithubInnovationGraph?</strong></a>)</span> At the same time, AI and agentic systems are reshaping how software is produced, making it increasingly important to preserve accessibility, transparency, and reproducibility in scientific software and data science workflows.</p>
+<p>Despite the central role of these workflows in academia and industry, effective, reproducible documentation remains an overlooked and under-served part of delivering high quality software <span class="citation" data-cites="aghajaniSoftwareDocumentationIssues2019">(<a href="#ref-aghajaniSoftwareDocumentationIssues2019" role="doc-biblioref">Aghajani et al., 2019</a>)</span>. This issue is likely to become more acute as the volume and sophistication of AI generated code submitted to public repositories continues to increase <span class="citation" data-cites="robbesAgenticMuchAdoption2026">(<a href="#ref-robbesAgenticMuchAdoption2026" role="doc-biblioref">Robbes et al., 2026</a>)</span>. Developers therefore need solutions beyond traditional documentation to support workflow execution __ address the limitations of traditional software documentation to executing workflows in a reproducible and verifiable manner as the landscape of software development continues to evolve.</p>
+<p>Conventional documentation can describe a workflow, but for complex, multi-step, order-dependent tasks and projects, it is often insufficient capturing and verifying critical runtime execution details such as platform dependencies, configuration, versions, and relationships between steps <span class="citation" data-cites="ebertGeneralConceptConsistent2015">(<a href="#ref-ebertGeneralConceptConsistent2015" role="doc-biblioref">Ebert et al., 2015</a>)</span>. Command-line interface (CLI) wrappers can improve automation and reproducibility of a declarative workflow by providing a directly executable interface for complex tasks <span class="citation" data-cites="vanderaalstDeclarativeWorkflowsBalancing2009">(<a href="#ref-vanderaalstDeclarativeWorkflowsBalancing2009" role="doc-biblioref">van der Aalst et al., 2009</a>)</span>. However, developing and maintaining CLI wrappers can be time-consuming and introduces a persistent trade-off between control and flexibility: highly specialized wrappers can improve consistency, but may be inflexible and difficult to maintain, while more generic wrappers enable complexity by shifting the burden to the user through large numbers of flags and configuration options <span class="citation" data-cites="sadiqSpecificationValidationProcess2005 brackTenSimpleRules2022">(<a href="#ref-brackTenSimpleRules2022" role="doc-biblioref">Brack et al., 2022</a>; <a href="#ref-sadiqSpecificationValidationProcess2005" role="doc-biblioref">Sadiq et al., 2005</a>)</span>. Lastly, AI and agentic systems are promising, but their reproducibility remains limited by non-determinism <span class="citation" data-cites="siddiqLargeLanguageModels2025">(<a href="#ref-siddiqLargeLanguageModels2025" role="doc-biblioref">Siddiq et al., 2025</a>)</span>. Furthermore, current practical agentic workflow implementations (such as harnesses) still require careful human oversight to achieve acceptable reliability <span class="citation" data-cites="agrawalCanAIConduct2026">(<a href="#ref-agrawalCanAIConduct2026" role="doc-biblioref">Agrawal et al., 2026</a>)</span>.</p>
+<p>Executable literate programming approaches can encode and enforce complex workflow steps <em>and</em> generate idempotent results. Quarto is a modern, plain-text, multi-language, and multi-output literate programming framework for creating reproducible documents and workflows <span class="citation" data-cites="allaireQuarto2026">(<a href="#ref-allaireQuarto2026" role="doc-biblioref">Allaire et al., 2026</a>)</span>. Building on Quarto with a carefully designed set of templates and extensions, we introduce <strong>Quarto Manuals</strong>, a framework for executable software manuals that guide users through a workflow as ordered, interactive pages that combine explanation, code execution, and verification. Rather than hiding workflow decisions and steps, Quarto Manuals keep them visible and editable, making them ideal for research computing contexts where local constraints and expert judgment often shape execution parameters. The framework is powered by <code>quarto-emit</code>, a lightweight backend extension that materializes conventional workflow artifacts from manual pages when needed. We demonstrate the approach with three examples of increasing sophistication: a simple manual, an intermediate manual, and a complex manual.</p>
+<p>For authors, Quarto Manuals provide a structured yet adaptable way to turn recurring workflows into reusable manuals; for operators, they provide a stepwise, testable process for generating reproducible setup artifacts and confirming progress throughout execution in a structured and auditable manner.</p>
 </section>
 <section id="feature-roadmap" class="level2">
 <h2 data-anchor-id="feature-roadmap">Feature Roadmap</h2>
 <ul class="task-list">
-<li><label><input type="checkbox">abstract as prose</label></li>
+<li><label><input type="checkbox" checked="">abstract as prose</label></li>
 <li><label><input type="checkbox">stylize each block so it is visually distinct</label></li>
 <li><label><input type="checkbox">use Lua to print out useful render messages when blocks are being processed</label></li>
-<li><label><input type="checkbox">can Lua be used to connect checks and prereqs across pages? Maybe?</label></li>
+<li><label><input type="checkbox">negative reinforcement: identify and correct misuse of the manual visually</label></li>
 <li><label><input type="checkbox">setup a testing suite in a separate repo</label></li>
+<li><label><input type="checkbox">can Lua be used to connect checks and prereqs across pages? Maybe?</label></li>
 </ul>
-</section>
-<section id="hypotheses-aims-and-objectives" class="level2">
-<h2 data-anchor-id="hypotheses-aims-and-objectives">Hypotheses, Aims, and Objectives</h2>
-<p>The last paragraph of the introduction usually states the specific hypotheses of the study, often in a way that links them to the research design.</p>
-</section>
-</section>
-<section id="method" class="level1">
-<h1>Method</h1>
-<p>General remarks on method. This paragraph is optional. Not all papers require each of these sections. Edit them as needed. Consult the <a href="https://apastyle.apa.org/jars">Journal Article Reporting Standards</a> for what is needed for your type of article.</p>
-<section id="participants" class="level2">
-<h2 data-anchor-id="participants">Participants</h2>
-<p>Who are they? How were they recruited? Report criteria for participant inclusion and exclusion. Perhaps some basic demographic stats are in order. A table is a great way to avoid repetition in statistical reporting.</p>
-</section>
-<section id="measures" class="level2">
-<h2 data-anchor-id="measures">Measures</h2>
-<p>This section can also be titled <strong>Materials</strong> or <strong>Apparatus</strong>. Whatever tools, equipment, or measurement devices used in the study should be described.</p>
-<section id="measure-a" class="level3">
-<h3 data-anchor-id="measure-a">Measure A</h3>
-<p>Describe Measure A.</p>
-</section>
-<section id="measure-b" class="level3">
-<h3 data-anchor-id="measure-b">Measure B</h3>
-<p>Describe Measure B.</p>
-<section id="subscale-b1" class="level4">
-<h4 data-anchor-id="subscale-b1">Subscale B1.</h4>
-<p>A paragraph after a 4th-level header will appear on the same line as the header.</p>
-</section>
-<section id="subscale-b2" class="level4">
-<h4 data-anchor-id="subscale-b2">Subscale B2.</h4>
-<p>A paragraph after a 4th-level header will appear on the same line as the header.</p>
-<section id="subscale-b2a" class="level5">
-<h5 data-anchor-id="subscale-b2a">Subscale B2a.</h5>
-<p>A paragraph after a 5th-level header will appear on the same line as the header.</p>
-</section>
-<section id="subscale-b2b" class="level5">
-<h5 data-anchor-id="subscale-b2b">Subscale B2b.</h5>
-<p>A paragraph after a 5th-level header will appear on the same line as the header.</p>
-</section>
-</section>
-</section>
-</section>
-<section id="procedure" class="level2">
-<h2 data-anchor-id="procedure">Procedure</h2>
-<p>What did participants do? How are the data going to be analyzed?</p>
-</section>
-</section>
-<section id="results" class="level1">
-<h1>Results</h1>
-<section id="descriptive-statistics" class="level2">
-<h2 data-anchor-id="descriptive-statistics">Descriptive Statistics</h2>
-<p>Describe the basic characteristics of the primary variables. My ideal is to describe the variables well enough that someone conducting a meta-analysis can include the study without needing to ask for additional information.</p>
-<!-- Add Additional Sections as Needed -->
-<p><a href="#tbl-mymarkdowntable2" class="quarto-xref" aria-expanded="false">Table&nbsp;1</a> is an example of a plain markdown table. Note the that the caption begins with a colon.</p>
-<div id="tbl-mymarkdowntable2" class="quarto-float quarto-figure quarto-figure-center FigureWithNote" data-apa-note="My note" data-tblnum="1" prefix="" data-custom-style="FigureWithNote">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mymarkdowntable2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="FigureTitle" data-custom-style="FigureTitle">
-<p>Table&nbsp;1</p>
-</div>
-<div class="Caption" data-custom-style="Caption">
-<p>My Caption.</p>
-</div>
-</figcaption>
-<div aria-describedby="tbl-mymarkdowntable2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="tbl-mymarkdowntable2" class="caption-top table" prefix="" data-tblnum="1">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Letters</th>
-<th style="text-align: center;">Numbers</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">B</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">3</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-<div>
-<div class="FigureNote NoIndent" data-custom-style="FigureNote">
-<em>Note</em>. My&nbsp;note
-</div>
-</div>
-</section>
-</section>
-<section id="discussion" class="level1">
-<h1>Discussion</h1>
-<p>Describe results in non-statistical terms. <!-- Add sections as needed. --></p>
-<section id="limitations-and-future-directions" class="level2">
-<h2 data-anchor-id="limitations-and-future-directions">Limitations and Future Directions</h2>
-<p>Every study has limitations. Based on this study, some additional steps might include…</p>
-</section>
-<section id="conclusion" class="level2">
-<h2 data-anchor-id="conclusion">Conclusion</h2>
-<p>Describe the main point of the paper.</p>
 </section>
 </section>
 <section id="references" class="level1">
 <h1>References</h1>
 <p>References marked with an asterisk indicate studies included in the meta-analysis.</p>
 <!-- References will auto-populate in the refs div below -->
-<div id="refs" role="list">
-
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-aghajaniSoftwareDocumentationIssues2019" class="csl-entry" role="listitem">
+Aghajani, E., Nagy, C., Vega-Márquez, O. L., Linares-Vásquez, M., Moreno, L., Bavota, G., &amp; Lanza, M. (2019). Software <span>Documentation Issues Unveiled</span>. <em>2019 <span>IEEE</span>/<span>ACM</span> 41st <span>International Conference</span> on <span>Software Engineering</span> (<span>ICSE</span>)</em>, 1199–1210. <a href="https://doi.org/10.1109/ICSE.2019.00122">https://doi.org/10.1109/ICSE.2019.00122</a>
+</div>
+<div id="ref-agrawalCanAIConduct2026" class="csl-entry" role="listitem">
+Agrawal, S., Anadkat, H. B., Athimoolam, K. K., Bhardwaj, H., Chowdhury, T., Gao, S., Kamat, P. K., Makwana, V., Shariff, M. H., Badkul, A., Xie, L., &amp; Sinitskiy, A. V. (2026, January 6). <em>Can <span>AI Conduct Autonomous Scientific Research</span>? <span>Case Studies</span> on <span>Two Real-World Tasks</span></em>. <a href="https://doi.org/10.64898/2026.01.05.697809">https://doi.org/10.64898/2026.01.05.697809</a> (Pre-published)
+</div>
+<div id="ref-allaireQuarto2026" class="csl-entry" role="listitem">
+Allaire, J. J., Teague, C., Scheidegger, C., Xie, Y., Dervieux, C., &amp; Woodhull, G. (2026). <em>Quarto</em> (Version 1.10) [Computer software]. <a href="https://doi.org/10.5281/zenodo.5960048">https://doi.org/10.5281/zenodo.5960048</a>
+</div>
+<div id="ref-brackTenSimpleRules2022" class="csl-entry" role="listitem">
+Brack, P., Crowther, P., Soiland-Reyes, S., Owen, S., Lowe, D., Williams, A. R., Groom, Q., Dillen, M., Coppens, F., Grüning, B., Eguinoa, I., Ewels, P., &amp; Goble, C. (2022). Ten simple rules for making a software tool workflow-ready. <em>PLOS Computational Biology</em>, <em>18</em>(3), e1009823. <a href="https://doi.org/10.1371/journal.pcbi.1009823">https://doi.org/10.1371/journal.pcbi.1009823</a>
+</div>
+<div id="ref-ebertGeneralConceptConsistent2015" class="csl-entry" role="listitem">
+Ebert, P., Müller, F., Nordström, K., Lengauer, T., &amp; Schulz, M. H. (2015). A general concept for consistent documentation of computational analyses. <em>Database: The Journal of Biological Databases and Curation</em>, <em>2015</em>, bav050. <a href="https://doi.org/10.1093/database/bav050">https://doi.org/10.1093/database/bav050</a>
+</div>
+<div id="ref-martinelliSoftwareHeritageActivity2026" class="csl-entry" role="listitem">
+Martinelli, N. (2026, January 16). <em>Software <span>Heritage Activity Report</span>: 2025</em>. Software Heritage. <a href="https://www.softwareheritage.org/2026/01/16/software-heritage-activity-report-2025/">https://www.softwareheritage.org/2026/01/16/software-heritage-activity-report-2025/</a>
+</div>
+<div id="ref-robbesAgenticMuchAdoption2026" class="csl-entry" role="listitem">
+Robbes, R., Matricon, T., Degueule, T., Hora, A., &amp; Zacchiroli, S. (2026). Agentic <span>Much</span>? <span>Adoption</span> of <span>Coding Agents</span> on <span>GitHub</span>. <em>ACM Transactions on Software Engineering and Methodology</em>. <a href="https://doi.org/10.1145/3822180">https://doi.org/10.1145/3822180</a>
+</div>
+<div id="ref-sadiqSpecificationValidationProcess2005" class="csl-entry" role="listitem">
+Sadiq, S. W., Orlowska, M. E., &amp; Sadiq, W. (2005). Specification and validation of process constraints for flexible workflows. <em>Information Systems</em>, <em>30</em>(5), 349–378. <a href="https://doi.org/10.1016/j.is.2004.05.002">https://doi.org/10.1016/j.is.2004.05.002</a>
+</div>
+<div id="ref-siddiqLargeLanguageModels2025" class="csl-entry" role="listitem">
+Siddiq, M. L., Islam-Gomes, A., Sekerak, N., &amp; Santos, J. C. S. (2025, November 29). <em>Large <span>Language Models</span> for <span>Software Engineering</span>: <span>A Reproducibility Crisis</span></em>. <a href="https://doi.org/10.48550/arXiv.2512.00651">https://doi.org/10.48550/arXiv.2512.00651</a>
+</div>
+<div id="ref-vanderaalstDeclarativeWorkflowsBalancing2009" class="csl-entry" role="listitem">
+van der Aalst, W. M. P., Pesic, M., &amp; Schonenberg, H. (2009). Declarative workflows: <span>Balancing</span> between flexibility and support. <em>Computer Science - Research and Development</em>, <em>23</em>(2), 99–113. <a href="https://doi.org/10.1007/s00450-009-0057-9">https://doi.org/10.1007/s00450-009-0057-9</a>
+</div>
 </div>
 </section>
 

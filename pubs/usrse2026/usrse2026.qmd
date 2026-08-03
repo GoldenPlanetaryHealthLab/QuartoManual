@@ -152,7 +152,7 @@ format:
     pdf-standard: ua-2
 ---
 
-{{< include abstract.md#abstract >}}
+{{< include abstract.md >}}
 
 # References
 

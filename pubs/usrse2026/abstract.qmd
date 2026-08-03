@@ -55,6 +55,12 @@ recurring workflows into reusable manuals; for operators, they provide a
 stepwise, testable process for generating reproducible setup artifacts 
 and confirming progress throughout execution in a structured and auditable manner.
 
+Quarto Manuals promise to improve the reproducibility and reliability of software workflows,
+while also providing a more accessible and interactive experience for users. And,
+with the increasing adoption of AI and agentic systems in software development,
+may provide a framework for ensuring that these workflows remain transparent, verifiable, and 
+reproducible in the face of increasing complexity and non-determinism.
+
 ## Feature Roadmap
 
 - [x] abstract as prose

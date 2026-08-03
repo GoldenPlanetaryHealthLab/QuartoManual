@@ -115,6 +115,39 @@
 \makeatother
 
 
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 
 
@@ -304,64 +337,85 @@ St., Albany, NY 12084-1234, USA, Email: \href{mailto:ttapera@hsph.harvard.edu}{t
 
 \subsection{Abstract}\label{abstract}
 
-\begin{itemize}
-\tightlist
-\item
-  Programming is already difficult, and research data workflows are
-  growing in scale and complexity {[}CITE NEEDED{]}. Scientists need
-  workflow rigor, not just working code.
-\item
-  Traditional documentation helps, but it breaks down for large,
-  multi-step, order-dependent workflows. It is not executable,
-  reproducible, or able to confirm that a user is proceeding correctly.
-  {[}CITE PROBABLY NEEDED{]}
-\item
-  Command-line wrappers are executable, but often too rigid: either the
-  workflow is over-constrained, or flexibility is pushed into an
-  unwieldy number of flags and options.
-\item
-  AI and agentic systems are promising, but today they are still limited
-  by (FACT) non-determinism {[}CITE NEEDED{]} and (OPINION) uneven
-  reliability in complex scientific workflows (though we are working to
-  address these issues with agentic workflows).
-\item
-  We propose \textbf{Quarto Manuals}, a framework for executable
-  software manuals built on Quarto starter templates and extensions.
-\item
-  A Quarto Manual guides users through a workflow as ordered,
-  interactive pages that combine explanation, code execution, and
-  verification.
-\item
-  Manuals are flexible across audiences, projects, organizations, and
-  programming languages, while remaining reproducible because their side
-  effects are explicit and inspectable.
-\item
-  Rather than hiding workflow decisions, Quarto Manuals keep them
-  visible and editable, which is especially important in research
-  computing environments with local constraints and judgment calls.
-\item
-  The backend is powered by \textbf{\texttt{quarto-emit}}, a lightweight
-  extension that materializes conventional workflow artifacts from
-  manual pages when needed.
-\item
-  We demonstrate the approach with three examples of increasing
-  sophistication: a simple manual, an intermediate manual, and a complex
-  manual.
-\item
-  For authors, Quarto Manuals provide a structured but adaptable
-  template for turning complex recurring workflows into reusable
-  manuals.
-\item
-  For operators, they provide a stepwise, testable process for leaving
-  behind reproducible setup artifacts and confirming progress in a
-  structured way through the workflow.
-\end{itemize}
+Software development is continuing to expand in both scale and
+complexity, evidenced by the growth of global repository counts and
+large-scale software
+archives(\citeproc{ref-martinelliSoftwareHeritageActivity2026}{Martinelli,
+2026};
+\citeproc{ref-GithubInnovationGraph}{\textbf{GithubInnovationGraph?}})
+At the same time, AI and agentic systems are reshaping how software is
+produced, making it increasingly important to preserve accessibility,
+transparency, and reproducibility in scientific software and data
+science workflows.
+
+Despite the central role of these workflows in academia and industry,
+effective, reproducible documentation remains an overlooked and
+under-served part of delivering high quality software
+(\citeproc{ref-aghajaniSoftwareDocumentationIssues2019}{Aghajani et al.,
+2019}). This issue is likely to become more acute as the volume and
+sophistication of AI generated code submitted to public repositories
+continues to increase
+(\citeproc{ref-robbesAgenticMuchAdoption2026}{Robbes et al., 2026}).
+Developers therefore need solutions beyond traditional documentation to
+support workflow execution \_\_ address the limitations of traditional
+software documentation to executing workflows in a reproducible and
+verifiable manner as the landscape of software development continues to
+evolve.
+
+Conventional documentation can describe a workflow, but for complex,
+multi-step, order-dependent tasks and projects, it is often insufficient
+capturing and verifying critical runtime execution details such as
+platform dependencies, configuration, versions, and relationships
+between steps (\citeproc{ref-ebertGeneralConceptConsistent2015}{Ebert et
+al., 2015}). Command-line interface (CLI) wrappers can improve
+automation and reproducibility of a declarative workflow by providing a
+directly executable interface for complex tasks
+(\citeproc{ref-vanderaalstDeclarativeWorkflowsBalancing2009}{van der
+Aalst et al., 2009}). However, developing and maintaining CLI wrappers
+can be time-consuming and introduces a persistent trade-off between
+control and flexibility: highly specialized wrappers can improve
+consistency, but may be inflexible and difficult to maintain, while more
+generic wrappers enable complexity by shifting the burden to the user
+through large numbers of flags and configuration options
+(\citeproc{ref-brackTenSimpleRules2022}{Brack et al., 2022};
+\citeproc{ref-sadiqSpecificationValidationProcess2005}{Sadiq et al.,
+2005}). Lastly, AI and agentic systems are promising, but their
+reproducibility remains limited by non-determinism
+(\citeproc{ref-siddiqLargeLanguageModels2025}{Siddiq et al., 2025}).
+Furthermore, current practical agentic workflow implementations (such as
+harnesses) still require careful human oversight to achieve acceptable
+reliability (\citeproc{ref-agrawalCanAIConduct2026}{Agrawal et al.,
+2026}).
+
+Executable literate programming approaches can encode and enforce
+complex workflow steps \emph{and} generate idempotent results. Quarto is
+a modern, plain-text, multi-language, and multi-output literate
+programming framework for creating reproducible documents and workflows
+(\citeproc{ref-allaireQuarto2026}{Allaire et al., 2026}). Building on
+Quarto with a carefully designed set of templates and extensions, we
+introduce \textbf{Quarto Manuals}, a framework for executable software
+manuals that guide users through a workflow as ordered, interactive
+pages that combine explanation, code execution, and verification. Rather
+than hiding workflow decisions and steps, Quarto Manuals keep them
+visible and editable, making them ideal for research computing contexts
+where local constraints and expert judgment often shape execution
+parameters. The framework is powered by \texttt{quarto-emit}, a
+lightweight backend extension that materializes conventional workflow
+artifacts from manual pages when needed. We demonstrate the approach
+with three examples of increasing sophistication: a simple manual, an
+intermediate manual, and a complex manual.
+
+For authors, Quarto Manuals provide a structured yet adaptable way to
+turn recurring workflows into reusable manuals; for operators, they
+provide a stepwise, testable process for generating reproducible setup
+artifacts and confirming progress throughout execution in a structured
+and auditable manner.
 
 \subsection{Feature Roadmap}\label{feature-roadmap}
 
 \begin{itemize}
 \tightlist
-\item[$\square$]
+\item[$\boxtimes$]
   abstract as prose
 \item[$\square$]
   stylize each block so it is visually distinct
@@ -369,119 +423,13 @@ St., Albany, NY 12084-1234, USA, Email: \href{mailto:ttapera@hsph.harvard.edu}{t
   use Lua to print out useful render messages when blocks are being
   processed
 \item[$\square$]
-  can Lua be used to connect checks and prereqs across pages? Maybe?
+  negative reinforcement: identify and correct misuse of the manual
+  visually
 \item[$\square$]
   setup a testing suite in a separate repo
+\item[$\square$]
+  can Lua be used to connect checks and prereqs across pages? Maybe?
 \end{itemize}
-
-\subsection{Hypotheses, Aims, and
-Objectives}\label{hypotheses-aims-and-objectives}
-
-The last paragraph of the introduction usually states the specific
-hypotheses of the study, often in a way that links them to the research
-design.
-
-\section{Method}\label{method}
-
-General remarks on method. This paragraph is optional. Not all papers
-require each of these sections. Edit them as needed. Consult the
-\href{https://apastyle.apa.org/jars}{Journal Article Reporting
-Standards} for what is needed for your type of article.
-
-\subsection{Participants}\label{participants}
-
-Who are they? How were they recruited? Report criteria for participant
-inclusion and exclusion. Perhaps some basic demographic stats are in
-order. A table is a great way to avoid repetition in statistical
-reporting.
-
-\subsection{Measures}\label{measures}
-
-This section can also be titled \textbf{Materials} or
-\textbf{Apparatus}. Whatever tools, equipment, or measurement devices
-used in the study should be described.
-
-\subsubsection{Measure A}\label{measure-a}
-
-Describe Measure A.
-
-\subsubsection{Measure B}\label{measure-b}
-
-Describe Measure B.
-
-\paragraph{Subscale B1.}\label{subscale-b1}
-
-A paragraph after a 4th-level header will appear on the same line as the
-header.
-
-\paragraph{Subscale B2.}\label{subscale-b2}
-
-A paragraph after a 4th-level header will appear on the same line as the
-header.
-
-\subparagraph{Subscale B2a.}\label{subscale-b2a}
-
-A paragraph after a 5th-level header will appear on the same line as the
-header.
-
-\subparagraph{Subscale B2b.}\label{subscale-b2b}
-
-A paragraph after a 5th-level header will appear on the same line as the
-header.
-
-\subsection{Procedure}\label{procedure}
-
-What did participants do? How are the data going to be analyzed?
-
-\section{Results}\label{results}
-
-\subsection{Descriptive Statistics}\label{descriptive-statistics}
-
-Describe the basic characteristics of the primary variables. My ideal is
-to describe the variables well enough that someone conducting a
-meta-analysis can include the study without needing to ask for
-additional information.
-
-Table~\ref{tbl-mymarkdowntable2} is an example of a plain markdown
-table. Note the that the caption begins with a colon.
-
-\begin{table}
-
-{\caption{{My Caption.}{\label{tbl-mymarkdowntable2}}}
-\vspace{-20pt}}
-
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}cc@{}}
-\toprule\noalign{}
-Letters & Numbers \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-A & 1 \\
-B & 2 \\
-C & 3 \\
-\end{longtable}
-}
-
-\vspace{-12pt}
-\noindent \emph{Note.} My~note
-
-\end{table}
-
-\section{Discussion}\label{discussion}
-
-Describe results in non-statistical terms.
-
-\subsection{Limitations and Future
-Directions}\label{limitations-and-future-directions}
-
-Every study has limitations. Based on this study, some additional steps
-might include\ldots{}
-
-\subsection{Conclusion}\label{conclusion}
-
-Describe the main point of the paper.
 
 \section{References}\label{references}
 
@@ -489,6 +437,72 @@ References marked with an asterisk indicate studies included in the
 meta-analysis.
 
 \protect\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-aghajaniSoftwareDocumentationIssues2019}
+Aghajani, E., Nagy, C., Vega-Márquez, O. L., Linares-Vásquez, M.,
+Moreno, L., Bavota, G., \& Lanza, M. (2019). Software {Documentation
+Issues Unveiled}. \emph{2019 {IEEE}/{ACM} 41st {International
+Conference} on {Software Engineering} ({ICSE})}, 1199--1210.
+\url{https://doi.org/10.1109/ICSE.2019.00122}
+
+\bibitem[\citeproctext]{ref-agrawalCanAIConduct2026}
+Agrawal, S., Anadkat, H. B., Athimoolam, K. K., Bhardwaj, H., Chowdhury,
+T., Gao, S., Kamat, P. K., Makwana, V., Shariff, M. H., Badkul, A., Xie,
+L., \& Sinitskiy, A. V. (2026, January 6). \emph{Can {AI Conduct
+Autonomous Scientific Research}? {Case Studies} on {Two Real-World
+Tasks}}. \url{https://doi.org/10.64898/2026.01.05.697809}
+(Pre-published)
+
+\bibitem[\citeproctext]{ref-allaireQuarto2026}
+Allaire, J. J., Teague, C., Scheidegger, C., Xie, Y., Dervieux, C., \&
+Woodhull, G. (2026). \emph{Quarto} (Version 1.10) {[}Computer
+software{]}. \url{https://doi.org/10.5281/zenodo.5960048}
+
+\bibitem[\citeproctext]{ref-brackTenSimpleRules2022}
+Brack, P., Crowther, P., Soiland-Reyes, S., Owen, S., Lowe, D.,
+Williams, A. R., Groom, Q., Dillen, M., Coppens, F., Grüning, B.,
+Eguinoa, I., Ewels, P., \& Goble, C. (2022). Ten simple rules for making
+a software tool workflow-ready. \emph{PLOS Computational Biology},
+\emph{18}(3), e1009823.
+\url{https://doi.org/10.1371/journal.pcbi.1009823}
+
+\bibitem[\citeproctext]{ref-ebertGeneralConceptConsistent2015}
+Ebert, P., Müller, F., Nordström, K., Lengauer, T., \& Schulz, M. H.
+(2015). A general concept for consistent documentation of computational
+analyses. \emph{Database: The Journal of Biological Databases and
+Curation}, \emph{2015}, bav050.
+\url{https://doi.org/10.1093/database/bav050}
+
+\bibitem[\citeproctext]{ref-martinelliSoftwareHeritageActivity2026}
+Martinelli, N. (2026, January 16). \emph{Software {Heritage Activity
+Report}: 2025}. Software Heritage.
+\url{https://www.softwareheritage.org/2026/01/16/software-heritage-activity-report-2025/}
+
+\bibitem[\citeproctext]{ref-robbesAgenticMuchAdoption2026}
+Robbes, R., Matricon, T., Degueule, T., Hora, A., \& Zacchiroli, S.
+(2026). Agentic {Much}? {Adoption} of {Coding Agents} on {GitHub}.
+\emph{ACM Transactions on Software Engineering and Methodology}.
+\url{https://doi.org/10.1145/3822180}
+
+\bibitem[\citeproctext]{ref-sadiqSpecificationValidationProcess2005}
+Sadiq, S. W., Orlowska, M. E., \& Sadiq, W. (2005). Specification and
+validation of process constraints for flexible workflows.
+\emph{Information Systems}, \emph{30}(5), 349--378.
+\url{https://doi.org/10.1016/j.is.2004.05.002}
+
+\bibitem[\citeproctext]{ref-siddiqLargeLanguageModels2025}
+Siddiq, M. L., Islam-Gomes, A., Sekerak, N., \& Santos, J. C. S. (2025,
+November 29). \emph{Large {Language Models} for {Software Engineering}:
+{A Reproducibility Crisis}}.
+\url{https://doi.org/10.48550/arXiv.2512.00651}
+
+\bibitem[\citeproctext]{ref-vanderaalstDeclarativeWorkflowsBalancing2009}
+van der Aalst, W. M. P., Pesic, M., \& Schonenberg, H. (2009).
+Declarative workflows: {Balancing} between flexibility and support.
+\emph{Computer Science - Research and Development}, \emph{23}(2),
+99--113. \url{https://doi.org/10.1007/s00450-009-0057-9}
+
+\end{CSLReferences}
 
 
 

@@ -2,61 +2,69 @@
 
 [![hackmd-github-sync-badge](https://hackmd.io/_App6vg9Tr-d0id8Uj675Q/badge)](https://hackmd.io/_App6vg9Tr-d0id8Uj675Q)
 
-Software development activities continue to evolve in scale and complexity, as evidenced by
-the growth of global repository counts and volume of large-scale software archives[@GithubInnovationGraph; @martinelliSoftwareHeritageActivity2026]
-And as we navigate the paradigm shift of AI and agentic systems, 
-maintaining accessibility to scientific software 
-and data science workflows must remain a high priority. 
+Software development is continuing to expand in both scale and complexity, 
+evidenced by the growth of global repository counts and large-scale software archives[@GithubInnovationGraph; @martinelliSoftwareHeritageActivity2026]
+At the same time, AI and agentic systems are reshaping how software 
+is produced, making it increasingly important to preserve 
+accessibility, transparency, and reproducibility in scientific 
+software and data science workflows.
 
-Despite the critical importance of modern data science and AI workflows in 
-academia and industry, effective, reproducible documentation remains an 
-overlooked and under-served component of delivering 
+Despite the central role of these workflows in academia and industry, 
+effective, reproducible documentation remains an 
+overlooked and under-served part of delivering 
 high quality software [@aghajaniSoftwareDocumentationIssues2019]. This issue
-is only expected to be exacerbated as the proportion and sophistication of AI 
-generated code submitted to public repositories continues to rise [@robbesAgenticMuchAdoption2026].
-Developers need creative solutions to address the limitations of traditional
+is likely to become more acute as the volume and sophistication of AI 
+generated code submitted to public repositories continues to increase [@robbesAgenticMuchAdoption2026].
+Developers therefore need solutions beyond traditional documentation 
+to support workflow execution __ address the limitations of traditional
 software documentation to executing workflows in a reproducible and verifiable manner 
 as the landscape of software development continues to evolve.
 
 Conventional documentation can describe a workflow, but for complex, multi-step, 
-order-dependent tasks and projects, it is often insufficient to document and 
-verify critical runtime execution details such as user platform 
-dependencies, configuration, versions, and step relationships [@ebertGeneralConceptConsistent2015]. 
-On the other hand, command-line wrappers can be built to wrap and directly execute
-tasks in a declarative workflow [@vanderaalstDeclarativeWorkflowsBalancing2009], improving automation and reproducibility. However,
-developing CLI wrappers can be time-consuming and comes with a trade-off between control
-and flexibility: highly specialized wrappers can improve consistency, but may be inflexible and difficult to maintain, while
-more generic wrappers enable complexity by shifting the burden to the user, requiring them to manage a large 
-number of flags and options via configuration files [@sadiqSpecificationValidationProcess2005; @brackTenSimpleRules2022].
-AI and agentic systems are promising, but their reproducibility is currently limited by non-determinism [@siddiqLargeLanguageModels2025]. Furthermore, ongoing development of
-agentic systems is still in its infancy, with current exploratory implementations
-(such as harnesses)
-still requiring careful human oversight to achieve acceptable levels of reliability [@agrawalCanAIConduct2026].
+order-dependent tasks and projects, it is often insufficient capturing and 
+verifying critical runtime execution details such as platform 
+dependencies, configuration, versions, and relationships between steps [@ebertGeneralConceptConsistent2015]. 
+Command-line interface (CLI) wrappers can improve automation and reproducibility of a 
+declarative workflow by providing a directly executable interface for complex
+tasks [@vanderaalstDeclarativeWorkflowsBalancing2009]. However,
+developing and maintaining CLI wrappers can be time-consuming and introduces
+a persistent trade-off between control and flexibility: highly specialized 
+wrappers can improve consistency, but may be inflexible and difficult to maintain, while
+more generic wrappers enable complexity by shifting the burden to the user through
+large numbers of flags and configuration options [@sadiqSpecificationValidationProcess2005; @brackTenSimpleRules2022].
+Lastly, AI and agentic systems are promising, but their reproducibility remains limited by 
+non-determinism [@siddiqLargeLanguageModels2025]. Furthermore, current 
+practical agentic workflow implementations (such as harnesses) still require careful human oversight to achieve acceptable reliability [@agrawalCanAIConduct2026].
 
-By contrast, executable literate programming approaches can encode and enforce complex
-workflow steps _and_ generate idempotent results. Quarto modern, plain-text, 
-multi-language, and multi-output literate programming framework that enables the creation of 
-reproducible documents and workflows [@allaireQuarto2026]. By extending Quarto with a
-carefully designed set of templates and extensions, we propose **Quarto Manuals**, a framework 
-for executable software manuals that guide users through a workflow as ordered, interactive 
-pages that combine explanation, code execution, and verification. Quarto Manuals 
-are intended to be flexible across audiences, projects, organizations, and 
-programming languages, while maintaining reproducibility by enabling explicit 
-and auditable side effects.
-Rather than hiding workflow decisions, Quarto Manuals keep them visible and editable, 
-which is especially important in research computing environments where local constraints and 
-expert judgment often shape how work is performed. The system is powered by quarto-emit, a 
-lightweight backend extension that materializes conventional workflow artifacts from manual 
-pages when needed. We demonstrate the approach through three examples of increasing 
-sophistication: a simple manual, an intermediate manual, and a complex manual. For authors, 
-Quarto Manuals provide a structured yet adaptable way to turn recurring workflows into reusable 
-manuals. For operators, they provide a stepwise, testable process for generating reproducible 
-setup artifacts and confirming progress in a structured and auditable way throughout the 
-workflow.
+Executable literate programming approaches can encode and enforce complex
+workflow steps _and_ generate idempotent results. Quarto is a modern, plain-text, 
+multi-language, and multi-output literate programming framework for creating 
+reproducible documents and workflows [@allaireQuarto2026]. Building on Quarto with a
+carefully designed set of templates and extensions, we introduce **Quarto Manuals**, a
+framework for executable software manuals that guide users through a workflow as ordered, interactive 
+pages that combine explanation, code execution, and verification. Rather than 
+hiding workflow decisions and steps, Quarto Manuals keep them visible and editable, 
+making them ideal for research computing contexts where local constraints and 
+expert judgment often shape execution parameters. The framework is powered 
+by `quarto-emit`, a lightweight backend extension that materializes conventional 
+workflow artifacts from manual pages when needed. We demonstrate the approach 
+with three examples of increasing sophistication: a simple manual, 
+an intermediate manual, and a complex manual. 
+
+For authors, Quarto Manuals provide a structured yet adaptable way to turn 
+recurring workflows into reusable manuals; for operators, they provide a 
+stepwise, testable process for generating reproducible setup artifacts 
+and confirming progress throughout execution in a structured and auditable manner.
+
+Quarto Manuals promise to improve the reproducibility and reliability of software workflows,
+while also providing a more accessible and interactive experience for users. And,
+with the increasing adoption of AI and agentic systems in software development,
+may provide a framework for ensuring that these workflows remain transparent, verifiable, and 
+reproducible in the face of increasing complexity and non-determinism.
 
 ## Feature Roadmap
 
-- [ ] abstract as prose
+- [x] abstract as prose
 - [ ] stylize each block so it is visually distinct
 - [ ] use Lua to print out useful render messages when blocks are being processed
 - [ ] negative reinforcement: identify and correct misuse of the manual visually
