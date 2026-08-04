@@ -26,13 +26,13 @@ book:
         - examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.qmd
         - examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.qmd
 
-    - part: examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.qmd
+    - part: examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.qmd
       chapters: 
-        - examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.qmd
-        - examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.qmd
-        - examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.qmd
-        - examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.qmd
-        - examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.qmd
+        - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.qmd
+        - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/01_misc-CDS-API-keys.qmd
+        - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/10_page-orchestrate-pipeline.qmd
+        - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.qmd
+        - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all.qmd
 
     - part: examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.qmd
       chapters: 

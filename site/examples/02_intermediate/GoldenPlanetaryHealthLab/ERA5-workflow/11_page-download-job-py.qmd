@@ -1,0 +1,134 @@
+---
+title: "Define The ERA5 Download Job"
+subtitle: "Turn one grouped request into one CDS download task"
+format: html
+execute:
+  eval: false
+---
+
+::: {.callout-caution}
+
+The content on this page is adapted from a project notebook that implemented a
+reusable Python download job. It has been rewritten here as a manual page so
+that the download contract is visible to the operator.
+
+:::
+
+This page converts the download notebook into a manual step. Its job is to make
+one grouped request concrete: define the request parameters, translate the
+country code into a bounding box, and describe how one download task writes its
+output.
+
+::: {.manual-prereq title="Confirm Request Parameters"}
+
+Before defining the download job, confirm that the grouped request fields from
+the orchestration page are available and that CDS credentials have already been
+configured.
+
+```{python}
+#| eval: false
+from pathlib import Path
+
+assert Path.home().joinpath(".cdsapirc").exists(), "Expected CDS credentials in ~/.cdsapirc."
+
+required_fields = [
+    "country",
+    "dataset",
+    "variable",
+    "year",
+    "month",
+    "day",
+    "time",
+    "data_format",
+    "download_format",
+]
+required_fields
+```
+
+:::
+
+::: {.manual-procedure title="Declare One Download Request"}
+
+The original notebook starts by showing the parameter shape for a single ERA5
+download job.
+
+```{python}
+#| eval: false
+# Pseudocode adapted from the original notebook
+request = {
+    "country": "MDG",
+    "dataset": "reanalysis-era5-land",
+    "variable": "2m_temperature",
+    "year": "2021",
+    "month": "01",
+    "day": ["01", "02", "...", "31"],
+    "time": [f"{hour:02d}:00" for hour in range(24)],
+    "data_format": "grib",
+    "download_format": "unarchived",
+}
+```
+
+:::
+
+::: {.manual-procedure title="Describe The Download Function"}
+
+The notebook then defines a general-purpose `download_era5()` function. Its key
+responsibilities are to build a predictable output path, translate a country
+code into a CDS bounding box, and optionally run in dry-run mode.
+
+```{python}
+#| eval: false
+# Pseudocode adapted from the original notebook
+def download_era5(request_dict, output_dir="data/intermediates/download_era5_nb", dry_run=True):
+    request_dict = request_dict.copy()
+    dataset = request_dict.pop("dataset")
+    output_file = (
+        f"{request_dict['country']}_{dataset}_{request_dict['variable']}_"
+        f"{request_dict['year']}-{request_dict['month']}.grib"
+    )
+
+    area = get_country_bbox(request_dict["country"])
+    request_dict["area"] = area
+    request_dict.pop("country")
+
+    if dry_run:
+        # Report the intended request and output path without contacting CDS.
+        return output_file
+
+    # Otherwise:
+    # 1. instantiate cdsapi.Client()
+    # 2. call client.retrieve(dataset, request_dict, output_file)
+    # 3. verify that output_file now exists
+    return output_file
+```
+
+:::
+
+::: {.manual-procedure title="Define The Bounding Box Helper"}
+
+The notebook also defines a helper that maps each ISO country code to the
+bounding box required by CDS.
+
+```{python}
+#| eval: false
+# Pseudocode adapted from the original notebook
+def get_country_bbox(iso_code):
+    # look up country subunits by ISO code
+    # return [north, west, south, east] in CDS-compatible order
+    return ["north", "west", "south", "east"]
+```
+
+:::
+
+::: {.manual-check title="Check The Download Job Contract"}
+
+```{python}
+#| eval: false
+# This page is complete when the operator can point to:
+# - the fields required in one grouped ERA5 request,
+# - the output file naming pattern,
+# - the difference between dry-run and real-run behavior,
+# - and the role of the country bounding-box helper in building the final CDS request.
+```
+
+:::

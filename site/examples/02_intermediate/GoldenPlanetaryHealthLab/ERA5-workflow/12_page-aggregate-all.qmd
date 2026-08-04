@@ -1,0 +1,160 @@
+---
+title: "Aggregate ERA5 Across Healthsheds"
+subtitle: "Summarize hourly climate fields into daily boundary-level outputs"
+format: html
+execute:
+  eval: false
+---
+
+::: {.callout-caution}
+
+The content on this page is adapted from a project notebook that mixed
+configuration, helper functions, and long-running aggregation loops. It has
+been rewritten here as a manual page so the aggregation logic is easier to
+inspect.
+
+:::
+
+This page converts the aggregation notebook into a manual step. Its job is to
+show how raw ERA5 fields are transformed into daily healthshed-level summaries,
+including optional population weighting, timezone adjustment, unit conversion,
+and derived variables such as relative humidity and wind speed.
+
+::: {.manual-prereq title="Confirm Aggregation Inputs"}
+
+Before beginning aggregation, confirm that the required boundary geometry,
+downloaded ERA5 rasters, elevation data, and optional population rasters are
+already available.
+
+```{r}
+#| eval: false
+shp_file <- "path/to/healthsheds.shp"
+data_dir <- "path/to/era5_raw"
+elevation_file <- "path/to/elevation_healthshed.csv"
+population_dir <- "path/to/worldpop"
+output_dir <- "path/to/era5_healthshed_outputs"
+
+list(
+  shp_file = shp_file,
+  data_dir = data_dir,
+  elevation_file = elevation_file,
+  population_dir = population_dir,
+  output_dir = output_dir
+)
+```
+
+:::
+
+::: {.manual-procedure title="Declare The Aggregation Configuration"}
+
+The notebook begins by defining whether the run targets ERA5 or ERA5-Land,
+which years to process, the local time shift, the healthshed identifier, and
+whether values should be population-weighted or area-averaged.
+
+```{r}
+#| eval: false
+# Pseudocode adapted from the original notebook
+is_era5land <- TRUE
+id_name <- "fs_uid"
+data_years <- 2010:2025
+local_time_to_utc <- +3
+pop_weighted <- FALSE
+
+source_name <- ifelse(is_era5land, "era5land", "era5")
+```
+
+:::
+
+::: {.manual-procedure title="Extract And Clean Hourly Values"}
+
+The core of the notebook does three things for each variable and year:
+
+1. read the raster and align it to the healthshed geometry;
+2. extract hourly values per healthshed, optionally weighting by population;
+3. clean the hourly series by shifting accumulated variables, adjusting for
+   local time, converting units, and applying elevation-based lapse-rate
+   corrections where needed.
+
+```{r}
+#| eval: false
+# Pseudocode adapted from the original notebook
+# shp <- read_sf(shp_file)
+# r <- rast(file.path(data_dir, "<source>_<variable>_<year>.grib"))
+# hourly <- get_hourly_var_per_healthshed(r, year, shp, id_name, pop_weighted = pop_weighted)
+# cleaned <- clean_raw_hourly_data(
+#   hourly,
+#   agg_previous = previous_hours,
+#   year = year,
+#   variable = variable,
+#   is_era5land = is_era5land,
+#   local_time_to_utc = local_time_to_utc,
+#   elevation_file = elevation_file
+# )
+```
+
+:::
+
+::: {.manual-procedure title="Write Daily Outputs For Standard Variables"}
+
+For the standard ERA5 variables, the notebook loops over all years, aggregates
+cleaned hourly values to daily mean, min, and max, and saves one output file
+per variable and year.
+
+```{r}
+#| eval: false
+# Pseudocode adapted from the original notebook
+base_variables <- c(
+  "2m_temperature",
+  "2m_dewpoint_temperature",
+  "surface_pressure",
+  "soil_temperature_level_1",
+  "volumetric_soil_water_layer_1",
+  "volumetric_soil_water_layer_2",
+  "total_precipitation",
+  "surface_solar_radiation_downwards"
+)
+
+# for (variable in base_variables) {
+#   for (year in data_years) {
+#     daily <- get_daily_avg(cleaned$data_year_clean, id_name = id_name)
+#     write.csv(daily, file.path(output_dir, "<source>_<variable>_<year>.csv"))
+#   }
+# }
+```
+
+:::
+
+::: {.manual-procedure title="Derive Relative Humidity And Wind Metrics"}
+
+The notebook also computes additional products that are not downloaded
+directly. Relative humidity is derived from temperature and dewpoint; wind
+speed and direction are derived from the `u` and `v` wind components.
+
+```{r}
+#| eval: false
+# Pseudocode adapted from the original notebook
+# relative_humidity <- derive_from_temperature_and_dewpoint(hourly_temp, hourly_dewpoint)
+# relative_humidity_daily <- get_daily_avg(relative_humidity, round_digits = 1)
+
+# wind_speed <- sqrt(u^2 + v^2)
+# wind_speed_daily <- get_daily_avg(wind_speed, round_digits = 2)
+
+# wind_direction <- (180 + atan2(u, v) * 180 / pi) %% 360
+# wind_direction_daily <- get_daily_avg(wind_direction, round_digits = 2)
+```
+
+:::
+
+::: {.manual-check title="Check The Aggregation Contract"}
+
+```{r}
+#| eval: false
+# This page is complete when the operator can explain:
+# - which source files feed the aggregation,
+# - when population weighting is used instead of area averaging,
+# - why hourly data must be cleaned before daily summaries are computed,
+# - and which outputs are direct daily summaries versus derived products
+#   such as relative humidity and wind metrics.
+```
+
+:::

@@ -1,5 +1,5 @@
 ---
-title: "A Climate-CAFE ERA5 Workflow"
+title: "An ERA5 Aggregation Workflow"
 subtitle: "A Quarto Manual adaptation of a real ERA5 download and aggregation project"
 format:
   html:
@@ -23,6 +23,6 @@ Compared with the simple staging example, this manual has more moving parts:
 - large downloaded artifacts;
 - downstream aggregation steps that depend on earlier outputs.
 
-That is exactly where Quarto Manuals are useful: the workflow is repetitive and
+Quarto Manuals become useful in these scenarios: the workflow is repetitive and
 important, but still too context-specific to collapse into a single rigid
 command-line wrapper.

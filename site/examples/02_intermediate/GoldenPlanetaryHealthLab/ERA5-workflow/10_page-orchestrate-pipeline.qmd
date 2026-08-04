@@ -1,0 +1,134 @@
+---
+title: "Orchestrate The ERA5 Pipeline"
+subtitle: "Declare the request grid and split it into manageable download jobs"
+format: html
+execute:
+  eval: false
+---
+
+::: {.callout-caution}
+
+The content on this page is adapted from a project notebook that mixed pipeline
+implementation with explanation. It has been rewritten here as a manual page so
+that the workflow intent is easier to inspect step by step.
+
+:::
+
+This page converts the pipeline notebook into an operator-facing setup step.
+Its job is to define the overall ERA5 request space and turn it into a set of
+grouped API calls that later pages can execute.
+
+::: {.manual-prereq title="Confirm Pipeline Inputs"}
+
+Before building the request grid, confirm that the project already knows where
+its staged inputs, stagecoach manifest, and downstream download notebook live.
+
+```{r}
+#| eval: false
+library(here)
+
+stagecoach_manifest <- here("stagecoach_manifest.yml")
+download_era5_nb <- here("notebooks", "download_era5", "download_era5.qmd")
+input_dir <- here("data", "inputs")
+
+# In a real manual, these would be concrete prerequisite checks.
+stagecoach_manifest
+download_era5_nb
+input_dir
+```
+
+:::
+
+::: {.manual-procedure title="Declare The CDS Request Grid"}
+
+The original notebook defines a large grid of request parameters covering
+country, dataset, variable, year, month, day, and hour. It then filters out
+invalid dates and avoids redundant hourly requests for time-invariant
+variables.
+
+```{r}
+#| eval: false
+library(tibble)
+library(tidyr)
+library(dplyr)
+library(lubridate)
+library(stringr)
+
+# Pseudocode adapted from the original pipeline notebook
+cds_api_config <- expand_grid(
+  years = 2010:2025,
+  months = str_pad(1:12, 2, pad = "0"),
+  days = 1:31,
+  hours = paste0(str_pad(0:23, 2, pad = "0"), ":00"),
+  countries = c("MDG", "NPL"),
+  datasets = c("reanalysis-era5-land", "reanalysis-era5-single-levels"),
+  variables = c(
+    "2m_temperature",
+    "2m_dewpoint_temperature",
+    "volumetric_soil_water_layer_1",
+    "volumetric_soil_water_layer_2",
+    "surface_solar_radiation_downwards",
+    "total_precipitation",
+    "10m_u_component_of_wind",
+    "10m_v_component_of_wind",
+    "surface_pressure",
+    "soil_temperature_level_1",
+    "geopotential"
+  ),
+  data_format = "grib",
+  download_format = "unarchived"
+) |>
+  filter(
+    !(months %in% c(4, 6, 9, 11) & days == 31),
+    !(months == 2 & days > 29),
+    !(months == 2 & days == 29 & !leap_year(years)),
+    !(variables == "geopotential" & hours != "00:00")
+  )
+```
+
+:::
+
+::: {.manual-procedure title="Group The Grid Into API Calls"}
+
+The notebook does not send one API call for every row. Instead, it groups the
+grid by country, dataset, variable, year, and month, then converts each group
+into a single request dictionary that a downstream job can execute.
+
+```{r}
+#| eval: false
+library(purrr)
+
+# Pseudocode adapted from the original pipeline notebook
+request_groups <- cds_api_config |>
+  group_by(countries, datasets, variables, years, months) |>
+  group_split()
+
+request_dicts <- map(request_groups, \(x) {
+  list(
+    country = unique(x$countries),
+    dataset = unique(x$datasets),
+    variable = unique(x$variables),
+    year = unique(x$years),
+    month = unique(x$months),
+    day = unique(x$days),
+    time = unique(x$hours),
+    data_format = unique(x$data_format),
+    download_format = unique(x$download_format)
+  )
+})
+```
+
+:::
+
+::: {.manual-check title="Check The Pipeline Contract"}
+
+```{r}
+#| eval: false
+# This page is complete when the operator can explain:
+# - which inputs are required before downloads begin,
+# - which dimensions define the CDS request grid,
+# - why invalid dates are filtered out,
+# - and why requests are grouped by country, dataset, variable, year, and month.
+```
+
+:::
