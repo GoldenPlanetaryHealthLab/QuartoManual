@@ -244,31 +244,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../examples/02_intermediate/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ERA5 Workflow Manual</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Cover Page: ERA5 Workflow Manual</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../examples/02_intermediate/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">CDS API Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Helper Page: CDS API Access</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../examples/02_intermediate/ERA5-workflow/10_page-orchestrate-pipeline-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Orchestrate The ERA5 Pipeline</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Page:Orchestrate The ERA5 Pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../examples/02_intermediate/ERA5-workflow/11_page-download-job-py.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Define The ERA5 Download Job</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Page: Define The ERA5 Download Job</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../examples/02_intermediate/ERA5-workflow/12_page-snakemake-py.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Emit A Snakemake Download Workflow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Page: Emit A Snakemake Download Workflow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -448,7 +448,7 @@ Warning
 <h2 data-number="9.1" class="anchored" data-anchor-id="prerequisite"><span class="header-section-number">9.1</span> <em>1. Prerequisite</em></h2>
 <div class="manual-prereq callout callout-important" title="Confirm Required State">
 <p>Before running this page, confirm that the project already exists and that the operator is working from its root.</p>
-<div id="9cc4f4b7" class="cell" data-execution_count="1">
+<div id="87c9f878" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path(<span class="st">"README.md"</span>).exists(), <span class="st">"Expected README.md to exist before staging data."</span></span>
@@ -460,7 +460,7 @@ Warning
 <h2 data-number="9.2" class="anchored" data-anchor-id="procedure"><span class="header-section-number">9.2</span> <em>2. Procedure</em></h2>
 <div class="manual-procedure callout callout-tip" title="Declare The Target Dataset">
 <p>Record the dataset identifier and the intended staging location.</p>
-<div id="c9227414" class="cell" data-execution_count="2">
+<div id="37ec8716" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dataset_name <span class="op">=</span> <span class="st">"example_registered_dataset"</span></span>
@@ -469,7 +469,7 @@ Warning
 </div>
 <div class="manual-procedure callout callout-tip" title="Create The Staging Link">
 <p>Create the staged location. In a real manual this could call <code>stagecoach</code> or another institutional tool.</p>
-<div id="f940e5e0" class="cell" data-execution_count="3">
+<div id="0484c377" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dataset_name <span class="op">=</span> <span class="st">"example_registered_dataset"</span></span>
@@ -482,7 +482,7 @@ Warning
 <section id="check" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="check"><span class="header-section-number">9.3</span> <em>3. Check</em></h2>
 <div class="manual-check callout callout-warning" title="Verify Stage Result">
-<div id="4aa6cbde" class="cell" data-execution_count="4">
+<div id="33aabefa" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dataset_name <span class="op">=</span> <span class="st">"example_registered_dataset"</span></span>
