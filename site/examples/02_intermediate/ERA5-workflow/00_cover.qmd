@@ -1,0 +1,33 @@
+---
+title: "Cover Page: ERA5 Workflow Manual"
+format: html
+---
+
+This manual prepares an ERA5 download and aggregation workflow for use in a
+real project.
+
+It is intended for an operator who needs to:
+
+- define a valid ERA5 request space;
+- turn grouped requests into reproducible download jobs;
+- emit supporting workflow files for orchestration;
+- aggregate downloaded climate data into daily boundary-level outputs.
+
+Before starting, the operator should already have:
+
+- access to the Copernicus Climate Data Store;
+- a project workspace with a clear data layout;
+- the ability to decide which countries, variables, years, and months belong in
+  the workflow;
+- any required boundary, elevation, and optional population inputs for the
+  final aggregation stage.
+
+By the end of this manual, the project should have:
+
+- a declared ERA5 request grid;
+- a defined single-job download contract;
+- emitted Snakemake workflow files for scaling downloads;
+- a documented aggregation contract for producing daily healthshed summaries.
+
+The goal of this manual is not to complete the scientific analysis. The goal is
+to make the workflow legible, inspectable, and ready to operate.

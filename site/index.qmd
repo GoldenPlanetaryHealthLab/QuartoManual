@@ -115,6 +115,9 @@ such as:
 - `scripts/`;
 - `config/` files.
 
+That being said, you can use any Quarto extension you'd like to
+extend the functionality of a Quarto Manual.
+
 ## Author Workflow
 
 To create a manual for your own procedure:

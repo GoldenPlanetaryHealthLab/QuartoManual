@@ -1,5 +1,5 @@
 ---
-title: "Emit A Snakemake Download Workflow"
+title: "Page: Emit A Snakemake Download Workflow"
 subtitle: "Use quarto-emit to materialize pipeline files without replacing Snakemake"
 format: html
 execute:
@@ -98,13 +98,14 @@ rule download_era5:
 
 ::: {.manual-check title="Check The Snakemake Integration Contract"}
 
+Finally, we can assert that the emitted files exist and that Snakemake is responsive to the workflow definition.
+
 ```{python}
 #| eval: false
 assert Path("workflow/downloads.yaml").exists()
 assert Path("workflow/Snakefile").exists()
 ```
 
-As a secondary check, we can assert that snakemake is responsive:
 ```{python}
 import subprocess
 result = subprocess.run(["snakemake", "--dry-run"], capture_output=True, text=True)

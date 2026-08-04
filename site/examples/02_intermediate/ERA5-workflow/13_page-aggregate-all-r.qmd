@@ -15,7 +15,7 @@ and derived variables such as relative humidity and wind speed.
 
 Before beginning aggregation, confirm that the required boundary geometry,
 downloaded ERA5 rasters, elevation data, and optional population rasters are
-already available.
+already available. These are files that may have been staged in a previous workflow step.
 
 ```{r}
 #| eval: false
