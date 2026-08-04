@@ -1,133 +1,114 @@
 ---
-title: "Define The ERA5 Download Job"
-subtitle: "Turn one grouped request into one CDS download task"
+title: "Emit A Snakemake Download Workflow"
+subtitle: "Use quarto-emit to materialize pipeline files without replacing Snakemake"
 format: html
 execute:
   eval: false
 ---
 
-This page aims to make one grouped request concrete: define the request parameters, 
-translate the country code into a bounding box, and describe how one 
-download task writes its output.
+This page sits between the single-job download definition and the full
+aggregation step. Its job is to show one way a manual can bridge the two:
+describe the download workflow to the operator, then emit a minimal Snakemake
+workflow that can run the grouped jobs at scale.
 
-::: {.manual-prereq title="Confirm Request Parameters"}
+::: {.manual-prereq title="Confirm The Download Contract Exists"}
 
-Before defining the download job, confirm that the grouped request fields from
-the orchestration page are available and that CDS credentials have already been
-configured.
+Before emitting a Snakemake workflow, confirm that the manual has already
+defined:
+
+- the request-grid logic from the orchestration page;
+- the single-job parameter contract from the download page;
+- the expected output naming pattern for raw ERA5 files.
 
 ```{python}
 #| eval: false
-from pathlib import Path
-
-assert Path.home().joinpath(".cdsapirc").exists(), "Expected CDS credentials in ~/.cdsapirc."
-
-required_fields = [
-    "country",
-    "dataset",
-    "variable",
-    "year",
-    "month",
-    "day",
-    "time",
-    "data_format",
-    "download_format",
+required_concepts = [
+    "request_dicts",
+    "download_era5(request_dict, ...)",
+    "data/raw/era5land/<country>_<dataset>_<variable>_<year>-<month>.grib",
 ]
-required_fields
+required_concepts
 ```
 
 :::
 
-::: {.manual-procedure title="Declare One Download Request"}
+::: {.manual-procedure .emit-config-yaml file="workflow/downloads.yaml" title="Emit A Download Configuration File"}
 
-The original notebook starts by showing the parameter shape for a single ERA5
-download job.
+The first emitted artifact can be a small configuration file that records which
+download jobs Snakemake should expect.
+
+```yaml
+downloads:
+  - country: MDG
+    dataset: reanalysis-era5-land
+    variable: 2m_temperature
+    year: 2021
+    month: "01"
+  - country: NPL
+    dataset: reanalysis-era5-land
+    variable: total_precipitation
+    year: 2021
+    month: "01"
+```
+
+This does not replace the operator's reasoning about which jobs belong in the
+workflow. It simply materializes that decision into a file Snakemake can read.
+
+:::
+
+::: {.manual-procedure .emit-source-py file="workflow/Snakefile" title="Emit A Minimal Snakefile"}
+
+The second emitted artifact can be a `Snakefile` that maps each configured job
+to the Python download function from the previous page.
 
 ```{python}
-#| eval: false
-# Pseudocode adapted from the original notebook
-request = {
-    "country": "MDG",
-    "dataset": "reanalysis-era5-land",
-    "variable": "2m_temperature",
-    "year": "2021",
-    "month": "01",
-    "day": ["01", "02", "...", "31"],
-    "time": [f"{hour:02d}:00" for hour in range(24)],
-    "data_format": "grib",
-    "download_format": "unarchived",
-}
+# Pseudocode adapted for a Quarto Manual example
+configfile: "workflow/downloads.yaml"
+
+DOWNLOADS = config["downloads"]
+
+rule all:
+    input:
+        expand(
+            "data/raw/era5land/{country}_{dataset}_{variable}_{year}-{month}.grib",
+            zip,
+            country=[job["country"] for job in DOWNLOADS],
+            dataset=[job["dataset"] for job in DOWNLOADS],
+            variable=[job["variable"] for job in DOWNLOADS],
+            year=[job["year"] for job in DOWNLOADS],
+            month=[job["month"] for job in DOWNLOADS],
+        )
+
+rule download_era5:
+    output:
+        "data/raw/era5land/{country}_{dataset}_{variable}_{year}-{month}.grib"
+    params:
+        dataset=lambda wc: wc.dataset,
+        variable=lambda wc: wc.variable,
+        year=lambda wc: wc.year,
+        month=lambda wc: wc.month,
+    shell:
+        # In a real project this would call the emitted Python download job.
+        "python scripts/download_era5.py --country {wildcards.country} "
+        "--dataset {params.dataset} --variable {params.variable} "
+        "--year {params.year} --month {params.month}"
 ```
 
 :::
 
-::: {.manual-procedure title="Describe The Download Function"}
-
-The notebook then defines a general-purpose `download_era5()` function. Its key
-responsibilities are to build a predictable output path, translate a country
-code into a CDS bounding box, and optionally run in dry-run mode.
+::: {.manual-check title="Check The Snakemake Integration Contract"}
 
 ```{python}
 #| eval: false
-# Pseudocode adapted from the original notebook
-def download_era5(request_dict, output_dir="data/intermediates/download_era5_nb", dry_run=True):
-    request_dict = request_dict.copy()
-    dataset = request_dict.pop("dataset")
-    output_file = (
-        f"{request_dict['country']}_{dataset}_{request_dict['variable']}_"
-        f"{request_dict['year']}-{request_dict['month']}.grib"
-    )
-
-    area = get_country_bbox(request_dict["country"])
-    request_dict["area"] = area
-    request_dict.pop("country")
-
-    if dry_run:
-        # Report the intended request and output path without contacting CDS.
-        return output_file
-
-    # Otherwise:
-    # 1. instantiate cdsapi.Client()
-    # 2. call client.retrieve(dataset, request_dict, output_file)
-    # 3. verify that output_file now exists
-    return output_file
+assert Path("workflow/downloads.yaml").exists()
+assert Path("workflow/Snakefile").exists()
 ```
 
-:::
-
-::: {.manual-procedure title="Define The Bounding Box Helper"}
-
-The notebook also defines a helper that maps each ISO country code to the
-bounding box required by CDS.
-
+As a secondary check, we can assert that snakemake is responsive:
 ```{python}
-#| eval: false
-# Pseudocode adapted from the original notebook
-def get_country_bbox(iso_code):
-    # look up country subunits by ISO code
-    # return [north, west, south, east] in CDS-compatible order
-    return ["north", "west", "south", "east"]
-```
-
-:::
-
-::: {.manual-check title="Check The Download Job Contract"}
-
-In this check section, the author can add a computational test to verify that the 
-download job is defined correctly, or that a single download
-executes and produces the expected output file.
-
-```{python}
-#| eval: false
-# This page is complete when the operator can point to:
-# - the fields required in one grouped ERA5 request,
-# - the output file naming pattern,
-# - the difference between dry-run and real-run behavior,
-# - and the role of the country bounding-box helper in building the final CDS request.
-output_file = download_era5(request, dry_run=False)
-assert output_file == "MDG_reanalysis-era5-land_2m_temperature_2021-01.grib", \
-    f"Expected output file name, got {output_file}"
-assert Path(output_file).exists()
+import subprocess
+result = subprocess.run(["snakemake", "--dry-run"], capture_output=True, text=True)
+assert result.returncode == 0, f"Snakemake dry-run failed: {result.stderr}"
 ```
 
 :::

@@ -16,12 +16,12 @@ high quality software [@aghajaniSoftwareDocumentationIssues2019]. This issue
 is likely to become more acute as the volume and sophistication of AI 
 generated code submitted to public repositories continues to increase [@robbesAgenticMuchAdoption2026].
 Developers therefore need solutions beyond traditional documentation 
-to support workflow execution __ address the limitations of traditional
+to support workflow execution _and_ address the limitations of traditional
 software documentation to executing workflows in a reproducible and verifiable manner 
 as the landscape of software development continues to evolve.
 
 Conventional documentation can describe a workflow, but for complex, multi-step, 
-order-dependent tasks and projects, it is often insufficient capturing and 
+order-dependent tasks and projects, it is often insufficient at capturing and 
 verifying critical runtime execution details such as platform 
 dependencies, configuration, versions, and relationships between steps [@ebertGeneralConceptConsistent2015]. 
 Command-line interface (CLI) wrappers can improve automation and reproducibility of a 
@@ -52,8 +52,8 @@ with three examples of increasing sophistication: a simple manual,
 an intermediate manual, and a complex manual. 
 
 For authors, Quarto Manuals provide a structured yet adaptable way to turn 
-recurring workflows into reusable manuals; for operators, they provide a 
-stepwise, testable process for generating reproducible setup artifacts 
+recurring workflows into reusable operators' manuals for themselves and colleagues; for operators, they provide a 
+stepwise, testable process for generating reproducible setup and execution artifacts 
 and confirming progress throughout execution in a structured and auditable manner.
 
 Quarto Manuals promise to improve the reproducibility and reliability of software workflows,
