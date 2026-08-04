@@ -8,13 +8,11 @@ execute:
 
 ::: {.callout-caution}
 
-The content on this page is adapted from a project notebook that mixed pipeline
-implementation with explanation. It has been rewritten here as a manual page so
-that the workflow intent is easier to inspect step by step.
+The content on this page contains pseudocode for demonstration purposes.
 
 :::
 
-This page converts the pipeline notebook into an operator-facing setup step.
+This page orchestrates the data aggregation pipeline.
 Its job is to define the overall ERA5 request space and turn it into a set of
 grouped API calls that later pages can execute.
 
@@ -28,12 +26,10 @@ its staged inputs, stagecoach manifest, and downstream download notebook live.
 library(here)
 
 stagecoach_manifest <- here("stagecoach_manifest.yml")
-download_era5_nb <- here("notebooks", "download_era5", "download_era5.qmd")
 input_dir <- here("data", "inputs")
 
 # In a real manual, these would be concrete prerequisite checks.
 stagecoach_manifest
-download_era5_nb
 input_dir
 ```
 
@@ -41,10 +37,14 @@ input_dir
 
 ::: {.manual-procedure title="Declare The CDS Request Grid"}
 
-The original notebook defines a large grid of request parameters covering
+Our job defines a large grid of request parameters covering
 country, dataset, variable, year, month, day, and hour. It then filters out
 invalid dates and avoids redundant hourly requests for time-invariant
-variables.
+variables. End users of a manual could use this space to customize,
+tinker with, and experiment with the request grid before it is split into
+download jobs, and are encouraged to exercise whatever methods
+they prefer to get there, including data transformation libraries,
+data visualization tools, and other data analysis frameworks.
 
 ```{r}
 #| eval: false
@@ -54,7 +54,6 @@ library(dplyr)
 library(lubridate)
 library(stringr)
 
-# Pseudocode adapted from the original pipeline notebook
 cds_api_config <- expand_grid(
   years = 2010:2025,
   months = str_pad(1:12, 2, pad = "0"),
@@ -98,7 +97,6 @@ into a single request dictionary that a downstream job can execute.
 #| eval: false
 library(purrr)
 
-# Pseudocode adapted from the original pipeline notebook
 request_groups <- cds_api_config |>
   group_by(countries, datasets, variables, years, months) |>
   group_split()
@@ -121,6 +119,9 @@ request_dicts <- map(request_groups, \(x) {
 :::
 
 ::: {.manual-check title="Check The Pipeline Contract"}
+In some cases, authors may choose not to include a file artifact
+in a check block, but instead an end-of-page summary that 
+describes what the operator should be able to explain or demonstrate.
 
 ```{r}
 #| eval: false
@@ -129,6 +130,9 @@ request_dicts <- map(request_groups, \(x) {
 # - which dimensions define the CDS request grid,
 # - why invalid dates are filtered out,
 # - and why requests are grouped by country, dataset, variable, year, and month.
+stopifnot({
+  "I can explain the required inputs, the request grid dimensions, the filtering of invalid dates, and the grouping of requests."
+})
 ```
 
 :::

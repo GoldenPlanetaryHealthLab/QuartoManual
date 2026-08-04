@@ -234,8 +234,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A Climate-CAFE ERA5 Workflow</span></a>
+            <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">An ERA5 Aggregation Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -243,32 +243,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">CDS API Access</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Query ERA5-Land For Kenya</span></span></a>
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/10_page-orchestrate-pipeline-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Orchestrate The ERA5 Pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Build The Aggregation Fishnet</span></span></a>
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Define The ERA5 Download Job</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Using The Fishnet</span></span></a>
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Across Healthsheds</span></span></a>
   </div>
 </li>
       </ul>
@@ -418,14 +418,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This notebook builds the platform image and tests the platform contract.</p>
 <p>Do not mount <code>/work</code>. Do not activate a project Spack environment yet. Do not run <code>rv sync</code>, <code>quarto check</code>, or VS Code tunnel commands yet. These actions will obfuscate your ability to validate the platform.</p>
-<div id="e76cee04" class="cell" data-execution_count="1">
+<div id="5777085d" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> spython.main <span class="im">import</span> Client</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rse_workbench.helpers <span class="im">import</span> spython_exec, show_spython</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The following code may take some time as it runs in the foreground:</p>
-<div id="cf4868bc" class="cell" data-execution_count="2">
+<div id="6adf908f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Client.build(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    image<span class="op">=</span><span class="bu">str</span>(project_contract.singularity_def),</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    recipe<span class="op">=</span><span class="bu">str</span>(project_contract.base_image),</span>
@@ -436,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="platform-only-validation" class="level2" data-number="20.1">
 <h2 data-number="20.1" class="anchored" data-anchor-id="platform-only-validation"><span class="header-section-number">20.1</span> <em>Platform-only validation</em></h2>
 <p>If the installables in the previous notebook are correct, the platform image should pass the following tests. Feel free to add more if you need!</p>
-<div id="b5575906" class="cell" data-execution_count="3">
+<div id="01d374c5" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>show_spython(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    spython_exec(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        command<span class="op">=</span><span class="vs">r'''</span></span>

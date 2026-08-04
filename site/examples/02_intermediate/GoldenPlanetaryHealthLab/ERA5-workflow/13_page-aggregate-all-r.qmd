@@ -6,17 +6,8 @@ execute:
   eval: false
 ---
 
-::: {.callout-caution}
 
-The content on this page is adapted from a project notebook that mixed
-configuration, helper functions, and long-running aggregation loops. It has
-been rewritten here as a manual page so the aggregation logic is easier to
-inspect.
-
-:::
-
-This page converts the aggregation notebook into a manual step. Its job is to
-show how raw ERA5 fields are transformed into daily healthshed-level summaries,
+This page converts raw ERA5 data into daily healthshed-level summaries,
 including optional population weighting, timezone adjustment, unit conversion,
 and derived variables such as relative humidity and wind speed.
 
@@ -146,6 +137,8 @@ speed and direction are derived from the `u` and `v` wind components.
 :::
 
 ::: {.manual-check title="Check The Aggregation Contract"}
+
+A final check section can assert the success of the pipeline.
 
 ```{r}
 #| eval: false

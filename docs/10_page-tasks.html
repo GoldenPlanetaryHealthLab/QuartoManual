@@ -234,8 +234,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A Climate-CAFE ERA5 Workflow</span></a>
+            <a href="./examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">An ERA5 Aggregation Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -243,32 +243,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="./examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
+  <a href="./examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">CDS API Access</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Query ERA5-Land For Kenya</span></span></a>
+  <a href="./examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/10_page-orchestrate-pipeline-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Orchestrate The ERA5 Pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Build The Aggregation Fishnet</span></span></a>
+  <a href="./examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Define The ERA5 Download Job</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Using The Fishnet</span></span></a>
+  <a href="./examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Across Healthsheds</span></span></a>
   </div>
 </li>
       </ul>
@@ -457,7 +457,7 @@ Tip
 </div>
 <div class="manual-prereq callout callout-important" title="Confirm Required State">
 <p>Before running this page, confirm that the project already has a <code>data/</code> directory and a <code>README.md</code> file.</p>
-<div id="6e314345" class="cell" data-execution_count="1">
+<div id="05291239" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path(<span class="st">"README.md"</span>).exists(), <span class="st">"Expected README.md to exist before this page runs."</span></span>
@@ -479,7 +479,7 @@ pytest tests/test_previous_step.py</code></pre>
 <p>Each procedure block should do one clear part of the step.</p>
 <div class="manual-procedure callout callout-tip" title="Create A Configuration Directory">
 <p>Create a directory for project configuration files.</p>
-<div id="2beec58b" class="cell" data-execution_count="2">
+<div id="f6d4042b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"config"</span>).mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -487,7 +487,7 @@ pytest tests/test_previous_step.py</code></pre>
 </div>
 <div class="manual-procedure callout callout-tip" title="Write A Minimal Configuration File">
 <p>Write a small JSON file that later pages can inspect.</p>
-<div id="b1223d43" class="cell" data-execution_count="3">
+<div id="f0454c22" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -504,7 +504,7 @@ pytest tests/test_previous_step.py</code></pre>
 <p>Use the check block to prove that the page succeeded.</p>
 <p>Checks should assert the results of the procedure blocks above. If you want the page to emit a reusable test file, you can combine the manual check block with a <code>quarto-emit</code> class.</p>
 <div class="manual-check emit-test-py callout callout-warning" data-file="tests/test_manual_page.py" title="Verify Page Outcome">
-<div id="ebe0679b" class="cell" data-execution_count="4">
+<div id="98da19e1" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>

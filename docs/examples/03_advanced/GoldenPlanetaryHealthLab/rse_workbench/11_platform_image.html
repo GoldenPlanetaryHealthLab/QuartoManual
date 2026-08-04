@@ -234,8 +234,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A Climate-CAFE ERA5 Workflow</span></a>
+            <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">An ERA5 Aggregation Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -243,32 +243,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">CDS API Access</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Query ERA5-Land For Kenya</span></span></a>
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/10_page-orchestrate-pipeline-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Orchestrate The ERA5 Pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Build The Aggregation Fishnet</span></span></a>
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Define The ERA5 Download Job</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Using The Fishnet</span></span></a>
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Across Healthsheds</span></span></a>
   </div>
 </li>
       </ul>
@@ -423,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>The platform image must not yet know about <code>/work/.spack-env/view</code>, <code>R_HOME</code>, <code>rv</code> libraries, Quarto project extensions, or project-specific activation.</p>
 <p>We import the <code>Installable</code> class, which allows us to define additional platform-level tools, like <code>code</code>, <code>rv</code>, <code>uv</code>, and <code>quarto</code>. These tools are installed in the platform image, and are available to all projects that use this platform image.</p>
-<div id="91178dee" class="cell" data-sorting-hat="keep" data-execution_count="1">
+<div id="f7204e52" class="cell" data-sorting-hat="keep" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> __future__ <span class="im">import</span> annotations</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass, field</span>
@@ -445,11 +445,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_lines(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">str</span>]:</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="b138ec6a" class="cell" data-sorting-hat="remove" data-execution_count="2">
+<div id="013f06d5" class="cell" data-sorting-hat="remove" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rse_workbench.platform_image <span class="im">import</span> Installable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>And we also import the <code>compose_platform_recipe</code> and <code>recipe_to_definition</code> functions, which allow us to compose a Singularity definition file from our platform and basic installables. This is a structured way to define the platform image, and is wrapped in a Python function for our convenience.</p>
-<div id="41f5b5ea" class="cell" data-sorting-hat="keep" data-execution_count="3">
+<div id="444ea7db" class="cell" data-sorting-hat="keep" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> spython.main.parse.recipe <span class="im">import</span> Recipe</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> spython.main.parse.writers <span class="im">import</span> SingularityWriter</span>
@@ -502,13 +502,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    writer <span class="op">=</span> SingularityWriter({<span class="st">"spython-base"</span>: recipe})</span>
 <span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> writer.convert()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f07f2081" class="cell" data-sorting-hat="remove" data-execution_count="4">
+<div id="97075275" class="cell" data-sorting-hat="remove" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rse_workbench.platform_image <span class="im">import</span> compose_platform_recipe, recipe_to_definition</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="platform-tools" class="level2" data-number="19.1">
 <h2 data-number="19.1" class="anchored" data-anchor-id="platform-tools"><span class="header-section-number">19.1</span> <em>Platform tools</em></h2>
 <p>Here, we’re attaching VSCode to the container. VSCode is the decided -upon IDE for this project, but it could be whatever you want! By using the <code>Installable</code> class, we can define any additional platform-level tools, like <code>rv</code>, <code>uv</code>, and <code>quarto</code>. These tools are installed in the platform image, and are available to all projects that use this platform image.</p>
-<div id="21200ef8" class="cell" data-sorting-hat="remove" data-execution_count="5">
+<div id="39e21a2a" class="cell" data-sorting-hat="remove" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>code <span class="op">=</span> Installable(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"code"</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"binary"</span>,</span>
@@ -530,7 +530,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>To manage our R and Python environments, we use <code>rv</code> and <code>uv</code>, respectively. These are installed in the platform image, and are available as binaries:</p>
-<div id="f73408f5" class="cell" data-sorting-hat="remove" data-execution_count="6">
+<div id="99e37435" class="cell" data-sorting-hat="remove" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rv <span class="op">=</span> Installable(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"rv"</span>,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"binary"</span>,</span>
@@ -568,7 +568,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We will also install Quarto, which is a publishing system for data science. Quarto is installed in the platform image, and is available as a binary:</p>
-<div id="f0da1f7f" class="cell" data-sorting-hat="remove" data-execution_count="7">
+<div id="d17c32ba" class="cell" data-sorting-hat="remove" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>quarto <span class="op">=</span> Installable(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"quarto"</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"binary"</span>,</span>
@@ -595,7 +595,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>arf</code> is useful but not a required part of the platform image. Keep it optional until embedded R is stable.</p>
-<div id="649d0702" class="cell" data-sorting-hat="remove" data-execution_count="8">
+<div id="57704fcd" class="cell" data-sorting-hat="remove" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>arf <span class="op">=</span> Installable(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"arf"</span>,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"cargo"</span>,</span>
@@ -618,7 +618,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="compose-definition" class="level2" data-number="19.2">
 <h2 data-number="19.2" class="anchored" data-anchor-id="compose-definition"><span class="header-section-number">19.2</span> <em>Compose definition</em></h2>
 <p>We use the <code>spython</code> library to compose a Singularity definition file from our platform and basic installables. This is a structured way to define the platform image, and is wrapped in a Python function for your convenience:</p>
-<div id="da0891c8" class="cell" data-sorting-hat="remove" data-execution_count="9">
+<div id="978e134f" class="cell" data-sorting-hat="remove" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>recipe <span class="op">=</span> compose_platform_recipe(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    base_image<span class="op">=</span>BASE_IMAGE,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    installables<span class="op">=</span>[code, rv, uv, quarto],</span>
@@ -631,7 +631,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>When working with Spack, you’ll want to set the following environment variables in the platform image, so that we can be sure that it always knows how to reference Spack’s configuration and cache directories:</p>
-<div id="3a04a04e" class="cell" data-sorting-hat="remove" data-execution_count="10">
+<div id="c4f7e9e1" class="cell" data-sorting-hat="remove" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>recipe.environ.extend(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    [</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PATH=/usr/local/bin:/opt/spack/bin:/usr/bin:/usr/sbin:/sbin:/bin"</span>,</span>
@@ -643,7 +643,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Finally, we write the Singularity definition to file:</p>
-<div id="8f240af7" class="cell" data-sorting-hat="remove" data-execution_count="11">
+<div id="290b2061" class="cell" data-sorting-hat="remove" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>definition <span class="op">=</span> recipe_to_definition(recipe)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>project_contract.singularity_def.write_text(definition)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(definition)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

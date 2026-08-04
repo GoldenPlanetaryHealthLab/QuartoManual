@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tinashe M. Tapera">
-<meta name="dcterms.date" content="2026-07-31">
 
-<title>5&nbsp; Examples – Quarto Manual</title>
+<title>14&nbsp; Aggregate ERA5 Across Healthsheds – Quarto Manual</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,28 +23,63 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html" rel="next">
-<link href="../10_page-tasks.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html" rel="next">
+<link href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.html" rel="prev">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../examples/index.html">Examples</a></li><li class="breadcrumb-item"><a href="../examples/index.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html">An ERA5 Aggregation Workflow</a></li><li class="breadcrumb-item"><a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Across Healthsheds</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -102,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Quarto Manual</a> 
+      <a href="../../../../">Quarto Manual</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -123,25 +156,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto Manuals Explained</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Cover Page</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01_misc-helpers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../01_misc-helpers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Helper Pages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../10_page-tasks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../10_page-tasks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual Pages</span></span></a>
   </div>
 </li>
@@ -158,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../../examples/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></span></a>
   </div>
 </li>
@@ -166,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">A Data Staging Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -175,25 +208,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/01_simple/NSAPH-data-processing/data-staging-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cover Page: Data Staging with stagecoach</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/01_misc-uv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Helper Page: Notes About Data Staging &amp; UV</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/10_page-bare-symlinks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stage The Dataset - Option 1: Bare Symlinks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/01_simple/NSAPH-data-processing/data-staging-workflow/11_page-stagecoach.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stage The Dataset - Option 2: Using stagecoach</span></span></a>
   </div>
 </li>
@@ -201,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">An ERA5 Aggregation Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -210,31 +243,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/01_misc-CDS-API-keys.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">CDS API Access</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/10_page-orchestrate-pipeline-r.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/10_page-orchestrate-pipeline.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Orchestrate The ERA5 Pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Define The ERA5 Download Job</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all-r.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Across Healthsheds</span></span></a>
   </div>
 </li>
@@ -242,7 +275,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">RSE Workbench: An Environment Generator Workflow</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -251,97 +284,97 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/00_cover.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/00_cover.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">RSE Workbench Manual</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/01_misc-rse-workbench-apptainer.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/01_misc-rse-workbench-apptainer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Helper Functions: Singularity/Apptainer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/02_misc-rse-workbench-slurm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/02_misc-rse-workbench-slurm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Helper Functions: SLURM &amp; Submitit</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/10_project_contract.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/10_project_contract.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Project Contract</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/11_platform_image.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Platform Image</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/12_build_platform.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Build Platform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/13_spack_yaml.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/13_spack_yaml.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Scientific System Dependency Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/14_language_packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/14_language_packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Data Science Language Package Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/15_activation_contract.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/15_activation_contract.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Activation Contract</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/16_validate_activation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/16_validate_activation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Validate Activation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/17_install_spack.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/17_install_spack.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Install Spack Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/18_validate_r.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/18_validate_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Validate R From Spack</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/19_install_language_packages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/19_install_language_packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Install Language Package Layer</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/20_validate_quarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Validate Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/21_build_final_sif.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Build Final SIF</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/22_launch_vscode.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/22_launch_vscode.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Launch VS Code Tunnel</span></span></a>
   </div>
 </li>
@@ -352,48 +385,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#what-to-expect-from-these-examples" id="toc-what-to-expect-from-these-examples" class="nav-link active" data-scroll-target="#what-to-expect-from-these-examples"><span class="header-section-number">5.1</span> <em>What To Expect From These Examples</em></a></li>
-  <li><a href="#the-three-example-levels" id="toc-the-three-example-levels" class="nav-link" data-scroll-target="#the-three-example-levels"><span class="header-section-number">5.2</span> <em>The Three Example Levels</em></a>
-  <ul class="collapse">
-  <li><a href="#simple" id="toc-simple" class="nav-link" data-scroll-target="#simple"><span class="header-section-number">5.2.1</span> <em>Simple</em></a></li>
-  <li><a href="#intermediate" id="toc-intermediate" class="nav-link" data-scroll-target="#intermediate"><span class="header-section-number">5.2.2</span> <em>Intermediate</em></a></li>
-  <li><a href="#advanced" id="toc-advanced" class="nav-link" data-scroll-target="#advanced"><span class="header-section-number">5.2.3</span> <em>Advanced</em></a></li>
-  </ul></li>
-  <li><a href="#how-to-read-these-examples" id="toc-how-to-read-these-examples" class="nav-link" data-scroll-target="#how-to-read-these-examples"><span class="header-section-number">5.3</span> <em>How To Read These Examples</em></a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../examples/index.html">Examples</a></li><li class="breadcrumb-item"><a href="../examples/index.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html">An ERA5 Aggregation Workflow</a></li><li class="breadcrumb-item"><a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Across Healthsheds</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Examples</span></h1>
-<p class="subtitle lead">Three Quarto Manuals Shown At Increasing Levels Of Complexity</p>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregate ERA5 Across Healthsheds</span></h1>
+<p class="subtitle lead">Summarize hourly climate fields into daily boundary-level outputs</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Tinashe M. Tapera </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 31, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -403,51 +411,123 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="what-to-expect-from-these-examples" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="what-to-expect-from-these-examples"><span class="header-section-number">5.1</span> <em>What To Expect From These Examples</em></h2>
-<p>The starter template shipped by Quarto Manuals is deliberately lean. The examples on this site show what that template looks like once it has been adapted to real work.</p>
-<p>Each example mirrors the same Page contract:</p>
-<ul>
-<li>one prerequisite block;</li>
-<li>one or more procedure blocks;</li>
-<li>one check block.</li>
-</ul>
-<p>What changes across examples is not the framework, but the complexity of the workflow being narrated.</p>
-</section>
-<section id="the-three-example-levels" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="the-three-example-levels"><span class="header-section-number">5.2</span> <em>The Three Example Levels</em></h2>
-<section id="simple" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="simple"><span class="header-section-number">5.2.1</span> <em>Simple</em></h3>
-<p>The simple example shows a data-staging workflow. It demonstrates the smallest useful manual:</p>
-<ul>
-<li>a short cover page;</li>
-<li>a helper page for shared context;</li>
-<li>one task page that checks state, performs the operation, and verifies the result.</li>
-</ul>
-</section>
-<section id="intermediate" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="intermediate"><span class="header-section-number">5.2.2</span> <em>Intermediate</em></h3>
-<p>The intermediate example adapts a real ERA5 data acquisition and aggregation workflow into ordered manual pages. It shows how the same page contract scales when:</p>
-<ul>
-<li>credentials matter;</li>
-<li>large data movement is involved;</li>
-<li>multi-step processing requires several pages;</li>
-<li>each page leaves behind artifacts that later pages can inspect.</li>
-</ul>
-</section>
-<section id="advanced" class="level3" data-number="5.2.3">
-<h3 data-number="5.2.3" class="anchored" data-anchor-id="advanced"><span class="header-section-number">5.2.3</span> <em>Advanced</em></h3>
-<p>The advanced example documents a reproducible RSE workbench for shared HPC infrastructure. It shows how Quarto Manuals can support a long, multi-page project assembly process involving containers, package managers, scheduler support, and repeated validation.</p>
-</section>
-</section>
-<section id="how-to-read-these-examples" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="how-to-read-these-examples"><span class="header-section-number">5.3</span> <em>How To Read These Examples</em></h2>
-<p>Read the examples as rendered manuals, not just as documentation prose.</p>
-<p>They are intended to show what an operator would see after cloning a manual template and opening the pages locally.</p>
-<p>That is why the examples are more complete than the root template: the template teaches by prompting, while the examples teach by demonstration.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The content on this page is adapted from a project notebook that mixed configuration, helper functions, and long-running aggregation loops. It has been rewritten here as a manual page so the aggregation logic is easier to inspect.</p>
+</div>
+</div>
+<p>This page converts the aggregation notebook into a manual step. Its job is to show how raw ERA5 fields are transformed into daily healthshed-level summaries, including optional population weighting, timezone adjustment, unit conversion, and derived variables such as relative humidity and wind speed.</p>
+<div class="manual-prereq callout callout-important" title="Confirm Aggregation Inputs">
+<p>Before beginning aggregation, confirm that the required boundary geometry, downloaded ERA5 rasters, elevation data, and optional population rasters are already available.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>shp_file <span class="ot">&lt;-</span> <span class="st">"path/to/healthsheds.shp"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">"path/to/era5_raw"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>elevation_file <span class="ot">&lt;-</span> <span class="st">"path/to/elevation_healthshed.csv"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>population_dir <span class="ot">&lt;-</span> <span class="st">"path/to/worldpop"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> <span class="st">"path/to/era5_healthshed_outputs"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">shp_file =</span> shp_file,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data_dir =</span> data_dir,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">elevation_file =</span> elevation_file,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">population_dir =</span> population_dir,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_dir =</span> output_dir</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="manual-procedure callout callout-tip" title="Declare The Aggregation Configuration">
+<p>The notebook begins by defining whether the run targets ERA5 or ERA5-Land, which years to process, the local time shift, the healthshed identifier, and whether values should be population-weighted or area-averaged.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode adapted from the original notebook</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>is_era5land <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>id_name <span class="ot">&lt;-</span> <span class="st">"fs_uid"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data_years <span class="ot">&lt;-</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2025</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>local_time_to_utc <span class="ot">&lt;-</span> <span class="sc">+</span><span class="dv">3</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>pop_weighted <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>source_name <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(is_era5land, <span class="st">"era5land"</span>, <span class="st">"era5"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="manual-procedure callout callout-tip" title="Extract And Clean Hourly Values">
+<p>The core of the notebook does three things for each variable and year:</p>
+<ol type="1">
+<li>read the raster and align it to the healthshed geometry;</li>
+<li>extract hourly values per healthshed, optionally weighting by population;</li>
+<li>clean the hourly series by shifting accumulated variables, adjusting for local time, converting units, and applying elevation-based lapse-rate corrections where needed.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode adapted from the original notebook</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># shp &lt;- read_sf(shp_file)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># r &lt;- rast(file.path(data_dir, "&lt;source&gt;_&lt;variable&gt;_&lt;year&gt;.grib"))</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># hourly &lt;- get_hourly_var_per_healthshed(r, year, shp, id_name, pop_weighted = pop_weighted)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaned &lt;- clean_raw_hourly_data(</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   hourly,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   agg_previous = previous_hours,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   year = year,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   variable = variable,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   is_era5land = is_era5land,</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   local_time_to_utc = local_time_to_utc,</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   elevation_file = elevation_file</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="manual-procedure callout callout-tip" title="Write Daily Outputs For Standard Variables">
+<p>For the standard ERA5 variables, the notebook loops over all years, aggregates cleaned hourly values to daily mean, min, and max, and saves one output file per variable and year.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode adapted from the original notebook</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>base_variables <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2m_temperature"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2m_dewpoint_temperature"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"surface_pressure"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"soil_temperature_level_1"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"volumetric_soil_water_layer_1"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"volumetric_soil_water_layer_2"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"total_precipitation"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"surface_solar_radiation_downwards"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># for (variable in base_variables) {</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   for (year in data_years) {</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     daily &lt;- get_daily_avg(cleaned$data_year_clean, id_name = id_name)</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     write.csv(daily, file.path(output_dir, "&lt;source&gt;_&lt;variable&gt;_&lt;year&gt;.csv"))</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   }</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="manual-procedure callout callout-tip" title="Derive Relative Humidity And Wind Metrics">
+<p>The notebook also computes additional products that are not downloaded directly. Relative humidity is derived from temperature and dewpoint; wind speed and direction are derived from the <code>u</code> and <code>v</code> wind components.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode adapted from the original notebook</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># relative_humidity &lt;- derive_from_temperature_and_dewpoint(hourly_temp, hourly_dewpoint)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># relative_humidity_daily &lt;- get_daily_avg(relative_humidity, round_digits = 1)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># wind_speed &lt;- sqrt(u^2 + v^2)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># wind_speed_daily &lt;- get_daily_avg(wind_speed, round_digits = 2)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># wind_direction &lt;- (180 + atan2(u, v) * 180 / pi) %% 360</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># wind_direction_daily &lt;- get_daily_avg(wind_direction, round_digits = 2)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="manual-check callout callout-warning" title="Check The Aggregation Contract">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This page is complete when the operator can explain:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - which source files feed the aggregation,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - when population weighting is used instead of area averaging,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - why hourly data must be cleaned before daily summaries are computed,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - and which outputs are direct daily summaries versus derived products</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   such as relative humidity and wind metrics.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -852,13 +932,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../10_page-tasks.html" class="pagination-link" aria-label="Manual Pages">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manual Pages</span></span>
+      <a href="../../../../examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.html" class="pagination-link" aria-label="Define The ERA5 Download Job">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Define The ERA5 Download Job</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../examples/01_simple/NSAPH-data-processing/data-staging-workflow/index.html" class="pagination-link" aria-label="A Data Staging Workflow">
-        <span class="nav-page-text">A Data Staging Workflow</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.html" class="pagination-link" aria-label="RSE Workbench: An Environment Generator Workflow">
+        <span class="nav-page-text">RSE Workbench: An Environment Generator Workflow</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

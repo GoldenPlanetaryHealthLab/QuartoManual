@@ -372,155 +372,144 @@
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html",
-    "title": "A Climate-CAFE ERA5 Workflow",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html",
+    "title": "An ERA5 Aggregation Workflow",
     "section": "",
-    "text": "Overview\nThis example adapts a real ERA5 download and aggregation workflow into a multi-page Quarto Manual.\nCompared with the simple staging example, this manual has more moving parts:\nThat is exactly where Quarto Manuals are useful: the workflow is repetitive and important, but still too context-specific to collapse into a single rigid command-line wrapper.",
+    "text": "Overview\nThis example adapts a real ERA5 download and aggregation workflow into a multi-page Quarto Manual.\nCompared with the simple staging example, this manual has more moving parts:\nQuarto Manuals become useful in these scenarios: the workflow is repetitive and important, but still too context-specific to collapse into a single rigid command-line wrapper.",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow"
+      "An ERA5 Aggregation Workflow"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html#overview",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/index.html#overview",
-    "title": "A Climate-CAFE ERA5 Workflow",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html#overview",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/index.html#overview",
+    "title": "An ERA5 Aggregation Workflow",
     "section": "",
     "text": "credentials for an external data service;\nrepeated parameter choices for time, place, and variables;\nlarge downloaded artifacts;\ndownstream aggregation steps that depend on earlier outputs.",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow"
+      "An ERA5 Aggregation Workflow"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html",
     "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
     "section": "",
     "text": "10.1 Project Overview\nUsing the Python cdsapi package, ERA5-Land hourly temperature measures are downloaded from the Copernicus Climate Data Store (CDS). Heat index and humidex metrics are derived from ERA5-Land hourly 2-meter temperature and 2-meter dew point temperature. Daily mean, maximum, and minimum measures are assessed across administrative boundaries for 2-meter temperature, 2-meter dew point temperature, skin temperature, heat index and humidex. Kenya is used as a demonstration area for the Copernicus CDS API query and spatial aggregation, using administrative boundaries from the Database of Global Administrative Areas.",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
+      "An ERA5 Aggregation Workflow",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#usage",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#usage",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#usage",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#usage",
     "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
     "section": "10.2 Usage",
     "text": "10.2 Usage\nThis repository provides the building blocks for the query of any data from the Copernicus CDS. Code for spatial aggregation of ERA5-Land hourly netCDF files from their native raster format to daily measures averaged across administrative boundaries are also included, using the geopandas, shapely, xarray, and rioxarray packages. These spatial aggregation methods can be used to derive measures from ERA5-Land in analysis of sociodemographic disparities or epidemiologic studies of temperature and health outcomes.\nComments are included within the code repository with descriptions of how to manipulate the ERA5 API language to query additional variables, time frames, or spatial extents. Please note that users will need to set up an account with the Copernicus CDS for the API query to function effectively. For more information on the cdsapi package and details about how to set up an account and access the necessary user ID and API key inputs for the API query please see: https://cds.climate.copernicus.eu/how-to-api#install-the-cds-api-client",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
+      "An ERA5 Aggregation Workflow",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#notes-on-computation",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#notes-on-computation",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#notes-on-computation",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#notes-on-computation",
     "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
     "section": "10.3 Notes on Computation",
     "text": "10.3 Notes on Computation\n\nThis code was run to generate the 24 years of heat measures across Kenya administrative boundaries using a shared computing cluster at Boston University. The use of a computing cluster allows for intensive computation to run more quickly and to run without the limits of conventional storage options on a single computer.\nThe query of the data using cdsapi is done in monthly chunks due to restrictions in the CDS API.\nEach 1-month period of ERA5-Land data across Kenya with the three variables (2-m temp, dew point temp, skin temp) took about several minutes to download and is approximately 24MB for the raster file storage.\nFor the 24 years, and 12 files each year, this results in just under 9 GB of storage for the raw raster data.\nThe aggregation loop that computes the ward-level results takes about several hours per year to output the resulting .csv file on a local computer. In a .csv format, each year’s data is ~162MB after including additional columns with geographic parameters for the larger geographies in which wards are nested.\nThe computation efficiency and size will vary by use case. Aggregating to a smaller administrative boundary, or using a less spatially resolved raw product (such as ERA5, Non-Land with is a 25km grid) will reduce the needed computation resources.",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
+      "An ERA5 Aggregation Workflow",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#data-sources",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#data-sources",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#data-sources",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#data-sources",
     "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
     "section": "10.4 Data Sources",
     "text": "10.4 Data Sources\n\nERA5-Land hourly data from 1950 to present\nDatabase of Global Administrative Areas",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
+      "An ERA5 Aggregation Workflow",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#workflow",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#workflow",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#workflow",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#workflow",
     "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
     "section": "10.5 Workflow",
     "text": "10.5 Workflow\n\n\n\n\n\n\nTip\n\n\n\nFor optimal learning, the section below should instead be coupled code and prose blocks in each individual Manual Page…\n\n\nThree scripts are included in the code repository.\n\n01_Query_ERA5_CDSAPI_Kenya_v1.py applies the cdsapi package to query hourly ERA5-Land data from the Copernicus CDS using the cdsapi package.\n\nThe necessary code to set your API key in your Python environment is provided, as well as a description of the necessary inputs for an effective API query, including the dataset, spatial extent, time frame, and variables requested.\nThe query is broken down into queries for data every month. A for loop is used to query these one-month data cuts across the 24-year period of the full dataset. These cuts were set as the Copernicus CDS API restricts the amount of data accessible in a single pull.\nPlease Note: The API query can be time-consuming and the resulting output can be extremely large if the API query is not correctly specified. When first using the API for a new use case, consider requesting only a few hours or days of data for a small spatial area in order to get an estimate for the time and data size that will be queried with larger sets.\n\n02_Aggregate_ERA5_Kenya_SetFishnet_v1.py is the first in a two-step process for aggregating the queried rasters to the administrative boundaries.\n\nA fishnet approach is used, where a grid of points is established and the merged with points representing the spatial extent of the administrative boundaries for the area of interest.\nThis is set as a separate file because it can be very time consuming with a highly spatially resolved raster. The ERA5-Land dataset is shared at a 9 km grid resolution, so this runs quickly in this application.\nMore details about the use of a fishnet for spatial aggregation of raster data can be found here: https://github.com/Climate-CAFE/population_weighting_raster_data\n\n03_Aggregate_ERA5_Kenya_UseFishnet_v1.py uses the fishnet grid set up in script 2, and merges the grid with centroids for the administrative boundaries in Kenya.\n\nThe raster data time series is reset from Coordinated Universal Time (UTC) to East Africa Time (EAT).\nHourly heat index and humidex are estimated from the 2-m temperature and 2-m dew point temperature.\nDaily mean, minimum, and maximum are assessed across the raster, and then joined to the extraction points (the union of the fishnet grid and adminstrative centroids).\nSpatially weighted averages across the administrative boundaries are computed from the extraction points.\nThe resulting output is a dataframe with Kenya administrative boundaries and a time series of daily mean, minimum, and maximum for 2-m temperature, 2-m dew point temperature, skin temperature, heat index, and humidex.",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
+      "An ERA5 Aggregation Workflow",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#dependencies",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#dependencies",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#dependencies",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#dependencies",
     "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
     "section": "10.6 Dependencies",
     "text": "10.6 Dependencies\n\n\n\n\n\n\nTip\n\n\n\nThe section below could be implemented as the first page of a Quarto Manual, with each dependency being a prerequisite check for the operator to confirm before proceeding to the next step. A pytest suite would be very easy to implement here, and on page two, to check for.\n\n\nPackages used in this repository include:\n\nimport cdsapi for era5 data query\nimport geopandas for spatial operations on geometric types\nimport xarray for raster data\nimport rioxarray for raster data\nimport shapely for manipulation and analysis of geometric objects\nfrom osgeo import gdal, ogr for creating a fishnet grid\nimport os for creating/removing a file path\nimport glob for findng all the pathnames matching a specified pattern\nimport numpy for scientific computing\nimport pandas for manipulation of structured data\nfrom functools import reduce for merging datasets\nimport math for mathematical calculations\nimport pytz for cross platform timezone calculations\nfrom datetime import datetime for manipulating dates and times\nimport xvec for extending Xarray to work with vector data\nimport re for using regular expression",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
+      "An ERA5 Aggregation Workflow",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#references",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/00_cover.html#references",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#references",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.html#references",
     "title": "10  Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics",
     "section": "10.7 References",
     "text": "10.7 References\n\n\n\n\n\n\nTip\n\n\n\nWith Quarto, we can take advantage of the rich publishing ecosystem to include references directly from bibtex files, rather than having to manually format them in the markdown as below.\n\n\nHumidex estimation references:\n\nK.R. Spangler, S. Liang, and G.A. Wellenius. “Wet-Bulb Globe Temperature, Universal Thermal Climate Index, and Other Heat Metrics for US Counties, 2000-2020.” Scientific Data (2022). doi: 10.1038/s41597-022-01405-3\nLawrence, M. G. The relationship between relative humidity and the dewpoint temperature in moist air - A simple conversion and applications. B. Am. Meteorol. Soc. 86, 225–233, https://doi.org/10.1175/Bams-86-2-225 (2005).\n\nHeat index (weathermetrics package) reference:\n\nAnderson GB, Bell ML, Peng RD. 2013. Methods to calculate the heat index as an exposure metric in environmental health research. Environmental Health Perspectives 121(10):1111-1119.",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
+      "An ERA5 Aggregation Workflow",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Query of Hourly ERA5-Land Data and Aggregation of Daily Summary Heat Metrics</span>"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/01_misc-CDS-API-keys.html",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/01_misc-CDS-API-keys.html",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/01_misc-CDS-API-keys.html",
     "title": "11  CDS API Access",
     "section": "",
-    "text": "Caution\n\n\n\nThe following was generated by ChatGPT, but is used only as a demonstration of how a Quarto Manual can be used to explain a workflow.\n\n\nBefore downloading ERA5 data, the operator must have access to the Copernicus Climate Data Store.\nThis helper page is where the manual can explain:\n\nhow to create a CDS account;\nwhere to find the API key;\nhow to store credentials safely;\nhow to test that the Python cdsapi client can authenticate.\n\nThis kind of shared setup belongs naturally on a helper page because multiple later workflow pages depend on it.",
+    "text": "Caution\n\n\n\nThe content below was generated by ChatGPT, but is only as a demonstration of how a Quarto Manual can be used to explain a workflow.\n\n\nBefore downloading ERA5 data, the operator must have access to the Copernicus Climate Data Store.\nThis helper page is where the manual can explain:\n\nhow to create a CDS account;\nwhere to find the API key;\nhow to store credentials safely;\nhow to test that the Python cdsapi client can authenticate.\n\nThis kind of shared setup belongs naturally on a helper page because multiple later workflow pages depend on it.",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
+      "An ERA5 Aggregation Workflow",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>CDS API Access</span>"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/10_page-query-era5-cdsapi-kenya.html",
-    "title": "12  Query ERA5-Land For Kenya",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/10_page-orchestrate-pipeline-r.html",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/10_page-orchestrate-pipeline-r.html",
+    "title": "12  Orchestrate The ERA5 Pipeline",
     "section": "",
-    "text": "Caution\n\n\n\nThe following was generated by ChatGPT, but is used only as a demonstration of how a Quarto Manual can be used to explain a workflow.\nSource: 01_Query_ERA5_CDSAPI_Kenya_v1.py\n\n\nThis page turns the first Climate-CAFE script into a manual step the operator can execute and verify.\n\nBefore querying ERA5-Land data, confirm that the CDS client, credentials, and project output location are available.\n\nfrom pathlib import Path\n\nassert Path(\"README.md\").exists(), \"Expected to run this page from the project root.\"\nassert Path.home().joinpath(\".cdsapirc\").exists(), \"Expected CDS credentials in ~/.cdsapirc.\"\n\n\n\nThe source script defines a CDS request for hourly ERA5-Land variables over Kenya, then loops over monthly time windows because the CDS restricts large requests.\n\n# Pseudocode based on 01_Query_ERA5_CDSAPI_Kenya_v1.py\ndataset = \"reanalysis-era5-land\"\nvariables = [\n    \"2m_temperature\",\n    \"2m_dewpoint_temperature\",\n    \"skin_temperature\",\n]\narea = {\n    \"north\": \"...\",\n    \"west\": \"...\",\n    \"south\": \"...\",\n    \"east\": \"...\",\n}\ntime_range = {\n    \"years\": range(2000, 2024),\n    \"months\": [\"01\", \"02\", \"...\", \"12\"],\n    \"hours\": [\"00:00\", \"01:00\", \"...\", \"23:00\"],\n}\n\n\n\nThe source script retrieves one month at a time and writes each result to a raw data directory.\n\nfrom pathlib import Path\n\nraw_dir = Path(\"data/raw/era5land\")\nraw_dir.mkdir(parents=True, exist_ok=True)\n\n# Pseudocode based on 01_Query_ERA5_CDSAPI_Kenya_v1.py\nfor year in time_range[\"years\"]:\n    for month in time_range[\"months\"]:\n        target = raw_dir / f\"era5land_kenya_{year}_{month}.nc\"\n        # client.retrieve(\n        #     dataset,\n        #     {\n        #         \"variable\": variables,\n        #         \"year\": str(year),\n        #         \"month\": month,\n        #         \"day\": [\"01\", \"...\", \"31\"],\n        #         \"time\": time_range[\"hours\"],\n        #         \"area\": [area[\"north\"], area[\"west\"], area[\"south\"], area[\"east\"]],\n        #         \"format\": \"netcdf\",\n        #     },\n        #     str(target),\n        # )\n\n\n\n\nfrom pathlib import Path\n\nraw_dir = Path(\"data/raw/era5land\")\nassert raw_dir.exists(), \"Expected the raw ERA5-Land directory to exist.\"\nassert raw_dir.is_dir(), \"Expected data/raw/era5land to be a directory.\"",
+    "text": "Caution\n\n\n\nThe content on this page contains pseudocode for demonstration purposes.\n\n\nThis page orchestrates the data aggregation pipeline. Its job is to define the overall ERA5 request space and turn it into a set of grouped API calls that later pages can execute.\n\nBefore building the request grid, confirm that the project already knows where its staged inputs, stagecoach manifest, and downstream download notebook live.\n\nlibrary(here)\n\nstagecoach_manifest &lt;- here(\"stagecoach_manifest.yml\")\ninput_dir &lt;- here(\"data\", \"inputs\")\n\n# In a real manual, these would be concrete prerequisite checks.\nstagecoach_manifest\ninput_dir\n\n\n\nOur job defines a large grid of request parameters covering country, dataset, variable, year, month, day, and hour. It then filters out invalid dates and avoids redundant hourly requests for time-invariant variables. End users of a manual could use this space to customize, tinker with, and experiment with the request grid before it is split into download jobs, and are encouraged to exercise whatever methods they prefer to get there, including data transformation libraries, data visualization tools, and other data analysis frameworks.\n\nlibrary(tibble)\nlibrary(tidyr)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\n\ncds_api_config &lt;- expand_grid(\n  years = 2010:2025,\n  months = str_pad(1:12, 2, pad = \"0\"),\n  days = 1:31,\n  hours = paste0(str_pad(0:23, 2, pad = \"0\"), \":00\"),\n  countries = c(\"MDG\", \"NPL\"),\n  datasets = c(\"reanalysis-era5-land\", \"reanalysis-era5-single-levels\"),\n  variables = c(\n    \"2m_temperature\",\n    \"2m_dewpoint_temperature\",\n    \"volumetric_soil_water_layer_1\",\n    \"volumetric_soil_water_layer_2\",\n    \"surface_solar_radiation_downwards\",\n    \"total_precipitation\",\n    \"10m_u_component_of_wind\",\n    \"10m_v_component_of_wind\",\n    \"surface_pressure\",\n    \"soil_temperature_level_1\",\n    \"geopotential\"\n  ),\n  data_format = \"grib\",\n  download_format = \"unarchived\"\n) |&gt;\n  filter(\n    !(months %in% c(4, 6, 9, 11) & days == 31),\n    !(months == 2 & days &gt; 29),\n    !(months == 2 & days == 29 & !leap_year(years)),\n    !(variables == \"geopotential\" & hours != \"00:00\")\n  )\n\n\n\nThe notebook does not send one API call for every row. Instead, it groups the grid by country, dataset, variable, year, and month, then converts each group into a single request dictionary that a downstream job can execute.\n\nlibrary(purrr)\n\nrequest_groups &lt;- cds_api_config |&gt;\n  group_by(countries, datasets, variables, years, months) |&gt;\n  group_split()\n\nrequest_dicts &lt;- map(request_groups, \\(x) {\n  list(\n    country = unique(x$countries),\n    dataset = unique(x$datasets),\n    variable = unique(x$variables),\n    year = unique(x$years),\n    month = unique(x$months),\n    day = unique(x$days),\n    time = unique(x$hours),\n    data_format = unique(x$data_format),\n    download_format = unique(x$download_format)\n  )\n})\n\n\n\nIn some cases, authors may choose not to include a file artifact in a check block, but instead an end-of-page summary that describes what the operator should be able to explain or demonstrate.\n\n# This page is complete when the operator can explain:\n# - which inputs are required before downloads begin,\n# - which dimensions define the CDS request grid,\n# - why invalid dates are filtered out,\n# - and why requests are grouped by country, dataset, variable, year, and month.\nstopifnot({\n  \"I can explain the required inputs, the request grid dimensions, the filtering of invalid dates, and the grouping of requests.\"\n})",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Query ERA5-Land For Kenya</span>"
+      "An ERA5 Aggregation Workflow",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Orchestrate The ERA5 Pipeline</span>"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html",
-    "title": "13  Build The Aggregation Fishnet",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.html",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.html",
+    "title": "13  Define The ERA5 Download Job",
     "section": "",
-    "text": "This page represents the first aggregation step. It depends on the project already having a place for derived artifacts and any required boundary data.",
+    "text": "This page aims to make one grouped request concrete: define the request parameters, translate the country code into a bounding box, and describe how one download task writes its output.\n\nBefore defining the download job, confirm that the grouped request fields from the orchestration page are available and that CDS credentials have already been configured.\n\nfrom pathlib import Path\n\nassert Path.home().joinpath(\".cdsapirc\").exists(), \"Expected CDS credentials in ~/.cdsapirc.\"\n\nrequired_fields = [\n    \"country\",\n    \"dataset\",\n    \"variable\",\n    \"year\",\n    \"month\",\n    \"day\",\n    \"time\",\n    \"data_format\",\n    \"download_format\",\n]\nrequired_fields\n\n\n\nThe original notebook starts by showing the parameter shape for a single ERA5 download job.\n\n# Pseudocode adapted from the original notebook\nrequest = {\n    \"country\": \"MDG\",\n    \"dataset\": \"reanalysis-era5-land\",\n    \"variable\": \"2m_temperature\",\n    \"year\": \"2021\",\n    \"month\": \"01\",\n    \"day\": [\"01\", \"02\", \"...\", \"31\"],\n    \"time\": [f\"{hour:02d}:00\" for hour in range(24)],\n    \"data_format\": \"grib\",\n    \"download_format\": \"unarchived\",\n}\n\n\n\nThe notebook then defines a general-purpose download_era5() function. Its key responsibilities are to build a predictable output path, translate a country code into a CDS bounding box, and optionally run in dry-run mode.\n\n# Pseudocode adapted from the original notebook\ndef download_era5(request_dict, output_dir=\"data/intermediates/download_era5_nb\", dry_run=True):\n    request_dict = request_dict.copy()\n    dataset = request_dict.pop(\"dataset\")\n    output_file = (\n        f\"{request_dict['country']}_{dataset}_{request_dict['variable']}_\"\n        f\"{request_dict['year']}-{request_dict['month']}.grib\"\n    )\n\n    area = get_country_bbox(request_dict[\"country\"])\n    request_dict[\"area\"] = area\n    request_dict.pop(\"country\")\n\n    if dry_run:\n        # Report the intended request and output path without contacting CDS.\n        return output_file\n\n    # Otherwise:\n    # 1. instantiate cdsapi.Client()\n    # 2. call client.retrieve(dataset, request_dict, output_file)\n    # 3. verify that output_file now exists\n    return output_file\n\n\n\nThe notebook also defines a helper that maps each ISO country code to the bounding box required by CDS.\n\n# Pseudocode adapted from the original notebook\ndef get_country_bbox(iso_code):\n    # look up country subunits by ISO code\n    # return [north, west, south, east] in CDS-compatible order\n    return [\"north\", \"west\", \"south\", \"east\"]\n\n\n\nIn this check section, the author can add a computational test to verify that the download job is defined correctly, or that a single download executes and produces the expected output file.\n\n# This page is complete when the operator can point to:\n# - the fields required in one grouped ERA5 request,\n# - the output file naming pattern,\n# - the difference between dry-run and real-run behavior,\n# - and the role of the country bounding-box helper in building the final CDS request.\noutput_file = download_era5(request, dry_run=False)\nassert output_file == \"MDG_reanalysis-era5-land_2m_temperature_2021-01.grib\", \\\n    f\"Expected output file name, got {output_file}\"\nassert Path(output_file).exists()",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Build The Aggregation Fishnet</span>"
+      "An ERA5 Aggregation Workflow",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Define The ERA5 Download Job</span>"
     ]
   },
   {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html#footnotes",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/11_page-aggregate-era5-kenya-setfishnet.html#footnotes",
-    "title": "13  Build The Aggregation Fishnet",
+    "objectID": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all-r.html",
+    "href": "examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all-r.html",
+    "title": "14  Aggregate ERA5 Across Healthsheds",
     "section": "",
-    "text": "Notice that ChatGPT did not use a prereq block here to check for the existence of the boundary file. As an author, you’re not punished for that, but this code block should stick out to you as a reader because it is a prerequisite for the aggregation step — it should go into its own manual-prereq block.↩︎",
+    "text": "This page converts raw ERA5 data into daily healthshed-level summaries, including optional population weighting, timezone adjustment, unit conversion, and derived variables such as relative humidity and wind speed.\n\nBefore beginning aggregation, confirm that the required boundary geometry, downloaded ERA5 rasters, elevation data, and optional population rasters are already available.\n\nshp_file &lt;- \"path/to/healthsheds.shp\"\ndata_dir &lt;- \"path/to/era5_raw\"\nelevation_file &lt;- \"path/to/elevation_healthshed.csv\"\npopulation_dir &lt;- \"path/to/worldpop\"\noutput_dir &lt;- \"path/to/era5_healthshed_outputs\"\n\nlist(\n  shp_file = shp_file,\n  data_dir = data_dir,\n  elevation_file = elevation_file,\n  population_dir = population_dir,\n  output_dir = output_dir\n)\n\n\n\nThe notebook begins by defining whether the run targets ERA5 or ERA5-Land, which years to process, the local time shift, the healthshed identifier, and whether values should be population-weighted or area-averaged.\n\n# Pseudocode adapted from the original notebook\nis_era5land &lt;- TRUE\nid_name &lt;- \"fs_uid\"\ndata_years &lt;- 2010:2025\nlocal_time_to_utc &lt;- +3\npop_weighted &lt;- FALSE\n\nsource_name &lt;- ifelse(is_era5land, \"era5land\", \"era5\")\n\n\n\nThe core of the notebook does three things for each variable and year:\n\nread the raster and align it to the healthshed geometry;\nextract hourly values per healthshed, optionally weighting by population;\nclean the hourly series by shifting accumulated variables, adjusting for local time, converting units, and applying elevation-based lapse-rate corrections where needed.\n\n\n# Pseudocode adapted from the original notebook\n# shp &lt;- read_sf(shp_file)\n# r &lt;- rast(file.path(data_dir, \"&lt;source&gt;_&lt;variable&gt;_&lt;year&gt;.grib\"))\n# hourly &lt;- get_hourly_var_per_healthshed(r, year, shp, id_name, pop_weighted = pop_weighted)\n# cleaned &lt;- clean_raw_hourly_data(\n#   hourly,\n#   agg_previous = previous_hours,\n#   year = year,\n#   variable = variable,\n#   is_era5land = is_era5land,\n#   local_time_to_utc = local_time_to_utc,\n#   elevation_file = elevation_file\n# )\n\n\n\nFor the standard ERA5 variables, the notebook loops over all years, aggregates cleaned hourly values to daily mean, min, and max, and saves one output file per variable and year.\n\n# Pseudocode adapted from the original notebook\nbase_variables &lt;- c(\n  \"2m_temperature\",\n  \"2m_dewpoint_temperature\",\n  \"surface_pressure\",\n  \"soil_temperature_level_1\",\n  \"volumetric_soil_water_layer_1\",\n  \"volumetric_soil_water_layer_2\",\n  \"total_precipitation\",\n  \"surface_solar_radiation_downwards\"\n)\n\n# for (variable in base_variables) {\n#   for (year in data_years) {\n#     daily &lt;- get_daily_avg(cleaned$data_year_clean, id_name = id_name)\n#     write.csv(daily, file.path(output_dir, \"&lt;source&gt;_&lt;variable&gt;_&lt;year&gt;.csv\"))\n#   }\n# }\n\n\n\nThe notebook also computes additional products that are not downloaded directly. Relative humidity is derived from temperature and dewpoint; wind speed and direction are derived from the u and v wind components.\n\n# Pseudocode adapted from the original notebook\n# relative_humidity &lt;- derive_from_temperature_and_dewpoint(hourly_temp, hourly_dewpoint)\n# relative_humidity_daily &lt;- get_daily_avg(relative_humidity, round_digits = 1)\n\n# wind_speed &lt;- sqrt(u^2 + v^2)\n# wind_speed_daily &lt;- get_daily_avg(wind_speed, round_digits = 2)\n\n# wind_direction &lt;- (180 + atan2(u, v) * 180 / pi) %% 360\n# wind_direction_daily &lt;- get_daily_avg(wind_direction, round_digits = 2)\n\n\n\n\n# This page is complete when the operator can explain:\n# - which source files feed the aggregation,\n# - when population weighting is used instead of area averaging,\n# - why hourly data must be cleaned before daily summaries are computed,\n# - and which outputs are direct daily summaries versus derived products\n#   such as relative humidity and wind metrics.",
     "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Build The Aggregation Fishnet</span>"
-    ]
-  },
-  {
-    "objectID": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html",
-    "href": "examples/02_intermediate/Climate-CAFE/ERA5-workflow/12_page-aggregate-era5-kenya-usefishnet.html",
-    "title": "14  Aggregate ERA5 Using The Fishnet",
-    "section": "",
-    "text": "Caution\n\n\n\nThe following was generated by ChatGPT, but is used only as a demonstration of how a Quarto Manual can be used to explain a workflow.\nSource: 03_Aggregate_ERA5_Kenya_UseFishnet_v1.py\n\n\nThis page stands in for the final aggregation step, where prepared geometry and downloaded ERA5 files are brought together into analysis-ready summaries.\n\n\nfrom pathlib import Path\n\nassert Path(\"data/interim/fishnet\").is_dir(), \"Expected fishnet directory from the previous page.\"\nassert Path(\"data/raw/era5land\").is_dir(), \"Expected raw ERA5-Land files from the query step.\"\n\n\n\nThe source script loads each monthly ERA5 file, resets timestamps from UTC to East Africa Time, and prepares the hourly fields needed for downstream heat metrics.\n\n# Pseudocode based on 03_Aggregate_ERA5_Kenya_UseFishnet_v1.py\nraw_files = [\"data/raw/era5land/era5land_kenya_YYYY_MM.nc\", \"...\"]\ntimezone = \"Africa/Nairobi\"\n\n# for path in raw_files:\n#     ds = xarray.open_dataset(path)\n#     ds = convert_from_utc_to_local_time(ds, timezone)\n\n\n\nThe source script derives hourly heat index and humidex, summarizes them to daily statistics, joins them to the fishnet extraction points, and computes weighted averages across administrative boundaries.\n\nfrom pathlib import Path\n\nprocessed_dir = Path(\"data/processed\")\nprocessed_dir.mkdir(parents=True, exist_ok=True)\nsummary_path = Path(\"data/processed/era5_daily_summary.csv\")\n\n# Pseudocode based on 03_Aggregate_ERA5_Kenya_UseFishnet_v1.py\n# hourly = derive_heat_index_and_humidex(ds)\n# daily = summarize_to_daily_min_mean_max(hourly)\n# joined = join_daily_values_to_extraction_points(daily, \"data/interim/fishnet/...\")\n# weighted = compute_boundary_weighted_averages(joined)\n# weighted.to_csv(summary_path, index=False)\n\n\n\n\nfrom pathlib import Path\n\nprocessed_dir = Path(\"data/processed\")\nsummary_path = Path(\"data/processed/era5_daily_summary.csv\")\n\nassert processed_dir.is_dir(), \"Expected processed output directory to exist.\"\n\n# This page is complete when the operator can describe:\n# - the UTC to EAT time reset,\n# - the hourly heat metric derivation,\n# - the daily min/mean/max summary,\n# - and the weighted aggregation from fishnet points to boundaries.",
-    "crumbs": [
-      "A Climate-CAFE ERA5 Workflow",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Aggregate ERA5 Using The Fishnet</span>"
+      "An ERA5 Aggregation Workflow",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Aggregate ERA5 Across Healthsheds</span>"
     ]
   },
   {

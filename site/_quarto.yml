@@ -30,9 +30,9 @@ book:
       chapters: 
         - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/00_cover.qmd
         - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/01_misc-CDS-API-keys.qmd
-        - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/10_page-orchestrate-pipeline.qmd
+        - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/10_page-orchestrate-pipeline-r.qmd
         - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/11_page-download-job-py.qmd
-        - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all.qmd
+        - examples/02_intermediate/GoldenPlanetaryHealthLab/ERA5-workflow/12_page-aggregate-all-r.qmd
 
     - part: examples/03_advanced/GoldenPlanetaryHealthLab/rse_workbench/index.qmd
       chapters: 
