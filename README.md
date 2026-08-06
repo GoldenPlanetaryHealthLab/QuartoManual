@@ -2,23 +2,26 @@
 
 [![hackmd-github-sync-badge](https://hackmd.io/_App6vg9Tr-d0id8Uj675Q/badge)](https://hackmd.io/_App6vg9Tr-d0id8Uj675Q)
 
-Software development is continuing to expand in both scale and complexity, 
-evidenced by the growth of global repository counts and large-scale software archives[@GithubInnovationGraph; @martinelliSoftwareHeritageActivity2026]
-At the same time, AI and agentic systems are reshaping how software 
-is produced, making it increasingly important to preserve 
-accessibility, transparency, and reproducibility in scientific 
-software and data science workflows.
+Climate-Smart Public Health (CSPH) is a data-driven approach to detect, 
+quantify, and adapt to climate-related health impacts at a global scale,
+with efforts spanning surveillance, risk assessment,
+early warning and response, and healthcare systems adaptation [@goldenClimatesmartPublicHealth2025].
+In practice, CSPH depends on complex computational workflows 
+that integrate heterogeneous climate, environmental, and health 
+data and that must remain understandable, reproducible, and 
+adaptable across collaborators and local settings.
 
 Despite the central role of these workflows in academia and industry, 
 effective, reproducible documentation remains an 
 overlooked and under-served part of delivering 
 high quality software [@aghajaniSoftwareDocumentationIssues2019]. This issue
-is likely to become more acute as the volume and sophistication of AI 
-generated code submitted to public repositories continues to increase [@robbesAgenticMuchAdoption2026].
-Developers therefore need solutions beyond traditional documentation 
-to support workflow execution _and_ address the limitations of traditional
-software documentation to executing workflows in a reproducible and verifiable manner 
-as the landscape of software development continues to evolve.
+is likely to become more acute as software development continues to expand 
+in scale and complexity [@GithubInnovationGraph; @martinelliSoftwareHeritageActivity2026] 
+and as the volume and sophistication of AI generated code submitted to 
+public repositories continues to increase [@robbesAgenticMuchAdoption2026].
+Developers therefore need solutions beyond traditional static documentation
+to support workflow execution, verification, and reproducibility,
+in practical and user-friendly ways.
 
 Conventional documentation can describe a workflow, but for complex, multi-step, 
 order-dependent tasks and projects, it is often insufficient at capturing and 
@@ -48,18 +51,25 @@ making them ideal for research computing contexts where local constraints and
 expert judgment often shape execution parameters. The framework is powered 
 by `quarto-emit`, a lightweight backend extension that materializes conventional 
 workflow artifacts from manual pages when needed. We demonstrate the approach 
-with three examples of increasing sophistication: a simple manual, 
-an intermediate manual, and a complex manual. 
+with three examples of increasing sophistication: a simple manual for
+staging datasets in your project space; an intermediate manual for geospatial
+aggregation of environmental exposure data; and a complex manual for creating
+robust, reproducible, fully containerized geospatial data science
+environments on High Performance Computing (HPC) clusters.
 
 For authors, Quarto Manuals provide a structured yet adaptable way to turn 
-recurring workflows into reusable operators' manuals for themselves and colleagues; for operators, they provide a 
+recurring workflows into reusable operators' manuals for 
+themselves and colleagues; for operators, they provide a 
 stepwise, testable process for generating reproducible setup and execution artifacts 
 and confirming progress throughout execution in a structured and auditable manner.
 
-Quarto Manuals promise to improve the reproducibility and reliability of software workflows,
-while also providing a more accessible and interactive experience for users. And,
-with the increasing adoption of AI and agentic systems in software development,
-may provide a framework for ensuring that these workflows remain transparent, verifiable, and 
+Quarto Manuals promise to improve the reproducibility and reliability of scientific
+workflows — particularly in contexts like CSPH where local constraints and expert 
+judgment shape execution parameters and conditions —
+while also providing an accessible and interactive experience for users. In future
+work, we hope to explore how Quarto Manuals may be used in conjunction 
+with the increasing adoption of AI and agentic systems in software development to
+provide a framework for ensuring that scientific workflows remain transparent, verifiable, and 
 reproducible in the face of increasing complexity and non-determinism.
 
 ## Feature Roadmap
