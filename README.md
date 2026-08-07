@@ -76,6 +76,7 @@ reproducible in the face of increasing complexity and non-determinism.
 
 - [x] abstract as prose
 - [ ] give the examples an onramp to users to "get started now!"
+- [ ] visual abstract/diagram
 - [ ] stylize each block so it is visually distinct
 - [ ] use Lua to print out useful render messages when blocks are being processed
 - [ ] negative reinforcement: identify and correct misuse of the manual visually
