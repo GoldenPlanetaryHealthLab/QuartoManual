@@ -179,8 +179,8 @@ independent Quarto pages}
 
 
 
-\authorsnames[{1},{1},{2,3},{4}]{Tinashe M.
-Tapera,Chris,Danielle,Michelle}
+\authorsnames[{1,2},{2},{2},{1}]{Tinashe M. Tapera,Michelle
+Audirac,Danielle Braun,Christopher Golden}
 
 
 
@@ -189,47 +189,50 @@ Tapera,Chris,Danielle,Michelle}
 
 
 \authorsaffiliations{
-{Department of Psychology, Ana and Blanca's University},{Danielle's
-Primary Affiliation},{Danielle's Secondary Affiliation},{Buffalo, NY }}
+{Harvard T.H. Chan School of Public Health, Harvard University},{Harvard
+T.H. Chan School of Public Health, Harvard University}}
 
 
 
 
-\leftheader{Tapera, Chris, Danielle and Michelle}
+\leftheader{Tapera, Audirac, Braun and Golden}
 
 
 
-\abstract{to be fleshed out from bullet form below  \section{Impact
-Statement} \noindent Scientific programming workflows are becoming
-increasingly complex, while existing support mechanisms remain poorly
-matched to that complexity. Traditional documentation is flexible but
-non-executable, command-line wrappers are executable but often too
-rigid, and current agentic systems are promising but not yet
-sufficiently reliable for many high-stakes workflow setup tasks. We
-propose Quarto Manuals, an executable documentation framework built on
-Quarto that helps authors create flexible, scalable, and reproducible
-workflow manuals composed of structured pages with explicit procedures
-and checks. Powered by the quarto-emit backend, Quarto Manuals enable
-authors to create executable documentation that allows users to
-conveniently step through scientific computing workflows while
-generating reproducible project artifacts and receiving immediate
-feedback on whether each step has been implemented correctly. }
+\abstract{See below.  \section{Impact Statement} \noindent Scientific
+programming workflows are becoming increasingly complex, while existing
+support mechanisms remain poorly matched to that complexity. We believe
+Quarto Manuals is a step forward in addressing this challenge. With
+Quarto Manuals, we hope to make scientific programming more
+understandable, reproducible, and maintainable for the people who run
+them. Quarto Manuals are designed to be able to meet the needs of novice
+programmers and experts alike, and scale with the complexity and
+capabilities of the workflows they document. Indeed, the Quarto Manual
+framework may be complementary --- not adversarial --- to the growing
+trend of AI-assisted programming, as Manuals may potentially provide a
+plaintext
+\href{https://github.blog/ai-and-ml/github-copilot/the-harness-is-all-you-need-mostly/}{harness}
+for AI-assisted programming to be more understandable, reproducible, and
+maintainable. }
 
-\keywords{APA Style, Quarto, Markdown, apaquarto}
+\keywords{Quarto, apaquarto}
 
 \authornote{\par{\addORCIDlink{Tinashe M.
-Tapera}{0000-0001-9080-5010}}\par{\addORCIDlink{Chris}{0000-0000-0000-0002}}\par{\addORCIDlink{Danielle}{0000-0000-0000-0003}}\par{\addORCIDlink{Michelle}{0000-0000-0000-0004}} 
-\par{Carina Mengano is now at Generic University. }
+Tapera}{0000-0001-9080-5010}}\par{\addORCIDlink{Christopher
+Golden}{0000-0002-2258-7493}} 
+\par{ }
 \par{   The authors have no conflicts of interest to disclose.    Author
 roles were classified using the Contributor Role Taxonomy (CRediT;
 \href{https://credit.niso.org}{credit.niso.org}) as follows:  Tinashe M.
-Tapera:   conceptualization, writing; Chris:   project
-administration, formal analysis; Danielle:   formal
-analysis, writing; Michelle:   writing, methodology, formal analysis}
+Tapera:   conceptualization, writing, software; Michelle
+Audirac:   writing, supervision; Danielle
+Braun:   writing, supervision; Christopher Golden:   project
+administration, writing, supervision}
 \par{Correspondence concerning this article should be addressed
-to Tinashe M. Tapera, Department of Psychology, Ana and Blanca's
-University, 1234 Capital
-St., Albany, NY 12084-1234, USA, Email: \href{mailto:ttapera@hsph.harvard.edu}{ttapera@hsph.harvard.edu}}
+to Tinashe M. Tapera, Harvard T.H. Chan School of Public Health, Harvard
+University, 655 Huntington Ave, Boston, MA 2115, USA, Harvard T.H. Chan
+School of Public Health, Harvard University, 655 Huntington
+Ave, Boston, MA 2115, USA, Email: \href{mailto:ttapera@hsph.harvard.edu}{ttapera@hsph.harvard.edu}}
 }
 
 \makeatletter
@@ -335,36 +338,33 @@ St., Albany, NY 12084-1234, USA, Email: \href{mailto:ttapera@hsph.harvard.edu}{t
 \setlength{\cslhangindent}{0.5in}
 
 
-\subsection{Abstract}\label{abstract}
-
-Software development is continuing to expand in both scale and
-complexity, evidenced by the growth of global repository counts and
-large-scale software
-archives(\citeproc{ref-martinelliSoftwareHeritageActivity2026}{Martinelli,
-2026};
-\citeproc{ref-GithubInnovationGraph}{\textbf{GithubInnovationGraph?}})
-At the same time, AI and agentic systems are reshaping how software is
-produced, making it increasingly important to preserve accessibility,
-transparency, and reproducibility in scientific software and data
-science workflows.
+Climate-Smart Public Health (CSPH) is a data-driven approach to detect,
+quantify, and adapt to climate-related health impacts at a global scale,
+with efforts spanning surveillance, risk assessment, early warning and
+response, and healthcare systems adaptation
+(\citeproc{ref-goldenClimatesmartPublicHealth2025}{Golden et al.,
+2025}). In practice, CSPH depends on complex computational workflows
+that integrate heterogeneous climate, environmental, and health data and
+that must remain understandable, reproducible, and adaptable across
+collaborators and local settings.
 
 Despite the central role of these workflows in academia and industry,
 effective, reproducible documentation remains an overlooked and
 under-served part of delivering high quality software
 (\citeproc{ref-aghajaniSoftwareDocumentationIssues2019}{Aghajani et al.,
-2019}). This issue is likely to become more acute as the volume and
-sophistication of AI generated code submitted to public repositories
-continues to increase
+2019}). This issue is likely to become more acute as software
+development continues to expand in scale and complexity
+(\citeproc{ref-martinelliSoftwareHeritageActivity2026}{Martinelli,
+2026}) and as the volume and sophistication of AI generated code
+submitted to public repositories continues to increase
 (\citeproc{ref-robbesAgenticMuchAdoption2026}{Robbes et al., 2026}).
-Developers therefore need solutions beyond traditional documentation to
-support workflow execution \_\_ address the limitations of traditional
-software documentation to executing workflows in a reproducible and
-verifiable manner as the landscape of software development continues to
-evolve.
+Developers therefore need solutions beyond traditional static
+documentation to support workflow execution, verification, and
+reproducibility, in practical and user-friendly ways.
 
 Conventional documentation can describe a workflow, but for complex,
 multi-step, order-dependent tasks and projects, it is often insufficient
-capturing and verifying critical runtime execution details such as
+at capturing and verifying critical runtime execution details such as
 platform dependencies, configuration, versions, and relationships
 between steps (\citeproc{ref-ebertGeneralConceptConsistent2015}{Ebert et
 al., 2015}). Command-line interface (CLI) wrappers can improve
@@ -402,39 +402,31 @@ where local constraints and expert judgment often shape execution
 parameters. The framework is powered by \texttt{quarto-emit}, a
 lightweight backend extension that materializes conventional workflow
 artifacts from manual pages when needed. We demonstrate the approach
-with three examples of increasing sophistication: a simple manual, an
-intermediate manual, and a complex manual.
+with three examples of increasing sophistication: a simple manual for
+staging datasets in your project space; an intermediate manual for
+geospatial aggregation of environmental exposure data; and a complex
+manual for creating robust, reproducible, fully containerized geospatial
+data science environments on High Performance Computing (HPC) clusters.
+All examples are available at the project
+\href{https://goldenplanetaryhealthlab.github.io/QuartoManual/}{website}.
 
 For authors, Quarto Manuals provide a structured yet adaptable way to
-turn recurring workflows into reusable manuals; for operators, they
-provide a stepwise, testable process for generating reproducible setup
-artifacts and confirming progress throughout execution in a structured
-and auditable manner.
+turn recurring workflows into reusable operators' manuals for themselves
+and colleagues; for operators, they provide a stepwise, testable process
+for generating reproducible setup and execution artifacts and confirming
+progress throughout execution in a structured and auditable manner.
 
-\subsection{Feature Roadmap}\label{feature-roadmap}
-
-\begin{itemize}
-\tightlist
-\item[$\boxtimes$]
-  abstract as prose
-\item[$\square$]
-  stylize each block so it is visually distinct
-\item[$\square$]
-  use Lua to print out useful render messages when blocks are being
-  processed
-\item[$\square$]
-  negative reinforcement: identify and correct misuse of the manual
-  visually
-\item[$\square$]
-  setup a testing suite in a separate repo
-\item[$\square$]
-  can Lua be used to connect checks and prereqs across pages? Maybe?
-\end{itemize}
+Quarto Manuals promise to improve the reproducibility and reliability of
+scientific workflows --- particularly in contexts like CSPH where local
+constraints and expert judgment shape execution parameters and
+conditions --- while also providing an accessible and interactive
+experience for users. In future work, we hope to explore how Quarto
+Manuals may be used in conjunction with the increasing adoption of AI
+and agentic systems in software development to provide a framework for
+ensuring that scientific workflows remain transparent, verifiable, and
+reproducible in the face of increasing complexity and non-determinism.
 
 \section{References}\label{references}
-
-References marked with an asterisk indicate studies included in the
-meta-analysis.
 
 \protect\phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
@@ -472,6 +464,16 @@ Ebert, P., Müller, F., Nordström, K., Lengauer, T., \& Schulz, M. H.
 analyses. \emph{Database: The Journal of Biological Databases and
 Curation}, \emph{2015}, bav050.
 \url{https://doi.org/10.1093/database/bav050}
+
+\bibitem[\citeproctext]{ref-goldenClimatesmartPublicHealth2025}
+Golden, C. D., Childs, M. L., Mudele, O. E., Andriamizarasoa, F. A.,
+Bouley, T. A., Nicola, G. D., Fontaine, M. A., Huybers, P. J.,
+Mahatante, P. T., Rabemananjara, R., Rakotoarison, N., Ramambason, H.
+R., Ramihantaniarivo, H., Randriamady, H. J., Randriatsara, H.,
+Ravelomanantsoa, M. A., Razafinimanana, A. K. S., Rigden, A. J.,
+Shumake-Guillemot, J., \ldots{} Dominici, F. (2025). Climate-smart
+public health for global health resilience. \emph{The Lancet Planetary
+Health}, \emph{9}(8). \url{https://doi.org/10.1016/j.lanplh.2025.101293}
 
 \bibitem[\citeproctext]{ref-martinelliSoftwareHeritageActivity2026}
 Martinelli, N. (2026, January 16). \emph{Software {Heritage Activity

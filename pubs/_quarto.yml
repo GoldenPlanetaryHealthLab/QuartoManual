@@ -1,6 +1,8 @@
 project:
   title: "publications"
   output-dir: "outputs"
+  pre-render: 
+    - "usrse2026/update_readme.sh ../README.md"
   render: 
     - usrse2026/poster.qmd
     - usrse2026/usrse2026.qmd

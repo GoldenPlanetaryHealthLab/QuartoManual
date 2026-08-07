@@ -1,6 +1,8 @@
-## Abstract
+# Quarto Manuals: Executable Software Manuals for Reproducible Scientific Workflows
 
 [![hackmd-github-sync-badge](https://hackmd.io/_App6vg9Tr-d0id8Uj675Q/badge)](https://hackmd.io/_App6vg9Tr-d0id8Uj675Q)
+
+## Abstract
 
 Climate-Smart Public Health (CSPH) is a data-driven approach to detect, 
 quantify, and adapt to climate-related health impacts at a global scale,
@@ -16,7 +18,7 @@ effective, reproducible documentation remains an
 overlooked and under-served part of delivering 
 high quality software [@aghajaniSoftwareDocumentationIssues2019]. This issue
 is likely to become more acute as software development continues to expand 
-in scale and complexity [@GithubInnovationGraph; @martinelliSoftwareHeritageActivity2026] 
+in scale and complexity [@martinelliSoftwareHeritageActivity2026] 
 and as the volume and sophistication of AI generated code submitted to 
 public repositories continues to increase [@robbesAgenticMuchAdoption2026].
 Developers therefore need solutions beyond traditional static documentation
