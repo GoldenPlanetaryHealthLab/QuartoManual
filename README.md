@@ -55,7 +55,7 @@ with three examples of increasing sophistication: a simple manual for
 staging datasets in your project space; an intermediate manual for geospatial
 aggregation of environmental exposure data; and a complex manual for creating
 robust, reproducible, fully containerized geospatial data science
-environments on High Performance Computing (HPC) clusters.
+environments on High Performance Computing (HPC) clusters. All examples are available at the project [website](https://goldenplanetaryhealthlab.github.io/QuartoManual/).
 
 For authors, Quarto Manuals provide a structured yet adaptable way to turn 
 recurring workflows into reusable operators' manuals for 
@@ -75,6 +75,7 @@ reproducible in the face of increasing complexity and non-determinism.
 ## Feature Roadmap
 
 - [x] abstract as prose
+- [ ] give the examples an onramp to users to "get started now!"
 - [ ] stylize each block so it is visually distinct
 - [ ] use Lua to print out useful render messages when blocks are being processed
 - [ ] negative reinforcement: identify and correct misuse of the manual visually
