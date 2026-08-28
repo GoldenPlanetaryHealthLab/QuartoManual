@@ -94,24 +94,41 @@ keywords:
   - scientific programming
   - AI
 # Optional statement about the importance of the paper. The heading can be customized in the language field.
-impact-statement: "Scientific programming workflows are becoming increasingly 
-complex, while existing support mechanisms remain poorly matched to that complexity.
-We believe Quarto Manuals is a step forward in addressing this challenge. With Quarto
-Manuals, we hope to make scientific programming more understandable, reproducible,
-and maintainable for the people who run them. Quarto Manuals are designed to be able to
-meet the needs of novice programmers and experts alike, and scale with the complexity
-and capabilities of the workflows they document. Indeed, the Quarto Manual
-framework may be complementary — not adversarial — to the growing trend of 
-AI-assisted programming, as Manuals may potentially provide a 
-[harness](https://github.blog/ai-and-ml/github-copilot/the-harness-is-all-you-need-mostly/) 
-for AI-assisted programming to be more understandable, reproducible, and maintainable.
+impact-statement: "Scientific programming workflows are becoming more complex, 
+while existing support mechanisms often remain poorly matched to that complexity. 
+We see Quarto Manuals as a practical contribution to this problem and as 
+directly aligned with the interests of the US-RSE community. Research software 
+engineers are often responsible not only for building software, but also for 
+making workflows understandable, reproducible, maintainable, and usable by others. 
+Quarto Manuals are designed to support that work by combining explanation, 
+code execution, and verification in an ordered, operator-facing format. 
 
-Ultimately, our aim is that Quarto Manuals will help to make scientific 
-programming more accessible and inclusive, and support the development 
-of a more diverse and equitable scientific community, by providing
-a canvas for conducting science that is more user-friendly, less intimidating,
-and still able to adhere to rigorous standards of high quality software engineering, 
-reproducibility, and transparency."
+This contribution has three main highlights. First, our work promotes 
+technical resources for documenting and delivering rigorous, complex 
+scientific workflows. Second, it supports the visibility and value of 
+research software engineering by treating workflow design, execution, 
+and handoff as first-class engineering artifacts, rather than incidental burdens 
+or purely local practice. Third, it serves the broader community by 
+making it easier for collaborators with different levels of programming 
+experience to run, inspect, and adapt computational workflows in 
+a structured and auditable way.
+
+Perhaps most importantly, Quarto Manuals are also intended to 
+be complementary to the growing use of AI-assisted programming. As 
+AI-generated code becomes more common, research teams will increasingly 
+need workflow structures that make human-written instructions _and_ 
+LLM-generated code easier to inspect, test, reproduce, and 
+maintain together. In that sense, Quarto Manuals may provide 
+a useful [harness](https://github.blog/ai-and-ml/github-copilot/the-harness-is-all-you-need-mostly/) 
+for incorporating AI-assisted programming into scientific workflows, 
+without sacrificing rigor or transparency.
+
+Ultimately, we hope Quarto Manuals helps make scientific 
+programming more accessible, reproducible, and inclusive, 
+while supporting the high standards of software engineering and 
+collaboration that the US-RSE community promotes."
+
+
 # If true, a word count will appear below the keywords (tables, figure captions, and references excluded in count.)
 word-count: true
 # If true, tables and figures are mingled with the text instead of listed at the end of the document.

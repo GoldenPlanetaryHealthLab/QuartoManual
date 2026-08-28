@@ -200,22 +200,38 @@ T.H. Chan School of Public Health, Harvard University}}
 
 
 \abstract{See below.  \section{Impact Statement} \noindent Scientific
-programming workflows are becoming increasingly complex, while existing
-support mechanisms remain poorly matched to that complexity. We believe
-Quarto Manuals is a step forward in addressing this challenge. With
-Quarto Manuals, we hope to make scientific programming more
-understandable, reproducible, and maintainable for the people who run
-them. Quarto Manuals are designed to be able to meet the needs of novice
-programmers and experts alike, and scale with the complexity and
-capabilities of the workflows they document. Indeed, the Quarto Manual
-framework may be complementary --- not adversarial --- to the growing
-trend of AI-assisted programming, as Manuals may potentially provide a
-plaintext
+programming workflows are becoming more complex, while existing support
+mechanisms often remain poorly matched to that complexity. We see Quarto
+Manuals as a practical contribution to this problem and as directly
+aligned with the interests of the US-RSE community. Research software
+engineers are often responsible not only for building software, but also
+for making workflows understandable, reproducible, maintainable, and
+usable by others. Quarto Manuals are designed to support that work by
+combining explanation, code execution, and verification in an ordered,
+operator-facing format. This contribution has three main highlights.
+First, our work promotes technical resources for documenting and
+delivering rigorous, complex scientific workflows. Second, it supports
+the visibility and value of research software engineering by treating
+workflow design, execution, and handoff as first-class engineering
+artifacts, rather than incidental burdens or purely local practice.
+Third, it serves the broader community by making it easier for
+collaborators with different levels of programming experience to run,
+inspect, and adapt computational workflows in a structured and auditable
+way. Perhaps most importantly, Quarto Manuals are also intended to be
+complementary to the growing use of AI-assisted programming. As
+AI-generated code becomes more common, research teams will increasingly
+need workflow structures that make human-written instructions \emph{and}
+LLM-generated code easier to inspect, test, reproduce, and maintain
+together. In that sense, Quarto Manuals may provide a useful
 \href{https://github.blog/ai-and-ml/github-copilot/the-harness-is-all-you-need-mostly/}{harness}
-for AI-assisted programming to be more understandable, reproducible, and
-maintainable. }
+for incorporating AI-assisted programming into scientific workflows,
+without sacrificing rigor or transparency. Ultimately, we hope Quarto
+Manuals helps make scientific programming more accessible, reproducible,
+and inclusive, while supporting the high standards of software
+engineering and collaboration that the US-RSE community promotes. }
 
-\keywords{Quarto, apaquarto}
+\keywords{Quarto, notebook driven development, reproducible
+research, scientific programming, AI}
 
 \authornote{\par{\addORCIDlink{Tinashe M.
 Tapera}{0000-0001-9080-5010}}\par{\addORCIDlink{Christopher
@@ -388,26 +404,29 @@ reliability (\citeproc{ref-agrawalCanAIConduct2026}{Agrawal et al.,
 2026}).
 
 Executable literate programming approaches can encode and enforce
-complex workflow steps \emph{and} generate idempotent results. Quarto is
-a modern, plain-text, multi-language, and multi-output literate
-programming framework for creating reproducible documents and workflows
-(\citeproc{ref-allaireQuarto2026}{Allaire et al., 2026}). Building on
-Quarto with a carefully designed set of templates and extensions, we
-introduce \textbf{Quarto Manuals}, a framework for executable software
-manuals that guide users through a workflow as ordered, interactive
-pages that combine explanation, code execution, and verification. Rather
-than hiding workflow decisions and steps, Quarto Manuals keep them
-visible and editable, making them ideal for research computing contexts
-where local constraints and expert judgment often shape execution
-parameters. The framework is powered by \texttt{quarto-emit}, a
-lightweight backend extension that materializes conventional workflow
-artifacts from manual pages when needed. We demonstrate the approach
-with three examples of increasing sophistication: a simple manual for
-staging datasets in your project space; an intermediate manual for
-geospatial aggregation of environmental exposure data; and a complex
-manual for creating robust, reproducible, fully containerized geospatial
-data science environments on High Performance Computing (HPC) clusters.
-All examples are available at the project
+complex workflow steps \emph{and} generate idempotent results
+(\citeproc{ref-knuthLiterateProgramming1992}{Knuth, 1992}).
+
+Quarto is a modern, plain-text, multi-language, and multi-output
+literate programming framework for creating reproducible documents and
+workflows (\citeproc{ref-allaireQuarto2026}{Allaire et al., 2026}).
+Building on Quarto with a carefully designed set of templates and
+extensions, we introduce \textbf{Quarto Manuals}: a framework for
+\textbf{executable software manuals} that guide users through workflows
+as ordered, interactive pages that combine explanation, code execution,
+and step verification. Rather than hiding workflow decisions and steps,
+Quarto Manuals keep them visible and editable, making them ideal for
+research computing contexts where local constraints and expert judgment
+often shape execution parameters. The framework is powered by
+\texttt{quarto-emit}, a lightweight backend extension that materializes
+conventional workflow artifacts from manual pages when needed. We
+demonstrate the approach with three examples of increasing
+sophistication: a simple manual for staging datasets in your project
+space; an intermediate manual for geospatial aggregation of
+environmental exposure data; and a complex manual for creating robust,
+reproducible, fully containerized geospatial data science environments
+on High Performance Computing (HPC) clusters. All examples are available
+at the project
 \href{https://goldenplanetaryhealthlab.github.io/QuartoManual/}{website}.
 
 For authors, Quarto Manuals provide a structured yet adaptable way to
@@ -423,8 +442,9 @@ conditions --- while also providing an accessible and interactive
 experience for users. In future work, we hope to explore how Quarto
 Manuals may be used in conjunction with the increasing adoption of AI
 and agentic systems in software development to provide a framework for
-ensuring that scientific workflows remain transparent, verifiable, and
-reproducible in the face of increasing complexity and non-determinism.
+ensuring that computational workflows remain transparent, verifiable,
+and reproducible in the face of increasing complexity and
+non-determinism.
 
 \section{References}\label{references}
 
@@ -474,6 +494,11 @@ Ravelomanantsoa, M. A., Razafinimanana, A. K. S., Rigden, A. J.,
 Shumake-Guillemot, J., \ldots{} Dominici, F. (2025). Climate-smart
 public health for global health resilience. \emph{The Lancet Planetary
 Health}, \emph{9}(8). \url{https://doi.org/10.1016/j.lanplh.2025.101293}
+
+\bibitem[\citeproctext]{ref-knuthLiterateProgramming1992}
+Knuth, D. E. (1992). \emph{Literate {Programming}}. {Center for the
+Study of Language and Information}.
+\url{https://press.uchicago.edu/ucp/books/book/distributed/L/bo3629677.html}
 
 \bibitem[\citeproctext]{ref-martinelliSoftwareHeritageActivity2026}
 Martinelli, N. (2026, January 16). \emph{Software {Heritage Activity

@@ -37,12 +37,14 @@ non-determinism [@siddiqLargeLanguageModels2025]. Furthermore, current
 practical agentic workflow implementations (such as harnesses) still require careful human oversight to achieve acceptable reliability [@agrawalCanAIConduct2026].
 
 Executable literate programming approaches can encode and enforce complex
-workflow steps _and_ generate idempotent results. Quarto is a modern, plain-text, 
+workflow steps _and_ generate idempotent results [@knuthLiterateProgramming1992]. 
+
+Quarto is a modern, plain-text, 
 multi-language, and multi-output literate programming framework for creating 
 reproducible documents and workflows [@allaireQuarto2026]. Building on Quarto with a
-carefully designed set of templates and extensions, we introduce **Quarto Manuals**, a
-framework for executable software manuals that guide users through a workflow as ordered, interactive 
-pages that combine explanation, code execution, and verification. Rather than 
+carefully designed set of templates and extensions, we introduce **Quarto Manuals**: a
+framework for **executable software manuals** that guide users through workflows as ordered, interactive 
+pages that combine explanation, code execution, and step verification. Rather than 
 hiding workflow decisions and steps, Quarto Manuals keep them visible and editable, 
 making them ideal for research computing contexts where local constraints and 
 expert judgment often shape execution parameters. The framework is powered 
@@ -66,6 +68,6 @@ judgment shape execution parameters and conditions —
 while also providing an accessible and interactive experience for users. In future
 work, we hope to explore how Quarto Manuals may be used in conjunction 
 with the increasing adoption of AI and agentic systems in software development to
-provide a framework for ensuring that scientific workflows remain transparent, verifiable, and 
+provide a framework for ensuring that computational workflows remain transparent, verifiable, and 
 reproducible in the face of increasing complexity and non-determinism.
 
