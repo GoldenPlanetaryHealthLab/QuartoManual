@@ -32,6 +32,9 @@ $endif$
 $if(header_logo)$
   header_logo: "$header_logo$",
 $endif$
+$if(header_font)$
+  header_font: "$header_font$",
+$endif$
 $if(body_color)$
   body_color: "$body_color$",
 $endif$
@@ -43,5 +46,4 @@ $if(heading_color)$
 $endif$
 doc,
 )
-
 

@@ -2,12 +2,12 @@
 title: Quarto Manuals
 author: Edenian
 subtitle: Executable software operations manuals built from independent Quarto pages
-# header_font: "Roboto"
+header_font: "Baskerville"
 header_logo: "dummy-thchan.png"
-# header_block_color: "BF40BF"
-# heading_color: "EADDCA"
-# body_color: "ffffff"
-# body_font: "JetBrains Mono"
+header_block_color: "A51C30"
+heading_color: "1E1E1E"
+body_color: "F4F4F4"
+body_font: "Arial"
 format:
   poster-typst: 
     keep-typ: true
@@ -26,7 +26,7 @@ today_date <- Sys.Date()
 
 ```{=typst}
 #import "@preview/showybox:2.0.4": showybox 
-#let main = rgb("#6b1f50")
+#let main = rgb("#A51C30")
 
 #showybox(
   title-style: (
@@ -47,7 +47,7 @@ today_date <- Sys.Date()
 
   ),
   title: "tl;dr",
-  footer: text(size: 30pt, weight: 600, emph("Check it out, you can also add Typst code to make math functions or diagrams."))
+  footer: text(size: 30pt, weight: 600, "Check it out: you can also add Typst code to make math functions or diagrams.")
 )[
   This is a Typst template that can be used with Quarto to execute code and automatically render outputs like text, plots, and tables.
   Forget about copying and pasting screenshots 
@@ -272,8 +272,6 @@ plot(code)
 ```{=typst}
 ]
 ```
-
-
 
 
 

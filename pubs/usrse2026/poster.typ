@@ -272,52 +272,62 @@
   title,
   author,
   subtitle,
-  header_block_color: "6b1f50",
+  header_block_color: "A51C30",
   header_logo: none,
   header_font: "JetBrains Mono",
+  body_font: "Arial",
   
 ) = {
     
-  set text(fill: white, font: header_font)
-  
-  stack(
-    dir: ttb,
+  grid(
+    rows: (1fr, 0.14in),
     block(
-      fill: rgb(header_block_color),
       width: 100%,
       height: 100%,
-      inset: 1in,
       grid(
-        columns: (4fr, .5fr),
-        align(left + horizon)[#stack(
-          spacing: 0.5in,
-          text(size: 92pt,weight: "extrabold",fill: rgb("ffdb43"))[#title],
-          text(size: 58pt, weight: "bold")[#subtitle],
-          text(size: 48pt)[#author],
-        )],
-        align(right + horizon)[
-          #if header_logo != none {
-            box(width: 100%)[#image(header_logo)]
-          }
-        ]
-      )
-    )
+        columns: (3fr, 1fr),
+        block(
+          fill: rgb(header_block_color),
+          width: 100%,
+          height: 100%,
+          inset: (left: 1in, right: .7in, top: .55in, bottom: .55in),
+          [
+            #text(font: header_font, size: 88pt, weight: "bold", fill: white)[#title]
+            #v(0.16in)
+            #text(font: body_font, size: 42pt, weight: "bold", fill: white)[#subtitle]
+            #v(0.12in)
+            #text(font: body_font, size: 30pt, fill: white)[#author]
+          ],
+        ),
+        block(
+          fill: white,
+          width: 100%,
+          height: 100%,
+          inset: .5in,
+          align(center + horizon)[
+            #if header_logo != none { image(header_logo, width: 100%) }
+          ],
+        ),
+      ),
+    ),
+    block(fill: rgb(header_block_color), width: 100%, height: 100%),
   )
 }
 
 #let poster_body(
-  body_color: "cccccc",
-  body_font: "JetBrains Mono",
-  heading_color: "6b1f50",
+  body_color: "F4F4F4",
+  body_font: "Arial",
+  heading_color: "1E1E1E",
   doc
 ) = {
   set text(
     fill: black,
     font: body_font,
-    size: 38pt
+    size: 32pt
   )
 
-  show heading: set text(fill: rgb(heading_color))
+  show heading: set text(font: "Baskerville", fill: rgb(heading_color), weight: "bold")
+  set block(spacing: 1em)
 
   stack(
     dir: ttb,
@@ -325,8 +335,8 @@
       fill: rgb(body_color),
       width: 100%,
       height: 100%,
-      inset: (top: .75in, right: 1in, bottom: .5in, left: 1in),
-      columns(3, gutter: 2em)[
+      inset: (top: .65in, right: .8in, bottom: .55in, left: .8in),
+      columns(3, gutter: .45in)[
         #doc
       ]
     )
@@ -339,12 +349,12 @@
   subtitle: "",
   width: 48in,
   height: 36in,
-  header_block_color: "6b1f50",
+  header_block_color: "A51C30",
   header_logo: "logo.png",
-  header_font: "JetBrains Mono",
-  body_color: "cccccc",
-  body_font: "JetBrains Mono",
-  heading_color: black,
+  header_font: "Baskerville",
+  body_color: "F4F4F4",
+  body_font: "Arial",
+  heading_color: "1E1E1E",
   doc,
 ) = {
   set page(
@@ -353,7 +363,7 @@
     margin: 0in,
   )
 
-  set par(justify: true)
+  set par(justify: false)
 
   set text(size: 24pt)
 
@@ -367,6 +377,7 @@
       header_block_color: header_block_color,
       header_logo: header_logo,
       header_font: header_font,
+      body_font: body_font,
     ),
     poster_body(
       body_color: body_color,
@@ -377,12 +388,7 @@
   )
 }
 
-#set table(
-  inset: 6pt,
-  stroke: none 
-)
-
-#set block(spacing: 2em)
+#set table(inset: 6pt, stroke: rgb("1E1E1E") + 0.5pt)
 #let brand-color = (:)
 #let brand-color-background = (:)
 #let brand-logo = (:)
@@ -413,16 +419,20 @@
   title: "Quarto Manuals",
   subtitle: "Executable software operations manuals built from independent Quarto pages",
   author: "Edenian",
+  header_block_color: "A51C30",
   header_logo: "dummy-thchan.png",
+  header_font: "Baskerville",
+  body_color: "F4F4F4",
+  body_font: "Arial",
+  heading_color: "1E1E1E",
 doc,
 )
-
 
 
 PLACEHOLDER CONTENT. NOT YET IMPLEMENTED
 
 #import "@preview/showybox:2.0.4": showybox 
-#let main = rgb("#6b1f50")
+#let main = rgb("#A51C30")
 
 #showybox(
   title-style: (
@@ -443,7 +453,7 @@ PLACEHOLDER CONTENT. NOT YET IMPLEMENTED
 
   ),
   title: "tl;dr",
-  footer: text(size: 30pt, weight: 600, emph("Check it out, you can also add Typst code to make math functions or diagrams."))
+  footer: text(size: 30pt, weight: 600, "Check it out: you can also add Typst code to make math functions or diagrams.")
 )[
   This is a Typst template that can be used with Quarto to execute code and automatically render outputs like text, plots, and tables.
   Forget about copying and pasting screenshots 
