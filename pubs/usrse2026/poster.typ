@@ -448,7 +448,7 @@ PLACEHOLDER CONTENT. NOT YET IMPLEMENTED
   This is a Typst template that can be used with Quarto to execute code and automatically render outputs like text, plots, and tables.
   Forget about copying and pasting screenshots 
 
-  $ frac(diff^n f, diff x_i ... diff x_j)(a_1, a_2, ..., a_n) = frac(diff^n f, diff x_j ... diff x_i)(a_1, a_2, ..., a_n) $
+  $ frac(partial^n f, partial x_i ... partial x_j)(a_1, a_2, ..., a_n) = frac(partial^n f, partial x_j ... partial x_i)(a_1, a_2, ..., a_n) $
 ]
 #block(
 fill:white,
@@ -505,6 +505,7 @@ Run put your code in the Quarto document like you normally would and it will ren
 - Adjust the height with #NormalTok("#| fig-height: 9");
 - Adjust plot attributes in your code
 
+#align(center)[#box(image("poster_files/figure-typst/unnamed-chunk-2-1.svg"))]
 Add a footer or something underneath
 
 ])
@@ -518,6 +519,88 @@ radius:6pt,
 <adding-tables>
 Likewise, you can add tables by doing the same as above.
 
+#show figure: set block(breakable: false)
+
+#block[ // start block
+
+  #let style-dict = (
+    // tinytable style-dict after
+    "0_1": 0, "1_1": 0, "2_1": 0, "3_1": 0, "4_1": 0, "5_1": 0, "6_1": 0, "0_2": 0, "1_2": 0, "4_2": 0, "5_2": 0, "0_0": 1, "1_0": 1, "2_0": 1, "3_0": 1, "4_0": 1, "5_0": 1, "6_0": 1, "2_2": 2, "3_2": 2, "6_2": 2
+  )
+
+  #let style-array = ( 
+    // tinytable cell style after
+    (align: center,),
+    (align: left,),
+    (color: rgb("#FF0000"), align: center,),
+  )
+
+  // Helper function to get cell style
+  #let get-style(x, y) = {
+    let key = str(y) + "_" + str(x)
+    if key in style-dict { style-array.at(style-dict.at(key)) } else { none }
+  }
+
+  #show table.cell: it => {
+    if style-array.len() == 0 { return it }
+    
+    let style = get-style(it.x, it.y)
+    if style == none { return it }
+    
+    let tmp = it
+    if ("fontsize" in style) { tmp = text(size: style.fontsize, tmp) }
+    if ("color" in style) { tmp = text(fill: style.color, tmp) }
+    if ("indent" in style) { tmp = pad(left: style.indent, tmp) }
+    if ("underline" in style) { tmp = underline(tmp) }
+    if ("italic" in style) { tmp = emph(tmp) }
+    if ("bold" in style) { tmp = strong(tmp) }
+    if ("mono" in style) { tmp = math.mono(tmp) }
+    if ("strikeout" in style) { tmp = strike(tmp) }
+    if ("smallcaps" in style) { tmp = smallcaps(tmp) }
+    tmp
+  }
+
+  // tinytable align-figure before
+
+  #table( // tinytable table start
+    columns: (24.00%, 52.00%, 24.00%),
+    stroke: none,
+    rows: auto,
+    align: (x, y) => {
+      let style = get-style(x, y)
+      if style != none and "align" in style { style.align } else { left }
+    },
+    fill: (x, y) => {
+      let style = get-style(x, y)
+      if style != none and "background" in style { style.background }
+    },
+ table.hline(y: 1, start: 0, end: 3, stroke: 0.05em),
+ table.hline(y: 7, start: 0, end: 3, stroke: 0.08em),
+ table.hline(y: 0, start: 0, end: 3, stroke: 0.08em),
+    // tinytable lines before
+
+    // tinytable header start
+    table.header(
+      repeat: true,
+[mfr], [model], [year],
+    ),
+    // tinytable header end
+
+    // tinytable cell content after
+[Ford], [GT], [2017],
+[Ferrari], [458 Speciale], [2015],
+[Ferrari], [458 Spider], [2015],
+[Ferrari], [458 Italia], [2014],
+[Ferrari], [488 GTB], [2016],
+[Ferrari], [California], [2015],
+
+    // tinytable footer after
+
+  ) // end table
+
+  // tinytable align-figure after
+
+] // end block
 #NormalTok("tinytable"); seems to look the best in this format fyi.
 
 ])
@@ -569,6 +652,7 @@ radius:6pt,
   ),
   title: "Source Code",
 )[
+#align(center)[#box(image("poster_files/figure-typst/unnamed-chunk-4-1.svg"))]
 ]
 
 

@@ -1,5 +1,4 @@
 {
-  "git.enabled": false,
   "positron.r.customBinaries": [
     "/Users/tit420/.uvr/r-versions/4.6.1/bin/R"
   ],

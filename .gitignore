@@ -9,3 +9,5 @@ data
 *.err
 *.out
 logs
+/.uvr/library/
+/.uvr/activate*

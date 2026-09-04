@@ -12,7 +12,7 @@ format:
   poster-typst: 
     keep-typ: true
 execute:
-  eval: false
+  eval: true
 ---
 
 PLACEHOLDER CONTENT. NOT YET IMPLEMENTED
@@ -52,7 +52,7 @@ today_date <- Sys.Date()
   This is a Typst template that can be used with Quarto to execute code and automatically render outputs like text, plots, and tables.
   Forget about copying and pasting screenshots 
 
-  $ frac(diff^n f, diff x_i ... diff x_j)(a_1, a_2, ..., a_n) = frac(diff^n f, diff x_j ... diff x_i)(a_1, a_2, ..., a_n) $
+  $ frac(partial^n f, partial x_i ... partial x_j)(a_1, a_2, ..., a_n) = frac(partial^n f, partial x_j ... partial x_i)(a_1, a_2, ..., a_n) $
 ]
 ```
 

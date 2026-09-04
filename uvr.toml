@@ -1,0 +1,9 @@
+[project]
+name = "QuartoManual"
+
+[dependencies]
+ggplot2 = "*"
+gt = "*"
+gtsummary = "*"
+qrcode = "*"
+tinytable = "*"
