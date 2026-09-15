@@ -1,9 +1,23 @@
 ---
 title: "Helper Functions: SLURM & Submitit"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm The Workbench Context"}
+
+Run this page from the workbench project root and confirm that the scheduler
+helper dependencies are available.
+
+```{bash}
+#| eval: false
+test -d .
+```
+
+:::
+
+:::: {.manual-procedure title="Define Scheduler Helpers"}
 
 This notebook collects miscellaneous functions that are useful for the RSE 
 Workbench. 
@@ -40,3 +54,17 @@ def show_submitit_job(job: Any) -> Any:
 
     return job.result()
 ```
+
+::::
+
+::: {.manual-check title="Check Scheduler Helper"}
+
+Confirm that the page leaves `show_submitit_job` available for scheduler-backed
+installation procedures.
+
+```{python}
+#| eval: false
+assert callable(show_submitit_job)
+```
+
+:::

@@ -23,12 +23,11 @@ etc.
 Putting all of these together for the first time in a critical project is a lengthy,
 several day process. Redoing it each and every single time a project counts as critical 
 is [Sisyphean](https://en.wikipedia.org/wiki/Sisyphus).
-The RSE Workbench Manual allows me to learn the complicated procedure once, then
-duplicate the pages for a new project, change the paths, insert and remove a few project specific
-packages, and then recompile a new singularity container for the new project in a matter of minutes.
-This is a huge time saver, and it was also a great way to learn
-how tools like Spack, Singularity, and Quarto work together to create a
-reproducible computing environment.
+The RSE Workbench Manual captures the complicated procedure once, then allows
+an operator to duplicate the pages for a new project, change the paths, insert
+or remove project-specific packages, and recompile a new Singularity container
+in a matter of minutes. The pages preserve the required choices, artifacts, and
+checks at each stage.
 
 :::
 

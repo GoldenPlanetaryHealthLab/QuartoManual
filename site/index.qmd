@@ -11,15 +11,22 @@ workflow.
 Use a Quarto Manual when a workflow is too long, fragile, or context-specific
 for a README, but too visible and judgment-heavy to hide behind a single CLI.
 
-A manual gives the user ordered `.qmd` pages that:
+A manual gives the operator ordered `.qmd` pages that:
 
-- explain one step at a time;
-- run the code for that step;
-- verify whether the step worked;
+- expose one operational transformation at a time;
+- identify the inputs, choices, and actions for that transformation;
+- verify the resulting state;
 - make dependencies between steps explicit.
 
 In practice, Quarto Manuals are best understood as operator-facing procedure
-books for software and research workflows.
+books for software and research workflows. The intended reader is a competent
+practitioner in the relevant domain.
+
+Operational explicitness is not the same as conceptual explanation. Manuals
+should normally assume ordinary domain knowledge: describe the action and the
+expected state, not the textbook concept behind the action. Add explanation when
+an operation is unusual, easy to misinterpret, safety- or correctness-critical,
+or surprising despite normal domain competence.
 
 ## Core Idea
 
@@ -33,18 +40,12 @@ Each Page is a contract with three parts:
 2. `procedure`: do one or more pieces of work;
 3. `check`: prove that the work succeeded.
 
-Pages should share a project, not a notebook kernel[^1].
+Pages should share a project, not hidden notebook state[^1].
 
-[^1]: A notebook kernel is a program that runs code in a specific programming 
-language, such as Python or R. It allows users to test out code iteratively in
-a Read-Eval-Print Loop (REPL) workflow. REPL workflows are great for exploration,
-and arguably were the foundational technology behind the rise of accessible data science.
-One of the main criticisms of notebooks, however, is that they 
-can hide the state of your code ([see here](https://www.researchgate.net/figure/An-example-of-a-hidden-state-in-Jupyter-Notebook-with-three-different-execution-variations_fig3_391056804)), which makes it hard to reason about your project. Quarto 
-Manuals avoid that problem primarily by using Quarto Markdown, which is plain
-text, and secondarily by encouraging page independence in its design. 
-Any interdependence is made explicit through side-effects that Manual Authors 
-must deliberately insert.
+[^1]: A notebook kernel can retain execution state between cells. Manuals avoid
+depending on that hidden state by making page dependencies explicit through
+visible project artifacts and checks. The details of notebook execution are
+background for authors, not a concept that every operator needs to learn here.
 
 If page 3 depends on page 2, page 3 should deliberately enforce that dependency in its
 prerequisite block by checking visible project state:
@@ -118,20 +119,34 @@ such as:
 That being said, you can use any Quarto extension you'd like to
 extend the functionality of a Quarto Manual.
 
+## Authoring Model
+
+Write for a competent operator. Explicit instructions do not imply a tutorial:
+make inputs, actions, consequential choices, outputs, state transitions, and
+checks visible, while explaining underlying concepts only when they are unusually
+important to executing the procedure correctly.
+
+Automate mechanical execution when no meaningful decision occurs between its
+substeps. Do not automate a consequential operator choice merely because it can
+be encoded, and do not hide the verification boundary behind an opaque command.
+
+An optional `.manual-explain` block may provide short, exceptional context for
+an unusual or non-obvious operation. It is not a required fourth page component.
+
 ## Author Workflow
 
 To create a manual for your own procedure:
 
 1. Start from the Quarto Manual template.
-2. Write one page per operational step.
+2. Write one page per reliable operational transformation.
 3. Give each page one prerequisite block, one or more procedure blocks, and
    one check block.
-4. Keep page state local and enforce dependencies through prerequisites.
+4. Keep page state local and enforce dependencies through visible prerequisites.
 5. Use `quarto-emit` only when a page needs to materialize reusable files.
 
 The shipped template should stay lean and prompt-driven. Treat the template as
-the source of truth, then use richer examples on the documentation site to show
-what a mature manual can look like.
+the source of truth, then use the examples to show how a mature manual exposes
+decisions, automation boundaries, exceptional explanation, and verification.
 
 ## Operator Workflow
 
@@ -175,12 +190,12 @@ Everything else should be optional, but frictionless to add, thanks to `quarto-e
 
 ## Examples On This Site
 
-This site includes three example manuals that scale in sophistication:
+This site includes three example manuals that scale in operational sophistication:
 
 - a simple data-staging workflow;
 - an intermediate ERA5 acquisition and aggregation workflow;
 - an advanced RSE workbench environment workflow.
 
-Each example is intentionally more complete than the shipped template, with more 
-creative (and hopefully more elegant) implementations and problem solving strategies
-involving real-world use cases.
+Each example increases the complexity of its operations and state transitions;
+it does not need to contain more explanatory prose. Reliable automation may make
+a mature manual more concise by absorbing mechanical substeps.

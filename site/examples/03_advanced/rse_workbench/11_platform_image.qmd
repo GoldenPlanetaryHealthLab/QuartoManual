@@ -1,9 +1,23 @@
 ---
 title: "Platform Image"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm The Project Contract"}
+
+Confirm that the project contract page has run and that the target definition
+path is available.
+
+```{bash}
+#| eval: false
+test -d .
+```
+
+:::
+
+:::: {.manual-procedure title="Declare The Platform Image"}
 
 To begin, we must first set the foundations of a software platform, i.e., what kind
 of computer to isolate. This notebook defines the platform image in
@@ -288,3 +302,18 @@ print(definition)
 To learn more about Singularity, see the [Singularity documentation](https://sylabs.io/docs/).
 
 The next notebook builds and tests this basic image.
+
+::::
+
+::: {.manual-check title="Verify The Platform Definition"}
+
+Confirm that the generated definition exists and contains the platform tools
+selected for this workbench.
+
+```{python}
+#| eval: false
+assert project_contract.singularity_def.exists()
+assert project_contract.singularity_def.stat().st_size > 0
+```
+
+:::

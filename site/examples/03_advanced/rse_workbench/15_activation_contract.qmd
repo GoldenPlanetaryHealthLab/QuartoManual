@@ -1,9 +1,25 @@
 ---
 title: "Activation Contract"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm Package Declarations"}
+
+Confirm that the platform and language package declarations exist before
+writing the runtime activation contract.
+
+```{bash}
+#| eval: false
+test -s spack.yaml
+test -s rproject.toml
+test -s pyproject.toml
+```
+
+:::
+
+:::: {.manual-procedure title="Write The Activation Contract"}
 
 This notebook writes the canonical project runtime activation script.
 
@@ -123,3 +139,19 @@ if project_contract.enable_direnv:
 ```
 
 Stop here. The next notebook tests activation with the project mounted.
+
+::::
+
+::: {.manual-check title="Verify The Activation Script"}
+
+Confirm that the activation script exists, is executable, and contains the
+canonical entrypoint.
+
+```{python}
+#| eval: false
+assert project_contract.activate_script.exists()
+assert project_contract.activate_script.stat().st_mode & 0o111
+assert "source /work/env/activate.sh" in project_contract.activate_script.read_text()
+```
+
+:::

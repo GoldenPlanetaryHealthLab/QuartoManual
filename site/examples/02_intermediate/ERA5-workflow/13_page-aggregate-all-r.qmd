@@ -7,9 +7,11 @@ execute:
 ---
 
 
-This page converts raw ERA5 data into daily healthshed-level summaries,
-including optional population weighting, timezone adjustment, unit conversion,
-and derived variables such as relative humidity and wind speed.
+This page converts raw ERA5 data into daily healthshed-level summaries.
+The operator chooses the dataset variant, years, time shift, healthshed key,
+and weighting strategy. The procedure also handles optional population
+weighting, timezone adjustment, unit conversion, and derived variables such as
+relative humidity and wind speed.
 
 ::: {.manual-prereq title="Confirm Aggregation Inputs"}
 
@@ -38,9 +40,9 @@ list(
 
 ::: {.manual-procedure title="Declare The Aggregation Configuration"}
 
-The notebook begins by defining whether the run targets ERA5 or ERA5-Land,
-which years to process, the local time shift, the healthshed identifier, and
-whether values should be population-weighted or area-averaged.
+Set whether the run targets ERA5 or ERA5-Land, the years to process, the local
+time shift, the healthshed identifier, and whether values should be
+population-weighted or area-averaged.
 
 ```{r}
 #| eval: false
@@ -58,7 +60,7 @@ source_name <- ifelse(is_era5land, "era5land", "era5")
 
 ::: {.manual-procedure title="Extract And Clean Hourly Values"}
 
-The core of the notebook does three things for each variable and year:
+For each variable and year:
 
 1. read the raster and align it to the healthshed geometry;
 2. extract hourly values per healthshed, optionally weighting by population;
@@ -117,8 +119,8 @@ base_variables <- c(
 
 ::: {.manual-procedure title="Derive Relative Humidity And Wind Metrics"}
 
-The notebook also computes additional products that are not downloaded
-directly. Relative humidity is derived from temperature and dewpoint; wind
+Compute products that are not downloaded directly. Relative humidity is derived
+from temperature and dewpoint; wind
 speed and direction are derived from the `u` and `v` wind components.
 
 ```{r}
@@ -138,16 +140,14 @@ speed and direction are derived from the `u` and `v` wind components.
 
 ::: {.manual-check title="Check The Aggregation Contract"}
 
-A final check section can assert the success of the pipeline.
+Verify that the configured inputs exist and that the expected output directory
+contains daily products for the selected source and years.
 
 ```{r}
 #| eval: false
-# This page is complete when the operator can explain:
-# - which source files feed the aggregation,
-# - when population weighting is used instead of area averaging,
-# - why hourly data must be cleaned before daily summaries are computed,
-# - and which outputs are direct daily summaries versus derived products
-#   such as relative humidity and wind metrics.
+stopifnot(dir.exists(output_dir))
+stopifnot(length(data_years) > 0)
+stopifnot(is.logical(pop_weighted), length(pop_weighted) == 1)
 ```
 
 :::

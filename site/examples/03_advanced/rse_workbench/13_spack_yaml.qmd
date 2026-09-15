@@ -1,9 +1,23 @@
 ---
 title: "Scientific System Dependency Layer"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm The Platform Image"}
+
+Confirm that the platform definition and project contract are available before
+declaring the scientific dependency layer.
+
+```{bash}
+#| eval: false
+test -s .devcontainer/Singularity.def
+```
+
+:::
+
+:::: {.manual-procedure title="Declare Scientific Dependencies"}
 
 This notebook writes `spack.yaml`. It should only answer:
 
@@ -195,3 +209,18 @@ print(project_contract.spack_yaml.read_text())
 ```
 
 Stop here. The next notebook writes language package declarations.
+
+::::
+
+::: {.manual-check title="Verify The Spack Declaration"}
+
+Confirm that `spack.yaml` exists, is non-empty, and contains the project
+environment declaration.
+
+```{python}
+#| eval: false
+assert project_contract.spack_yaml.exists()
+assert project_contract.spack_yaml.stat().st_size > 0
+```
+
+:::

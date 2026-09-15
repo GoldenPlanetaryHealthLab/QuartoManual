@@ -1,14 +1,39 @@
 ---
 title: "Install Language Package Layer"
-format: gfm
+format: html
 execute:
   eval: false
 ---
 
+::: {.manual-prereq title="Confirm The R Runtime"}
+
+Confirm that the Spack environment and R validation have completed before
+installing project language packages.
+
+```{bash}
+#| eval: false
+test -s spack.yaml
+test -s rproject.toml
+test -s pyproject.toml
+```
+
+:::
+
+:::: {.manual-procedure title="Install Language Packages"}
+
 This notebook installs R and Python project packages after Spack and R have already been validated.
 
-Note that from here on out, you should be binding your fake $HOME directory
-to `CONTAINER_HOME`, and your fake $TMP directory to `CONTAINER_TMP`, so that R and Python package installations can write to a writable home and tmp directory.
+Bind the fake `$HOME` directory to `CONTAINER_HOME` and the fake `$TMP`
+directory to `CONTAINER_TMP`. These bindings are required so R and Python
+package installations write to writable locations.
+
+::: {.manual-explain title="Why These Bindings Are Required"}
+
+The container image is read-only at this stage. Without writable home and
+temporary paths, package installers may fail even when the package declarations
+and runtime are valid.
+
+:::
 
 ```{python}
 #| sorting-hat: remove
@@ -106,3 +131,18 @@ quarto check knitr
 ```
 
 Stop here until language package installation succeeds.
+
+::::
+
+::: {.manual-check title="Verify Language Package Installation"}
+
+Confirm that the submitted installation job completed successfully and that the
+project package declarations remain available for the runtime validation page.
+
+```{bash}
+#| eval: false
+test -s rproject.toml
+test -s pyproject.toml
+```
+
+:::

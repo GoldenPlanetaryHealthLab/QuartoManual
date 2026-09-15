@@ -1,10 +1,24 @@
 ---
 title: "Data Science Language Package Layer"
-format: gfm
+format: html
 execute:
   eval: false
 
 ---
+
+::: {.manual-prereq title="Confirm The Dependency Layer"}
+
+Confirm that the project contract and platform dependency declaration are
+available before writing language package declarations.
+
+```{bash}
+#| eval: false
+test -s spack.yaml
+```
+
+:::
+
+:::: {.manual-procedure title="Declare Language Packages"}
 
 This notebook writes `rproject.toml` and `pyproject.toml`.
 
@@ -267,3 +281,19 @@ print(project_contract.pyproject_toml.read_text())
 ```
 
 Stop here. The next notebook writes the runtime activation contract.
+
+::::
+
+::: {.manual-check title="Verify Language Declarations"}
+
+Confirm that both language package declaration files exist and are non-empty.
+
+```{python}
+#| eval: false
+assert project_contract.rproject_toml.exists()
+assert project_contract.pyproject_toml.exists()
+assert project_contract.rproject_toml.stat().st_size > 0
+assert project_contract.pyproject_toml.stat().st_size > 0
+```
+
+:::

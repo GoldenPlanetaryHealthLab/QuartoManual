@@ -37,14 +37,11 @@ input_dir
 
 ::: {.manual-procedure title="Declare The CDS Request Grid"}
 
-Our job defines a large grid of request parameters covering
+Declare the request parameters covering
 country, dataset, variable, year, month, day, and hour. It then filters out
 invalid dates and avoids redundant hourly requests for time-invariant
-variables. End users of a manual could use this space to customize,
-tinker with, and experiment with the request grid before it is split into
-download jobs, and are encouraged to exercise whatever methods
-they prefer to get there, including data transformation libraries,
-data visualization tools, and other data analysis frameworks.
+variables. Adjust the date range, countries, datasets, or variables here when
+the intended run requires a different request set.
 
 ```{r}
 #| eval: false
@@ -119,20 +116,14 @@ request_dicts <- map(request_groups, \(x) {
 :::
 
 ::: {.manual-check title="Check The Pipeline Contract"}
-In some cases, authors may choose not to include a file artifact
-in a check block, but instead an end-of-page summary that 
-describes what the operator should be able to explain or demonstrate.
+Confirm that the request grid and grouped requests contain the expected fields
+and that invalid dates and redundant geopotential hours were removed.
 
 ```{r}
 #| eval: false
-# This page is complete when the operator can explain:
-# - which inputs are required before downloads begin,
-# - which dimensions define the CDS request grid,
-# - why invalid dates are filtered out,
-# - and why requests are grouped by country, dataset, variable, year, and month.
-stopifnot({
-  "I can explain the required inputs, the request grid dimensions, the filtering of invalid dates, and the grouping of requests."
-})
+stopifnot(nrow(cds_api_config) > 0)
+stopifnot(length(request_dicts) > 0)
+stopifnot(all(vapply(request_dicts, function(x) all(c("country", "dataset", "variable", "year", "month") %in% names(x)), logical(1))))
 ```
 
 :::

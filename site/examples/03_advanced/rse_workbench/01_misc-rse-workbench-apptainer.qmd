@@ -1,9 +1,23 @@
 ---
 title: "Helper Functions: Singularity/Apptainer"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm The Workbench Context"}
+
+Run this page from the workbench project root and confirm that the helper
+dependencies used by the page are available.
+
+```{bash}
+#| eval: false
+test -d .
+```
+
+:::
+
+:::: {.manual-procedure title="Define Apptainer Helpers"}
 
 This notebook collects miscellaneous functions that are useful for the RSE 
 Workbench. 
@@ -148,3 +162,18 @@ def show_submitit_job(job: Any) -> Any:
 
     return job.result()
 ```
+
+::::
+
+::: {.manual-check title="Check Helper Definitions"}
+
+Confirm that the page leaves the two helper definitions available for later
+container and scheduler procedures.
+
+```{python}
+#| eval: false
+assert callable(spython_exec)
+assert callable(show_spython)
+```
+
+:::

@@ -14,13 +14,8 @@ NOT YET IMPLEMENTED: This page will show how to stage the dataset using bare sym
 :::
 
 
-This page shows the manual page contract in the context of a real staging task.
-
-The operator must:
-
-1. confirm that the project is ready to receive the staged data;
-2. create the staged input location;
-3. verify that the staged path now exists and points where expected.
+This page shows the manual page contract for a small staging operation. The
+operator supplies the dataset identifier and confirms the resulting path.
 
 ## 1. Prerequisite
 
@@ -34,7 +29,7 @@ operator is working from its root.
 from pathlib import Path
 
 assert Path("README.md").exists(), "Expected README.md to exist before staging data."
-Path("data").mkdir(exist_ok=True)
+assert Path("data").is_dir(), "Expected the data directory to exist before staging data."
 ```
 
 :::
@@ -57,8 +52,9 @@ stage_path = Path("data") / dataset_name
 
 ::: {.manual-procedure title="Create The Staging Link"}
 
-Create the staged location. In a real manual this could call `stagecoach` or
-another institutional tool.
+Create the staged location. In a real manual this mechanical operation could
+invoke `stagecoach` or another institutional tool without expanding its internal
+substeps into tutorial prose.
 
 ```{python}
 #| eval: false

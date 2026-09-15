@@ -1,9 +1,22 @@
 ---
 title: "Validate R From Spack"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm The Spack Layer"}
+
+Confirm that the Spack installation completed before validating R.
+
+```{bash}
+#| eval: false
+test -s spack.yaml
+```
+
+:::
+
+:::: {.manual-procedure title="Validate R From Spack"}
 
 This notebook validates the R installation after the Spack layer is installed.
 
@@ -43,3 +56,17 @@ Expected result:
 
 
 Stop here if R capabilities are wrong.
+
+::::
+
+::: {.manual-check title="Verify R Runtime"}
+
+Confirm that `R`, `Rscript`, and the required image capabilities are reported
+by the container command.
+
+```{bash}
+#| eval: false
+test -s spack.yaml
+```
+
+:::

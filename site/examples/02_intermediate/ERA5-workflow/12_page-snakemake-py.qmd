@@ -6,10 +6,9 @@ execute:
   eval: false
 ---
 
-This page sits between the single-job download definition and the full
-aggregation step. Its job is to show one way a manual can bridge the two:
-describe the download workflow to the operator, then emit a minimal Snakemake
-workflow that can run the grouped jobs at scale.
+This page bridges the single-job download definition and the full aggregation
+step. The operator decides which jobs belong in the run; `quarto-emit` and
+Snakemake materialize and execute the mechanical workflow.
 
 ::: {.manual-prereq title="Confirm The Download Contract Exists"}
 
@@ -34,8 +33,7 @@ required_concepts
 
 ::: {.manual-procedure .emit-config-yaml file="workflow/downloads.yaml" title="Emit A Download Configuration File"}
 
-The first emitted artifact can be a small configuration file that records which
-download jobs Snakemake should expect.
+Emit a configuration file recording the download jobs selected for this run.
 
 ```yaml
 downloads:
@@ -51,15 +49,16 @@ downloads:
     month: "01"
 ```
 
-This does not replace the operator's reasoning about which jobs belong in the
-workflow. It simply materializes that decision into a file Snakemake can read.
+The file materializes the operator's job-selection decision; it does not make
+that decision implicitly.
 
 :::
 
 ::: {.manual-procedure .emit-source-py file="workflow/Snakefile" title="Emit A Minimal Snakefile"}
 
-The second emitted artifact can be a `Snakefile` that maps each configured job
-to the Python download function from the previous page.
+Emit a `Snakefile` that maps each configured job to the Python download function
+from the previous page. Snakemake absorbs the repeated mechanical scheduling
+steps.
 
 ```{python}
 # Pseudocode adapted for a Quarto Manual example
@@ -98,7 +97,8 @@ rule download_era5:
 
 ::: {.manual-check title="Check The Snakemake Integration Contract"}
 
-Finally, we can assert that the emitted files exist and that Snakemake is responsive to the workflow definition.
+Verify that the emitted files exist and that Snakemake accepts the workflow in
+dry-run mode.
 
 ```{python}
 #| eval: false

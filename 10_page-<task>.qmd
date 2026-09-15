@@ -6,7 +6,18 @@ execute:
   eval: false
 ---
 
-This file is the core template for a Quarto Manual workflow page.
+This file is the core template for a Quarto Manual workflow page. Write for a
+competent operator in the relevant domain.
+
+Explicitness is not pedagogy. Describe the action, required inputs, consequential
+choices, expected outputs, and resulting state. Add conceptual explanation only
+when ordinary domain knowledge is insufficient to execute the step correctly.
+
+When generating or revising a Quarto Manual, do not treat explicitness as a
+request for a tutorial. Make actions, decisions, inputs, outputs, state
+transitions, and checks explicit. Automate mechanical execution when no meaningful
+operator judgment occurs between stages, but preserve consequential choices and
+verification boundaries.
 
 A page should do three things:
 
@@ -24,8 +35,10 @@ Replace the placeholder prose and code below with your real procedure.
 
 ## 1. Prerequisites
 
-Use the prerequisite block to check whether the page is allowed to proceed.
-This is where page-to-page dependency should be enforced.
+Use the prerequisite block to establish whether the required starting state
+exists. This is where page-to-page dependency should be enforced. Check the
+tools, files, directories, or prior artifacts needed by the operation; do not
+normally teach the tools being checked.
 
 Good prerequisite checks look for visible project state:
 
@@ -83,19 +96,17 @@ Each procedure block should do one clear part of the step.
 
 ::: {.manual-procedure title="Create A Configuration Directory"}
 
-Create a directory for project configuration files. Note that this chunk won't
-run because we need the user to define the `Path("config")` variable at runtime,
-and we're using `assert` to reinforce that
+Create the configuration directory. Supply the project path if it differs from
+the example, then confirm that the directory did not already exist before
+creating it.
 
 ```{python}
 #| eval: false
 from pathlib import Path
 
-myconfig_dir = "" #Path("config")
-
-assert myconfig_dir.exists() is False, "Expected config directory to not exist before this page runs. Please define the variable `myconfig_dir`"
-
+myconfig_dir = Path("config")  # Replace with the project-specific path.
 myconfig_dir.mkdir(exist_ok=True)
+assert myconfig_dir.is_dir(), "Expected the configuration directory to exist."
 ```
 
 :::
@@ -120,7 +131,9 @@ config_path.write_text(
 
 ## 3. Check
 
-Use the check block to prove that the page succeeded.
+Use the check block to provide observable evidence that the intended transformation
+occurred. It should answer “What should now be true?”, not “What concept should
+the reader have learned?”.
 
 Checks should assert the results of the procedure blocks above. If you want the
 page to emit a reusable test file, you can combine the manual check block with a
@@ -145,7 +158,7 @@ def test_manual_page_created_config():
 
 This block serves two purposes:
 
-- as a Manual check, it shows the reader how to verify their work on the page;
+- as a Manual check, it shows the operator how to verify the resulting state;
 - as an `emit` block, it can materialize a real test file for later reuse.
 
 ## Authoring Notes

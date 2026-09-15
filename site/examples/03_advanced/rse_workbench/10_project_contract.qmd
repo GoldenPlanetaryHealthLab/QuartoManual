@@ -1,9 +1,23 @@
 ---
 title: "Project Contract"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm The Project Root"}
+
+Run this page from the repository that will contain the workbench project.
+
+```{bash}
+#| eval: false
+test -d .
+```
+
+:::
+
+:::: {.manual-procedure title="Declare The Project Contract"}
+
 This notebook defines the project contract.
 It answers one question:
 
@@ -358,3 +372,19 @@ Stop here.
 
 The next notebook uses this contract to define the project's base
 platform image.
+
+::::
+
+::: {.manual-check title="Verify The Project Contract"}
+
+Confirm that the contract resolves the project, environment, container, and
+scheduler paths without creating any downstream artifacts yet.
+
+```{python}
+#| eval: false
+assert project_contract.project_dir.is_absolute()
+assert project_contract.env_dir.parent == project_contract.project_dir
+assert project_contract.singularity_def.parent == project_contract.devcontainer_dir
+```
+
+:::

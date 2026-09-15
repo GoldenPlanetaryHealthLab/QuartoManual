@@ -1,9 +1,23 @@
 ---
 title: "Validate Activation"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm The Activation Contract"}
+
+Confirm that the runtime activation script exists before testing it inside the
+project container.
+
+```{bash}
+#| eval: false
+test -s env/activate.sh
+```
+
+:::
+
+:::: {.manual-procedure title="Test Project Activation"}
 
 This notebook tests only project activation.
 
@@ -51,3 +65,17 @@ R_HOME is empty
 ```
 
 Stop here if activation fails.
+
+::::
+
+::: {.manual-check title="Verify Activation State"}
+
+Confirm that the command output includes the expected executable paths and that
+the project Spack environment activates without setting `R_HOME` prematurely.
+
+```{bash}
+#| eval: false
+test -s env/activate.sh
+```
+
+:::

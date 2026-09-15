@@ -1,9 +1,23 @@
 ---
 title: "Build Platform"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm The Platform Definition"}
+
+Confirm that the platform definition exists and that the project contract has
+not yet been extended with project-specific package layers.
+
+```{bash}
+#| eval: false
+test -s .devcontainer/Singularity.def
+```
+
+:::
+
+:::: {.manual-procedure title="Build The Platform Image"}
 
 This notebook builds the platform image and tests the platform contract.
 
@@ -80,3 +94,17 @@ be tested independently.
 #TODO insert computational tests here e.g. pytest, assert statements, etc.
 
 Stop here and debug if the platform contract fails.
+
+::::
+
+::: {.manual-check title="Verify The Platform Image"}
+
+Confirm that the platform image exists and that the platform-only checks pass
+before adding project-specific layers.
+
+```{bash}
+#| eval: false
+test -s .devcontainer/Singularity.sandbox
+```
+
+:::

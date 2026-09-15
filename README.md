@@ -1,4 +1,4 @@
-# Quarto Manuals: Executable Software Manuals for Reproducible Scientific Workflows
+# Quarto Manuals: Executable Operator Manuals for Reproducible Scientific Workflows
 
 [![hackmd-github-sync-badge](https://hackmd.io/_App6vg9Tr-d0id8Uj675Q/badge)](https://hackmd.io/_App6vg9Tr-d0id8Uj675Q)
 
@@ -44,28 +44,35 @@ practical agentic workflow implementations (such as harnesses) still require car
 Executable literate programming approaches can encode and enforce complex
 workflow steps _and_ generate idempotent results [@knuthLiterateProgramming1992]. 
 
-Quarto is a modern, plain-text, 
+### Quarto Manuals as Executable Operator Manuals
+
+Quarto is a modern, plain-text,
 multi-language, and multi-output literate programming framework for creating 
 reproducible documents and workflows [@allaireQuarto2026]. Building on Quarto with a
 carefully designed set of templates and extensions, we introduce **Quarto Manuals**: a
-framework for **executable software manuals** that guide users through workflows as ordered, interactive 
-pages that combine explanation, code execution, and step verification. Rather than 
-hiding workflow decisions and steps, Quarto Manuals keep them visible and editable, 
-making them ideal for research computing contexts where local constraints and 
-expert judgment often shape execution parameters. The framework is powered 
+framework for **executable operator manuals** that expose ordered procedures,
+required inputs, consequential decisions, observable state transitions, and
+verification points. A Quarto Manual documents how a competent operator performs
+a workflow; it does not attempt to teach ordinary concepts from that operator's
+domain. Explanation is optional and subordinate to operation. Rather than
+hiding workflow decisions and steps, Quarto Manuals keep them visible and editable,
+making them useful for research computing contexts where local constraints and
+expert judgment often shape execution parameters. Mechanical work may be
+automated, but automation should not erase operator decisions, state changes, or
+verification boundaries. The framework is powered
 by `quarto-emit`, a lightweight backend extension that materializes conventional 
 workflow artifacts from manual pages when needed. We demonstrate the approach 
-with three examples of increasing sophistication: a simple manual for
+with three examples of increasing operational complexity: a simple manual for
 staging datasets in your project space; an intermediate manual for geospatial
 aggregation of environmental exposure data; and a complex manual for creating
 robust, reproducible, fully containerized geospatial data science
 environments on High Performance Computing (HPC) clusters. All examples are available at the project [website](https://goldenplanetaryhealthlab.github.io/QuartoManual/).
 
-For authors, Quarto Manuals provide a structured yet adaptable way to turn 
-recurring workflows into reusable operators' manuals for 
-themselves and colleagues; for operators, they provide a 
-stepwise, testable process for generating reproducible setup and execution artifacts 
-and confirming progress throughout execution in a structured and auditable manner.
+For authors, Quarto Manuals provide a structured yet adaptable way to turn
+recurring workflows into reusable operators' manuals for themselves and
+colleagues. For operators, they provide a reproducible handoff: a smallest
+reliable sequence of actions that leaves visible artifacts and confirms progress
+throughout execution in a structured and auditable manner.
 
 Quarto Manuals promise to improve the reproducibility and reliability of scientific
 workflows — particularly in contexts like CSPH where local constraints and expert 

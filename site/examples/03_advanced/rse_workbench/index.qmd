@@ -13,8 +13,8 @@ execute:
 
 ## Overview
 
-This example shows Quarto Manuals at their most ambitious in the current
-project: a reproducible RSE workbench assembled across many pages.
+This example shows Quarto Manuals at their most operationally complex in the
+current project: a reproducible RSE workbench assembled across many pages.
 
 Unlike the smaller examples, this manual spans platform setup, container
 construction, language package management, activation checks, and scheduler
@@ -22,9 +22,8 @@ integration.
 
 It is included here as a case study in scale.
 
-Some of the page names retain language from the earlier development history of
-the workbench. That is acceptable for the example because the important point is
-that each page still behaves like a manual page:
+Some page names retain language from the earlier development history of the
+workbench. Each operational page now exposes the same manual contract:
 
 - check whether the step is ready to run;
 - perform one concrete part of the environment assembly;

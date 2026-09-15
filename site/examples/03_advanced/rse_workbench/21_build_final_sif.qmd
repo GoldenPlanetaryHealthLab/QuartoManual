@@ -1,10 +1,26 @@
 ---
 title: "Build Final SIF"
-format: gfm
+format: html
 execute:
   eval: false
   
 ---
+
+::: {.manual-prereq title="Confirm All Runtime Validations"}
+
+Confirm that platform, activation, R, language packages, and Quarto validation
+have completed before building the final read-only image.
+
+```{bash}
+#| eval: false
+test -s env/activate.sh
+test -s rproject.toml
+test -s pyproject.toml
+```
+
+:::
+
+:::: {.manual-procedure title="Build And Validate The Final Image"}
 
 This notebook builds the final read-only SIF from the validated platform definition.
 
@@ -346,3 +362,17 @@ Expected:
 
 ---
 
+::::
+
+::: {.manual-check title="Verify The Final Image"}
+
+Confirm that the final SIF exists and that the runtime, Spack, R, and Quarto
+checks report the expected installations.
+
+```{python}
+#| eval: false
+assert project_contract.build_image.exists()
+assert project_contract.build_image.stat().st_size > 0
+```
+
+:::

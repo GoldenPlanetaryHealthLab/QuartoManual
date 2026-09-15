@@ -1,9 +1,23 @@
 ---
 title: "Launch VS Code Tunnel"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm The Final Image"}
+
+Confirm that the read-only project image and activation script have been
+validated before generating the VS Code tunnel launch script.
+
+```{bash}
+#| eval: false
+test -s env/activate.sh
+```
+
+:::
+
+:::: {.manual-procedure title="Write The VS Code Launch Script"}
 
 This notebook writes the VS Code launch script.
 
@@ -99,3 +113,18 @@ Launch manually from the project directory:
 ```bash
 sbatch "$LAUNCHSCRIPT"
 ```
+
+::::
+
+::: {.manual-check title="Verify The Launch Script"}
+
+Confirm that the generated launch script is executable and points at the
+validated project runtime.
+
+```{python}
+#| eval: false
+assert project_contract.launch_script.exists()
+assert project_contract.launch_script.stat().st_mode & 0o111
+```
+
+:::

@@ -1,9 +1,24 @@
 ---
 title: "Validate Quarto"
-format: gfm
+format: html
 execute:
   eval: false
 ---
+
+::: {.manual-prereq title="Confirm Language Packages"}
+
+Confirm that the language package installation has completed before validating
+Quarto inside the same runtime.
+
+```{bash}
+#| eval: false
+test -s rproject.toml
+test -s pyproject.toml
+```
+
+:::
+
+:::: {.manual-procedure title="Validate Quarto"}
 
 This notebook validates Quarto after Spack, R, and language packages are installed.
 
@@ -46,3 +61,18 @@ If project notebooks require executable filters like `sorting-hat` or `ripper`, 
 The activation script already prepends `/work/env/bin` to `PATH`.
 
 Do not rely on arbitrary `/work/dev/<filter>` paths unless those files are created by a notebook and made executable.
+
+::::
+
+::: {.manual-check title="Verify Quarto Runtime"}
+
+Confirm that `quarto --version` and `quarto check all` succeed inside the
+activated container runtime.
+
+```{bash}
+#| eval: false
+test -s rproject.toml
+test -s pyproject.toml
+```
+
+:::

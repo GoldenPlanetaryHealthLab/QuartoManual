@@ -6,7 +6,18 @@ execute:
 ---
 
 This section illustrates the smallest useful shape of a Quarto Manual page,
-and serves as the working template for Quarto Manual authors.
+and serves as the working template for Quarto Manual authors. Write for a
+competent operator in the relevant domain.
+
+Explicitness is not pedagogy. Describe the action, required inputs, consequential
+choices, expected outputs, and resulting state. Add conceptual explanation only
+when ordinary domain knowledge is insufficient to execute the step correctly.
+
+When generating or revising a Quarto Manual, do not treat explicitness as a
+request for a tutorial. Make actions, decisions, inputs, outputs, state
+transitions, and checks explicit. Automate mechanical execution when no meaningful
+operator judgment occurs between stages, but preserve consequential choices and
+verification boundaries.
 
 A Page should do three things:
 
@@ -22,8 +33,10 @@ In Quarto Manuals, we implement these requirements in specific block types, whic
 
 ## 1. Prerequisites
 
-Use the prerequisite block to check whether the page is allowed to proceed.
-This is where page-to-page dependency should be enforced.
+Use the prerequisite block to establish whether the required starting state
+exists. This is where page-to-page dependency should be enforced. Check the
+tools, files, directories, or prior artifacts needed by the operation; do not
+normally teach the tools being checked.
 
 Good prerequisite checks look for visible project state:
 
@@ -75,7 +88,9 @@ pytest tests/test_previous_step.py
 ## 2. Procedure
 
 Procedure blocks contain the work of the page. A page may use one procedure
-block or several.
+block or several. Each procedure changes project or system state and should make
+the operator's inputs, consequential choices, and expected resulting artifact
+visible. Avoid tutorial exposition by default.
 
 Each procedure block should do one clear part of the step.
 
@@ -112,7 +127,9 @@ config_path.write_text(
 
 ## 3. Check
 
-Use the check block to prove that the page succeeded.
+Use the check block to provide observable evidence that the intended transformation
+occurred. It should answer “What should now be true?”, not “What concept should
+the reader have learned?”.
 
 Checks should assert the results of the procedure blocks above. If you want the
 page to emit a reusable test file, you can combine the manual check block with a
@@ -137,7 +154,7 @@ def test_manual_page_created_config():
 
 This block serves two purposes:
 
-- as a manual check, it shows the reader how to verify the page;
+- as a manual check, it shows the operator how to verify the resulting state;
 - as an emit block, it can materialize a real test file for later reuse.
 
 ## Authoring Notes

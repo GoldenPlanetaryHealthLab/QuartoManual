@@ -24,7 +24,9 @@ Each example mirrors the same Page contract:
 - one check block.
 
 What changes across examples is not the framework, but the complexity of the
-workflow being narrated.
+operations and state transitions being managed. More sophisticated examples do
+not need more explanatory prose; reliable automation may make a mature manual
+more concise by absorbing mechanical substeps.
 
 ## The Three Example Levels
 
@@ -61,7 +63,9 @@ support, and repeated validation.
 Read the examples as rendered manuals, not just as documentation prose.
 
 They are intended to show what an operator would see after cloning a manual
-template and opening the pages locally.
+template and opening the pages locally. Read each page as a sequence of
+starting state, action, resulting state, and verification.
 
 That is why the examples are more complete than the root template: the template
-teaches by prompting, while the examples teach by demonstration.
+prompts authors, while the examples demonstrate bounded operations, meaningful
+choices, mechanical automation, exceptional explanation, and concrete checks.

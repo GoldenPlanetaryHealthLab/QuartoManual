@@ -8,19 +8,14 @@ execute:
 
 ::: {.callout-warning}
 
-NOT YET IMPLEMENTED: This page will show how to stage the dataset using the `stagecoach` tool, which is a more robust and user-friendly approach compared to creating bare symlinks. The operator must:
-
+NOT YET IMPLEMENTED: replace the placeholder directory operation below with the
+institutional `stagecoach` command and its concrete output check.
 
 :::
 
-
-This page shows the manual page contract in the context of a real staging task.
-
-The operator must:
-
-1. confirm that the project is ready to receive the staged data;
-2. create the staged input location;
-3. verify that the staged path now exists and points where expected.
+This page shows the manual page contract for a tool-backed staging operation.
+The choice of staging tool is explicit; its mechanical substeps remain inside
+the tool.
 
 ## 1. Prerequisite
 
@@ -34,7 +29,7 @@ operator is working from its root.
 from pathlib import Path
 
 assert Path("README.md").exists(), "Expected README.md to exist before staging data."
-Path("data").mkdir(exist_ok=True)
+assert Path("data").is_dir(), "Expected the data directory to exist before staging data."
 ```
 
 :::
@@ -57,8 +52,9 @@ stage_path = Path("data") / dataset_name
 
 ::: {.manual-procedure title="Create The Staging Link"}
 
-Create the staged location. In a real manual this could call `stagecoach` or
-another institutional tool.
+Create the staged location with `stagecoach` once the institutional command and
+dataset identifier are available. The placeholder creates the expected path so
+the page remains a bounded example.
 
 ```{python}
 #| eval: false

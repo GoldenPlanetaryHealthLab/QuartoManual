@@ -1,13 +1,28 @@
 ---
 title: "Install Spack Layer"
-format: gfm
+format: html
 execute:
   eval: false
 ---
 
+::: {.manual-prereq title="Confirm Activation And Spack Declarations"}
+
+Confirm that activation and dependency declaration artifacts exist before
+submitting the Spack installation.
+
+```{bash}
+#| eval: false
+test -s env/activate.sh
+test -s spack.yaml
+```
+
+:::
+
+:::: {.manual-procedure title="Install The Spack Layer"}
+
 This notebook installs the project Spack layer. Spack works by creating
-a project specific DAG of dependencies and finding the best way to build them.
-Installation will usually work, but you can use this notebook to debug installation issues.
+the declared project dependencies. Installation may be submitted to Slurm; use
+the configured partition, CPU, memory, and time values for the target cluster.
 
 Do not run `rv sync`, `uv sync`, Quarto checks, or VS Code, yet.
 
@@ -119,3 +134,17 @@ if result is not None:
 ```
 
 Stop here until the Spack layer succeeds.
+
+::::
+
+::: {.manual-check title="Verify The Spack Layer"}
+
+Confirm that the installation job completed successfully and that the project
+Spack environment can be queried from the activated runtime.
+
+```{bash}
+#| eval: false
+test -s spack.yaml
+```
+
+:::

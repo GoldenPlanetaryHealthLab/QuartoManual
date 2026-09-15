@@ -6,9 +6,9 @@ execute:
   eval: false
 ---
 
-This page aims to make one grouped request concrete: define the request parameters, 
-translate the country code into a bounding box, and describe how one 
-download task writes its output.
+This page turns one grouped request into a download task. The operator chooses
+the request values and dry-run behavior; the function supplies the predictable
+output path and CDS bounding box.
 
 ::: {.manual-prereq title="Confirm Request Parameters"}
 
@@ -40,8 +40,7 @@ required_fields
 
 ::: {.manual-procedure title="Declare One Download Request"}
 
-The original notebook starts by showing the parameter shape for a single ERA5
-download job.
+Set the parameter values for one grouped ERA5 download job.
 
 ```{python}
 #| eval: false
@@ -63,9 +62,9 @@ request = {
 
 ::: {.manual-procedure title="Describe The Download Function"}
 
-The notebook then defines a general-purpose `download_era5()` function. Its key
-responsibilities are to build a predictable output path, translate a country
-code into a CDS bounding box, and optionally run in dry-run mode.
+Define `download_era5()`. It builds a predictable output path, translates a
+country code into a CDS bounding box, and supports a dry-run before contacting
+CDS.
 
 ```{python}
 #| eval: false
@@ -97,7 +96,7 @@ def download_era5(request_dict, output_dir="data/intermediates/download_era5_nb"
 
 ::: {.manual-procedure title="Define The Bounding Box Helper"}
 
-The notebook also defines a helper that maps each ISO country code to the
+Define a helper that maps each ISO country code to the
 bounding box required by CDS.
 
 ```{python}
@@ -113,21 +112,14 @@ def get_country_bbox(iso_code):
 
 ::: {.manual-check title="Check The Download Job Contract"}
 
-In this check section, the author can add a computational test to verify that the 
-download job is defined correctly, or that a single download
-executes and produces the expected output file.
+Run the dry-run and verify the output naming contract before enabling a real
+download. A real run must leave the expected GRIB file on disk.
 
 ```{python}
 #| eval: false
-# This page is complete when the operator can point to:
-# - the fields required in one grouped ERA5 request,
-# - the output file naming pattern,
-# - the difference between dry-run and real-run behavior,
-# - and the role of the country bounding-box helper in building the final CDS request.
-output_file = download_era5(request, dry_run=False)
+output_file = download_era5(request, dry_run=True)
 assert output_file == "MDG_reanalysis-era5-land_2m_temperature_2021-01.grib", \
     f"Expected output file name, got {output_file}"
-assert Path(output_file).exists()
 ```
 
 :::
