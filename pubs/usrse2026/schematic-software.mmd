@@ -1,0 +1,35 @@
+%%{init: {"theme":"base","look":"classic","layout":"dagre","htmlLabels":false,"flowchart":{"curve":"linear","wrappingWidth":300,"htmlLabels":false,"nodeSpacing":34,"rankSpacing":44},"themeVariables":{"fontFamily":"Arial, sans-serif","primaryTextColor":"#1E1E1E","lineColor":"#6B7280","clusterBkg":"#FFFFFF","clusterBorder":"#CBD5E1"}}}%%
+flowchart TB
+
+  subgraph SOFTWARE["Visible software project state"]
+    direction TB
+
+    ROOT["project/"]
+
+    subgraph INPUT_STAGE["Inputs and conditions"]
+      direction TB
+      INPUTS["project/<br/>├── data/<br/>├── config/<br/>└── environment/"]
+    end
+
+    subgraph ARTIFACT_STAGE["Created or changed artifacts"]
+      direction TB
+      ARTIFACTS["project/<br/>├── src/<br/>├── scripts/<br/>└── results/"]
+    end
+
+    subgraph EVIDENCE_STAGE["Verification evidence"]
+      direction TB
+      EVIDENCE["project/<br/>├── tests/<br/>├── logs/<br/>└── checked-output.parquet ✓"]
+    end
+
+    ROOT --> INPUT_STAGE --> ARTIFACT_STAGE --> EVIDENCE_STAGE
+  end
+
+  classDef root fill:#F4F4F4,stroke:#4B5563,stroke-width:2px,color:#1E1E1E;
+  classDef code fill:#F8F8F8,stroke:#6B7280,stroke-width:1.5px,color:#1E1E1E,font-family:monospace,text-align:left;
+
+  class ROOT root;
+  class INPUTS,ARTIFACTS,EVIDENCE code;
+  style INPUT_STAGE fill:#FFFFFF,stroke:#CBD5E1,stroke-width:1px
+  style ARTIFACT_STAGE fill:#FFFFFF,stroke:#CBD5E1,stroke-width:1px
+  style EVIDENCE_STAGE fill:#FFFFFF,stroke:#CBD5E1,stroke-width:1px
+  style SOFTWARE fill:#FFFFFF,stroke:#CBD5E1,stroke-width:1px

@@ -4,6 +4,9 @@ project:
   render: 
     - "*.qmd"
 
+shortcodes:
+  - _extensions/quarto-ext/fontawesome/fontawesome.lua
+
 book:
   title: Quarto Manual
 

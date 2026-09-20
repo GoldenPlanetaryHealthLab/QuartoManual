@@ -1,0 +1,101 @@
+%%{init: {
+  "theme": "base",
+  "flowchart": {
+    "curve": "basis",
+    "nodeSpacing": 34,
+    "rankSpacing": 44,
+    "htmlLabels": true
+  },
+  "themeVariables": {
+    "fontFamily": "Arial, sans-serif",
+    "primaryTextColor": "#1E1E1E",
+    "lineColor": "#6B7280",
+    "clusterBkg": "#FFFFFF",
+    "clusterBorder": "#CBD5E1"
+  }
+}}%%
+
+flowchart LR
+
+  %% ─────────────────────────────────────────────
+  %% LEFT: physical instruction manual
+  %% ─────────────────────────────────────────────
+  subgraph LEGO["Physical instruction manual"]
+    direction TB
+
+    L1["ILLUSTRATION 01<br/><br/><b>1 · Unpack</b>"]
+    L2["ILLUSTRATION 02<br/><br/><b>2 · Inspect and arrange</b>"]
+    L3["ILLUSTRATION 03<br/><br/><b>3 · Assemble one step</b>"]
+    L4["ILLUSTRATION 04<br/><br/><b>4 · Compare with instructions</b>"]
+
+    L1 --> L2 --> L3 --> L4
+  end
+
+
+  %% ─────────────────────────────────────────────
+  %% MIDDLE: one Quarto Manual page
+  %% ─────────────────────────────────────────────
+  subgraph MANUAL["Quarto Manual page"]
+    direction TB
+
+    PAGE["<b>Page N</b><br/>One bounded operational transformation"]
+
+    PRE["<b>PREREQUISITE</b><br/>What must already be true?<br/><br/>Inspect required inputs,<br/>tools, configuration, and state"]
+
+    PROC["<b>PROCEDURE</b><br/>What should the operator do?<br/><br/>Perform one operation while<br/>keeping consequential choices visible"]
+
+    CHECK["<b>CHECK</b><br/>What evidence permits progress?<br/><br/>Inspect the resulting artifact<br/>or observable project state"]
+
+    GATE{"Evidence<br/>sufficient?"}
+
+    NEXT(["Continue to<br/>the next page"])
+    REPAIR(["Stop, repair,<br/>and rerun"])
+
+    PAGE --> PRE --> PROC --> CHECK --> GATE
+    GATE -- Yes --> NEXT
+    GATE -- No --> REPAIR
+    REPAIR -. return .-> PRE
+  end
+
+
+  %% ─────────────────────────────────────────────
+  %% RIGHT: visible software project state
+  %% ─────────────────────────────────────────────
+  subgraph FILES["Visible software project state"]
+    direction TB
+
+    ROOT["<b>project/</b>"]
+
+    INPUTS["<b>Inputs and conditions</b><br/><p align="left"><code>├── data/</code><br/><code>├── config/</code><br/><code>└── environment/</code></p>"]
+
+    ARTIFACTS["<b>Created or changed artifacts</b><br/><p align="left"><code>├── src/</code><br/><code>├── scripts/</code><br/><code>└── results/</code></p>"]
+
+    EVIDENCE["<b>Verification evidence</b><br/><p align="left"><code>├── tests/</code><br/><code>├── logs/</code><br/><code>└── output.parquet ✓</code></p>"]
+
+    ROOT --> INPUTS --> ARTIFACTS --> EVIDENCE
+  end
+
+
+  %% ─────────────────────────────────────────────
+  %% STYLING
+  %% ─────────────────────────────────────────────
+  classDef page fill:#F4F4F4,stroke:#4B5563,stroke-width:2px,color:#1E1E1E;
+  classDef prerequisite fill:#F6DCE1,stroke:#A51C30,stroke-width:3px,color:#1E1E1E;
+  classDef procedure fill:#DCEBF3,stroke:#2F6F95,stroke-width:3px,color:#1E1E1E;
+  classDef check fill:#DDECE1,stroke:#4D8B57,stroke-width:3px,color:#1E1E1E;
+  classDef file fill:#F8F8F8,stroke:#6B7280,stroke-width:1.5px,color:#1E1E1E;
+  classDef gate fill:#FFF3CD,stroke:#B7791F,stroke-width:2px,color:#1E1E1E;
+  classDef outcome fill:#FFFFFF,stroke:#6B7280,stroke-width:1.5px,color:#1E1E1E;
+
+
+  class PAGE page;
+  class PRE prerequisite;
+  class PROC procedure;
+  class CHECK check;
+  class ROOT,INPUTS,ARTIFACTS,EVIDENCE file;
+  class GATE gate;
+  class NEXT,REPAIR outcome;
+
+  style LEGO fill:#FFFFFF,stroke:#CBD5E1,stroke-width:1px
+  style MANUAL fill:#FFFFFF,stroke:#4B5563,stroke-width:2px
+  style FILES fill:#FFFFFF,stroke:#CBD5E1,stroke-width:1px

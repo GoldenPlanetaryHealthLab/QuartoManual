@@ -44,6 +44,12 @@ $endif$
 $if(heading_color)$
   heading_color: "$heading_color$",
 $endif$
+$if(poster_width)$
+  width: $poster_width$,
+$endif$
+$if(poster_height)$
+  height: $poster_height$,
+$endif$
 doc,
 )
 

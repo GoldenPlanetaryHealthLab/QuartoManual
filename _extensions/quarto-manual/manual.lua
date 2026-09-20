@@ -9,6 +9,7 @@ local fragment_types = {
       kind = "callout",
       type = "important",
       title = "Prerequisite",
+      icon = "list-check",
     },
   },
   ["manual-procedure"] = {
@@ -17,6 +18,7 @@ local fragment_types = {
       kind = "callout",
       type = "tip",
       title = "Procedure",
+      icon = "person-walking",
     },
   },
   ["manual-check"] = {
@@ -25,6 +27,7 @@ local fragment_types = {
       kind = "callout",
       type = "warning",
       title = "Check",
+      icon = "clipboard-check",
     },
   },
   ["manual-explain"] = {
@@ -33,6 +36,7 @@ local fragment_types = {
       kind = "callout",
       type = "note",
       title = "Why This Step Exists",
+      icon = "circle-question",
     },
   },
 }
@@ -113,11 +117,39 @@ local function semantic_attr(fragment)
   return attr
 end
 
+-- Callout titles are created after source shortcodes have already been parsed,
+-- so ask the installed shortcode extension to emit the same accessible inline.
+local function fontawesome_icon(icon)
+  if quarto.doc.is_format("html:js") or quarto.doc.is_format("pdf") then
+    return quarto.utils.string_to_inlines("{{< fa " .. icon .. " >}}")
+  end
+
+  return nil
+end
+
+local function callout_title(fragment, attr)
+  local presentation = fragment.specification.presentation
+  local author_title = attr.attributes["title"]
+  local title = presentation.title
+
+  if author_title ~= nil and author_title ~= "" then
+    title = title .. ": " .. author_title
+  end
+
+  local inlines = pandoc.Inlines({})
+  local icon = fontawesome_icon(presentation.icon)
+  if icon ~= nil then
+    inlines:extend(icon)
+    inlines:insert(pandoc.Space())
+  end
+  inlines:insert(pandoc.Str(title))
+  return inlines
+end
+
 local function render_callout(fragment)
   local presentation = fragment.specification.presentation
   local attr = semantic_attr(fragment)
-  local author_title = attr.attributes["title"]
-  local title = author_title or presentation.title
+  local title = callout_title(fragment, attr)
 
   quarto.log.output(
     "[quarto-manual] rendering "
@@ -130,7 +162,7 @@ local function render_callout(fragment)
     appearance = attr.attributes["appearance"],
     collapse = attr.attributes["collapse"],
     content = fragment.content,
-    icon = attr.attributes["icon"],
+    icon = false,
     title = title,
     type = presentation.type,
     attr = attr,

@@ -1,7 +1,7 @@
 ---
 title: Quarto Manuals
-author: Edenian
-subtitle: Executable software operations manuals built from independent Quarto pages
+author: Tinashe M. Tapera, Michelle Audirac, Danielle Braun, Christopher Golden
+subtitle: Executable operator manuals for reproducible scientific workflows
 header_font: "Baskerville"
 header_logo: "dummy-thchan.png"
 header_block_color: "A51C30"
@@ -9,269 +9,208 @@ heading_color: "1E1E1E"
 body_color: "F4F4F4"
 body_font: "Arial"
 format:
-  poster-typst: 
+  poster-typst:
     keep-typ: true
+    poster_width: 44in
+    poster_height: 33in
 execute:
-  eval: true
+  eval: false
+filters:
+  - ../../_extensions/quarto-manual/manual.lua
 ---
-
-PLACEHOLDER CONTENT. NOT YET IMPLEMENTED
-
-```{r}
-#| echo: false
-library(ggplot2)
-var <- "JN.1"
-today_date <- Sys.Date()
-```
-
-```{=typst}
-#import "@preview/showybox:2.0.4": showybox 
-#let main = rgb("#A51C30")
-
-#showybox(
-  title-style: (
-    boxed-style: (
-      anchor: (
-        x: center,
-        y: horizon
-      ),
-      radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt),
-    )
-  ),
-  frame: (
-    title-color: main,
-    body-color: main.lighten(80%),
-    footer-color: main.lighten(60%),
-    border-color: main.darken(20%),
-    radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)
-
-  ),
-  title: "tl;dr",
-  footer: text(size: 30pt, weight: 600, "Check it out: you can also add Typst code to make math functions or diagrams.")
-)[
-  This is a Typst template that can be used with Quarto to execute code and automatically render outputs like text, plots, and tables.
-  Forget about copying and pasting screenshots 
-
-  $ frac(partial^n f, partial x_i ... partial x_j)(a_1, a_2, ..., a_n) = frac(partial^n f, partial x_j ... partial x_i)(a_1, a_2, ..., a_n) $
-]
-```
 
 :::{.block fill="white" inset="30pt" radius="6pt"}
 
-# **INSTALLATION**
+# The problem
 
-To install this poster template, go to your project root and run:
+Scientific workflows depend on local platforms, configuration, versions,
+permissions, and ordered state changes. A README can describe the workflow steps,
+but cannot easily show whether it is safe to proceed between steps or whether the workflow 
+succeeded.
 
-```bash
-quarto install extension https://codeberg.org/edenian-prince/quarto-typst-poster/archive/main.zip
-```
+# Our approach
 
-You can also add the template/demo quarto document by running the code below,
-but note, it adds all the files in the repo currently..
-
-```bash
-quarto use template https://codeberg.org/edenian-prince/quarto-typst-poster/archive/main.zip
-```
+**Quarto Manuals** are ordered `.qmd` pages for domain-competent scientists who run software. 
+Each page makes inputs, choices, actions, artifacts, and checks visible. The rendered manual is
+a readable interface; the source page remains the operational record.
 
 :::
 
-::::{.block fill="white" inset="30pt" radius="6pt"}
+:::{.block fill="white" inset="30pt" radius="6pt"}
 
+# The page contract
 
-# **USAGE**
+Each operational page answers three questions: what must already be true,
+what change(s) will I make, and what evidence says it worked?
 
-After installing, change the format in your Quarto document's yaml front matter to `format: poster-typst`
+::: {.manual-prereq title="Start From Current State"}
 
-```markdown
----
-format:
-  poster-typst: default
----
-```
-
-You can also add other options in the front matter like a title, subtitle, and color options. See the codeberg repo for a complete list of options.
-
-
-# **ADDING SECTIONS**
-
-This format is a Typst canvas, but Quarto is where you write the sections that contain text, code, and outputs. These sections are what you are 
-reading now. To create these sections in white blocks (or whatever color you want...), wrap your sections in fenced divs like this:
-
+Check for visible files, tools, configuration, or prior artifacts.
 ````markdown
-:::{.block fill="white" inset="30pt" radius="6pt"}
-
-Headings, text, and code go here
-
-:::
+```python
+# Example: check that a file exists
+import os
+assert os.path.exists("data.csv"), "data.csv is required!"
+```
 ````
 
-
-::::
-
-
-
-:::{.block fill="white" inset="30pt" radius="6pt"}
-
-# **ADDING PLOTS**
-
-Run put your code in the Quarto document like you normally would and it will render here.
-
-- Center the plot with `#| fig-align: center` 
-- Adjust the width with `#| fig-width: 12`
-- Adjust the height with `#| fig-height: 9`
-- Adjust plot attributes in your code
-
-```{r}
-#| message: false 
-#| warning: false
-#| echo: false 
-#| fig-width: 12
-#| fig-height: 9
-#| fig-align: center 
-mpg2 <- data.frame(
-  name = c("Sedan", "SUV", "Truck", "Hybrid", "Electric"),
-  value = c(25, 18, 15, 45, 120)
-)
-data <- data.frame(x=rnorm(100))
-
-# Custom a few word of the title only:
-my_title <- expression(paste("A ", italic(bold("blue")), " histogram"))
-ggplot( data=data, aes(x=x)) + 
-  geom_histogram(fill="skyblue", alpha=0.8) +
-  ggtitle(my_title) +
-  theme_minimal() +
-  theme(
-        plot.title = element_text(size=38),
-        axis.title.x = element_text(size=30),
-        axis.text.x = element_text(size=30),
-        axis.title.y = element_text(size=30),
-        axis.text.y = element_text(size=30)
-  )
-
-
-```
-Add a footer or something underneath
-
 :::
 
-:::{.block fill="white" inset="30pt" radius="6pt"}
+::: {.manual-procedure title="Make One Bounded Change"}
 
-# **ADDING TABLES**
-
-Likewise, you can add tables by doing the same as above.
-
-
-```{r}
-#| message: false 
-#| warning: false
-#| echo: false 
-#| fig-width: 12
-#| fig-height: 9
-#| fig-align: center 
-library(gtsummary)
-# Setting JAMA theme for gtsummary
-theme_gtsummary_journal("jama")
-#> Setting theme "JAMA"
-# Themes can be combined by including more than one
-theme_gtsummary_compact()
-#> Setting theme "Compact"
-
-gt_table <- trial |>
-  select(age, grade, trt) |>
-  tbl_summary(by = trt) |>
-  as_gt() |>
-  gt::tab_options(
-    table.font.size = gt::px(30)
-  )
-
-library(tinytable)
-library(gt)
-x <- gtcars |>
-  select(1:3) |> 
-  head() 
-
-x |>
-  tt(width = c(.25, .55, .25)) |>
-  style_tt(align = c("lcc")) |> 
-  style_tt(
-    j = 3, 
-    i = which(x$year == 2015),
-    color = "red"
-)
-```
-
-`tinytable` seems to look the best in this format fyi.
-
-:::
-
-
-
-:::{.block fill="white" inset="30pt" radius="6pt"}
-
-# **TYPST CODE**
-
-You can add Typst snippets in the Quarto doc like this with showybox.
-This is how I made the `tl;dr` and `Source Code` blocks.
-
+Perform one bounded transformation while keeping meaningful choices and
+execution boundaries visible.
 ````markdown
-```{=typst}
-#import "@preview/showybox:2.0.4": showybox 
-
-#showybox(...)
-
+```python
+# Example: manipulate the data.csv file
+import pandas as pd
+data = pd.read_csv("data.csv")
+# Perform a bounded change, e.g., filter rows
+data_filtered = data[data['value'] > 0]
+# Save the result to a new file
+data_filtered.to_csv("data_filtered.csv", index=False)
 ```
 ````
+
+:::
+
+::: {.manual-check title="Verify The Result"}
+Prove that the intended state or artifact exists; a successful command alone is
+not evidence that the workflow succeeded.
+````markdown
+```python
+# Assert that the filtered data has the expected properties
+assert not data_filtered.empty, "Filtered data is empty"
+```
+````
+:::
+
+:::
+
+```{=typst}
+#let captioned-image(path, caption, width: 100%) = {
+  stack(
+    dir: ttb,
+    spacing: 8pt,
+    align(
+      center,
+      text(size: 20pt, weight: "bold", caption),
+    ),
+    align(
+      center,
+      image(path, width: width),
+    ),
+  )
+}
+
+#colbreak()
+
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 0.2in,
+  align: top,
+
+  captioned-image(
+    "schematic-manual_inkscape2.svg",
+    [Structure of a Quarto Manual Page],
+  ),
+
+  stack(
+    dir: ttb,
+    spacing: 0.25in,
+
+    captioned-image(
+      "lego_cropped.png",
+      [Like playing with LEGO — a build is constructed by taking inventory of your pieces, putting them together, and verifying the result against the instructions],
+    ),
+
+    captioned-image(
+      "schematic-software.svg",
+      [Your Assembled Output is a Reproducible Scientific Software Project],
+    ),
+  ),
+)
+
+#v(0.18in)
+
+#align(center)[
+  #stack(
+    dir: ttb,
+    spacing: 0.10in,
+    align(center)[
+      #text(size: 60pt, weight: "bold")[Explore Quarto Manuals]
+    ],
+    align(center)[
+      #link("https://goldenplanetaryhealthlab.github.io/QuartoManual")[
+        #text(size: 30pt)[goldenplanetaryhealthlab.github.io/QuartoManual]
+      ]
+    ],
+    align(center)[
+      #image("quarto-manual-qr.svg", width: 1.85in)
+    ],
+  )
+]
+
+#colbreak()
+```
+
+:::{.block fill='rgb("EFF6FF")' stroke='(left: 6pt + rgb("2563EB"))' inset="30pt" radius="6pt"}
+
+# Internals
+
+- **Quarto:** a manual is powered by Quarto, a user-friendly scientific publishing
+  system that uses plain text notebooks. Quarto projects can be seamlessly rendered to HTML, PDF,
+  or other formats.
+- **Book-as-Manual:** a manual is a Book project with ordered pages and navigation—mimicking 
+  a physical instruction manual.
+- **Extensions:** thin extensions compose existing Quarto features. We introduce 
+  **`quarto-emit`**, an extension that reviews source code blocks and materializes them as 
+  code, tests, scripts, and configuration.
 
 :::
 
 :::{.block fill="white" inset="30pt" radius="6pt"}
 
-# **RENDER THE POSTER**
+# Why this exists
 
-````bash 
-quarto render poster.qmd
-````
+Scientific software workflows are often too complex for a README and too
+judgment-heavy to hide behind a single command-line tool. Thorough 
+documentation may _describe_ a workflow, but websites, tutorials, and
+blog posts lack the _interactivity_ needed to navigate whether the current state/step 
+is valid, what local environment adjustments are needed, or what evidence 
+permits proceeding to the next step.
+
+**Quarto Manuals** provide a reproducible handoff: the smallest reliable sequence
+of actions that leaves visible artifacts and confirms progress. They're designed to
+preserve operator authority where **local constraints** and **scientific judgment** matter,
+while making repeatable work **mechanical and transparent**.
 
 :::
 
+:::{.block fill="white" inset="30pt" radius="6pt"}
 
+# Future development opportunities
 
-```{=typst}
+A Manual page provides a transparent interface between an operator and an
+**agentic coding assistant**:
 
-#showybox(
-  title-style: (
-    boxed-style: (
-      anchor: (
-        x: center,
-        y: horizon
-      ),
-      radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt),
-    )
-  ),
-  frame: (
-    title-color: main,
-    body-color: main.lighten(80%),
-    footer-color: main.lighten(60%),
-    border-color: main.darken(20%),
-    radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)
-  ),
-  title: "Source Code",
-)[
-```
-<!-- im adding the qr code between the typst block here, fyi -->
+- **Bounded context:** prerequisites verbally identify the approved specification,
+  relevant files, environment, and constraints.
+- **Bounded change:** procedures authorize one inspectable modification; an
+  agent may propose or emit source, tests, scripts, and configuration.
+- **Verifiable handoff:** checks become executable acceptance criteria, with a
+  human deciding whether the next page may run.
 
-```{r}
-#| echo: false
-#| fig-align: center 
-#| fig-height: 5
-#| fig-wigth: 6
-code <- qrcode::qr_code("https://codeberg.org/edenian-prince/quarto-typst-poster ")
-plot(code)
-```
+Because **Quarto Manuals promote human writing and review of scientific prose**,
+this structure supports agentic workflows, including:
 
-```{=typst}
-]
-```
+- **Turn-based execution** — the traditional human operator and agent take turns
+  writing expectations, executing code, and passing tests;
+- **Spec-driven development** (SDD), where a human operator provides a descriptive specification and an agentic system proposes code, configuration, and tests for review;
+- **Data Analysis Decision Records** (DADR), where a human operator and an agentic system record the rationale for data analysis decisions, including the specification, code, and tests.
 
+**Takeaway:** Quarto Manuals keep workflow decisions, state transitions,
+artifacts, verification, and approval points visible—so human-directed and
+AI-assisted execution remain understandable and accountable.
 
-
+:::

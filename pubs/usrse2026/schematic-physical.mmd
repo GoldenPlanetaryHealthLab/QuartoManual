@@ -1,0 +1,17 @@
+%%{init: {"theme":"base","look":"classic","layout":"dagre","htmlLabels":false,"flowchart":{"curve":"linear","htmlLabels":false,"nodeSpacing":34,"rankSpacing":44},"themeVariables":{"fontFamily":"Arial, sans-serif","primaryTextColor":"#1E1E1E","lineColor":"#6B7280","clusterBkg":"#FFFFFF","clusterBorder":"#CBD5E1"}}}%%
+flowchart TB
+
+  subgraph PHYSICAL["Physical instruction manual"]
+    direction TB
+
+    L1["ILLUSTRATION 01<br/>1 · Unpack"]
+    L2["ILLUSTRATION 02<br/>2 · Inspect and arrange"]
+    L3["ILLUSTRATION 03<br/>3 · Assemble one step"]
+    L4["ILLUSTRATION 04<br/>4 · Compare with instructions"]
+
+    L1 --> L2 --> L3 --> L4
+  end
+
+  classDef imageSlot fill:#F8F8F8,stroke:#9CA3AF,stroke-width:2px,stroke-dasharray:6 4,color:#6B7280;
+  class L1,L2,L3,L4 imageSlot;
+  style PHYSICAL fill:#FFFFFF,stroke:#CBD5E1,stroke-width:1px

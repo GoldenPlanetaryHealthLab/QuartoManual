@@ -91,6 +91,8 @@
   subtitle: "",
   width: 48in,
   height: 36in,
+  design_width: 48in,
+  design_height: 36in,
   header_block_color: "A51C30",
   header_logo: "logo.png",
   header_font: "Baskerville",
@@ -109,23 +111,33 @@
 
   set text(size: 24pt)
 
-  grid(
-    columns: 1,
-    rows: (15%, 85%),
-    poster_header(
-      title,
-      author,
-      subtitle,
-      header_block_color: header_block_color,
-      header_logo: header_logo,
-      header_font: header_font,
-      body_font: body_font,
-    ),
-    poster_body(
-      body_color: body_color,
-      body_font: body_font,
-      heading_color: heading_color,
-      doc
+  scale(
+    x: (width / design_width) * 100%,
+    y: (height / design_height) * 100%,
+    origin: top + left,
+    reflow: true,
+    block(
+      width: design_width,
+      height: design_height,
+      grid(
+        columns: 1,
+        rows: (15%, 85%),
+        poster_header(
+          title,
+          author,
+          subtitle,
+          header_block_color: header_block_color,
+          header_logo: header_logo,
+          header_font: header_font,
+          body_font: body_font,
+        ),
+        poster_body(
+          body_color: body_color,
+          body_font: body_font,
+          heading_color: heading_color,
+          doc
+        )
+      )
     )
   )
 }

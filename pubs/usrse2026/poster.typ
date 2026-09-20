@@ -349,6 +349,8 @@
   subtitle: "",
   width: 48in,
   height: 36in,
+  design_width: 48in,
+  design_height: 36in,
   header_block_color: "A51C30",
   header_logo: "logo.png",
   header_font: "Baskerville",
@@ -367,28 +369,39 @@
 
   set text(size: 24pt)
 
-  grid(
-    columns: 1,
-    rows: (15%, 85%),
-    poster_header(
-      title,
-      author,
-      subtitle,
-      header_block_color: header_block_color,
-      header_logo: header_logo,
-      header_font: header_font,
-      body_font: body_font,
-    ),
-    poster_body(
-      body_color: body_color,
-      body_font: body_font,
-      heading_color: heading_color,
-      doc
+  scale(
+    x: (width / design_width) * 100%,
+    y: (height / design_height) * 100%,
+    origin: top + left,
+    reflow: true,
+    block(
+      width: design_width,
+      height: design_height,
+      grid(
+        columns: 1,
+        rows: (15%, 85%),
+        poster_header(
+          title,
+          author,
+          subtitle,
+          header_block_color: header_block_color,
+          header_logo: header_logo,
+          header_font: header_font,
+          body_font: body_font,
+        ),
+        poster_body(
+          body_color: body_color,
+          body_font: body_font,
+          heading_color: heading_color,
+          doc
+        )
+      )
     )
   )
 }
 
 #set table(inset: 6pt, stroke: rgb("1E1E1E") + 0.5pt)
+#import "@preview/fontawesome:0.5.0": *
 #let brand-color = (:)
 #let brand-color-background = (:)
 #let brand-logo = (:)
@@ -417,106 +430,32 @@
 
 #show: doc => poster(
   title: "Quarto Manuals",
-  subtitle: "Executable software operations manuals built from independent Quarto pages",
-  author: "Edenian",
+  subtitle: "Executable operator manuals for reproducible scientific workflows",
+  author: "Tinashe M. Tapera, Michelle Audirac, Danielle Braun, Christopher Golden",
   header_block_color: "A51C30",
   header_logo: "dummy-thchan.png",
   header_font: "Baskerville",
   body_color: "F4F4F4",
   body_font: "Arial",
   heading_color: "1E1E1E",
+  width: 44in,
+  height: 33in,
 doc,
 )
 
 
-PLACEHOLDER CONTENT. NOT YET IMPLEMENTED
-
-#import "@preview/showybox:2.0.4": showybox 
-#let main = rgb("#A51C30")
-
-#showybox(
-  title-style: (
-    boxed-style: (
-      anchor: (
-        x: center,
-        y: horizon
-      ),
-      radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt),
-    )
-  ),
-  frame: (
-    title-color: main,
-    body-color: main.lighten(80%),
-    footer-color: main.lighten(60%),
-    border-color: main.darken(20%),
-    radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)
-
-  ),
-  title: "tl;dr",
-  footer: text(size: 30pt, weight: 600, "Check it out: you can also add Typst code to make math functions or diagrams.")
-)[
-  This is a Typst template that can be used with Quarto to execute code and automatically render outputs like text, plots, and tables.
-  Forget about copying and pasting screenshots 
-
-  $ frac(partial^n f, partial x_i ... partial x_j)(a_1, a_2, ..., a_n) = frac(partial^n f, partial x_j ... partial x_i)(a_1, a_2, ..., a_n) $
-]
 #block(
 fill:white,
 inset:30pt,
 radius:6pt,
 [
-= #strong[INSTALLATION]
-<installation>
-To install this poster template, go to your project root and run:
+= The problem
+<the-problem>
+Scientific workflows depend on local platforms, configuration, versions, permissions, and ordered state changes. A README can describe the workflow steps, but cannot easily show whether it is safe to proceed between steps or whether the workflow succeeded.
 
-#Skylighting(([#ExtensionTok("quarto");#NormalTok(" install extension https://codeberg.org/edenian-prince/quarto-typst-poster/archive/main.zip");],));
-You can also add the template/demo quarto document by running the code below, but note, it adds all the files in the repo currently..
-
-#Skylighting(([#ExtensionTok("quarto");#NormalTok(" use template https://codeberg.org/edenian-prince/quarto-typst-poster/archive/main.zip");],));
-])
-
-#block(
-fill:white,
-inset:30pt,
-radius:6pt,
-[
-= #strong[USAGE]
-<usage>
-After installing, change the format in your Quarto document's yaml front matter to #NormalTok("format: poster-typst");
-
-#Skylighting(([#CommentTok("---");],
-[#AnnotationTok("format:");],
-[#CommentTok("  poster-typst: default");],
-[#CommentTok("---");],));
-You can also add other options in the front matter like a title, subtitle, and color options. See the codeberg repo for a complete list of options.
-
-= #strong[ADDING SECTIONS]
-<adding-sections>
-This format is a Typst canvas, but Quarto is where you write the sections that contain text, code, and outputs. These sections are what you are reading now. To create these sections in white blocks (or whatever color you want…), wrap your sections in fenced divs like this:
-
-#Skylighting(([#NormalTok(":::{.block fill=\"white\" inset=\"30pt\" radius=\"6pt\"}");],
-[],
-[#NormalTok("Headings, text, and code go here");],
-[],
-[#NormalTok(":::");],));
-])
-
-#block(
-fill:white,
-inset:30pt,
-radius:6pt,
-[
-= #strong[ADDING PLOTS]
-<adding-plots>
-Run put your code in the Quarto document like you normally would and it will render here.
-
-- Center the plot with #NormalTok("#| fig-align: center");
-- Adjust the width with #NormalTok("#| fig-width: 12");
-- Adjust the height with #NormalTok("#| fig-height: 9");
-- Adjust plot attributes in your code
-
-#align(center)[#box(image("poster_files/figure-typst/unnamed-chunk-2-1.svg"))]
-Add a footer or something underneath
+= Our approach
+<our-approach>
+#strong[Quarto Manuals] are ordered #NormalTok(".qmd"); pages for domain-competent scientists who run software. Each page makes inputs, choices, actions, artifacts, and checks visible. The rendered manual is a readable interface; the source page remains the operational record.
 
 ])
 
@@ -525,111 +464,184 @@ fill:white,
 inset:30pt,
 radius:6pt,
 [
-= #strong[ADDING TABLES]
-<adding-tables>
-Likewise, you can add tables by doing the same as above.
+= The page contract
+<the-page-contract>
+Each operational page answers three questions: what must already be true, what change(s) will I make, and what evidence says it worked?
 
-#show figure: set block(breakable: false)
-
-#block[ // start block
-
-  #let style-dict = (
-    // tinytable style-dict after
-    "0_1": 0, "1_1": 0, "2_1": 0, "3_1": 0, "4_1": 0, "5_1": 0, "6_1": 0, "0_2": 0, "1_2": 0, "4_2": 0, "5_2": 0, "0_0": 1, "1_0": 1, "2_0": 1, "3_0": 1, "4_0": 1, "5_0": 1, "6_0": 1, "2_2": 2, "3_2": 2, "6_2": 2
-  )
-
-  #let style-array = ( 
-    // tinytable cell style after
-    (align: center,),
-    (align: left,),
-    (color: rgb("#FF0000"), align: center,),
-  )
-
-  // Helper function to get cell style
-  #let get-style(x, y) = {
-    let key = str(y) + "_" + str(x)
-    if key in style-dict { style-array.at(style-dict.at(key)) } else { none }
-  }
-
-  #show table.cell: it => {
-    if style-array.len() == 0 { return it }
-    
-    let style = get-style(it.x, it.y)
-    if style == none { return it }
-    
-    let tmp = it
-    if ("fontsize" in style) { tmp = text(size: style.fontsize, tmp) }
-    if ("color" in style) { tmp = text(fill: style.color, tmp) }
-    if ("indent" in style) { tmp = pad(left: style.indent, tmp) }
-    if ("underline" in style) { tmp = underline(tmp) }
-    if ("italic" in style) { tmp = emph(tmp) }
-    if ("bold" in style) { tmp = strong(tmp) }
-    if ("mono" in style) { tmp = math.mono(tmp) }
-    if ("strikeout" in style) { tmp = strike(tmp) }
-    if ("smallcaps" in style) { tmp = smallcaps(tmp) }
-    tmp
-  }
-
-  // tinytable align-figure before
-
-  #table( // tinytable table start
-    columns: (24.00%, 52.00%, 24.00%),
-    stroke: none,
-    rows: auto,
-    align: (x, y) => {
-      let style = get-style(x, y)
-      if style != none and "align" in style { style.align } else { left }
-    },
-    fill: (x, y) => {
-      let style = get-style(x, y)
-      if style != none and "background" in style { style.background }
-    },
- table.hline(y: 1, start: 0, end: 3, stroke: 0.05em),
- table.hline(y: 7, start: 0, end: 3, stroke: 0.08em),
- table.hline(y: 0, start: 0, end: 3, stroke: 0.08em),
-    // tinytable lines before
-
-    // tinytable header start
-    table.header(
-      repeat: true,
-[mfr], [model], [year],
-    ),
-    // tinytable header end
-
-    // tinytable cell content after
-[Ford], [GT], [2017],
-[Ferrari], [458 Speciale], [2015],
-[Ferrari], [458 Spider], [2015],
-[Ferrari], [458 Italia], [2014],
-[Ferrari], [488 GTB], [2016],
-[Ferrari], [California], [2015],
-
-    // tinytable footer after
-
-  ) // end table
-
-  // tinytable align-figure after
-
-] // end block
-#NormalTok("tinytable"); seems to look the best in this format fyi.
-
-])
-
-#block(
-fill:white,
-inset:30pt,
-radius:6pt,
+#block[
+#callout(
+body: 
 [
-= #strong[TYPST CODE]
-<typst-code>
-You can add Typst snippets in the Quarto doc like this with showybox. This is how I made the #NormalTok("tl;dr"); and #NormalTok("Source Code"); blocks.
+Check for visible files, tools, configuration, or prior artifacts.
 
-#Skylighting(([#InformationTok("```{=typst}");],
-[#InformationTok("#import \"@preview/showybox:2.0.4\": showybox ");],
-[],
-[#InformationTok("#showybox(...)");],
-[],
+#Skylighting(([#InformationTok("```python");],
+[#CommentTok("# Example: check that a file exists");],
+[#ImportTok("import");#NormalTok(" os");],
+[#ControlFlowTok("assert");#NormalTok(" os.path.exists(");#StringTok("\"data.csv\"");#NormalTok("), ");#StringTok("\"data.csv is required!\"");],
 [#InformationTok("```");],));
+]
+, 
+title: 
+[
+Prerequisite: Start From Current State
+]
+, 
+background_color: 
+rgb("#f7dddc")
+, 
+icon_color: 
+rgb("#CC1914")
+, 
+icon: 
+none
+, 
+body_background_color: 
+white
+)
+]
+#block[
+#callout(
+body: 
+[
+Perform one bounded transformation while keeping meaningful choices and execution boundaries visible.
+
+#Skylighting(([#InformationTok("```python");],
+[#CommentTok("# Example: manipulate the data.csv file");],
+[#ImportTok("import");#NormalTok(" pandas ");#ImportTok("as");#NormalTok(" pd");],
+[#NormalTok("data ");#OperatorTok("=");#NormalTok(" pd.read_csv(");#StringTok("\"data.csv\"");#NormalTok(")");],
+[#CommentTok("# Perform a bounded change, e.g., filter rows");],
+[#NormalTok("data_filtered ");#OperatorTok("=");#NormalTok(" data[data[");#StringTok("'value'");#NormalTok("] ");#OperatorTok(">");#NormalTok(" ");#DecValTok("0");#NormalTok("]");],
+[#CommentTok("# Save the result to a new file");],
+[#NormalTok("data_filtered.to_csv(");#StringTok("\"data_filtered.csv\"");#NormalTok(", index");#OperatorTok("=");#VariableTok("False");#NormalTok(")");],
+[#InformationTok("```");],));
+]
+, 
+title: 
+[
+Procedure: Make One Bounded Change
+]
+, 
+background_color: 
+rgb("#ccf1e3")
+, 
+icon_color: 
+rgb("#00A047")
+, 
+icon: 
+none
+, 
+body_background_color: 
+white
+)
+]
+#block[
+#callout(
+body: 
+[
+Prove that the intended state or artifact exists; a successful command alone is not evidence that the workflow succeeded.
+
+#Skylighting(([#InformationTok("```python");],
+[#CommentTok("# Assert that the filtered data has the expected properties");],
+[#ControlFlowTok("assert");#NormalTok(" ");#KeywordTok("not");#NormalTok(" data_filtered.empty, ");#StringTok("\"Filtered data is empty\"");],
+[#InformationTok("```");],));
+]
+, 
+title: 
+[
+Check: Verify The Result
+]
+, 
+background_color: 
+rgb("#fcefdc")
+, 
+icon_color: 
+rgb("#EB9113")
+, 
+icon: 
+none
+, 
+body_background_color: 
+white
+)
+]
+])
+
+#let captioned-image(path, caption, width: 100%) = {
+  stack(
+    dir: ttb,
+    spacing: 8pt,
+    align(
+      center,
+      text(size: 20pt, weight: "bold", caption),
+    ),
+    align(
+      center,
+      image(path, width: width),
+    ),
+  )
+}
+
+#colbreak()
+
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 0.2in,
+  align: top,
+
+  captioned-image(
+    "schematic-manual_inkscape2.svg",
+    [Structure of a Quarto Manual Page],
+  ),
+
+  stack(
+    dir: ttb,
+    spacing: 0.25in,
+
+    captioned-image(
+      "lego_cropped.png",
+      [Like playing with LEGO — a build is constructed by taking inventory of your pieces, putting them together, and verifying the result against the instructions],
+    ),
+
+    captioned-image(
+      "schematic-software.svg",
+      [Your Assembled Output is a Reproducible Scientific Software Project],
+    ),
+  ),
+)
+
+#v(0.18in)
+
+#align(center)[
+  #stack(
+    dir: ttb,
+    spacing: 0.10in,
+    align(center)[
+      #text(size: 60pt, weight: "bold")[Explore Quarto Manuals]
+    ],
+    align(center)[
+      #link("https://goldenplanetaryhealthlab.github.io/QuartoManual")[
+        #text(size: 30pt)[goldenplanetaryhealthlab.github.io/QuartoManual]
+      ]
+    ],
+    align(center)[
+      #image("quarto-manual-qr.svg", width: 1.85in)
+    ],
+  )
+]
+
+#colbreak()
+#block(
+fill:rgb("EFF6FF"),
+stroke:(left: 6pt + rgb("2563EB")),
+inset:30pt,
+radius:6pt,
+[
+= Internals
+<internals>
+- #strong[Quarto:] a manual is powered by Quarto, a user-friendly scientific publishing system that uses plain text notebooks. Quarto projects can be seamlessly rendered to HTML, PDF, or other formats.
+- #strong[Book-as-Manual:] a manual is a Book project with ordered pages and navigation---mimicking a physical instruction manual.
+- #strong[Extensions:] thin extensions compose existing Quarto features. We introduce #strong[#NormalTok("quarto-emit");], an extension that reviews source code blocks and materializes them as code, tests, scripts, and configuration.
+
 ])
 
 #block(
@@ -637,33 +649,37 @@ fill:white,
 inset:30pt,
 radius:6pt,
 [
-= #strong[RENDER THE POSTER]
-<render-the-poster>
-#Skylighting(([#ExtensionTok("quarto");#NormalTok(" render poster.qmd");],));
+= Why this exists
+<why-this-exists>
+Scientific software workflows are often too complex for a README and too judgment-heavy to hide behind a single command-line tool. Thorough documentation may #emph[describe] a workflow, but websites, tutorials, and blog posts lack the #emph[interactivity] needed to navigate whether the current state/step is valid, what local environment adjustments are needed, or what evidence permits proceeding to the next step.
+
+#strong[Quarto Manuals] provide a reproducible handoff: the smallest reliable sequence of actions that leaves visible artifacts and confirms progress. They're designed to preserve operator authority where #strong[local constraints] and #strong[scientific judgment] matter, while making repeatable work #strong[mechanical and transparent].
+
 ])
 
+#block(
+fill:white,
+inset:30pt,
+radius:6pt,
+[
+= Future development opportunities
+<future-development-opportunities>
+A Manual page provides a transparent interface between an operator and an #strong[agentic coding assistant]:
 
-#showybox(
-  title-style: (
-    boxed-style: (
-      anchor: (
-        x: center,
-        y: horizon
-      ),
-      radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt),
-    )
-  ),
-  frame: (
-    title-color: main,
-    body-color: main.lighten(80%),
-    footer-color: main.lighten(60%),
-    border-color: main.darken(20%),
-    radius: (top-left: 10pt, bottom-right: 10pt, rest: 0pt)
-  ),
-  title: "Source Code",
-)[
-#align(center)[#box(image("poster_files/figure-typst/unnamed-chunk-4-1.svg"))]
-]
+- #strong[Bounded context:] prerequisites verbally identify the approved specification, relevant files, environment, and constraints.
+- #strong[Bounded change:] procedures authorize one inspectable modification; an agent may propose or emit source, tests, scripts, and configuration.
+- #strong[Verifiable handoff:] checks become executable acceptance criteria, with a human deciding whether the next page may run.
+
+Because #strong[Quarto Manuals promote human writing and review of scientific prose], this structure supports agentic workflows, including:
+
+- #strong[Turn-based execution] --- the traditional human operator and agent take turns writing expectations, executing code, and passing tests;
+- #strong[Spec-driven development] (SDD), where a human operator provides a descriptive specification and an agentic system proposes code, configuration, and tests for review;
+- #strong[Data Analysis Decision Records] (DADR), where a human operator and an agentic system record the rationale for data analysis decisions, including the specification, code, and tests.
+
+#strong[Takeaway:] Quarto Manuals keep workflow decisions, state transitions, artifacts, verification, and approval points visible---so human-directed and AI-assisted execution remain understandable and accountable.
+
+])
+
 
 
 

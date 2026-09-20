@@ -1,0 +1,35 @@
+%%{init: {"theme":"base","look":"classic","layout":"dagre","htmlLabels":false,"flowchart":{"curve":"linear","htmlLabels":false,"nodeSpacing":34,"rankSpacing":44},"themeVariables":{"fontFamily":"Arial, sans-serif","primaryTextColor":"#1E1E1E","lineColor":"#6B7280","clusterBkg":"#FFFFFF","clusterBorder":"#4B5563"}}}%%
+flowchart TB
+
+  subgraph MANUAL["Quarto Manual page"]
+    direction TB
+
+    PAGE["Page N<br/>One bounded operational transformation"]
+    PRE["PREREQUISITE<br/>What must already be true?<br/>Inspect required inputs, tools, configuration, and state"]
+    PROC["PROCEDURE<br/>What should the operator do?<br/>Perform one operation while keeping consequential choices visible"]
+    CHECK["CHECK<br/>What evidence permits progress?<br/>Inspect the resulting artifact or observable project state"]
+    GATE{"Evidence sufficient?"}
+    NEXT(["Continue to the next page"])
+    REPAIR(["Stop, repair, and rerun"])
+
+    PAGE --> PRE --> PROC --> CHECK --> GATE
+    GATE -- Yes --> NEXT
+    GATE -- No --> REPAIR
+    REPAIR -. return .-> PRE
+  end
+
+  classDef page fill:#F4F4F4,stroke:#4B5563,stroke-width:2px,color:#1E1E1E;
+  %% Semantic borders mirror _extensions/quarto-manual/theme.scss.
+  classDef prerequisite fill:#FEE2E2,stroke:#DC2626,stroke-width:3px,color:#1E1E1E;
+  classDef procedure fill:#DCFCE7,stroke:#16A34A,stroke-width:3px,color:#1E1E1E;
+  classDef check fill:#FFEDD5,stroke:#EA580C,stroke-width:3px,color:#1E1E1E;
+  classDef gate fill:#FFF3CD,stroke:#B7791F,stroke-width:2px,color:#1E1E1E;
+  classDef outcome fill:#FFFFFF,stroke:#6B7280,stroke-width:1.5px,color:#1E1E1E;
+
+  class PAGE page;
+  class PRE prerequisite;
+  class PROC procedure;
+  class CHECK check;
+  class GATE gate;
+  class NEXT,REPAIR outcome;
+  style MANUAL fill:#FFFFFF,stroke:#4B5563,stroke-width:2px
