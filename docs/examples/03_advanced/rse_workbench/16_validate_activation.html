@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-5079bcd3b6f9e2cd3eb723c43e5bbc78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -416,35 +416,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="manual-prereq callout callout-style-default callout-important callout-titled" title="Confirm The Activation Contract" data-manual-kind="prereq">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Confirm The Activation Contract
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Confirm that the runtime activation script exists before testing it inside the project container.</p>
+<pre class="{bash}"><code>#| eval: false
+test -s env/activate.sh</code></pre>
+</div>
+</div>
+<div class="manual-procedure callout callout-style-default callout-tip callout-titled" title="Test Project Activation" data-manual-kind="procedure">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Test Project Activation
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>This notebook tests only project activation.</p>
 <p>Do not install Spack packages. Do not run <code>rv sync</code>. Do not run Quarto checks.</p>
-<div id="91f26d48" class="cell" data-sorting-hat="remove" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rse_workbench.helpers <span class="im">import</span> spython_exec, show_spython</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cedd4872" class="cell" data-sorting-hat="remove" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rse_workbench.helpers <span class="im">import</span> spython_exec, show_spython</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="47ea5069" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>show_spython(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    spython_exec(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        command<span class="op">=</span><span class="vs">r'''</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">set -euo pipefail</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">source /work/env/activate</span><span class="dv">.</span><span class="vs">sh</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "PATH=</span><span class="dv">$</span><span class="vs">PATH"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "PKG_CONFIG_PATH=</span><span class="dv">$</span><span class="vs">{PKG_CONFIG_PATH:-}"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "CPATH=</span><span class="dv">$</span><span class="vs">{CPATH:-}"</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "LIBRARY_PATH=</span><span class="dv">$</span><span class="vs">{LIBRARY_PATH:-}"</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "LD_LIBRARY_PATH=</span><span class="dv">$</span><span class="vs">{LD_LIBRARY_PATH:-}"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "R_HOME=</span><span class="dv">$</span><span class="vs">{R_HOME:-}"</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="vs">which spack</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="vs">which python3</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="vs">spack debug report</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="vs">spack env status</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="vs">'''</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        image<span class="op">=</span>project_contract.base_image,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        options<span class="op">=</span>[<span class="st">"--no-home"</span>],</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        bind_project<span class="op">=</span>project_contract.project_dir,</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="ca6b745f" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>show_spython(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    spython_exec(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        command<span class="op">=</span><span class="vs">r'''</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="vs">set -euo pipefail</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="vs">source /work/env/activate</span><span class="dv">.</span><span class="vs">sh</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "PATH=</span><span class="dv">$</span><span class="vs">PATH"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "PKG_CONFIG_PATH=</span><span class="dv">$</span><span class="vs">{PKG_CONFIG_PATH:-}"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "CPATH=</span><span class="dv">$</span><span class="vs">{CPATH:-}"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "LIBRARY_PATH=</span><span class="dv">$</span><span class="vs">{LIBRARY_PATH:-}"</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "LD_LIBRARY_PATH=</span><span class="dv">$</span><span class="vs">{LD_LIBRARY_PATH:-}"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "R_HOME=</span><span class="dv">$</span><span class="vs">{R_HOME:-}"</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="vs">which spack</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="vs">which python3</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="vs">spack debug report</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="vs">spack env status</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="vs">'''</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        image<span class="op">=</span>project_contract.base_image,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        options<span class="op">=</span>[<span class="st">"--no-home"</span>],</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        bind_project<span class="op">=</span>project_contract.project_dir,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Expected result:</p>
 <pre class="text"><code>spack is visible
@@ -452,6 +477,23 @@ python3 is visible
 project Spack environment activates
 R_HOME is empty</code></pre>
 <p>Stop here if activation fails.</p>
+</div>
+</div>
+<div class="manual-check callout callout-style-default callout-warning callout-titled" title="Verify Activation State" data-manual-kind="check">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Verify Activation State
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Confirm that the command output includes the expected executable paths and that the project Spack environment activates without setting <code>R_HOME</code> prematurely.</p>
+<pre class="{bash}"><code>#| eval: false
+test -s env/activate.sh</code></pre>
+</div>
+</div>
 
 
 

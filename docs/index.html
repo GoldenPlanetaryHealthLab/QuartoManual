@@ -43,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5079bcd3b6f9e2cd3eb723c43e5bbc78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -365,10 +365,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#why-this-shape" id="toc-why-this-shape" class="nav-link" data-scroll-target="#why-this-shape"><span class="header-section-number">0.3</span> <em>Why This Shape?</em></a></li>
   <li><a href="#page-contract" id="toc-page-contract" class="nav-link" data-scroll-target="#page-contract"><span class="header-section-number">0.4</span> <em>Page Contract</em></a></li>
   <li><a href="#the-backend-quarto-emit" id="toc-the-backend-quarto-emit" class="nav-link" data-scroll-target="#the-backend-quarto-emit"><span class="header-section-number">0.5</span> <em>The Backend: <code>quarto-emit</code></em></a></li>
-  <li><a href="#author-workflow" id="toc-author-workflow" class="nav-link" data-scroll-target="#author-workflow"><span class="header-section-number">0.6</span> <em>Author Workflow</em></a></li>
-  <li><a href="#operator-workflow" id="toc-operator-workflow" class="nav-link" data-scroll-target="#operator-workflow"><span class="header-section-number">0.7</span> <em>Operator Workflow</em></a></li>
-  <li><a href="#scope-of-this-project" id="toc-scope-of-this-project" class="nav-link" data-scroll-target="#scope-of-this-project"><span class="header-section-number">0.8</span> <em>Scope Of This Project</em></a></li>
-  <li><a href="#examples-on-this-site" id="toc-examples-on-this-site" class="nav-link" data-scroll-target="#examples-on-this-site"><span class="header-section-number">0.9</span> <em>Examples On This Site</em></a></li>
+  <li><a href="#authoring-model" id="toc-authoring-model" class="nav-link" data-scroll-target="#authoring-model"><span class="header-section-number">0.6</span> <em>Authoring Model</em></a></li>
+  <li><a href="#author-workflow" id="toc-author-workflow" class="nav-link" data-scroll-target="#author-workflow"><span class="header-section-number">0.7</span> <em>Author Workflow</em></a></li>
+  <li><a href="#operator-workflow" id="toc-operator-workflow" class="nav-link" data-scroll-target="#operator-workflow"><span class="header-section-number">0.8</span> <em>Operator Workflow</em></a></li>
+  <li><a href="#scope-of-this-project" id="toc-scope-of-this-project" class="nav-link" data-scroll-target="#scope-of-this-project"><span class="header-section-number">0.9</span> <em>Scope Of This Project</em></a></li>
+  <li><a href="#examples-on-this-site" id="toc-examples-on-this-site" class="nav-link" data-scroll-target="#examples-on-this-site"><span class="header-section-number">0.10</span> <em>Examples On This Site</em></a></li>
   </ul>
 </nav>
     </div>
@@ -399,14 +400,15 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="0.1" class="anchored" data-anchor-id="what-is-a-quarto-manual"><span class="header-section-number">0.1</span> <em>What Is A Quarto Manual?</em></h2>
 <p>A Quarto Manual is an executable operations manual for a software or research workflow.</p>
 <p>Use a Quarto Manual when a workflow is too long, fragile, or context-specific for a README, but too visible and judgment-heavy to hide behind a single CLI.</p>
-<p>A manual gives the user ordered <code>.qmd</code> pages that:</p>
+<p>A manual gives the operator ordered <code>.qmd</code> pages that:</p>
 <ul>
-<li>explain one step at a time;</li>
-<li>run the code for that step;</li>
-<li>verify whether the step worked;</li>
+<li>expose one operational transformation at a time;</li>
+<li>identify the inputs, choices, and actions for that transformation;</li>
+<li>verify the resulting state;</li>
 <li>make dependencies between steps explicit.</li>
 </ul>
-<p>In practice, Quarto Manuals are best understood as operator-facing procedure books for software and research workflows.</p>
+<p>In practice, Quarto Manuals are best understood as operator-facing procedure books for software and research workflows. The intended reader is a competent practitioner in the relevant domain.</p>
+<p>Operational explicitness is not the same as conceptual explanation. Manuals should normally assume ordinary domain knowledge: describe the action and the expected state, not the textbook concept behind the action. Add explanation when an operation is unusual, easy to misinterpret, safety- or correctness-critical, or surprising despite normal domain competence.</p>
 </section>
 <section id="core-idea" class="level2" data-number="0.2">
 <h2 data-number="0.2" class="anchored" data-anchor-id="core-idea"><span class="header-section-number">0.2</span> <em>Core Idea</em></h2>
@@ -420,7 +422,7 @@ ul.task-list li input[type="checkbox"] {
 <li><code>procedure</code>: do one or more pieces of work;</li>
 <li><code>check</code>: prove that the work succeeded.</li>
 </ol>
-<p>Pages should share a project, not a notebook kernel<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Pages should share a project, not hidden notebook state<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>If page 3 depends on page 2, page 3 should deliberately enforce that dependency in its prerequisite block by checking visible project state:</p>
 <ul>
 <li>required files exist;</li>
@@ -476,20 +478,26 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>That being said, you can use any Quarto extension you’d like to extend the functionality of a Quarto Manual.</p>
 </section>
-<section id="author-workflow" class="level2" data-number="0.6">
-<h2 data-number="0.6" class="anchored" data-anchor-id="author-workflow"><span class="header-section-number">0.6</span> <em>Author Workflow</em></h2>
+<section id="authoring-model" class="level2" data-number="0.6">
+<h2 data-number="0.6" class="anchored" data-anchor-id="authoring-model"><span class="header-section-number">0.6</span> <em>Authoring Model</em></h2>
+<p>Write for a competent operator. Explicit instructions do not imply a tutorial: make inputs, actions, consequential choices, outputs, state transitions, and checks visible, while explaining underlying concepts only when they are unusually important to executing the procedure correctly.</p>
+<p>Automate mechanical execution when no meaningful decision occurs between its substeps. Do not automate a consequential operator choice merely because it can be encoded, and do not hide the verification boundary behind an opaque command.</p>
+<p>An optional <code>.manual-explain</code> block may provide short, exceptional context for an unusual or non-obvious operation. It is not a required fourth page component.</p>
+</section>
+<section id="author-workflow" class="level2" data-number="0.7">
+<h2 data-number="0.7" class="anchored" data-anchor-id="author-workflow"><span class="header-section-number">0.7</span> <em>Author Workflow</em></h2>
 <p>To create a manual for your own procedure:</p>
 <ol type="1">
 <li>Start from the Quarto Manual template.</li>
-<li>Write one page per operational step.</li>
+<li>Write one page per reliable operational transformation.</li>
 <li>Give each page one prerequisite block, one or more procedure blocks, and one check block.</li>
-<li>Keep page state local and enforce dependencies through prerequisites.</li>
+<li>Keep page state local and enforce dependencies through visible prerequisites.</li>
 <li>Use <code>quarto-emit</code> only when a page needs to materialize reusable files.</li>
 </ol>
-<p>The shipped template should stay lean and prompt-driven. Treat the template as the source of truth, then use richer examples on the documentation site to show what a mature manual can look like.</p>
+<p>The shipped template should stay lean and prompt-driven. Treat the template as the source of truth, then use the examples to show how a mature manual exposes decisions, automation boundaries, exceptional explanation, and verification.</p>
 </section>
-<section id="operator-workflow" class="level2" data-number="0.7">
-<h2 data-number="0.7" class="anchored" data-anchor-id="operator-workflow"><span class="header-section-number">0.7</span> <em>Operator Workflow</em></h2>
+<section id="operator-workflow" class="level2" data-number="0.8">
+<h2 data-number="0.8" class="anchored" data-anchor-id="operator-workflow"><span class="header-section-number">0.8</span> <em>Operator Workflow</em></h2>
 <p>To use an existing manual:</p>
 <ol type="1">
 <li>Find the repository for the procedure manual.</li>
@@ -512,8 +520,8 @@ Important
 </div>
 </div>
 </section>
-<section id="scope-of-this-project" class="level2" data-number="0.8">
-<h2 data-number="0.8" class="anchored" data-anchor-id="scope-of-this-project"><span class="header-section-number">0.8</span> <em>Scope Of This Project</em></h2>
+<section id="scope-of-this-project" class="level2" data-number="0.9">
+<h2 data-number="0.9" class="anchored" data-anchor-id="scope-of-this-project"><span class="header-section-number">0.9</span> <em>Scope Of This Project</em></h2>
 <p>This project is intentionally narrow.</p>
 <p>Quarto Manual should only extend Quarto in one functional way:</p>
 <ul>
@@ -527,22 +535,22 @@ Important
 <li>workflow-specific libraries.</li>
 </ul>
 </section>
-<section id="examples-on-this-site" class="level2" data-number="0.9">
-<h2 data-number="0.9" class="anchored" data-anchor-id="examples-on-this-site"><span class="header-section-number">0.9</span> <em>Examples On This Site</em></h2>
-<p>This site includes three example manuals that scale in sophistication:</p>
+<section id="examples-on-this-site" class="level2" data-number="0.10">
+<h2 data-number="0.10" class="anchored" data-anchor-id="examples-on-this-site"><span class="header-section-number">0.10</span> <em>Examples On This Site</em></h2>
+<p>This site includes three example manuals that scale in operational sophistication:</p>
 <ul>
 <li>a simple data-staging workflow;</li>
 <li>an intermediate ERA5 acquisition and aggregation workflow;</li>
 <li>an advanced RSE workbench environment workflow.</li>
 </ul>
-<p>Each example is intentionally more complete than the shipped template, with more creative (and hopefully more elegant) implementations and problem solving strategies involving real-world use cases.</p>
+<p>Each example increases the complexity of its operations and state transitions; it does not need to contain more explanatory prose. Reliable automation may make a mature manual more concise by absorbing mechanical substeps.</p>
 
 
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>A notebook kernel is a program that runs code in a specific programming language, such as Python or R. It allows users to test out code iteratively in a Read-Eval-Print Loop (REPL) workflow. REPL workflows are great for exploration, and arguably were the foundational technology behind the rise of accessible data science. One of the main criticisms of notebooks, however, is that they can hide the state of your code (<a href="https://www.researchgate.net/figure/An-example-of-a-hidden-state-in-Jupyter-Notebook-with-three-different-execution-variations_fig3_391056804">see here</a>), which makes it hard to reason about your project. Quarto Manuals avoid that problem primarily by using Quarto Markdown, which is plain text, and secondarily by encouraging page independence in its design. Any interdependence is made explicit through side-effects that Manual Authors must deliberately insert.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>A notebook kernel can retain execution state between cells. Manuals avoid depending on that hidden state by making page dependencies explicit through visible project artifacts and checks. The details of notebook execution are background for authors, not a concept that every operator needs to learn here.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

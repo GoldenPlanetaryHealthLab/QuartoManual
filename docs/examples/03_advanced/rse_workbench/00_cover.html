@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-5079bcd3b6f9e2cd3eb723c43e5bbc78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -393,7 +393,7 @@ Important
 <div class="callout-body-container callout-body">
 <p>Adapted from my RSE Workbench <a href="https://github.com/GoldenPlanetaryHealthLab/rse-workbench">Repo</a></p>
 <p>The RSE workbench was the major inspiration for manuals. As you can see, creating a singularity container for reproducible data science on the cluster is a long, involved process. I was able to line up 12 notebooks of procedures, each with specific code to run, artifacts and files left behind, and checks to make at each stage. The end product is that I can now launch 5 or 6 simultaneous project workspaces on the cluster, each of which is running in an isolated singularity container (think Docker and Kubernetes, but on HPC), specifically configured for the project, including Linux dependencies, geospatial packages, my editor of choice, etc.</p>
-<p>Putting all of these together for the first time in a critical project is a lengthy, several day process. Redoing it each and every single time a project counts as critical is <a href="https://en.wikipedia.org/wiki/Sisyphus">Sisyphean</a>. The RSE Workbench Manual allows me to learn the complicated procedure once, then duplicate the pages for a new project, change the paths, insert and remove a few project specific packages, and then recompile a new singularity container for the new project in a matter of minutes. This is a huge time saver, and it was also a great way to learn how tools like Spack, Singularity, and Quarto work together to create a reproducible computing environment.</p>
+<p>Putting all of these together for the first time in a critical project is a lengthy, several day process. Redoing it each and every single time a project counts as critical is <a href="https://en.wikipedia.org/wiki/Sisyphus">Sisyphean</a>. The RSE Workbench Manual captures the complicated procedure once, then allows an operator to duplicate the pages for a new project, change the paths, insert or remove project-specific packages, and recompile a new Singularity container in a matter of minutes. The pages preserve the required choices, artifacts, and checks at each stage.</p>
 </div>
 </div>
 <p>Research software engineers often inherit or support projects where critical setup assumptions are implicit:</p>

@@ -57,8 +57,7 @@ book:
 format:
   html:
     toc: true
-    theme: cosmo
+    theme: [cosmo, _extensions/quarto-manual/theme.scss]
     filters:
       - _extensions/quarto-manual/manual.lua
       - _extensions/TinasheMTapera/quarto-emit/quarto-emit.lua
-

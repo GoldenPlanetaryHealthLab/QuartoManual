@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-5079bcd3b6f9e2cd3eb723c43e5bbc78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -416,35 +416,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="manual-prereq callout callout-style-default callout-important callout-titled" title="Confirm The Workbench Context" data-manual-kind="prereq">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Confirm The Workbench Context
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Run this page from the workbench project root and confirm that the scheduler helper dependencies are available.</p>
+<pre class="{bash}"><code>#| eval: false
+test -d .</code></pre>
+</div>
+</div>
+<div class="manual-procedure callout callout-style-default callout-tip callout-titled" title="Define Scheduler Helpers" data-manual-kind="procedure">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Define Scheduler Helpers
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>This notebook collects miscellaneous functions that are useful for the RSE Workbench.</p>
 <p>To see the ongoing result of a SLURM job with <code>submitit</code>, we can use the following helper function:</p>
-<div id="fd949c7c" class="cell" data-sorting-hat="keep" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Any</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rich.console <span class="im">import</span> Console</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rich.panel <span class="im">import</span> Panel</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rich.text <span class="im">import</span> Text</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>console <span class="op">=</span> Console()</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show_submitit_job(job: Any) <span class="op">-&gt;</span> Any:</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Show stdout/stderr for a submitit job and return its result when done."""</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    console.<span class="bu">print</span>(<span class="ss">f"Job ID: </span><span class="sc">{</span>job<span class="sc">.</span>job_id<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    console.<span class="bu">print</span>(<span class="ss">f"Done: </span><span class="sc">{</span>job<span class="sc">.</span>done()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    stdout <span class="op">=</span> job.stdout() <span class="kw">or</span> <span class="st">"&lt;empty&gt;"</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    stderr <span class="op">=</span> job.stderr() <span class="kw">or</span> <span class="st">"&lt;empty&gt;"</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    console.<span class="bu">print</span>(Panel(Text(stdout[<span class="op">-</span><span class="dv">8000</span>:] <span class="kw">or</span> <span class="st">"&lt;empty&gt;"</span>), title<span class="op">=</span><span class="st">"stdout"</span>, border_style<span class="op">=</span><span class="st">"green"</span>))</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    console.<span class="bu">print</span>(Panel(Text(stderr[<span class="op">-</span><span class="dv">8000</span>:] <span class="kw">or</span> <span class="st">"&lt;empty&gt;"</span>), title<span class="op">=</span><span class="st">"stderr"</span>, border_style<span class="op">=</span><span class="st">"red"</span>))</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> job.done():</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> job.result()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fd2f2dc9" class="cell" data-sorting-hat="keep" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Any</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rich.console <span class="im">import</span> Console</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rich.panel <span class="im">import</span> Panel</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rich.text <span class="im">import</span> Text</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>console <span class="op">=</span> Console()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show_submitit_job(job: Any) <span class="op">-&gt;</span> Any:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Show stdout/stderr for a submitit job and return its result when done."""</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    console.<span class="bu">print</span>(<span class="ss">f"Job ID: </span><span class="sc">{</span>job<span class="sc">.</span>job_id<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    console.<span class="bu">print</span>(<span class="ss">f"Done: </span><span class="sc">{</span>job<span class="sc">.</span>done()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    stdout <span class="op">=</span> job.stdout() <span class="kw">or</span> <span class="st">"&lt;empty&gt;"</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    stderr <span class="op">=</span> job.stderr() <span class="kw">or</span> <span class="st">"&lt;empty&gt;"</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    console.<span class="bu">print</span>(Panel(Text(stdout[<span class="op">-</span><span class="dv">8000</span>:] <span class="kw">or</span> <span class="st">"&lt;empty&gt;"</span>), title<span class="op">=</span><span class="st">"stdout"</span>, border_style<span class="op">=</span><span class="st">"green"</span>))</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    console.<span class="bu">print</span>(Panel(Text(stderr[<span class="op">-</span><span class="dv">8000</span>:] <span class="kw">or</span> <span class="st">"&lt;empty&gt;"</span>), title<span class="op">=</span><span class="st">"stderr"</span>, border_style<span class="op">=</span><span class="st">"red"</span>))</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> job.done():</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> job.result()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="manual-check callout callout-style-default callout-warning callout-titled" title="Check Scheduler Helper" data-manual-kind="check">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Check Scheduler Helper
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Confirm that the page leaves <code>show_submitit_job</code> available for scheduler-backed installation procedures.</p>
+<div id="a7402c68" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">callable</span>(show_submitit_job)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 </div>
 
 

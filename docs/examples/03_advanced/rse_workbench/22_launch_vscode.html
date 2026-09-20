@@ -78,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-5079bcd3b6f9e2cd3eb723c43e5bbc78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -415,84 +415,128 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="manual-prereq callout callout-style-default callout-important callout-titled" title="Confirm The Final Image" data-manual-kind="prereq">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Confirm The Final Image
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Confirm that the read-only project image and activation script have been validated before generating the VS Code tunnel launch script.</p>
+<pre class="{bash}"><code>#| eval: false
+test -s env/activate.sh</code></pre>
+</div>
+</div>
+<div class="manual-procedure callout callout-style-default callout-tip callout-titled" title="Write The VS Code Launch Script" data-manual-kind="procedure">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Write The VS Code Launch Script
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>This notebook writes the VS Code launch script.</p>
 <p>The launch script should not install packages. It assumes prior notebooks have already installed and validated the environment.</p>
-<div id="01a58cc2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> simple_slurm <span class="im">import</span> Slurm</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2eac31ce" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> simple_slurm <span class="im">import</span> Slurm</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Importantly, we add a “clean” argument here; if True, it’ll remove any existing cached VSCode tunnel state found in <code>CONTAINER_HOME/.vscode-server</code>. This is useful if you want to reset the VSCode tunnel state, but it will also remove any cached extensions and settings. If you want to preserve your VSCode tunnel state, set <code>clean</code> to False.</p>
-<div id="3e75be8b" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>clean <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>runtime_command <span class="op">=</span> [</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"set -euo pipefail"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"source /work/env/activate.sh"</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cd /work"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"which code"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"code tunnel user login --provider github"</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rm -rf /home/rse/.vscode-server"</span> <span class="cf">if</span> clean <span class="cf">else</span> <span class="st">"echo 'Preserving existing VSCode tunnel state'"</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"code tunnel --accept-server-license-terms --name </span><span class="sc">{</span>project_contract<span class="sc">.</span>project_name<span class="sc">}</span><span class="ss">"</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>runtime_command</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="1d47c334" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>clean <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>runtime_command <span class="op">=</span> [</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"set -euo pipefail"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"source /work/env/activate.sh"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cd /work"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"which code"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"code tunnel user login --provider github"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rm -rf /home/rse/.vscode-server"</span> <span class="cf">if</span> clean <span class="cf">else</span> <span class="st">"echo 'Preserving existing VSCode tunnel state'"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"code tunnel --accept-server-license-terms --name </span><span class="sc">{</span>project_contract<span class="sc">.</span>project_name<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>runtime_command</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="84635bb9" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>slurm <span class="op">=</span> Slurm(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    job_name<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>project_contract<span class="sc">.</span>project_name<span class="sc">}</span><span class="ss">-vscode"</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    cpus_per_task<span class="op">=</span>project_contract.slurm_build_cpus,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    mem<span class="op">=</span>project_contract.slurm_build_mem,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    time<span class="op">=</span><span class="st">"04:00:00"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    partition<span class="op">=</span>project_contract.slurm_build_partition,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    mail_user<span class="op">=</span>project_contract.slurm_email,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    output<span class="op">=</span><span class="bu">str</span>(project_contract.launch_log_dir <span class="op">/</span> <span class="st">"launch-%j.out"</span>),</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    error<span class="op">=</span><span class="bu">str</span>(project_contract.launch_log_dir <span class="op">/</span> <span class="st">"launch-%j.err"</span>),</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">"set -o errexit -o nounset -o pipefail"</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="ss">f'PROJECT_DIR="</span><span class="sc">{</span>project_contract<span class="sc">.</span>project_dir<span class="sc">}</span><span class="ss">"'</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'SIF="$</span><span class="sc">{PROJECT_DIR}</span><span class="st">/.devcontainer/Singularity.sif"'</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'CONTAINER_HOME="$</span><span class="sc">{PROJECT_DIR}</span><span class="st">/.container-home"'</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'CONTAINER_TMP="$</span><span class="sc">{PROJECT_DIR}</span><span class="st">/.container-tmp"'</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'mkdir -p "$</span><span class="sc">{PROJECT_DIR}</span><span class="st">/slurm/launch/logs"'</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'mkdir -p "$</span><span class="sc">{CONTAINER_HOME}</span><span class="st">" "$</span><span class="sc">{CONTAINER_TMP}</span><span class="st">"'</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'cd "$</span><span class="sc">{PROJECT_DIR}</span><span class="st">"'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c6760792" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>slurm <span class="op">=</span> Slurm(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    job_name<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>project_contract<span class="sc">.</span>project_name<span class="sc">}</span><span class="ss">-vscode"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    cpus_per_task<span class="op">=</span>project_contract.slurm_build_cpus,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    mem<span class="op">=</span>project_contract.slurm_build_mem,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    time<span class="op">=</span><span class="st">"04:00:00"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    partition<span class="op">=</span>project_contract.slurm_build_partition,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    mail_user<span class="op">=</span>project_contract.slurm_email,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    output<span class="op">=</span><span class="bu">str</span>(project_contract.launch_log_dir <span class="op">/</span> <span class="st">"launch-%j.out"</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    error<span class="op">=</span><span class="bu">str</span>(project_contract.launch_log_dir <span class="op">/</span> <span class="st">"launch-%j.err"</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">"set -o errexit -o nounset -o pipefail"</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="ss">f'PROJECT_DIR="</span><span class="sc">{</span>project_contract<span class="sc">.</span>project_dir<span class="sc">}</span><span class="ss">"'</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'SIF="$</span><span class="sc">{PROJECT_DIR}</span><span class="st">/.devcontainer/Singularity.sif"'</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'CONTAINER_HOME="$</span><span class="sc">{PROJECT_DIR}</span><span class="st">/.container-home"'</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'CONTAINER_TMP="$</span><span class="sc">{PROJECT_DIR}</span><span class="st">/.container-tmp"'</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'mkdir -p "$</span><span class="sc">{PROJECT_DIR}</span><span class="st">/slurm/launch/logs"'</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'mkdir -p "$</span><span class="sc">{CONTAINER_HOME}</span><span class="st">" "$</span><span class="sc">{CONTAINER_TMP}</span><span class="st">"'</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="st">'cd "$</span><span class="sc">{PROJECT_DIR}</span><span class="st">"'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="995d0a68" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="vs">r'''</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "=================== Slurm sitrep =================="</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Date:         </span><span class="dv">$</span><span class="kw">(</span><span class="vs">date</span><span class="kw">)</span><span class="vs">"</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Host:         </span><span class="dv">$</span><span class="kw">(</span><span class="vs">hostname</span><span class="kw">)</span><span class="vs">"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "User:         </span><span class="dv">$</span><span class="kw">(</span><span class="vs">whoami</span><span class="kw">)</span><span class="vs">"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Job ID:       </span><span class="dv">$</span><span class="vs">{SLURM_JOB_ID}"</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Project:      </span><span class="dv">$</span><span class="vs">{PROJECT_DIR}"</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "SIF:          </span><span class="dv">$</span><span class="vs">{SIF}"</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Home:         </span><span class="dv">$</span><span class="vs">{CONTAINER_HOME}"</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Tmp:          </span><span class="dv">$</span><span class="vs">{CONTAINER_TMP}"</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "==================================================="</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="vs">module purge</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="vs">'''</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="77ab70cd" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(<span class="vs">r'''</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "=================== Slurm sitrep =================="</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Date:         </span><span class="dv">$</span><span class="kw">(</span><span class="vs">date</span><span class="kw">)</span><span class="vs">"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Host:         </span><span class="dv">$</span><span class="kw">(</span><span class="vs">hostname</span><span class="kw">)</span><span class="vs">"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "User:         </span><span class="dv">$</span><span class="kw">(</span><span class="vs">whoami</span><span class="kw">)</span><span class="vs">"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Job ID:       </span><span class="dv">$</span><span class="vs">{SLURM_JOB_ID}"</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Project:      </span><span class="dv">$</span><span class="vs">{PROJECT_DIR}"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "SIF:          </span><span class="dv">$</span><span class="vs">{SIF}"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Home:         </span><span class="dv">$</span><span class="vs">{CONTAINER_HOME}"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "Tmp:          </span><span class="dv">$</span><span class="vs">{CONTAINER_TMP}"</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="vs">echo "==================================================="</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="vs">module purge</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="vs">'''</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="68d3bd19" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>container_command <span class="op">=</span> <span class="st">" &amp;&amp; "</span>.join(runtime_command)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="vs">r'''singularity exec </span><span class="ch">\</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="vs">  --bind "</span><span class="dv">$</span><span class="vs">{PROJECT_DIR}:/work" </span><span class="ch">\</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="vs">  --home "</span><span class="dv">$</span><span class="vs">{CONTAINER_HOME}:/home/rse" </span><span class="ch">\</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="vs">  --bind "</span><span class="dv">$</span><span class="vs">{CONTAINER_TMP}:/tmp" </span><span class="ch">\</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="vs">  "</span><span class="dv">$</span><span class="vs">{SIF}" </span><span class="ch">\</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="vs">  bash --noprofile --norc -lc '''</span> <span class="op">+</span> <span class="bu">repr</span>(container_command)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="d4dc7ef8" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>container_command <span class="op">=</span> <span class="st">" &amp;&amp; "</span>.join(runtime_command)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>slurm.add_cmd(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="vs">r'''singularity exec </span><span class="ch">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="vs">  --bind "</span><span class="dv">$</span><span class="vs">{PROJECT_DIR}:/work" </span><span class="ch">\</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="vs">  --home "</span><span class="dv">$</span><span class="vs">{CONTAINER_HOME}:/home/rse" </span><span class="ch">\</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="vs">  --bind "</span><span class="dv">$</span><span class="vs">{CONTAINER_TMP}:/tmp" </span><span class="ch">\</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="vs">  "</span><span class="dv">$</span><span class="vs">{SIF}" </span><span class="ch">\</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="vs">  bash --noprofile --norc -lc '''</span> <span class="op">+</span> <span class="bu">repr</span>(container_command)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="300b0b7b" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>project_contract.launch_script.parent.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>project_contract.launch_script.write_text(slurm.script(convert<span class="op">=</span><span class="va">False</span>))</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>project_contract.launch_script.chmod(<span class="bn">0o755</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(project_contract.launch_script.read_text())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="8cabdcdc" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>project_contract.launch_script.parent.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>project_contract.launch_script.write_text(slurm.script(convert<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>project_contract.launch_script.chmod(<span class="bn">0o755</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(project_contract.launch_script.read_text())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Launch manually from the project directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="st">"</span><span class="va">$LAUNCHSCRIPT</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="st">"</span><span class="va">$LAUNCHSCRIPT</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="manual-check callout callout-style-default callout-warning callout-titled" title="Verify The Launch Script" data-manual-kind="check">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Verify The Launch Script
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Confirm that the generated launch script is executable and points at the validated project runtime.</p>
+<div id="3f4fd846" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> project_contract.launch_script.exists()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> project_contract.launch_script.stat().st_mode <span class="op">&amp;</span> <span class="bn">0o111</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
 
 
 

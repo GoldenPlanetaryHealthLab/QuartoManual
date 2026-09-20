@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-5079bcd3b6f9e2cd3eb723c43e5bbc78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -437,39 +437,62 @@ Warning
 <p>NOT YET IMPLEMENTED: This page will show how to stage the dataset using bare symlinks.</p>
 </div>
 </div>
-<p>This page shows the manual page contract in the context of a real staging task.</p>
-<p>The operator must:</p>
-<ol type="1">
-<li>confirm that the project is ready to receive the staged data;</li>
-<li>create the staged input location;</li>
-<li>verify that the staged path now exists and points where expected.</li>
-</ol>
+<p>This page shows the manual page contract for a small staging operation. The operator supplies the dataset identifier and confirms the resulting path.</p>
 <section id="prerequisite" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="prerequisite"><span class="header-section-number">8.1</span> <em>1. Prerequisite</em></h2>
-<div class="manual-prereq callout callout-important" title="Confirm Required State">
+<div class="manual-prereq callout callout-style-default callout-important callout-titled" title="Confirm Required State" data-manual-kind="prereq">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Confirm Required State
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Before running this page, confirm that the project already exists and that the operator is working from its root.</p>
-<div id="16eed4d6" class="cell" data-execution_count="1">
+<div id="a8701baa" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path(<span class="st">"README.md"</span>).exists(), <span class="st">"Expected README.md to exist before staging data."</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"data"</span>).mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path(<span class="st">"data"</span>).is_dir(), <span class="st">"Expected the data directory to exist before staging data."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 </section>
 <section id="procedure" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="procedure"><span class="header-section-number">8.2</span> <em>2. Procedure</em></h2>
-<div class="manual-procedure callout callout-tip" title="Declare The Target Dataset">
+<div class="manual-procedure callout callout-style-default callout-tip callout-titled" title="Declare The Target Dataset" data-manual-kind="procedure">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Declare The Target Dataset
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Record the dataset identifier and the intended staging location.</p>
-<div id="a7a9e9b7" class="cell" data-execution_count="2">
+<div id="1f0349fe" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dataset_name <span class="op">=</span> <span class="st">"example_registered_dataset"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>stage_path <span class="op">=</span> Path(<span class="st">"data"</span>) <span class="op">/</span> dataset_name</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div class="manual-procedure callout callout-tip" title="Create The Staging Link">
-<p>Create the staged location. In a real manual this could call <code>stagecoach</code> or another institutional tool.</p>
-<div id="e936e30f" class="cell" data-execution_count="3">
+</div>
+<div class="manual-procedure callout callout-style-default callout-tip callout-titled" title="Create The Staging Link" data-manual-kind="procedure">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Create The Staging Link
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create the staged location. In a real manual this mechanical operation could invoke <code>stagecoach</code> or another institutional tool without expanding its internal substeps into tutorial prose.</p>
+<div id="9b45df67" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dataset_name <span class="op">=</span> <span class="st">"example_registered_dataset"</span></span>
@@ -478,11 +501,21 @@ Warning
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>stage_path.mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
+</div>
 </section>
 <section id="check" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="check"><span class="header-section-number">8.3</span> <em>3. Check</em></h2>
-<div class="manual-check callout callout-warning" title="Verify Stage Result">
-<div id="40541810" class="cell" data-execution_count="4">
+<div class="manual-check callout callout-style-default callout-warning callout-titled" title="Verify Stage Result" data-manual-kind="check">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Verify Stage Result
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div id="b42324e9" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dataset_name <span class="op">=</span> <span class="st">"example_registered_dataset"</span></span>
@@ -490,6 +523,7 @@ Warning
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> stage_path.exists(), <span class="st">"Expected staged dataset path to exist."</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> stage_path.is_dir(), <span class="st">"Expected staged dataset path to be a directory."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 <p>This page is intentionally small. It demonstrates that the framework still works when the workflow itself is simple.</p>

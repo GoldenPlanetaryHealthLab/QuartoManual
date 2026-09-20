@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-5079bcd3b6f9e2cd3eb723c43e5bbc78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -417,10 +417,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This page aims to make one grouped request concrete: define the request parameters, translate the country code into a bounding box, and describe how one download task writes its output.</p>
-<div class="manual-prereq callout callout-important" title="Confirm Request Parameters">
+<p>This page turns one grouped request into a download task. The operator chooses the request values and dry-run behavior; the function supplies the predictable output path and CDS bounding box.</p>
+<div class="manual-prereq callout callout-style-default callout-important callout-titled" title="Confirm Request Parameters" data-manual-kind="prereq">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Confirm Request Parameters
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Before defining the download job, confirm that the grouped request fields from the orchestration page are available and that CDS credentials have already been configured.</p>
-<div id="2c014f19" class="cell" data-execution_count="1">
+<div id="35918653" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path.home().joinpath(<span class="st">".cdsapirc"</span>).exists(), <span class="st">"Expected CDS credentials in ~/.cdsapirc."</span></span>
@@ -439,9 +448,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>required_fields</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div class="manual-procedure callout callout-tip" title="Declare One Download Request">
-<p>The original notebook starts by showing the parameter shape for a single ERA5 download job.</p>
-<div id="ccb045ae" class="cell" data-execution_count="2">
+</div>
+<div class="manual-procedure callout callout-style-default callout-tip callout-titled" title="Declare One Download Request" data-manual-kind="procedure">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Declare One Download Request
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Set the parameter values for one grouped ERA5 download job.</p>
+<div id="b89a2656" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode adapted from the original notebook</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>request <span class="op">=</span> {</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"country"</span>: <span class="st">"MDG"</span>,</span>
@@ -456,9 +475,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div class="manual-procedure callout callout-tip" title="Describe The Download Function">
-<p>The notebook then defines a general-purpose <code>download_era5()</code> function. Its key responsibilities are to build a predictable output path, translate a country code into a CDS bounding box, and optionally run in dry-run mode.</p>
-<div id="2d5d88d2" class="cell" data-execution_count="3">
+</div>
+<div class="manual-procedure callout callout-style-default callout-tip callout-titled" title="Describe The Download Function" data-manual-kind="procedure">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Describe The Download Function
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Define <code>download_era5()</code>. It builds a predictable output path, translates a country code into a CDS bounding box, and supports a dry-run before contacting CDS.</p>
+<div id="75a939f2" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode adapted from the original notebook</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_era5(request_dict, output_dir<span class="op">=</span><span class="st">"data/intermediates/download_era5_nb"</span>, dry_run<span class="op">=</span><span class="va">True</span>):</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    request_dict <span class="op">=</span> request_dict.copy()</span>
@@ -483,9 +512,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output_file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div class="manual-procedure callout callout-tip" title="Define The Bounding Box Helper">
-<p>The notebook also defines a helper that maps each ISO country code to the bounding box required by CDS.</p>
-<div id="c574fafb" class="cell" data-execution_count="4">
+</div>
+<div class="manual-procedure callout callout-style-default callout-tip callout-titled" title="Define The Bounding Box Helper" data-manual-kind="procedure">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Define The Bounding Box Helper
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Define a helper that maps each ISO country code to the bounding box required by CDS.</p>
+<div id="54ac4ed4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode adapted from the original notebook</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_country_bbox(iso_code):</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># look up country subunits by ISO code</span></span>
@@ -493,18 +532,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [<span class="st">"north"</span>, <span class="st">"west"</span>, <span class="st">"south"</span>, <span class="st">"east"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div class="manual-check callout callout-warning" title="Check The Download Job Contract">
-<p>In this check section, the author can add a computational test to verify that the download job is defined correctly, or that a single download executes and produces the expected output file.</p>
-<div id="fa8cab33" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This page is complete when the operator can point to:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - the fields required in one grouped ERA5 request,</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - the output file naming pattern,</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - the difference between dry-run and real-run behavior,</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - and the role of the country bounding-box helper in building the final CDS request.</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="op">=</span> download_era5(request, dry_run<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> output_file <span class="op">==</span> <span class="st">"MDG_reanalysis-era5-land_2m_temperature_2021-01.grib"</span>, <span class="op">\</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Expected output file name, got </span><span class="sc">{</span>output_file<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> Path(output_file).exists()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="manual-check callout callout-style-default callout-warning callout-titled" title="Check The Download Job Contract" data-manual-kind="check">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Check The Download Job Contract
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Run the dry-run and verify the output naming contract before enabling a real download. A real run must leave the expected GRIB file on disk.</p>
+<div id="1c269977" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>output_file <span class="op">=</span> download_era5(request, dry_run<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> output_file <span class="op">==</span> <span class="st">"MDG_reanalysis-era5-land_2m_temperature_2021-01.grib"</span>, <span class="op">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Expected output file name, got </span><span class="sc">{</span>output_file<span class="sc">}</span><span class="ss">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 
